@@ -1,0 +1,2043 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VEX C++ Programming Study Handbook</title>
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --primary-light: #2563eb;
+      --secondary: #0f172a;
+      --accent: #0284c7;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text: #334155;
+      --text-dark: #0f172a;
+      --border: #e2e8f0;
+      --code-bg: #0f172a;
+      --code-text: #f8fafc;
+      --correct: #16a34a;
+      --correct-bg: #dcfce7;
+      --wrong: #dc2626;
+      --wrong-bg: #fee2e2;
+
+      /* Syntax Highlighting Colors */
+      --syn-keyword: #569cd6;
+      --syn-builtin: #4ec9b0;
+      --syn-string: #ce9178;
+      --syn-number: #b5cea8;
+      --syn-comment: #6a9955;
+      --syn-literal: #569cd6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--text);
+      background-color: var(--bg);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: var(--secondary);
+      color: white;
+      padding: 1.25rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.25rem;
+    }
+
+    .header-brand {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+    }
+
+    .school-logo {
+      height: 48px;
+      width: auto;
+      object-fit: contain;
+      border-right: 2px solid rgba(255, 255, 255, 0.25);
+      padding-right: 1.25rem;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #f8fafc;
+    }
+
+    header p {
+      font-size: 0.875rem;
+      color: #94a3b8;
+    }
+
+    .progress-container {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .progress-bar-bg {
+      width: 120px;
+      height: 8px;
+      background: #334155;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: #38bdf8;
+      transition: width 0.3s ease;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 1.5rem;
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 2rem;
+      width: 100%;
+      flex: 1;
+    }
+
+    nav.sidebar {
+      position: sticky;
+      top: 90px;
+      height: calc(100vh - 110px);
+      overflow-y: auto;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+
+    nav.sidebar h3 {
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #64748b;
+      margin-bottom: 0.75rem;
+    }
+
+    nav.sidebar ul {
+      list-style: none;
+    }
+
+    nav.sidebar li {
+      margin-bottom: 0.5rem;
+    }
+
+    nav.sidebar a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.875rem;
+      display: block;
+      padding: 0.5rem 0.75rem;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+
+    nav.sidebar a:hover {
+      background-color: #f1f5f9;
+      color: var(--primary-light);
+    }
+
+    nav.sidebar a.active {
+      background-color: var(--primary-light);
+      color: white;
+      font-weight: 600;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+    }
+
+    section.card {
+      display: none;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    section.card.active {
+      display: block;
+      animation: fadeIn 0.25s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-header {
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 2px solid var(--border);
+    }
+
+    .section-tag {
+      display: inline-block;
+      background-color: var(--primary-light);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.25rem 0.6rem;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+    }
+
+    section.card h2 {
+      font-size: 1.5rem;
+      color: var(--text-dark);
+      margin: 0;
+      line-height: 1.35;
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin: 1.5rem 0;
+    }
+
+    .feature-box {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--primary-light);
+      padding: 1.25rem;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .feature-box img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 6px;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-box h4 {
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .feature-box p {
+      font-size: 0.875rem;
+      margin-bottom: 0;
+    }
+
+    .compilation-flow {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      background: #f1f5f9;
+      padding: 1.5rem;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .flow-step {
+      flex: 1;
+      min-width: 180px;
+      background: white;
+      border: 1px solid var(--border);
+      padding: 1rem;
+      border-radius: 6px;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    .flow-step-num {
+      display: inline-block;
+      background: var(--primary-light);
+      color: white;
+      font-weight: bold;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      font-size: 0.75rem;
+      line-height: 24px;
+      margin-bottom: 0.5rem;
+    }
+
+    .flow-arrow {
+      font-size: 1.5rem;
+      color: #94a3b8;
+      font-weight: bold;
+    }
+
+    /* Setup Steps Custom Styling */
+    .setup-steps-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 1.5rem 0;
+    }
+
+    .setup-step-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--primary-light);
+      border-radius: 6px;
+      padding: 1.25rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    }
+
+    .setup-step-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .setup-step-badge {
+      background: var(--primary-light);
+      color: white;
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.2rem 0.60rem;
+      border-radius: 4px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .setup-step-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    code {
+      font-family: "Consolas", "Courier New", Courier, monospace;
+      background-color: #1e293b;
+      color: #f8fafc;
+      padding: 0.15rem 0.45rem;
+      border-radius: 4px;
+      font-size: 0.875em;
+    }
+
+    pre {
+      background-color: var(--code-bg);
+      color: var(--code-text);
+      padding: 1.25rem;
+      border-radius: 0 0 6px 6px;
+      overflow-x: auto;
+      font-family: "Consolas", "Courier New", Courier, monospace;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      margin-bottom: 1.25rem;
+    }
+
+    pre code {
+      background-color: transparent;
+      padding: 0;
+      font-size: inherit;
+      border-radius: 0;
+    }
+
+    .code-title {
+      background: #1e293b;
+      color: #94a3b8;
+      padding: 0.4rem 1rem;
+      font-size: 0.75rem;
+      font-weight: bold;
+      letter-spacing: 0.05em;
+      border-radius: 6px 6px 0 0;
+      border-bottom: 1px solid #334155;
+      display: block;
+    }
+
+    .syn-keyword { color: var(--syn-keyword); font-weight: bold; }
+    .syn-builtin { color: var(--syn-builtin); }
+    .syn-string  { color: var(--syn-string); }
+    .syn-number  { color: var(--syn-number); }
+    .syn-comment { color: var(--syn-comment); font-style: italic; }
+    .syn-literal { color: var(--syn-literal); }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.25rem 0;
+      font-size: 0.9rem;
+    }
+
+    th, td {
+      border: 1px solid var(--border);
+      padding: 0.75rem 1rem;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f1f5f9;
+      color: var(--text-dark);
+      font-weight: 600;
+    }
+
+    .pitfall-box {
+      background-color: #fff7ed;
+      border: 1px solid #ffedd5;
+      border-left: 4px solid #f97316;
+      padding: 1rem;
+      border-radius: 0 6px 6px 0;
+      margin: 1.25rem 0;
+    }
+
+    .pitfall-box h4 {
+      color: #c2410c;
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .vocab-box {
+      background-color: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      border-left: 4px solid #16a34a;
+      padding: 1rem 1.25rem;
+      border-radius: 0 6px 6px 0;
+      margin: 1.5rem 0 1rem 0;
+    }
+
+    .vocab-box h4 {
+      color: #15803d;
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .vocab-box ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .vocab-box li {
+      margin-bottom: 0.4rem;
+      font-size: 0.875rem;
+    }
+
+    .vocab-box li:last-child {
+      margin-bottom: 0;
+    }
+
+    .quiz-container {
+      margin-top: 2rem;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1.25rem;
+    }
+
+    .quiz-container h3 {
+      font-size: 1.1rem;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.5rem;
+    }
+
+    .question-block {
+      margin-bottom: 1.5rem;
+      background: white;
+      padding: 1rem;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+    }
+
+    .question-block:last-child {
+      margin-bottom: 0;
+    }
+
+    .question-text {
+      font-weight: 600;
+      color: var(--text-dark);
+      margin-bottom: 0.75rem;
+      font-size: 0.95rem;
+    }
+
+    .options-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .option-item {
+      display: flex;
+      align-items: center;
+    }
+
+    .option-label {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: background 0.15s;
+    }
+
+    .option-label:hover {
+      background: #f1f5f9;
+    }
+
+    .option-item input[type="radio"] {
+      cursor: pointer;
+    }
+
+    .feedback {
+      margin-top: 0.75rem;
+      padding: 0.6rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      display: none;
+    }
+
+    .feedback.correct {
+      display: block;
+      background-color: var(--correct-bg);
+      color: var(--correct);
+      border: 1px solid #bbf7d0;
+    }
+
+    .feedback.wrong {
+      display: block;
+      background-color: var(--wrong-bg);
+      color: var(--wrong);
+      border: 1px solid #fecaca;
+    }
+
+    .page-navigation {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 2rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .btn-nav {
+      background-color: var(--primary-light);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.875rem;
+      transition: background-color 0.2s;
+    }
+
+    .btn-nav:hover {
+      background-color: var(--primary);
+    }
+
+    .btn-reset {
+      background: #ef4444;
+      color: white;
+      border: none;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.2s;
+    }
+
+    .btn-reset:hover {
+      background: #dc2626;
+    }
+
+    footer {
+      background-color: var(--secondary);
+      color: #94a3b8;
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.875rem;
+      margin-top: auto;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        grid-template-columns: 1fr;
+      }
+      nav.sidebar {
+        position: static;
+        height: auto;
+      }
+      .compilation-flow {
+        flex-direction: column;
+      }
+      .flow-arrow {
+        transform: rotate(90deg);
+      }
+      .header-brand {
+        flex-direction: row;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-content">
+      <div class="header-brand">
+        <img src="images/logo.svg" alt="Zurich International School Logo" class="school-logo">
+        <div>
+          <h1>VEX C++ Programming</h1>
+          <p>Study Handbook</p>
+        </div>
+      </div>
+      <div class="progress-container">
+        <div>
+          <div style="font-size: 0.75rem; color: #94a3b8;">Quiz Progress</div>
+          <div id="progress-text" style="font-size: 0.9rem; font-weight: bold; color: white;">0 / 54 Completed</div>
+        </div>
+        <div class="progress-bar-bg">
+          <div id="progress-bar" class="progress-bar-fill"></div>
+        </div>
+        <button class="btn-reset" onclick="resetAllQuizzes()">Reset Progress</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <nav class="sidebar">
+      <h3>Contents</h3>
+      <ul>
+        <li><a href="#section1">Sec 1: Why C++?</a></li>
+        <li><a href="#section-setup">Sec 2: Project Setup</a></li>
+        <li><a href="#section2">Sec 3: C++ Variables</a></li>
+        <li><a href="#section3">Sec 4: Arithmetic Expressions</a></li>
+        <li><a href="#section4">Sec 5: if / else Statements</a></li>
+        <li><a href="#section5">Sec 6: Relational Operators</a></li>
+        <li><a href="#section6">Sec 7: Constant Variables</a></li>
+        <li><a href="#section7">Sec 8: Displaying Data</a></li>
+        <li><a href="#section8">Sec 9: for Loops</a></li>
+        <li><a href="#section9">Sec 10: Type Casting</a></li>
+      </ul>
+    </nav>
+
+    <main>
+      <!-- SECTION 1 -->
+      <section id="section1" class="card">
+        <div class="section-header">
+          <span class="section-tag">Section 1</span>
+          <h2>Why C++? Real-World Power & How Code Runs</h2>
+        </div>
+        <p>Why learn C++? C++ isn't just a classroom language—it is the high-performance engine behind the most advanced technology on Earth! When microsecond speed, hardware control, and safety matter, engineers choose C++.</p>
+        
+        <div class="grid-3">
+          <div class="feature-box">
+            <img src="images/fig1.jpg" alt="Self-Driving Vehicles">
+            <h4>Self-Driving Vehicles</h4>
+            <p>Autonomous vehicles use C++ to process LIDAR & camera data in milliseconds to safely navigate city traffic.</p>
+          </div>
+          
+          <div class="feature-box">
+            <img src="images/fig2.webp" alt="AAA Video Games">
+            <h4>AAA Video Games</h4>
+            <p>3D Game Engines use C++ to render high-detail graphics, compute physics, and run game logic at over 120 FPS.</p>
+          </div>
+
+          <div class="feature-box">
+            <img src="images/fig3.jpg" alt="Advanced Robotics">
+            <h4>Advanced Robotics</h4>
+            <p>Boston Dynamics and VEX robots rely on C++ for real-time motor control, balance, and spatial movement.</p>
+          </div>
+        </div>
+
+        <p><strong>How Code Runs (The Compilation Process):</strong> Robot microchips cannot read C++ text directly. Before execution, your human-readable <strong>Source Code</strong> must pass through a <strong>Compiler</strong>—a program that checks for errors and translates C++ text into binary <strong>Machine Code</strong> (1s and 0s).</p>
+
+        <p>In C++, every single instruction or command is called a <strong>Statement</strong>. A critical rule of C++ syntax is that <strong>each C++ instruction must end with a semicolon (<code>;</code>)</strong>. The semicolon tells the compiler where one command finishes and the next command begins.</p>
+
+        <div class="compilation-flow">
+          <div class="flow-step">
+            <span class="flow-step-num">1</span>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#475569" stroke-width="2" style="margin: 0.25rem 0;">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/>
+            </svg>
+            <div><strong>Source Code (<code>.cpp</code>)</strong></div>
+            <p style="font-size: 0.8rem; color: #64748b;">Human-written C++ text instructions ending with semicolons</p>
+          </div>
+          
+          <div class="flow-arrow">➔</div>
+
+          <div class="flow-step">
+            <span class="flow-step-num">2</span>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" style="margin: 0.25rem 0;">
+              <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+            </svg>
+            <div><strong>C++ Compiler</strong></div>
+            <p style="font-size: 0.8rem; color: #64748b;">Checks syntax & translates to binary</p>
+          </div>
+
+          <div class="flow-arrow">➔</div>
+
+          <div class="flow-step">
+            <span class="flow-step-num">3</span>
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#059669" stroke-width="2" style="margin: 0.25rem 0;">
+              <rect x="4" y="4" width="16" height="16" rx="2"/>
+              <rect x="9" y="9" width="6" height="6"/>
+              <line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/>
+              <line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/>
+            </svg>
+            <div><strong>Machine Code</strong></div>
+            <p style="font-size: 0.8rem; color: #64748b;">Low-level instructions executed by V5 Robot Brain</p>
+          </div>
+        </div>
+
+        <p>Every program requires an <strong>Entry Function</strong> named the <strong>Main Function</strong> (<code>main()</code>), where code starts running line by line.</p>
+
+        <div class="code-title">MAIN.CPP - MINIMAL C++ PROGRAM STRUCTURE</div>
+<pre><code>// Every C++ program begins execution inside the main() entry function
+int main() {
+    // Instructions execute step-by-step from top to bottom
+    return 0; // Signals successful program completion to the brain;
+}</code></pre>
+
+        <div class="pitfall-box">
+          <h4>COMMON PITFALL: MISSING SEMICOLON (<code>;</code>)</h4>
+          <p>Forgetting to end a C++ statement with a semicolon is the #1 beginner error. Without a semicolon, the compiler gets confused and merges lines together, resulting in a syntax build error!</p>
+        </div>
+
+        <div class="vocab-box">
+          <h4>SECTION 1 VOCABULARY REVIEW</h4>
+          <ul>
+            <li><strong>Compiler:</strong> A software tool that checks C++ source code for syntax errors and translates it into binary machine code.</li>
+            <li><strong>Source Code:</strong> The human-readable C++ text instructions written by a programmer.</li>
+            <li><strong>Machine Code:</strong> Low-level binary (1s and 0s) instructions that microprocessors directly execute.</li>
+            <li><strong>Statement:</strong> A single complete command in C++. Every C++ statement must end with a semicolon (<code>;</code>).</li>
+            <li><strong>Semicolon (<code>;</code>):</strong> The mandatory punctuation mark used to terminate C++ statements.</li>
+            <li><strong>Main Function (<code>main()</code>):</strong> The essential entry function where C++ program execution begins.</li>
+          </ul>
+        </div>
+
+        <div class="quiz-container">
+          <h3>SECTION 1 REVIEW QUESTIONS</h3>
+          
+          <div class="question-block" data-qid="s1q1">
+            <div class="question-text">1. Why do Self-Driving Cars, 3D Game Engines, and VEX Robots all rely on C++?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s1q1" value="A"> It is the easiest language to type without syntax rules</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s1q1" value="B"> It provides microsecond execution speed and hardware control</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s1q1" value="C"> It only runs inside web browser tabs</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s1q1" value="D"> It requires no compiler to run on microchips</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s1q2">
+            <div class="question-text">2. What is the primary job of a C++ Compiler?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s1q2" value="A"> Translate source code into binary machine code</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s1q2" value="B"> Recharge the physical robot battery automatically</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s1q2" value="C"> Automatically write variable names for you</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s1q2" value="D"> Render 3D graphics on the computer display</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 2: PROJECT SETUP -->
+      <section id="section-setup" class="card">
+        <div class="section-header">
+          <span class="section-tag">Section 2</span>
+          <h2>Setting Up Your VEXcode V5 C++ Text Project</h2>
+        </div>
+        <p>Before writing code, follow these step-by-step instructions to create a clean C++ text project in VEXcode V5 Web:</p>
+
+        <div class="setup-steps-list">
+          <div class="setup-step-card">
+            <div class="setup-step-header">
+              <span class="setup-step-badge">Step 1</span>
+              <span class="setup-step-title">Open VEXcode V5 & Example Project</span>
+            </div>
+            <p style="font-size: 0.9rem; color: #475569; margin: 0;">
+              Navigate to <a href="https://codev5.vex.com/" target="_blank" style="color: var(--primary-light); font-weight: 600;">https://codev5.vex.com/</a> in your browser.<br>
+              In the top menu, select <strong>File</strong> ➔ <strong>Open Examples</strong> ➔ <strong>V5 2026 Flex</strong>.
+            </p>
+          </div>
+
+          <div class="setup-step-card">
+            <div class="setup-step-header">
+              <span class="setup-step-badge">Step 2</span>
+              <span class="setup-step-title">Remove Starter Blocks</span>
+            </div>
+            <p style="font-size: 0.9rem; color: #475569; margin: 0;">
+              On the block canvas, delete the <code>when autonomous</code> and <code>when driver control</code> blocks so only the clean workspace remains.
+            </p>
+          </div>
+
+          <div class="setup-step-card">
+            <div class="setup-step-header">
+              <span class="setup-step-badge">Step 3</span>
+              <span class="setup-step-title">Convert to C++ Text Project</span>
+            </div>
+            <p style="font-size: 0.9rem; color: #475569; margin: 0;">
+              Click the Code Viewer icon (<strong><code>&lt;&gt;</code></strong>) in the top-right toolbar.<br>
+              Select <strong>C++</strong> from the language dropdown, then click <strong>Convert to Text Project</strong>.
+            </p>
+          </div>
+
+          <div class="setup-step-card">
+            <div class="setup-step-header">
+              <span class="setup-step-badge">Step 4</span>
+              <span class="setup-step-title">Confirm Discard</span>
+            </div>
+            <p style="font-size: 0.9rem; color: #475569; margin: 0;">
+              When the popup appears, click <strong>Discard</strong> ➔ <strong>Yes</strong> to complete conversion into a pure C++ workspace.
+            </p>
+          </div>
+        </div>
+
+        <p style="margin-top: 1.5rem;">For the time being, <strong>ALL</strong> your C++ code should be written inside the <code>whenStarted1()</code> function—specifically between the opening brace <code>{</code> and <code>return 0;</code>.</p>
+
+        <div class="code-title">MAIN.CPP - CODE ENTRY LOCATION</div>
+<pre><code>// "when started" hat block
+int whenStarted1() {
+    // --------------------------------------------------
+    // WRITE ALL YOUR C++ CODE HERE
+    // (Between '{' and 'return 0;')
+    // --------------------------------------------------
+
+    return 0;
+}</code></pre>
+
+        <div class="pitfall-box">
+          <h4>IMPORTANT: CODE LOCATION RULE</h4>
+          <p>Always write your C++ statements inside <code>whenStarted1()</code> before the <code>return 0;</code> line. Code placed outside the function braces or below <code>return 0;</code> will cause build errors or fail to run on your robot brain.</p>
+        </div>
+      </section>
+
+      <!-- SECTION 3 -->
+      <section id="section2" class="card">
+        <div class="section-header">
+          <span class="section-tag">Section 3</span>
+          <h2>Storing Data with C++ Variables</h2>
+        </div>
+        <p>A <strong>Variable</strong> is a named storage container in memory designed to hold a data value that can change while the program runs. In C++, you must explicitly specify a variable's <strong>Data Type</strong> before using it—a process known as variable <strong>Declaration</strong>. Assigning a starting value when creating a variable is called <strong>Initialization</strong>.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Data Type</th>
+              <th>Data Stored</th>
+              <th>Example Value</th>
+              <th>Declaration Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Integer (<code>int</code>)</strong></td>
+              <td>Integers (Whole numbers)</td>
+              <td>5, -12, 100</td>
+              <td><code>int targetID = 3;</code></td>
+            </tr>
+            <tr>
+              <td><strong>Floating-point (<code>float</code>)</strong></td>
+              <td>Floating-point numbers (Decimals)</td>
+              <td>15.5, 0.25</td>
+              <td><code>float distance = 15.5;</code></td>
+            </tr>
+            <tr>
+              <td><strong>Boolean (<code>bool</code>)</strong></td>
+              <td>Boolean flags (True/False)</td>
+              <td>true, false</td>
+              <td><code>bool isReady = true;</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="code-title">VARIABLES.CPP - DECLARING DATA TYPES</div>
+<pre><code>int itemQuantity = 4;     // Whole number counter
+float speedSetting = 85.5; // Decimal value
+bool engineActive = true;  // State flag</code></pre>
+
+        <div class="pitfall-box">
+          <h4>COMMON PITFALL: UNINITIALIZED VARIABLES</h4>
+          <p>If you declare a variable (e.g., <code>int score;</code>) without giving it an initial value before reading it, the variable will hold random garbage data left over in RAM memory, causing unpredictable robot behavior!</p>
+        </div>
+
+        <div class="vocab-box">
+          <h4>SECTION 3 VOCABULARY REVIEW</h4>
+          <ul>
+            <li><strong>Variable:</strong> A named location in computer memory used to store data values.</li>
+            <li><strong>Data Type:</strong> The specifier that tells C++ what kind of data (integer, decimal, true/false) a variable holds.</li>
+            <li><strong>Integer (<code>int</code>):</strong> A data type used to store whole numbers without fractions or decimals.</li>
+            <li><strong>Floating-point (<code>float</code>):</strong> A data type used to store real numbers containing decimal points.</li>
+            <li><strong>Boolean (<code>bool</code>):</strong> A logical data type that stores either <code>true</code> or <code>false</code>.</li>
+            <li><strong>Declaration:</strong> Introducing a variable to C++ by defining its data type and name.</li>
+            <li><strong>Initialization:</strong> Setting an initial value for a variable when it is created.</li>
+          </ul>
+        </div>
+
+        <div class="quiz-container">
+          <h3>SECTION 3 REVIEW QUESTIONS</h3>
+          
+          <div class="question-block" data-qid="s2q1">
+            <div class="question-text">1. Which data type should be used to store a measurement like 24.75?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s2q1" value="A"> <code>int</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s2q1" value="B"> <code>bool</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s2q1" value="C"> <code>float</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s2q1" value="D"> <code>char</code></label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s2q2">
+            <div class="question-text">2. Why does writing <code>target = 5;</code> fail if <code>target</code> has not been created before?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s2q2" value="A"> C++ requires declaring the variable type first</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s2q2" value="B"> Numbers cannot be stored in variables</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s2q2" value="C"> Semicolons are forbidden after numbers</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s2q2" value="D"> Variable names cannot contain letters</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s2q3">
+            <div class="question-text">3. Which data type is best suited for storing a true/false status flag like <code>isObstacleDetected</code>?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s2q3" value="A"> <code>int</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s2q3" value="B"> <code>float</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s2q3" value="C"> <code>bool</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s2q3" value="D"> <code>char</code></label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s2q4">
+            <div class="question-text">4. What type of numbers can be stored in an <code>int</code> variable?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s2q4" value="A"> Whole numbers without decimals</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s2q4" value="B"> Fractional decimal values only</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s2q4" value="C"> Negative decimals only</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s2q4" value="D"> Any textual word</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s2q5">
+            <div class="question-text">5. Which data type is most suitable for storing an exact ultrasonic sensor measurement like 12.375 cm?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s2q5" value="A"> <code>int</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s2q5" value="B"> <code>float</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s2q5" value="C"> <code>bool</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s2q5" value="D"> <code>char</code></label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4 -->
+      <section id="section3" class="card">
+        <div class="section-header">
+          <span class="section-tag">Section 4</span>
+          <h2>Arithmetic Expressions & Operators</h2>
+        </div>
+        <p>An <strong>Arithmetic Expression</strong> combines variables, numeric values (called <strong>Operands</strong>), and mathematical symbol <strong>Operators</strong> to calculate dynamic new values. C++ uses standard arithmetic operators: <strong>Addition (<code>+</code>)</strong>, <strong>Subtraction (<code>-</code>)</strong>, <strong>Multiplication (<code>*</code>)</strong>, and <strong>Division (<code>/</code>)</strong>.</p>
+
+        <div class="code-title">EXPRESSIONS.CPP - MATH OPERATIONS</div>
+<pre><code>float startPos = 100.0;
+float endPos = 450.0;
+// Expression calculates distance between coordinates
+float distance = endPos - startPos; // Evaluates to 350.0
+
+// Updating variable values dynamically
+int score = 10;
+score = score + 5; // New score value is 15</code></pre>
+
+        <div class="pitfall-box">
+          <h4>COMMON PITFALL: INTEGER DIVISION TRUNCATION</h4>
+          <p>Dividing two integers in C++ produces an integer result! For example, <code>5 / 2</code> evaluates to <code>2</code> instead of <code>2.5</code> because C++ chops off (truncates) the remainder when both numbers are <code>int</code> types. To preserve decimals, ensure at least one operand is a decimal float like <code>5.0 / 2</code>.</p>
+        </div>
+
+        <div class="vocab-box">
+          <h4>SECTION 4 VOCABULARY REVIEW</h4>
+          <ul>
+            <li><strong>Arithmetic Expression:</strong> A combination of constants, variables, and mathematical operators that calculates a single numerical output.</li>
+            <li><strong>Operator:</strong> Symbols like <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code> that instruct C++ to perform mathematical operations.</li>
+            <li><strong>Operand:</strong> The values or variables acted upon by an operator in an expression.</li>
+            <li><strong>Integer Division:</strong> Division performed between two whole numbers that automatically truncates any fractional decimal remainder.</li>
+          </ul>
+        </div>
+
+        <div class="quiz-container">
+          <h3>SECTION 4 REVIEW QUESTIONS</h3>
+          
+          <div class="question-block" data-qid="s3q1">
+            <div class="question-text">1. If <code>int speed = 20</code> and you run <code>speed = speed + 15;</code>, what is <code>speed</code>?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s3q1" value="A"> 20</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s3q1" value="B"> 15</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s3q1" value="C"> 35</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s3q1" value="D"> 2015</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s3q2">
+            <div class="question-text">2. What does the expression <code>score = score + 5;</code> do in C++?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s3q2" value="A"> Resets <code>score</code> to 5</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s3q2" value="B"> Adds 5 to the current value of <code>score</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s3q2" value="C"> Compares <code>score</code> with 5</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s3q2" value="D"> Multiplies <code>score</code> by 5</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s3q3">
+            <div class="question-text">3. What is the value of <code>int result = 10 / 4;</code> in C++?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s3q3" value="A"> 2.5</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s3q3" value="B"> 2</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s3q3" value="C"> 3</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s3q3" value="D"> 0.5</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s3q4">
+            <div class="question-text">4. Which symbol represents multiplication in C++?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s3q4" value="A"> <code>x</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s3q4" value="B"> <code>*</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s3q4" value="C"> <code>^</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s3q4" value="D"> <code>%</code></label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s3q5">
+            <div class="question-text">5. What is the result of <code>15 - 3 * 2</code> in C++ following operator precedence?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s3q5" value="A"> 24</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s3q5" value="B"> 9</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s3q5" value="C"> 12</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s3q5" value="D"> 6</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s3q6">
+            <div class="question-text">6. If <code>float distance = 10.0;</code> and you execute <code>distance = distance * 2.5;</code>, what is <code>distance</code>?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s3q6" value="A"> 25.0</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s3q6" value="B"> 12.5</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s3q6" value="C"> 20.0</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s3q6" value="D"> 10.0</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 5 -->
+      <section id="section4" class="card">
+        <div class="section-header">
+          <span class="section-tag">Section 5</span>
+          <h2>Control Flow: Basic <code>if</code> / <code>else</code> Statements</h2>
+        </div>
+        <p>By default, program <strong>Control Flow</strong> follows sequential line-by-line execution. Introducing <strong>Decision-Making</strong> through a <strong>Conditional Statement</strong> allows programs to branch. An <strong><code>if</code> Statement</strong> checks a condition, while an <strong><code>else</code> Statement</strong> provides an alternate fallback branch. Code inside each branch is enclosed within a curly-brace <strong>Code Block</strong> <code>{}</code>.</p>
+
+        <div class="code-title">BRANCHING.CPP - SINGLE BRANCH EXECUTION</div>
+<pre><code>bool systemReady = true;
+
+if (systemReady) {
+    // Runs ONLY when systemReady is true
+    int status = 1;
+} else {
+    // Runs ONLY when systemReady is false
+    int status = 0;
+}</code></pre>
+
+        <p><strong>DECISION RULE:</strong> If the condition inside <code>if (...)</code> evaluates to <code>true</code>, the top block executes and the <code>else</code> block is completely skipped. If it is <code>false</code>, the <code>if</code> block is skipped and the <code>else</code> block executes.</p>
+
+        <div class="pitfall-box">
+          <h4>COMMON PITFALL: MISSING CURLY BRACES <code>{}</code></h4>
+          <p>While C++ allows single-line <code>if</code> statements without curly braces, omitting `{}` for multi-line code means only the first line is controlled by the condition! Always use curly braces to cleanly define your code block.</p>
+        </div>
+
+        <div class="vocab-box">
+          <h4>SECTION 5 VOCABULARY REVIEW</h4>
+          <ul>
+            <li><strong>Control Flow:</strong> The specific order in which individual statements and instructions are executed in a program.</li>
+            <li><strong>Decision-Making:</strong> The ability of a program to execute different code pathways based on dynamic conditions.</li>
+            <li><strong>Conditional Statement:</strong> A programming construct (like <code>if</code> or <code>else</code>) that selects execution paths based on true/false conditions.</li>
+            <li><strong><code>if</code> Statement:</strong> A statement that executes its code block only if its condition evaluates to <code>true</code>.</li>
+            <li><strong><code>else</code> Statement:</strong> An optional statement paired with <code>if</code> that executes its code block when the <code>if</code> condition evaluates to <code>false</code>.</li>
+            <li><strong>Code Block:</strong> A group of C++ statements enclosed within opening and closing curly braces <code>{ }</code>.</li>
+          </ul>
+        </div>
+
+        <div class="quiz-container">
+          <h3>SECTION 5 REVIEW QUESTIONS</h3>
+          
+          <div class="question-block" data-qid="s4q1">
+            <div class="question-text">1. Under what condition will code inside an <code>else</code> block execute?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s4q1" value="A"> Whenever the <code>if</code> condition is true</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s4q1" value="B"> Whenever the <code>if</code> condition is false</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s4q1" value="C"> Every time the program starts</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s4q1" value="D"> Before the <code>if</code> block executes</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s4q2">
+            <div class="question-text">2. What is the primary purpose of an <code>if</code> / <code>else</code> statement?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s4q2" value="A"> Repeat code 10 times</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s4q2" value="B"> Create decision branches in program flow</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s4q2" value="C"> Define constant parameters</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s4q2" value="D"> Convert floating-point numbers</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s4q3">
+            <div class="question-text">3. Can both the <code>if</code> block and <code>else</code> block of a single statement execute together during one pass?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s4q3" value="A"> Yes, always</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s4q3" value="B"> Yes, if the condition is partially true</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s4q3" value="C"> No, only one branch executes based on the condition</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s4q3" value="D"> Only when controlling motors</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s4q4">
+            <div class="question-text">4. What encloses the statements that belong inside an <code>if</code> code block?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s4q4" value="A"> Parentheses <code>()</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s4q4" value="B"> Curly braces <code>{}</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s4q4" value="C"> Square brackets <code>[]</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s4q4" value="D"> Angle brackets <code>&lt;&gt;</code></label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s4q5">
+            <div class="question-text">5. What condition causes the code inside an <code>if</code> block to run?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s4q5" value="A"> The condition evaluates to false</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s4q5" value="B"> The condition evaluates to true</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s4q5" value="C"> The condition evaluates to zero</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s4q5" value="D"> The condition contains a syntax error</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s4q6">
+            <div class="question-text">6. What happens if an <code>if</code> condition evaluates to <code>false</code> and there is NO <code>else</code> block attached?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s4q6" value="A"> The robot brain crashes</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s4q6" value="B"> The program skips the <code>if</code> block and moves to the next statement</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s4q6" value="C"> The program restarts from main()</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s4q6" value="D"> The code inside the <code>if</code> block runs anyway</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 6 -->
+      <section id="section5" class="card">
+        <div class="section-header">
+          <span class="section-tag">Section 6</span>
+          <h2>Relational Operators & Boolean Expressions</h2>
+        </div>
+        <p>A <strong>Relational Operator</strong> compares two values to construct a <strong>Boolean Expression</strong> that evaluates strictly to <code>true</code> or <code>false</code>. Understanding the difference between the <strong>Equality Operator (<code>==</code>)</strong> and the <strong>Assignment Operator (<code>=</code>)</strong> is essential for correct logic.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Operator</th>
+              <th>Meaning</th>
+              <th>Code Example</th>
+              <th>Evaluation</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>==</code></td>
+              <td>Equal to</td>
+              <td><code>(50 == 50)</code></td>
+              <td><code>true</code></td>
+            </tr>
+            <tr>
+              <td><code>!=</code></td>
+              <td>Not equal to</td>
+              <td><code>(10 != 5)</code></td>
+              <td><code>true</code></td>
+            </tr>
+            <tr>
+              <td><code>&lt; / &gt;</code></td>
+              <td>Less than / Greater than</td>
+              <td><code>(15 &gt; 20)</code></td>
+              <td><code>false</code></td>
+            </tr>
+            <tr>
+              <td><code>&lt;= / &gt;=</code></td>
+              <td>Less/Greater than or equal</td>
+              <td><code>(20 &gt;= 20)</code></td>
+              <td><code>true</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="pitfall-box">
+          <h4>COMMON PITFALL: ASSIGNMENT VS EQUALITY</h4>
+          <p>A single <code>=</code> is the assignment operator used to store values into variables (<code>x = 5;</code>). A double <code>==</code> is the equality comparison operator (<code>if (x == 5)</code>). Accidentally writing a single <code>=</code> inside an <code>if</code> condition overwrites your variable value and always forces the condition to evaluate as true!</p>
+        </div>
+
+        <div class="code-title">RELATIONAL DEMO.CPP - EVALUATING CONDITIONS</div>
+<pre><code>int speed = 45;
+// Relational comparison evaluates to boolean true
+bool isFast = (speed > 40);
+
+if (speed >= 50) {
+    // Triggers if speed reaches 50 or higher
+} else {
+    // Triggers if speed is strictly below 50
+}</code></pre>
+
+        <div class="vocab-box">
+          <h4>SECTION 6 VOCABULARY REVIEW</h4>
+          <ul>
+            <li><strong>Relational Operator:</strong> Operators (<code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code>) used to compare two numeric values.</li>
+            <li><strong>Boolean Expression:</strong> A logical statement or expression that produces a value of either <code>true</code> or <code>false</code>.</li>
+            <li><strong>Equality Operator (<code>==</code>):</strong> The relational operator used to test if two values are equal.</li>
+            <li><strong>Assignment Operator (<code>=</code>):</strong> The operator used to assign a new value into a variable memory location.</li>
+          </ul>
+        </div>
+
+        <div class="quiz-container">
+          <h3>SECTION 6 REVIEW QUESTIONS</h3>
+          
+          <div class="question-block" data-qid="s5q1">
+            <div class="question-text">1. Which relational operator is used to test equality inside an <code>if</code> condition?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s5q1" value="A"> <code>=</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s5q1" value="B"> <code>==</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s5q1" value="C"> <code>!=</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s5q1" value="D"> <code>&lt;=</code></label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s5q2">
+            <div class="question-text">2. What occurs if you use a single <code>=</code> instead of double <code>==</code> inside an <code>if</code> condition?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s5q2" value="A"> The program runs twice as fast</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s5q2" value="B"> It assigns the value instead of checking equality, causing logic bugs</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s5q2" value="C"> It automatically converts floats to integers</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s5q2" value="D"> It clears the robot brain screen</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s5q3">
+            <div class="question-text">3. What does the relational operator <code>!=</code> mean in C++?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s5q3" value="A"> Equal to</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s5q3" value="B"> Not equal to</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s5q3" value="C"> Greater than or equal to</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s5q3" value="D"> Less than or equal to</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s5q4">
+            <div class="question-text">4. What does <code>(10 &gt;= 10)</code> evaluate to in C++?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s5q4" value="A"> <code>true</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s5q4" value="B"> <code>false</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s5q4" value="C"> <code>10</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s5q4" value="D"> <code>0</code></label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s5q5">
+            <div class="question-text">5. What does the expression <code>(7 &lt; 5)</code> evaluate to?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s5q5" value="A"> <code>true</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s5q5" value="B"> <code>false</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s5q5" value="C"> <code>7</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s5q5" value="D"> Syntax error</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s5q6">
+            <div class="question-text">6. Which operator tests whether a left value is less than or equal to a right value?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s5q6" value="A"> <code>=&lt;</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s5q6" value="B"> <code>&lt;=</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s5q6" value="C"> <code>&lt;==</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s5q6" value="D"> <code>!=</code></label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s5q7">
+            <div class="question-text">7. What is the boolean result of evaluating <code>(12 != 12)</code>?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s5q7" value="A"> <code>true</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s5q7" value="B"> <code>false</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s5q7" value="C"> Null</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s5q7" value="D"> 12</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s5q8">
+            <div class="question-text">8. Which condition evaluates to <code>true</code> when <code>int speed = 50;</code>?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s5q8" value="A"> <code>speed &lt; 50</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s5q8" value="B"> <code>speed == 50</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s5q8" value="C"> <code>speed &gt; 50</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s5q8" value="D"> <code>speed != 50</code></label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 7 -->
+      <section id="section6" class="card">
+        <div class="section-header">
+          <span class="section-tag">Section 7</span>
+          <h2>Constant Variables (<code>const</code>)</h2>
+        </div>
+        <p>A <strong>Constant Variable</strong> is created using the <strong><code>const</code> Keyword</strong>. Declaring a constant marks the variable as <strong>Read-Only</strong>. Once assigned during initial declaration, its value can never be altered or reassigned elsewhere in your program.</p>
+
+        <div class="code-title">CONSTANTS.CPP - CREATING READ-ONLY PARAMETERS</div>
+<pre><code>// Naming convention: kCamelCase style for constants
+const float kPi = 3.14159;
+const int kMaxSpeed = 100;
+
+// kMaxSpeed = 120; <-- ERROR: Cannot modify read-only variable!</code></pre>
+
+        <div class="pitfall-box">
+          <h4>COMMON PITFALL: MODIFYING CONSTANT VARIABLES</h4>
+          <p>Attempting to reassign a new value to a <code>const</code> variable anywhere in code (e.g., <code>kMaxSpeed = 80;</code>) causes an immediate compiler error that stops your program from building.</p>
+        </div>
+
+        <div class="vocab-box">
+          <h4>SECTION 7 VOCABULARY REVIEW</h4>
+          <ul>
+            <li><strong>Constant Variable:</strong> A variable whose stored value is fixed and protected from being modified during runtime.</li>
+            <li><strong><code>const</code> Keyword:</strong> The C++ qualifier prefix used to declare a variable as immutable and read-only.</li>
+            <li><strong>Read-Only:</strong> A memory protection state preventing data modification after initial declaration.</li>
+          </ul>
+        </div>
+
+        <div class="quiz-container">
+          <h3>SECTION 7 REVIEW QUESTIONS</h3>
+          
+          <div class="question-block" data-qid="s6q1">
+            <div class="question-text">1. What happens if you try to assign a new value to a <code>const</code> variable?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s6q1" value="A"> The variable updates quietly</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s6q1" value="B"> The compiler throws an error</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s6q1" value="C"> The program turns into a loop</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s6q1" value="D"> The value resets to zero</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s6q2">
+            <div class="question-text">2. Which keyword creates a constant variable in C++?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s6q2" value="A"> <code>static</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s6q2" value="B"> <code>final</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s6q2" value="C"> <code>const</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s6q2" value="D"> <code>fixed</code></label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s6q3">
+            <div class="question-text">3. When must a <code>const</code> variable be assigned its value?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s6q3" value="A"> Any time later in the code</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s6q3" value="B"> Exactly at the time of its declaration</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s6q3" value="C"> Only inside a `for` loop</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s6q3" value="D"> Right before the program finishes</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s6q4">
+            <div class="question-text">4. Why are constant variables (<code>const</code>) useful in robotics programming?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s6q4" value="A"> They make motors run twice as fast</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s6q4" value="B"> They protect safety limits (like max motor speed) from accidental changes</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s6q4" value="C"> They allow variables to change data types automatically</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s6q4" value="D"> They automatically delete unused code</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 8 -->
+      <section id="section7" class="card">
+        <div class="section-header">
+          <span class="section-tag">Section 8</span>
+          <h2>Displaying Data on VEX Brain Screen</h2>
+        </div>
+        <p>VEX C++ provides specialized screen output functions that draw on the physical display <strong>Screen Buffer</strong>. Text layout is controlled by positioning the active text <strong>Cursor</strong>.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Screen Command</th>
+              <th>Purpose & Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>Brain.Screen.clearScreen();</code></td>
+              <td>Erases all content from the current screen buffer.</td>
+            </tr>
+            <tr>
+              <td><code>Brain.Screen.setCursor(row, col);</code></td>
+              <td>Positions text cursor at specified row and column.</td>
+            </tr>
+            <tr>
+              <td><code>Brain.Screen.print("Text");</code></td>
+              <td>Displays literal text string on the screen.</td>
+            </tr>
+            <tr>
+              <td><code>Brain.Screen.newLine();</code></td>
+              <td>Advances cursor to the beginning of the next row.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>To print variable values, place a <strong>Format Specifier</strong> placeholder inside the text string: <code>%d</code> for integers (<code>int</code>), and <code>%f</code> for decimals (<code>float</code>).</p>
+
+        <div class="code-title">BRAIN SCREEN.CPP - SCREEN PRINTING SYNTAX</div>
+<pre><code>int count = 10;
+float temp = 98.6;
+
+Brain.Screen.clearScreen();
+Brain.Screen.setCursor(1, 1);
+Brain.Screen.print("Count: %d", count); // Prints integer
+Brain.Screen.newLine();
+Brain.Screen.print("Temp: %f", temp);   // Prints floating decimal</code></pre>
+
+        <div class="pitfall-box">
+          <h4>COMMON PITFALL: MISMATCHED FORMAT SPECIFIERS</h4>
+          <p>Passing a floating-point decimal variable into an integer format specifier (<code>%d</code>) without type casting causes garbage digits to appear on the screen display!</p>
+        </div>
+
+        <div class="vocab-box">
+          <h4>SECTION 8 VOCABULARY REVIEW</h4>
+          <ul>
+            <li><strong>Format Specifier:</strong> Special placeholder tokens (like <code>%d</code> and <code>%f</code>) substituted with variable values during printing.</li>
+            <li><strong>Screen Buffer:</strong> The video memory holding pixel and character data displayed on the VEX Brain LCD.</li>
+            <li><strong>Cursor:</strong> The active row/column coordinate position on the display screen where printed text appears.</li>
+          </ul>
+        </div>
+
+        <div class="quiz-container">
+          <h3>SECTION 8 REVIEW QUESTIONS</h3>
+          
+          <div class="question-block" data-qid="s7q1">
+            <div class="question-text">1. Which format specifier is used to display an <code>int</code> variable on screen?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s7q1" value="A"> <code>%f</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s7q1" value="B"> <code>%s</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s7q1" value="C"> <code>%d</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s7q1" value="D"> <code>%i</code></label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s7q2">
+            <div class="question-text">2. What function moves the text cursor to row 2, column 5 on the VEX Brain?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s7q2" value="A"> <code>Brain.Screen.moveCursor(2, 5);</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s7q2" value="B"> <code>Brain.Screen.setCursor(2, 5);</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s7q2" value="C"> <code>Brain.Screen.clearScreen(2, 5);</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s7q2" value="D"> <code>Brain.Screen.setPosition(5, 2);</code></label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s7q3">
+            <div class="question-text">3. Which format specifier is used to display a decimal <code>float</code> variable on the screen?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s7q3" value="A"> <code>%d</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s7q3" value="B"> <code>%f</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s7q3" value="C"> <code>%s</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s7q3" value="D"> <code>%c</code></label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s7q4">
+            <div class="question-text">4. What action does <code>Brain.Screen.clearScreen();</code> perform?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s7q4" value="A"> Changes the font color to red</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s7q4" value="B"> Erases all text and graphics from the active screen buffer</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s7q4" value="C"> Reboots the robot brain hardware</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s7q4" value="D"> Prints a single blank space character</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s7q5">
+            <div class="question-text">5. What command moves the cursor to the beginning of a new line on the VEX Brain?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s7q5" value="A"> <code>Brain.Screen.newLine();</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s7q5" value="B"> <code>Brain.Screen.resetLine();</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s7q5" value="C"> <code>Brain.Screen.nextRow();</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s7q5" value="D"> <code>Brain.Screen.clearLine();</code></label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s7q6">
+            <div class="question-text">6. What will be displayed on screen by <code>Brain.Screen.print("Val: %d", 15);</code>?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s7q6" value="A"> <code>Val: %d</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s7q6" value="B"> <code>Val: 15</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s7q6" value="C"> <code>Val: 15.00</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s7q6" value="D"> <code>15</code></label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s7q7">
+            <div class="question-text">7. In the function <code>Brain.Screen.setCursor(row, col);</code>, what do the arguments represent?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s7q7" value="A"> Color and Font Size</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s7q7" value="B"> Text Row number and Column number</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s7q7" value="C"> Screen Width and Screen Height in pixels</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s7q7" value="D"> Motor Speed and Acceleration</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s7q8">
+            <div class="question-text">8. What occurs if you use <code>%d</code> to display a <code>float</code> variable without converting it first?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s7q8" value="A"> The value prints accurately without issue</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s7q8" value="B"> The output displays incorrect or unexpected garbage numbers</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s7q8" value="C"> The brain screen powers down immediately</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s7q8" value="D"> The float automatically converts into a text string</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 9 -->
+      <section id="section8" class="card">
+        <div class="section-header">
+          <span class="section-tag">Section 9</span>
+          <h2>Control Flow: Repetition with <code>for</code> Loops</h2>
+        </div>
+        <p>A <strong><code>for</code> Loop</strong> repeats a code block multiple times. Each pass through the loop is called an <strong>Iteration</strong>. A <strong>Loop Counter</strong> variable manages the loop state, updated at the end of each pass using the <strong>Increment Operator (<code>++</code>)</strong>.</p>
+
+        <div class="code-title">FOR_LOOP.CPP - REPEATING INSTRUCTIONS</div>
+<pre><code>// Header parts: Init (int i = 0); Condition (i &lt; 5); Increment (i++)
+for (int i = 0; i &lt; 5; i++) {
+    Brain.Screen.print("*");
+}
+// Output on screen: *****</code></pre>
+
+        <div class="pitfall-box">
+          <h4>COMMON PITFALL: OFF-BY-ONE ERRORS & INFINITE LOOPS</h4>
+          <p>Confusing <code>&lt;</code> with <code>&lt;=</code> causes loops to run one time too many (an off-by-one error). Forgetting to update your loop counter variable (e.g. omitting <code>i++</code>) creates an infinite loop that freezes your robot program!</p>
+        </div>
+
+        <div class="vocab-box">
+          <h4>SECTION 9 VOCABULARY REVIEW</h4>
+          <ul>
+            <li><strong><code>for</code> Loop:</strong> A loop control structure that iterates code a specific number of times based on a counter condition.</li>
+            <li><strong>Iteration:</strong> A single complete execution pass through a loop's code block.</li>
+            <li><strong>Loop Counter:</strong> An integer variable (typically <code>i</code>) tracking iteration passes.</li>
+            <li><strong>Increment Operator (<code>++</code>):</strong> An operator that increases a variable's value by 1 (e.g., <code>i++</code>).</li>
+          </ul>
+        </div>
+
+        <div class="quiz-container">
+          <h3>SECTION 9 REVIEW QUESTIONS</h3>
+          
+          <div class="question-block" data-qid="s8q1">
+            <div class="question-text">1. How many times will the loop body run for <code>for (int i = 0; i &lt; 4; i++)</code>?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s8q1" value="A"> 3 times</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s8q1" value="B"> 4 times</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s8q1" value="C"> 5 times</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s8q1" value="D"> Infinite times</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s8q2">
+            <div class="question-text">2. What does the <code>i++</code> part of a <code>for</code> loop header do after each iteration?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s8q2" value="A"> Resets counter back to 0</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s8q2" value="B"> Decrements counter by 1</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s8q2" value="C"> Increments counter by 1</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s8q2" value="D"> Multiplies counter by 2</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s8q3">
+            <div class="question-text">3. What punctuation mark separates the three control statements in a <code>for</code> loop header?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s8q3" value="A"> Commas <code>,</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s8q3" value="B"> Semicolons <code>;</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s8q3" value="C"> Colons <code>:</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s8q3" value="D"> Periods <code>.</code></label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s8q4">
+            <div class="question-text">4. How many iterations will execute for <code>for (int i = 1; i &lt;= 5; i++)</code>?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s8q4" value="A"> 4 times</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s8q4" value="B"> 5 times</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s8q4" value="C"> 6 times</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s8q4" value="D"> 0 times</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s8q5">
+            <div class="question-text">5. What is the initial value of loop counter variable <code>i</code> in <code>for (int i = 0; i &lt; 10; i++)</code>?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s8q5" value="A"> 1</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s8q5" value="B"> 0</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s8q5" value="C"> 10</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s8q5" value="D"> Undefined</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s8q6">
+            <div class="question-text">6. What happens if the test condition in a <code>for</code> loop is <code>false</code> on its very first check?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s8q6" value="A"> The loop runs once anyway</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s8q6" value="B"> The loop body never executes</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s8q6" value="C"> The loop runs infinitely</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s8q6" value="D"> The program crashes</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s8q7">
+            <div class="question-text">7. What action does the decrement statement <code>i--</code> perform in a loop header?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s8q7" value="A"> Increments <code>i</code> by 1</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s8q7" value="B"> Decrements <code>i</code> by 1</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s8q7" value="C"> Multiplies <code>i</code> by -1</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s8q7" value="D"> Resets <code>i</code> to 0</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 10 -->
+      <section id="section9" class="card">
+        <div class="section-header">
+          <span class="section-tag">Section 10</span>
+          <h2>Type Casting with <code>static_cast&lt;int&gt;</code></h2>
+        </div>
+        <p><strong>Type Casting</strong> is an <strong>Explicit Conversion</strong> technique used to convert data from one type to another. Writing <code>static_cast&lt;int&gt;(value)</code> converts a decimal (<code>float</code>) into an integer (<code>int</code>) by performing <strong>Truncation</strong>—dropping the fractional decimal portion entirely.</p>
+
+        <div class="code-title">TYPE_CAST.CPP - CONVERTING TYPES FOR SCREEN PRINTING</div>
+<pre><code>float speedVal = 85.75;
+
+// Cast float to int so it safely matches the %d format specifier
+Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
+// Screen Output: Speed: 85</code></pre>
+
+        <div class="pitfall-box">
+          <h4>COMMON PITFALL: PRECISION LOSS DURING TRUNCATION</h4>
+          <p>Remember that <code>static_cast&lt;int&gt;</code> does NOT round numbers to the nearest whole integer. Casting <code>9.99</code> truncates the `.99` completely, producing `9`. If rounding is required, handle decimal math explicitly before casting.</p>
+        </div>
+
+        <div class="vocab-box">
+          <h4>SECTION 10 VOCABULARY REVIEW</h4>
+          <ul>
+            <li><strong>Type Casting:</strong> Converting a variable value explicitly from one data type to another.</li>
+            <li><strong>Explicit Conversion:</strong> Manually commanding C++ to convert a type using operators like <code>static_cast</code>.</li>
+            <li><strong>Truncation:</strong> The removal of the decimal fractional portion of a number without mathematical rounding.</li>
+            <li><strong><code>static_cast</code>:</strong> The standard compile-time type conversion operator in C++.</li>
+          </ul>
+        </div>
+
+        <div class="quiz-container">
+          <h3>SECTION 10 REVIEW QUESTIONS</h3>
+          
+          <div class="question-block" data-qid="s9q1">
+            <div class="question-text">1. What is the numerical result of <code>static_cast&lt;int&gt;(12.89)</code>?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s9q1" value="A"> 12.89</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s9q1" value="B"> 13</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s9q1" value="C"> 12</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s9q1" value="D"> 0</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s9q2">
+            <div class="question-text">2. Why cast a <code>float</code> to an <code>int</code> before printing with <code>%d</code>?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s9q2" value="A"> <code>%d</code> expects an integer and passing a float causes improper display</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s9q2" value="B"> Floats are forbidden on screens</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s9q2" value="C"> It rounds numbers to the nearest even integer</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s9q2" value="D"> It speeds up motor velocity</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s9q3">
+            <div class="question-text">3. What happens to the decimal portion when a <code>float</code> like <code>9.99</code> is cast using <code>static_cast&lt;int&gt;(9.99)</code>?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s9q3" value="A"> It rounds up to 10</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s9q3" value="B"> The decimal portion is truncated (dropped), leaving 9</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s9q3" value="C"> It causes a runtime error</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s9q3" value="D"> It converts to 0.99</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s9q4">
+            <div class="question-text">4. Which keyword syntax is used for explicit type casting in C++?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s9q4" value="A"> <code>convert&lt;int&gt;(val)</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s9q4" value="B"> <code>static_cast&lt;int&gt;(val)</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s9q4" value="C"> <code>type_cast(val, int)</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s9q4" value="D"> <code>cast_to_int(val)</code></label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s9q5">
+            <div class="question-text">5. Does <code>static_cast&lt;int&gt;(7.8)</code> round the number to 8?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s9q5" value="A"> Yes, C++ rounds to the nearest whole integer</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s9q5" value="B"> No, it truncates the decimal part and results in 7</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s9q5" value="C"> Yes, because .8 is greater than .5</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s9q5" value="D"> It depends on battery charge</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s9q6">
+            <div class="question-text">6. What is the value of <code>static_cast&lt;int&gt;(-4.7)</code>?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s9q6" value="A"> -5</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s9q6" value="B"> -4</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s9q6" value="C"> 4</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s9q6" value="D"> -4.7</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s9q7">
+            <div class="question-text">7. Why is explicit type casting safer than relying on implicit automatic casting?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s9q7" value="A"> It makes the robot motors move smoother</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s9q7" value="B"> It makes developer intent clear and prevents unexpected data conversion bugs</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s9q7" value="C"> It disables all compiler safety warnings</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s9q7" value="D"> It reduces variable memory usage</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="s9q8">
+            <div class="question-text">8. If <code>float sensorReading = 42.19;</code>, what value is returned by <code>static_cast&lt;int&gt;(sensorReading)</code>?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="s9q8" value="A"> 42</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s9q8" value="B"> 42.19</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s9q8" value="C"> 43</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="s9q8" value="D"> 0</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <p>VEX C++ Student Study Handbook • Interactive Edition</p>
+  </footer>
+
+  <script>
+    const sectionIds = [
+      'section1', 'section-setup', 'section2', 'section3', 'section4', 'section5',
+      'section6', 'section7', 'section8', 'section9'
+    ];
+
+    function showSection(targetId) {
+      if (!sectionIds.includes(targetId)) {
+        targetId = 'section1';
+      }
+
+      document.querySelectorAll('section.card').forEach(sec => {
+        sec.classList.remove('active');
+      });
+      const targetSec = document.getElementById(targetId);
+      if (targetSec) {
+        targetSec.classList.add('active');
+      }
+
+      document.querySelectorAll('nav.sidebar a').forEach(a => {
+        if (a.getAttribute('href') === `#${targetId}`) {
+          a.classList.add('active');
+        } else {
+          a.classList.remove('active');
+        }
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      if (history.pushState) {
+        history.pushState(null, null, `#${targetId}`);
+      } else {
+        location.hash = `#${targetId}`;
+      }
+    }
+
+    function initPageNavigationControls() {
+      const sections = document.querySelectorAll('section.card');
+      sections.forEach((sec, idx) => {
+        const navDiv = document.createElement('div');
+        navDiv.className = 'page-navigation';
+
+        const prevId = idx > 0 ? sections[idx - 1].id : null;
+        const nextId = idx < sections.length - 1 ? sections[idx + 1].id : null;
+
+        let prevBtn = prevId
+          ? `<button class="btn-nav" onclick="showSection('${prevId}')">← Previous Section</button>`
+          : `<div></div>`;
+
+        let nextBtn = nextId
+          ? `<button class="btn-nav" onclick="showSection('${nextId}')">Next Section →</button>`
+          : `<div></div>`;
+
+        navDiv.innerHTML = `${prevBtn}${nextBtn}`;
+        sec.appendChild(navDiv);
+      });
+
+      document.querySelectorAll('nav.sidebar a').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const targetId = link.getAttribute('href').replace('#', '');
+          showSection(targetId);
+        });
+      });
+
+      window.addEventListener('popstate', () => {
+        const hash = window.location.hash.replace('#', '');
+        showSection(hash || 'section1');
+      });
+
+      const initialHash = window.location.hash.replace('#', '');
+      showSection(initialHash || 'section1');
+    }
+
+    function applySyntaxHighlighting() {
+      const codeBlocks = document.querySelectorAll('code');
+      codeBlocks.forEach(block => {
+        let text = block.textContent;
+
+        text = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+        const tokens = [];
+
+        function storeToken(match, className) {
+          tokens.push(`<span class="${className}">${match}</span>`);
+          return `___TOKEN_${tokens.length - 1}___`;
+        }
+
+        text = text.replace(/(\/\/.*)/g, m => storeToken(m, 'syn-comment'));
+        text = text.replace(/("[^"]*")/g, m => storeToken(m, 'syn-string'));
+        text = text.replace(/\b(int|float|bool|char|const|return|if|else|for|static_cast)\b/g, m => storeToken(m, 'syn-keyword'));
+        text = text.replace(/\b(Brain|Screen|clearScreen|setCursor|print|newLine|moveCursor|setPosition|main)\b/g, m => storeToken(m, 'syn-builtin'));
+        text = text.replace(/\b(true|false)\b/g, m => storeToken(m, 'syn-literal'));
+        text = text.replace(/(%[dfsi])/g, m => storeToken(m, 'syn-literal'));
+        text = text.replace(/\b(\d+(\.\d+)?)\b/g, m => storeToken(m, 'syn-number'));
+
+        for (let i = tokens.length - 1; i >= 0; i--) {
+          text = text.replace(`___TOKEN_${i}___`, tokens[i]);
+        }
+
+        block.innerHTML = text;
+      });
+    }
+
+    const answerKey = {
+      s1q1: "B", s1q2: "A",
+      s2q1: "C", s2q2: "A", s2q3: "C", s2q4: "A", s2q5: "B",
+      s3q1: "C", s3q2: "B", s3q3: "B", s3q4: "B", s3q5: "B", s3q6: "A",
+      s4q1: "B", s4q2: "B", s4q3: "C", s4q4: "B", s4q5: "B", s4q6: "B",
+      s5q1: "B", s5q2: "B", s5q3: "B", s5q4: "A", s5q5: "B", s5q6: "B", s5q7: "B", s5q8: "B",
+      s6q1: "B", s6q2: "C", s6q3: "B", s6q4: "B",
+      s7q1: "C", s7q2: "B", s7q3: "B", s7q4: "B", s7q5: "A", s7q6: "B", s7q7: "B", s7q8: "B",
+      s8q1: "B", s8q2: "C", s8q3: "B", s8q4: "B", s8q5: "B", s8q6: "B", s8q7: "B",
+      s9q1: "C", s9q2: "A", s9q3: "B", s9q4: "B", s9q5: "B", s9q6: "B", s9q7: "B", s9q8: "A"
+    };
+
+    const STORAGE_KEY = 'vex_cpp_handbook_answers_v3';
+
+    function loadSavedAnswers() {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      return saved ? JSON.parse(saved) : {};
+    }
+
+    function saveAnswer(qid, val) {
+      const answers = loadSavedAnswers();
+      answers[qid] = val;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(answers));
+      updateProgress();
+    }
+
+    function checkAnswer(qid, userVal) {
+      const qBlock = document.querySelector(`[data-qid="${qid}"]`);
+      if (!qBlock) return;
+      const feedback = qBlock.querySelector('.feedback');
+      const correctVal = answerKey[qid];
+
+      if (userVal === correctVal) {
+        feedback.textContent = `✓ Correct! Excellent job.`;
+        feedback.className = 'feedback correct';
+      } else {
+        feedback.textContent = `✗ Incorrect. Give it another try!`;
+        feedback.className = 'feedback wrong';
+      }
+    }
+
+    function updateProgress() {
+      const answers = loadSavedAnswers();
+      const total = Object.keys(answerKey).length;
+      let answeredCount = 0;
+
+      for (let qid in answerKey) {
+        if (answers[qid]) {
+          answeredCount++;
+        }
+      }
+
+      const percentage = Math.round((answeredCount / total) * 100);
+      document.getElementById('progress-text').textContent = `${answeredCount} / ${total} Completed`;
+      document.getElementById('progress-bar').style.width = `${percentage}%`;
+    }
+
+    function initQuiz() {
+      const answers = loadSavedAnswers();
+
+      document.querySelectorAll('.question-block').forEach(block => {
+        const qid = block.getAttribute('data-qid');
+        const inputs = block.querySelectorAll('input[type="radio"]');
+
+        if (answers[qid]) {
+          const savedInput = block.querySelector(`input[value="${answers[qid]}"]`);
+          if (savedInput) {
+            savedInput.checked = true;
+            checkAnswer(qid, answers[qid]);
+          }
+        }
+
+        inputs.forEach(input => {
+          input.addEventListener('change', (e) => {
+            const val = e.target.value;
+            saveAnswer(qid, val);
+            checkAnswer(qid, val);
+          });
+        });
+      });
+
+      updateProgress();
+    }
+
+    function resetAllQuizzes() {
+      if (confirm("Are you sure you want to reset all your quiz answers?")) {
+        localStorage.removeItem(STORAGE_KEY);
+        document.querySelectorAll('input[type="radio"]').forEach(input => input.checked = false);
+        document.querySelectorAll('.feedback').forEach(fb => {
+          fb.style.display = 'none';
+          fb.className = 'feedback';
+        });
+        updateProgress();
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      applySyntaxHighlighting();
+      initQuiz();
+      initPageNavigationControls();
+    });
+  </script>
+</body>
+</html>
