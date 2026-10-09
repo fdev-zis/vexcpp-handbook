@@ -783,6 +783,213 @@
       margin: 0;
     }
 
+    .trace-heading {
+      font-size: 1.1rem;
+      color: var(--text-dark);
+      margin: 0.25rem 0 0.5rem;
+    }
+
+    .trace-code {
+      background: var(--code-bg);
+      color: var(--code-text);
+      border-radius: 6px;
+      padding: 0.45rem 0;
+      margin: 0.75rem 0 1rem;
+      overflow-x: auto;
+      font-family: Consolas, "Courier New", Courier, monospace;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .trace-line {
+      display: flex;
+      gap: 0.85rem;
+      padding: 0.08rem 1rem;
+      white-space: pre;
+    }
+
+    .trace-line.current {
+      background: rgba(37, 99, 235, 0.35);
+      box-shadow: inset 3px 0 0 #93c5fd;
+    }
+
+    .trace-num {
+      width: 1.25rem;
+      text-align: right;
+      color: #64748b;
+      flex: none;
+    }
+
+    .trace-src {
+      font-family: inherit;
+    }
+
+    .trace-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0.75rem 0;
+    }
+
+    .trace-progress {
+      color: #64748b;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    .btn-paper {
+      background: white;
+      color: var(--primary);
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 0.55rem 1rem;
+      font-weight: 700;
+      font-size: 0.875rem;
+      cursor: pointer;
+    }
+
+    .btn-paper:hover {
+      background: #eff6ff;
+    }
+
+    .btn-run:disabled,
+    .btn-paper:disabled {
+      opacity: 0.45;
+      cursor: default;
+    }
+
+    .trace-note {
+      margin: 0.75rem 0 0;
+      padding: 0.75rem 0.9rem;
+      border-radius: 6px;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1e3a8a;
+    }
+
+    .paper-caption {
+      margin: 0.75rem 0 0.35rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #64748b;
+    }
+
+    .paper-sheet {
+      position: relative;
+      background: #fffdf6;
+      border: 1px solid #e7e5e4;
+      border-radius: 4px;
+      box-shadow: 2px 3px 0 rgba(15, 23, 42, 0.06);
+      padding: 0.8rem 0.9rem 0.9rem 1.35rem;
+      overflow-x: auto;
+      margin-top: 0.75rem;
+    }
+
+    .paper-sheet::before {
+      content: "";
+      position: absolute;
+      left: 0.65rem;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: #fb7185;
+    }
+
+    .paper-kicker {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #a8a29e;
+    }
+
+    .paper-sheet table {
+      margin: 0.4rem 0 0;
+      background: transparent;
+    }
+
+    .paper-sheet th,
+    .paper-sheet td {
+      background: transparent;
+      padding: 0.4rem 0.7rem;
+    }
+
+    .paper-sheet th {
+      color: var(--text-dark);
+    }
+
+    .trace-table td:first-child,
+    .trace-table th:first-child {
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .trace-values {
+      white-space: nowrap;
+    }
+
+    .trace-old {
+      text-decoration: line-through;
+      color: #a8a29e;
+      font-weight: 600;
+      margin-right: 0.55rem;
+    }
+
+    .trace-changed {
+      color: var(--primary-light);
+      font-weight: 800;
+    }
+
+    .trace-last td {
+      border-bottom-width: 2px;
+    }
+
+    .paper-console {
+      margin: 0.6rem 0 0.2rem 1.1rem;
+      font-family: Consolas, "Courier New", Courier, monospace;
+    }
+
+    .paper-robot p {
+      margin: 0.45rem 0 0;
+    }
+
+    .paper-sheet[hidden] {
+      display: none;
+    }
+
+    .trace-final-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1rem;
+      margin-top: 0.55rem;
+    }
+
+    .trace-final-grid label {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      font-size: 0.85rem;
+    }
+
+    .trace-final-grid input {
+      width: 6.5rem;
+      font: inherit;
+      font-weight: 600;
+      padding: 0.35rem 0.5rem;
+      border: 1px solid #d6d3d1;
+      border-radius: 4px;
+      background: transparent;
+      color: var(--text-dark);
+    }
+
+    .trace-final-grid input.wrong {
+      border-color: var(--wrong);
+      background: var(--wrong-bg);
+    }
+
     .feedback {
       margin-top: 0.75rem;
       padding: 0.6rem 0.8rem;
@@ -895,7 +1102,7 @@
       <div class="progress-container">
         <div>
           <div style="font-size: 0.75rem; color: #94a3b8;">Quiz Progress</div>
-          <div id="progress-text" style="font-size: 0.9rem; font-weight: bold; color: white;">0 / 81 Completed</div>
+          <div id="progress-text" style="font-size: 0.9rem; font-weight: bold; color: white;">0 / 89 Completed</div>
         </div>
         <div class="progress-bar-bg">
           <div id="progress-bar" class="progress-bar-fill"></div>
@@ -914,13 +1121,15 @@
         <li><a href="#section2">Sec 3: C++ Variables <span class="new-badge">NEW</span></a></li>
         <li><a href="#section3">Sec 4: Arithmetic Expressions <span class="new-badge">NEW</span></a></li>
         <li><a class="practice-link" href="#practice-variables"><svg class="practice-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M11.3.7a1.4 1.4 0 0 1 2 0l2 2a1.4 1.4 0 0 1 0 2L6.6 13.4 2.4 14.5a.6.6 0 0 1-.7-.7l1.1-4.2L11.3.7zM4 10.2l-.5 2.3 2.3-.5 6.8-6.8-1.8-1.8L4 10.2z"/></svg>Exercises: Variables &amp; Arithmetic <span class="new-badge">NEW</span></a></li>
-        <li><a href="#section4">Sec 5: if / else Statements <span class="new-badge">NEW</span></a></li>
-        <li><a href="#section5">Sec 6: Relational Operators <span class="new-badge">NEW</span></a></li>
-        <li><a href="#section6">Sec 7: Constant Variables <span class="new-badge">NEW</span></a></li>
+        <li><a href="#section-tracing">Sec 5: Tracing Code <span class="new-badge">NEW</span></a></li>
+        <li><a class="practice-link" href="#practice-tracing"><svg class="practice-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M11.3.7a1.4 1.4 0 0 1 2 0l2 2a1.4 1.4 0 0 1 0 2L6.6 13.4 2.4 14.5a.6.6 0 0 1-.7-.7l1.1-4.2L11.3.7zM4 10.2l-.5 2.3 2.3-.5 6.8-6.8-1.8-1.8L4 10.2z"/></svg>Exercises: Tracing <span class="new-badge">NEW</span></a></li>
+        <li><a href="#section4">Sec 6: if / else Statements <span class="new-badge">NEW</span></a></li>
+        <li><a href="#section5">Sec 7: Relational Operators <span class="new-badge">NEW</span></a></li>
+        <li><a href="#section6">Sec 8: Constant Variables <span class="new-badge">NEW</span></a></li>
         <li><a class="practice-link" href="#practice-decisions"><svg class="practice-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M11.3.7a1.4 1.4 0 0 1 2 0l2 2a1.4 1.4 0 0 1 0 2L6.6 13.4 2.4 14.5a.6.6 0 0 1-.7-.7l1.1-4.2L11.3.7zM4 10.2l-.5 2.3 2.3-.5 6.8-6.8-1.8-1.8L4 10.2z"/></svg>Exercises: Decisions &amp; Constants <span class="new-badge">NEW</span></a></li>
-        <li><a href="#section7">Sec 8: Displaying Data</a></li>
-        <li><a href="#section8">Sec 9: for Loops</a></li>
-        <li><a href="#section9">Sec 10: Type Casting</a></li>
+        <li><a href="#section7">Sec 9: Displaying Data</a></li>
+        <li><a href="#section8">Sec 10: for Loops</a></li>
+        <li><a href="#section9">Sec 11: Type Casting</a></li>
       </ul>
     </nav>
 
@@ -1385,13 +1594,13 @@ float endPos = ...;</code></pre>
           </div>
 
           <div class="question-block coding-block" data-qid="s3c2">
-            <div class="question-text"><span class="new-badge">NEW</span> 8. <code>ticks</code> and <code>motors</code> already exist. Store how many whole encoder ticks each motor gets in <code>int wholeTurns</code>. Store the exact share in <code>float exactTurns</code>.</div>
+            <div class="question-text"><span class="new-badge">NEW</span> 8. <code>ticks</code> and <code>motors</code> already exist. Store how many whole encoder ticks each motor gets in <code>int wholeTurns</code>. Store the leftover ticks in <code>int spare</code>: <code>ticks</code> minus <code>wholeTurns</code> times <code>motors</code>.</div>
             <div class="code-title">ALREADY WRITTEN</div>
 <pre><code>int ticks = ...;
 int motors = ...;</code></pre>
             <div class="code-editor-wrap">
               <pre class="code-highlight" aria-hidden="true"><code></code></pre>
-              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Create wholeTurns and exactTurns">// Create wholeTurns and exactTurns.
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Create wholeTurns and spare">// Create wholeTurns and spare.
 </textarea>
             </div>
             <button type="button" class="btn-run">Run tests</button>
@@ -1465,7 +1674,7 @@ int motors = ...;</code></pre>
             <div class="code-title">ALREADY WRITTEN</div>
 <pre><code>float endPos = ...;
 float startPos = ...;
-int laps = ...;</code></pre>
+float laps = ...;</code></pre>
             <div class="code-editor-wrap">
               <pre class="code-highlight" aria-hidden="true"><code></code></pre>
               <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Create travel">// Create float travel.
@@ -1510,7 +1719,7 @@ int gear = ...;</code></pre>
           <div class="question-block coding-block" data-qid="pvx4">
             <div class="question-text"><span class="new-badge">NEW</span> 8. <code>reading</code> and <code>gain</code> already exist. Create <code>float scaled</code> as the line-sensor <code>reading</code> times <code>gain</code>, plus <span class="key-term">1.5</span>.</div>
             <div class="code-title">ALREADY WRITTEN</div>
-<pre><code>int reading = ...;
+<pre><code>float reading = ...;
 float gain = ...;</code></pre>
             <div class="code-editor-wrap">
               <pre class="code-highlight" aria-hidden="true"><code></code></pre>
@@ -1539,7 +1748,7 @@ int motors = ...;</code></pre>
           </div>
 
           <div class="question-block coding-block" data-qid="pvx6">
-            <div class="question-text"><span class="new-badge">NEW</span> 10. Two distance sensors, <code>nearCm</code> and <code>farCm</code>, already exist. Create <code>float gap</code> as <code>farCm</code> minus <code>nearCm</code>, and <code>float midpoint</code> as the average of the two readings.</div>
+            <div class="question-text"><span class="new-badge">NEW</span> 10. Two distance sensors, <code>nearCm</code> and <code>farCm</code>, already exist. Create <code>float gap</code> as <code>farCm</code> minus <code>nearCm</code>, and <code>float midpoint</code> as their sum divided by <span class="key-term">2.0</span>.</div>
             <div class="code-title">ALREADY WRITTEN</div>
 <pre><code>float nearCm = ...;
 float farCm = ...;</code></pre>
@@ -1555,10 +1764,82 @@ float farCm = ...;</code></pre>
         </div>
       </section>
 
-      <!-- SECTION 5 -->
-      <section id="section4" class="card">
+      <!-- SECTION 5: TRACING -->
+      <section id="section-tracing" class="card">
         <div class="section-header">
           <span class="section-tag">Section 5</span>
+          <span class="new-badge">NEW</span>
+          <h2>Tracing Code on Paper</h2>
+        </div>
+        <p>Before a program runs on the robot, walk through it yourself. Read one statement, do exactly what that line does, and write the result down. Then go to the next line. This is called <span class="key-term">tracing</span>.</p>
+        <p>When a line creates a variable, add a row and write its name and starting value. When a later line stores a new value in that same variable, draw a line through the old value and write the new one beside it. Do not erase the old value, and do not invent a 0 for a variable the program has not stored yet.</p>
+        <div class="grid-3">
+          <div class="feature-box">
+            <h4>Variable table</h4>
+            <p>One row per variable. Cross out a value when it changes, and write the new one next to it.</p>
+          </div>
+          <div class="feature-box">
+            <h4>Console</h4>
+            <p>When a program prints, write those words on a separate part of the same paper. The programs here do not print.</p>
+          </div>
+          <div class="feature-box">
+            <h4>Robot</h4>
+            <p>When the code drives the robot, sketch that move beside the table. These programs only store values.</p>
+          </div>
+        </div>
+        <h3 class="trace-heading">Worked example</h3>
+        <p>This program shares a battery across motors. Use <strong>Next line</strong> to run one statement at a time. A blue value is the one that line just stored.</p>
+        <div id="trace-demo"></div>
+      </section>
+
+      <!-- PRACTICE: TRACING -->
+      <section id="practice-tracing" class="card">
+        <div class="section-header">
+          <span class="section-tag practice"><svg class="practice-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M11.3.7a1.4 1.4 0 0 1 2 0l2 2a1.4 1.4 0 0 1 0 2L6.6 13.4 2.4 14.5a.6.6 0 0 1-.7-.7l1.1-4.2L11.3.7zM4 10.2l-.5 2.3 2.3-.5 6.8-6.8-1.8-1.8L4 10.2z"/></svg>Exercises</span>
+          <span class="new-badge">NEW</span>
+          <h2>Tracing</h2>
+        </div>
+        <p>These exercises cover Section 5. Trace each program on paper, then enter each variable's final value. A variable gets a row when it is created. When it changes, cross out the old value and write the new one beside it.</p>
+
+        <div class="quiz-container">
+          <h3>PRACTICE QUESTIONS</h3>
+
+          <div class="question-block trace-block" data-qid="tr1">
+            <div class="question-text"><span class="new-badge">NEW</span> 1. <code>driveSpeed</code> is set from <code>baseSpeed</code>, then <code>baseSpeed</code> changes. Trace every line and enter each final value.</div>
+            <div class="trace-host"></div>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block trace-block" data-qid="tr2">
+            <div class="question-text"><span class="new-badge">NEW</span> 2. <code>wholeTurns</code> uses integer division, then <code>ticks</code> is updated. Trace every line and enter each final value.</div>
+            <div class="trace-host"></div>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block trace-block" data-qid="tr3">
+            <div class="question-text"><span class="new-badge">NEW</span> 3. Parentheses run first, and dividing two ints drops the fraction. Trace every line and enter each final value.</div>
+            <div class="trace-host"></div>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block trace-block" data-qid="tr4">
+            <div class="question-text"><span class="new-badge">NEW</span> 4. <code>scaled</code> is stored before <code>reading</code> changes. Trace every line and enter each final value.</div>
+            <div class="trace-host"></div>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block trace-block" data-qid="tr5">
+            <div class="question-text"><span class="new-badge">NEW</span> 5. <code>gap</code> is stored, then stored again after <code>nearCm</code> changes. Trace every line and enter each final value.</div>
+            <div class="trace-host"></div>
+            <div class="feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 6 -->
+      <section id="section4" class="card">
+        <div class="section-header">
+          <span class="section-tag">Section 6</span>
           <span class="new-badge">NEW</span>
           <h2>Control Flow: Basic <code>if</code> / <code>else</code> Statements</h2>
         </div>
@@ -1705,10 +1986,10 @@ if (distance < 20) {
         </div>
       </section>
 
-      <!-- SECTION 6 -->
+      <!-- SECTION 7 -->
       <section id="section5" class="card">
         <div class="section-header">
-          <span class="section-tag">Section 6</span>
+          <span class="section-tag">Section 7</span>
           <span class="new-badge">NEW</span>
           <h2>Relational Operators & Boolean Expressions</h2>
         </div>
@@ -1899,10 +2180,10 @@ int target = ...;</code></pre>
         </div>
       </section>
 
-      <!-- SECTION 7 -->
+      <!-- SECTION 8 -->
       <section id="section6" class="card">
         <div class="section-header">
-          <span class="section-tag">Section 7</span>
+          <span class="section-tag">Section 8</span>
           <span class="new-badge">NEW</span>
           <h2>Constant Variables (<code>const</code>)</h2>
         </div>
@@ -2005,14 +2286,14 @@ int speed;
         </div>
       </section>
 
-      <!-- PRACTICE: SECTIONS 5, 6, AND 7 -->
+      <!-- PRACTICE: SECTIONS 6, 7, AND 8 -->
       <section id="practice-decisions" class="card">
         <div class="section-header">
           <span class="section-tag practice"><svg class="practice-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M11.3.7a1.4 1.4 0 0 1 2 0l2 2a1.4 1.4 0 0 1 0 2L6.6 13.4 2.4 14.5a.6.6 0 0 1-.7-.7l1.1-4.2L11.3.7zM4 10.2l-.5 2.3 2.3-.5 6.8-6.8-1.8-1.8L4 10.2z"/></svg>Exercises</span>
           <span class="new-badge">NEW</span>
           <h2>Decisions, Comparisons, and Constants</h2>
         </div>
-        <p>These exercises cover Sections 5, 6, and 7.</p>
+        <p>These exercises cover Sections 6, 7, and 8. Questions 8, 9, and 10 are traces on the same kind of paper as Section 5.</p>
 
         <div class="quiz-container">
           <h3>PRACTICE QUESTIONS</h3>
@@ -2120,13 +2401,31 @@ int motorPercent;
             <div class="test-results" aria-live="polite"></div>
             <div class="feedback"></div>
           </div>
+
+          <div class="question-block trace-block" data-qid="td1">
+            <div class="question-text"><span class="new-badge">NEW</span> 8. <code>warning</code> starts at 1, then the <code>if</code> / <code>else</code> may change it. Trace every line and enter each final value.</div>
+            <div class="trace-host"></div>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block trace-block" data-qid="td2">
+            <div class="question-text"><span class="new-badge">NEW</span> 9. <code>isFast</code> starts <code>false</code>. Trace the <code>if</code> and enter each final value.</div>
+            <div class="trace-host"></div>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block trace-block" data-qid="td3">
+            <div class="question-text"><span class="new-badge">NEW</span> 10. <code>speed</code> starts as <code>requested</code>. The <code>if</code> may replace it with <code>kMaxSpeed</code>. Trace every line and enter each final value.</div>
+            <div class="trace-host"></div>
+            <div class="feedback"></div>
+          </div>
         </div>
       </section>
 
-      <!-- SECTION 8 -->
+      <!-- SECTION 9 -->
       <section id="section7" class="card">
         <div class="section-header">
-          <span class="section-tag">Section 8</span>
+          <span class="section-tag">Section 9</span>
           <h2>Displaying Data on VEX Brain Screen</h2>
         </div>
         <p>VEX C++ provides specialized screen output functions that draw on the physical display <strong>Screen Buffer</strong>. Text layout is controlled by positioning the active text <strong>Cursor</strong>.</p>
@@ -2277,10 +2576,10 @@ Brain.Screen.print("Temp: %f", temp);   // Prints floating decimal</code></pre>
         </div>
       </section>
 
-      <!-- SECTION 9 -->
+      <!-- SECTION 10 -->
       <section id="section8" class="card">
         <div class="section-header">
-          <span class="section-tag">Section 9</span>
+          <span class="section-tag">Section 10</span>
           <h2>Control Flow: Repetition with <code>for</code> Loops</h2>
         </div>
         <p>A <strong><code>for</code> Loop</strong> repeats a code block multiple times. Each pass through the loop is called an <strong>Iteration</strong>. A <strong>Loop Counter</strong> variable manages the loop state, updated at the end of each pass using the <strong>Increment Operator (<code>++</code>)</strong>.</p>
@@ -2389,10 +2688,10 @@ for (int i = 0; i &lt; 5; i++) {
         </div>
       </section>
 
-      <!-- SECTION 10 -->
+      <!-- SECTION 11 -->
       <section id="section9" class="card">
         <div class="section-header">
-          <span class="section-tag">Section 10</span>
+          <span class="section-tag">Section 11</span>
           <h2>Type Casting with <code>static_cast&lt;int&gt;</code></h2>
         </div>
         <p><strong>Type Casting</strong> is an <strong>Explicit Conversion</strong> technique used to convert data from one type to another. Writing <code>static_cast&lt;int&gt;(value)</code> converts a decimal (<code>float</code>) into an integer (<code>int</code>) by performing <strong>Truncation</strong>—dropping the fractional decimal portion entirely.</p>
@@ -2521,6 +2820,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
   <script>
     const sectionIds = [
       'section1', 'section-setup', 'section2', 'section3', 'practice-variables',
+      'section-tracing', 'practice-tracing',
       'section4', 'section5', 'section6', 'practice-decisions',
       'section7', 'section8', 'section9'
     ];
@@ -3451,11 +3751,11 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       },
       s3c2: {
         cases: [
-          codingCase("ticks = 10, motors = 4", "int ticks = 10;\nint motors = 4;", [ev("wholeTurns", "int", 2), ev("exactTurns", "float", 2.5)]),
-          codingCase("ticks = 7, motors = 2", "int ticks = 7;\nint motors = 2;", [ev("wholeTurns", "int", 3), ev("exactTurns", "float", 3.5)]),
-          codingCase("ticks = 9, motors = 3", "int ticks = 9;\nint motors = 3;", [ev("wholeTurns", "int", 3), ev("exactTurns", "float", 3)]),
-          codingCase("ticks = 1, motors = 2", "int ticks = 1;\nint motors = 2;", [ev("wholeTurns", "int", 0), ev("exactTurns", "float", 0.5)]),
-          codingCase("ticks = 8, motors = 5", "int ticks = 8;\nint motors = 5;", [ev("wholeTurns", "int", 1), ev("exactTurns", "float", 1.6)])
+          codingCase("ticks = 10, motors = 4", "int ticks = 10;\nint motors = 4;", [ev("wholeTurns", "int", 2), ev("spare", "int", 2)]),
+          codingCase("ticks = 7, motors = 2", "int ticks = 7;\nint motors = 2;", [ev("wholeTurns", "int", 3), ev("spare", "int", 1)]),
+          codingCase("ticks = 9, motors = 3", "int ticks = 9;\nint motors = 3;", [ev("wholeTurns", "int", 3), ev("spare", "int", 0)]),
+          codingCase("ticks = 1, motors = 2", "int ticks = 1;\nint motors = 2;", [ev("wholeTurns", "int", 0), ev("spare", "int", 1)]),
+          codingCase("ticks = 8, motors = 5", "int ticks = 8;\nint motors = 5;", [ev("wholeTurns", "int", 1), ev("spare", "int", 3)])
         ]
       },
       s4c1: {
@@ -3510,11 +3810,11 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       },
       pvx1: {
         cases: [
-          codingCase("endPos = 100, startPos = 40, laps = 3", "float endPos = 100;\nfloat startPos = 40;\nint laps = 3;", [ev("travel", "float", 180)]),
-          codingCase("endPos = 10, startPos = 10, laps = 5", "float endPos = 10;\nfloat startPos = 10;\nint laps = 5;", [ev("travel", "float", 0)]),
-          codingCase("endPos = 8.5, startPos = 2.5, laps = 4", "float endPos = 8.5;\nfloat startPos = 2.5;\nint laps = 4;", [ev("travel", "float", 24)]),
-          codingCase("endPos = 20, startPos = 50, laps = 2", "float endPos = 20;\nfloat startPos = 50;\nint laps = 2;", [ev("travel", "float", -60)]),
-          codingCase("endPos = 3, startPos = 1, laps = 1", "float endPos = 3;\nfloat startPos = 1;\nint laps = 1;", [ev("travel", "float", 2)])
+          codingCase("endPos = 100, startPos = 40, laps = 3", "float endPos = 100;\nfloat startPos = 40;\nfloat laps = 3;", [ev("travel", "float", 180)]),
+          codingCase("endPos = 10, startPos = 10, laps = 5", "float endPos = 10;\nfloat startPos = 10;\nfloat laps = 5;", [ev("travel", "float", 0)]),
+          codingCase("endPos = 8.5, startPos = 2.5, laps = 4", "float endPos = 8.5;\nfloat startPos = 2.5;\nfloat laps = 4;", [ev("travel", "float", 24)]),
+          codingCase("endPos = 20, startPos = 50, laps = 2", "float endPos = 20;\nfloat startPos = 50;\nfloat laps = 2;", [ev("travel", "float", -60)]),
+          codingCase("endPos = 3, startPos = 1, laps = 1", "float endPos = 3;\nfloat startPos = 1;\nfloat laps = 1;", [ev("travel", "float", 2)])
         ]
       },
       pvx2: {
@@ -3537,11 +3837,11 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       },
       pvx4: {
         cases: [
-          codingCase("reading = 4, gain = 2.5", "int reading = 4;\nfloat gain = 2.5;", [ev("scaled", "float", 11.5)]),
-          codingCase("reading = 0, gain = 3.25", "int reading = 0;\nfloat gain = 3.25;", [ev("scaled", "float", 1.5)]),
-          codingCase("reading = 3, gain = 0.5", "int reading = 3;\nfloat gain = 0.5;", [ev("scaled", "float", 3)]),
-          codingCase("reading = 10, gain = 1.25", "int reading = 10;\nfloat gain = 1.25;", [ev("scaled", "float", 14)]),
-          codingCase("reading = 2, gain = 2", "int reading = 2;\nfloat gain = 2;", [ev("scaled", "float", 5.5)])
+          codingCase("reading = 4, gain = 2.5", "float reading = 4;\nfloat gain = 2.5;", [ev("scaled", "float", 11.5)]),
+          codingCase("reading = 0, gain = 3.25", "float reading = 0;\nfloat gain = 3.25;", [ev("scaled", "float", 1.5)]),
+          codingCase("reading = 3, gain = 0.5", "float reading = 3;\nfloat gain = 0.5;", [ev("scaled", "float", 3)]),
+          codingCase("reading = 10, gain = 1.25", "float reading = 10;\nfloat gain = 1.25;", [ev("scaled", "float", 14)]),
+          codingCase("reading = 2, gain = 2", "float reading = 2;\nfloat gain = 2;", [ev("scaled", "float", 5.5)])
         ]
       },
       pvx5: {
@@ -3597,7 +3897,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       s2c1: "Each declaration needs a type, a name, and a starting value. wheelCount is an int, distanceCm is a float, and isReady is a bool.",
       s2c2: "The distance in centimeters is a float. The number of motors is an int.",
       s3c1: "Subtract startPos from endPos and store the result in distance.",
-      s3c2: "Integer division drops the fraction. Multiply by 1.0 before dividing when you need the decimal share.",
+      s3c2: "Integer division drops the fraction. Multiply wholeTurns by motors, then subtract that from ticks.",
       s4c1: "Give status a value in the if branch and a value in the else branch.",
       s4c2: "A reading of exactly 20 cm is not less than 20, so warning is 0.",
       s5c1: "Use >= to compare speed with 50. Use = only to store isFast.",
@@ -3609,7 +3909,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       pvx3: "Add the two speeds first, multiply by gear, then subtract rightRpm / 2. Parentheses control that order.",
       pvx4: "Multiply the reading by gain first, then add 1.5.",
       pvx5: "Multiply draw by motors first, then subtract that product from capacity.",
-      pvx6: "The gap is farCm minus nearCm. Put parentheses around the sum before you divide by 2.",
+      pvx6: "The gap is farCm minus nearCm. Add the two readings in parentheses, then divide by 2.0.",
       pdx1: "When the path is clear, driveSpeed is baseSpeed + 10. When the path is blocked, driveSpeed is 0.",
       pdx2: "Use > for leftBigger and == for same.",
       pdx3: "askedSpeed is the percent the driver asked for. If it is at or above kMaxPercent, store kMaxPercent in motorPercent. Use the name kMaxPercent, not only the number 80."
@@ -3843,7 +4143,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       const answers = loadSavedAnswers();
 
       document.querySelectorAll('.question-block').forEach(block => {
-        if (block.classList.contains('coding-block')) return;
+        if (block.classList.contains('coding-block') || block.classList.contains('trace-block')) return;
         const qid = block.getAttribute('data-qid');
         const checks = block.querySelectorAll('input[type="checkbox"]');
 
@@ -4040,8 +4340,433 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       }
     }
 
+    const traceDemo = {
+      lines: [
+        'int battery = 100;',
+        'int motors = 3;',
+        'int each = battery / motors;',
+        'int used = each * motors;',
+        'battery = battery - used;'
+      ],
+      columns: ['battery', 'motors', 'each', 'used'],
+      notes: [
+        'battery is created, so it gets a row. Write 100.',
+        'motors is created. Write 3 on its new row. battery is still 100.',
+        'Both numbers are ints, so / drops the fraction. 100 / 3 is 33. each gets a new row with 33.',
+        'each * motors is 33 * 3, which is 99. used gets a new row with 99.',
+        'battery - used is 100 - 99, which is 1. Cross out 100 and write 1 beside it.'
+      ]
+    };
+
+    const traceTasks = {
+      tr1: {
+        lines: [
+          'int baseSpeed = 20;',
+          'int driveSpeed = baseSpeed + 10;',
+          'baseSpeed = 35;'
+        ],
+        columns: ['baseSpeed', 'driveSpeed']
+      },
+      tr2: {
+        lines: [
+          'int ticks = 11;',
+          'int motors = 4;',
+          'int wholeTurns = ticks / motors;',
+          'ticks = ticks - wholeTurns * motors;'
+        ],
+        columns: ['ticks', 'motors', 'wholeTurns']
+      },
+      tr3: {
+        lines: [
+          'int leftRpm = 8;',
+          'int rightRpm = 3;',
+          'int gear = 2;',
+          'int power = (leftRpm + rightRpm) * gear - rightRpm / 2;'
+        ],
+        columns: ['leftRpm', 'rightRpm', 'gear', 'power']
+      },
+      tr4: {
+        lines: [
+          'float reading = 4.0;',
+          'float gain = 2.5;',
+          'float scaled = reading * gain + 1.5;',
+          'reading = reading + 2.0;'
+        ],
+        columns: ['reading', 'gain', 'scaled']
+      },
+      tr5: {
+        lines: [
+          'int nearCm = 10;',
+          'int farCm = 40;',
+          'int gap = farCm - nearCm;',
+          'bool aligned = false;',
+          'nearCm = nearCm + 6;',
+          'gap = farCm - nearCm;'
+        ],
+        columns: ['nearCm', 'farCm', 'gap', 'aligned']
+      },
+      td1: {
+        lines: [
+          'int distance = 25;',
+          'int warning = 1;',
+          'if (distance < 20) {',
+          '    warning = 1;',
+          '} else {',
+          '    warning = 0;',
+          '}'
+        ],
+        columns: ['distance', 'warning']
+      },
+      td2: {
+        lines: [
+          'int speed = 40;',
+          'bool isFast = false;',
+          'if (speed >= 50) {',
+          '    isFast = true;',
+          '}'
+        ],
+        columns: ['speed', 'isFast']
+      },
+      td3: {
+        lines: [
+          'const int kMaxSpeed = 100;',
+          'int requested = 140;',
+          'int speed = requested;',
+          'if (requested > kMaxSpeed) {',
+          '    speed = kMaxSpeed;',
+          '}'
+        ],
+        columns: ['kMaxSpeed', 'requested', 'speed']
+      }
+    };
+
+    function traceProgram(lines, columns) {
+      const program = parseCpp(lines.join('\n'), true);
+      const stmts = program.stmts || [];
+      const env = freshEnv();
+      const events = [];
+      const previous = {};
+      columns.forEach(name => { previous[name] = ''; });
+      stmts.forEach((stmt, index) => {
+        execStmt(stmt, env);
+        columns.forEach(name => {
+          const rec = env.lookup(name);
+          const value = rec && rec.initialized ? formatValue(rec.type, rec.value) : '';
+          if (value !== '' && value !== previous[name]) {
+            events.push({ step: index + 1, name: name, value: value });
+            previous[name] = value;
+          }
+        });
+      });
+      return { events: events, steps: stmts.length };
+    }
+
+    function buildTrace(task) {
+      const traced = traceProgram(task.lines, task.columns);
+      task.events = traced.events;
+      task.steps = traced.steps;
+      return task;
+    }
+
+    function finalTraceValues(task) {
+      return task.columns.map(name => {
+        const values = task.events.filter(event => event.name === name);
+        return values.length ? values[values.length - 1].value : '';
+      });
+    }
+
+    function traceValueEqual(actual, expected) {
+      const a = String(actual).trim();
+      const e = String(expected).trim();
+      if (a.toLowerCase() === e.toLowerCase()) return true;
+      const an = Number(a);
+      const en = Number(e);
+      return a !== '' && e !== '' && Number.isFinite(an) && Number.isFinite(en) && Math.abs(an - en) <= 0.0001;
+    }
+
+    function renderTraceCode(lines, currentIndex) {
+      const wrap = document.createElement('div');
+      wrap.className = 'trace-code';
+      lines.forEach((line, index) => {
+        const row = document.createElement('div');
+        row.className = 'trace-line' + (index === currentIndex ? ' current' : '');
+        const num = document.createElement('span');
+        num.className = 'trace-num';
+        num.textContent = String(index + 1);
+        const src = document.createElement('span');
+        src.className = 'trace-src';
+        src.innerHTML = highlightCpp(line);
+        row.appendChild(num);
+        row.appendChild(src);
+        wrap.appendChild(row);
+      });
+      return wrap;
+    }
+
+    function buildTraceTable(task, visibleCount, highlightStep) {
+      const table = document.createElement('table');
+      table.className = 'trace-table';
+      const headRow = document.createElement('tr');
+      ['Variable', 'Values'].forEach(label => {
+        const th = document.createElement('th');
+        th.textContent = label;
+        headRow.appendChild(th);
+      });
+      const thead = document.createElement('thead');
+      thead.appendChild(headRow);
+      table.appendChild(thead);
+      const tbody = document.createElement('tbody');
+      task.columns.forEach(name => {
+        const values = task.events.filter(event => event.name === name && event.step <= visibleCount);
+        if (!values.length) return;
+        const tr = document.createElement('tr');
+        const nameCell = document.createElement('td');
+        nameCell.textContent = name;
+        const valueCell = document.createElement('td');
+        valueCell.className = 'trace-values';
+        values.forEach((event, index) => {
+          const span = document.createElement('span');
+          span.textContent = event.value;
+          if (index < values.length - 1) span.className = 'trace-old';
+          else if (highlightStep && event.step === highlightStep) span.className = 'trace-changed';
+          valueCell.appendChild(span);
+        });
+        tr.appendChild(nameCell);
+        tr.appendChild(valueCell);
+        tbody.appendChild(tr);
+      });
+      table.appendChild(tbody);
+      return table;
+    }
+
+    function renderPaper(task, visibleCount, highlightStep) {
+      const paper = document.createElement('div');
+      paper.className = 'paper';
+      const panels = [{ id: 'variables', label: 'Variables', sheet: null }];
+      if (task.console && task.console.length) panels.push({ id: 'console', label: 'Console', sheet: null });
+      if (task.robot && task.robot.length) panels.push({ id: 'robot', label: 'Robot', sheet: null });
+
+      function makeSheet(id, label) {
+        const sheet = document.createElement('div');
+        sheet.className = 'paper-sheet';
+        sheet.dataset.paper = id;
+        const kicker = document.createElement('div');
+        kicker.className = 'paper-kicker';
+        kicker.textContent = label;
+        sheet.appendChild(kicker);
+        return sheet;
+      }
+
+      const variableSheet = makeSheet('variables', 'Variables');
+      variableSheet.appendChild(buildTraceTable(task, visibleCount, highlightStep));
+      panels[0].sheet = variableSheet;
+
+      if (task.console && task.console.length) {
+        const sheet = makeSheet('console', 'Console');
+        const list = document.createElement('ol');
+        list.className = 'paper-console';
+        task.console.forEach(line => {
+          const item = document.createElement('li');
+          item.textContent = line;
+          list.appendChild(item);
+        });
+        sheet.appendChild(list);
+        panels[1].sheet = sheet;
+      }
+
+      if (task.robot && task.robot.length) {
+        const sheet = makeSheet('robot', 'Robot');
+        sheet.classList.add('paper-robot');
+        task.robot.forEach(step => {
+          const line = document.createElement('p');
+          line.textContent = step;
+          sheet.appendChild(line);
+        });
+        panels[panels.length - 1].sheet = sheet;
+      }
+
+      if (panels.length > 1) {
+        const tabs = document.createElement('div');
+        tabs.className = 'coding-tabs';
+        tabs.setAttribute('role', 'tablist');
+        panels.forEach((panel, index) => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'coding-tab';
+          button.textContent = panel.label;
+          button.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
+          button.addEventListener('click', () => {
+            tabs.querySelectorAll('.coding-tab').forEach(item => item.setAttribute('aria-selected', 'false'));
+            button.setAttribute('aria-selected', 'true');
+            panels.forEach(item => { item.sheet.hidden = item !== panel; });
+          });
+          tabs.appendChild(button);
+          panel.sheet.hidden = index !== 0;
+        });
+        paper.appendChild(tabs);
+      }
+
+      panels.forEach(panel => paper.appendChild(panel.sheet));
+      return paper;
+    }
+
+    function renderTraceDemo() {
+      const mount = document.getElementById('trace-demo');
+      if (!mount) return;
+      const task = buildTrace(traceDemo);
+      let step = 0;
+      const codeHost = document.createElement('div');
+      const paperHost = document.createElement('div');
+      const note = document.createElement('p');
+      note.className = 'trace-note';
+      const actions = document.createElement('div');
+      actions.className = 'trace-actions';
+      const prev = document.createElement('button');
+      prev.type = 'button';
+      prev.className = 'btn-paper';
+      prev.textContent = 'Previous line';
+      const next = document.createElement('button');
+      next.type = 'button';
+      next.className = 'btn-run';
+      next.textContent = 'Next line';
+      const progress = document.createElement('span');
+      progress.className = 'trace-progress';
+      actions.append(prev, next, progress);
+
+      function paint() {
+        codeHost.replaceChildren(renderTraceCode(task.lines, step === 0 ? -1 : step - 1));
+        paperHost.replaceChildren(renderPaper(task, step, step));
+        note.textContent = step === 0
+          ? 'A variable gets a row when a line creates it. Run line 1.'
+          : task.notes[step - 1];
+        progress.textContent = step === 0 ? 'Paper is blank' : 'After line ' + step + ' of ' + task.lines.length;
+        prev.disabled = step === 0;
+        next.disabled = step === task.lines.length;
+      }
+
+      prev.addEventListener('click', () => { step -= 1; paint(); });
+      next.addEventListener('click', () => { step += 1; paint(); });
+      mount.replaceChildren(codeHost, actions, paperHost, note);
+      paint();
+    }
+
+    function renderTracePractice(block) {
+      const qid = block.getAttribute('data-qid');
+      const task = buildTrace(traceTasks[qid]);
+      const finalRow = finalTraceValues(task);
+      answerKey[qid] = finalRow.join('|');
+      const host = block.querySelector('.trace-host');
+      const sheet = document.createElement('div');
+      sheet.className = 'paper-sheet paper-final';
+      const kicker = document.createElement('div');
+      kicker.className = 'paper-kicker';
+      kicker.textContent = 'Final values';
+      const grid = document.createElement('div');
+      grid.className = 'trace-final-grid';
+      const inputs = task.columns.map(name => {
+        const label = document.createElement('label');
+        label.appendChild(document.createTextNode(name));
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.autocomplete = 'off';
+        input.spellcheck = false;
+        input.setAttribute('aria-label', 'Final value of ' + name);
+        label.appendChild(input);
+        grid.appendChild(label);
+        return input;
+      });
+      sheet.append(kicker, grid);
+
+      const actions = document.createElement('div');
+      actions.className = 'trace-actions';
+      const check = document.createElement('button');
+      check.type = 'button';
+      check.className = 'btn-run';
+      check.textContent = 'Check final values';
+      const show = document.createElement('button');
+      show.type = 'button';
+      show.className = 'btn-paper';
+      show.textContent = 'Show the paper';
+      actions.append(check, show);
+
+      const paperHost = document.createElement('div');
+      paperHost.className = 'paper-solution';
+      paperHost.hidden = true;
+
+      function showPaper() {
+        const caption = document.createElement('p');
+        caption.className = 'paper-caption';
+        caption.textContent = 'Finished paper. Crossed-out values were replaced.';
+        paperHost.replaceChildren(caption, renderPaper(task, task.steps, null));
+        paperHost.hidden = false;
+        show.textContent = 'Hide the paper';
+      }
+
+      function hidePaper() {
+        paperHost.hidden = true;
+        paperHost.replaceChildren();
+        show.textContent = 'Show the paper';
+      }
+
+      show.addEventListener('click', () => {
+        if (paperHost.hidden) showPaper();
+        else hidePaper();
+      });
+
+      function applyCheck() {
+        const feedback = block.querySelector('.feedback');
+        let ok = true;
+        inputs.forEach((input, index) => {
+          const match = traceValueEqual(input.value, finalRow[index]);
+          input.classList.toggle('wrong', !match);
+          if (!match) ok = false;
+        });
+        feedback.style.display = '';
+        if (ok) {
+          feedback.textContent = '✓ That matches the final value of each variable.';
+          feedback.className = 'feedback correct';
+          saveAnswer(qid, answerKey[qid]);
+          showPaper();
+        } else {
+          feedback.textContent = '✗ Those final values do not match the paper. The marked cells need another look.';
+          feedback.className = 'feedback wrong';
+          clearAnswer(qid);
+        }
+      }
+
+      check.addEventListener('click', applyCheck);
+      inputs.forEach(input => {
+        input.addEventListener('input', () => {
+          input.classList.remove('wrong');
+          clearAnswer(qid);
+          const feedback = block.querySelector('.feedback');
+          feedback.className = 'feedback';
+          feedback.style.display = '';
+          feedback.textContent = '';
+        });
+      });
+
+      host.replaceChildren(renderTraceCode(task.lines, -1), sheet, actions, paperHost);
+
+      const saved = loadSavedAnswers()[qid];
+      if (saved && saved === answerKey[qid]) {
+        inputs.forEach((input, index) => { input.value = finalRow[index]; });
+        const feedback = block.querySelector('.feedback');
+        feedback.style.display = '';
+        feedback.textContent = '✓ That matches the final value of each variable.';
+        feedback.className = 'feedback correct';
+        showPaper();
+      }
+    }
+
+    function initTracing() {
+      renderTraceDemo();
+      document.querySelectorAll('.trace-block').forEach(renderTracePractice);
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       applySyntaxHighlighting();
+      initTracing();
       initQuiz();
       initCoding();
       initPageNavigationControls();
