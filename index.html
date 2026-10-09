@@ -182,6 +182,7 @@
 
     section.card {
       display: none;
+      scroll-margin-top: 130px;
       background: var(--card-bg);
       border: 1px solid var(--border);
       border-radius: 8px;
@@ -528,8 +529,258 @@
       background: #f1f5f9;
     }
 
-    .option-item input[type="radio"] {
+    .option-item input[type="radio"],
+    .option-item input[type="checkbox"] {
       cursor: pointer;
+    }
+
+    .practice-mark {
+      width: 0.9em;
+      height: 0.9em;
+      margin-right: 0.35em;
+      vertical-align: -0.12em;
+      display: inline-block;
+    }
+
+    .section-tag.practice {
+      background-color: var(--accent);
+    }
+
+    nav.sidebar a.practice-link {
+      color: #075985;
+      background: #e0f2fe;
+      font-weight: 700;
+      border-left: 3px solid var(--accent);
+    }
+
+    nav.sidebar a.practice-link:hover {
+      background: #bae6fd;
+      color: #075985;
+    }
+
+    nav.sidebar a.practice-link.active {
+      background-color: var(--accent);
+      color: white;
+      border-left-color: white;
+    }
+
+    .question-text .new-badge {
+      margin-left: 0;
+      margin-right: 0.45rem;
+    }
+
+    .new-badge {
+      display: inline-block;
+      margin-left: 0.4rem;
+      background: var(--primary-light);
+      color: white;
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      line-height: 1.4;
+      padding: 0.05rem 0.35rem;
+      border-radius: 4px;
+      vertical-align: middle;
+    }
+
+    nav.sidebar a.active .new-badge {
+      background: white;
+      color: var(--primary-light);
+    }
+
+    .key-term {
+      color: var(--primary-light);
+      font-weight: 700;
+    }
+
+    .question-hint {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--primary-light);
+      margin: -0.25rem 0 0.75rem;
+    }
+
+    .coding-help {
+      font-size: 0.875rem;
+      color: #475569;
+      margin-bottom: 0.35rem;
+    }
+
+    .code-editor-wrap {
+      position: relative;
+      margin: 0.75rem 0;
+      background: var(--code-bg);
+      border: 1px solid #334155;
+      border-radius: 6px;
+      min-height: 140px;
+    }
+
+    .code-editor-wrap:focus-within {
+      outline: 2px solid var(--primary-light);
+      outline-offset: 1px;
+    }
+
+    .code-highlight,
+    .code-editor {
+      font-family: Consolas, "Courier New", Courier, monospace;
+      font-size: 16px;
+      line-height: 1.5;
+      padding: 1rem;
+      margin: 0;
+      border: 0;
+      tab-size: 4;
+      white-space: pre;
+      overflow: auto;
+    }
+
+    .code-highlight {
+      min-height: 140px;
+      pointer-events: none;
+      color: var(--code-text);
+    }
+
+    .code-highlight code {
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
+      background: transparent;
+      color: inherit;
+      padding: 0;
+      border-radius: 0;
+      white-space: inherit;
+    }
+
+    .code-editor {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      resize: none;
+      color: transparent;
+      caret-color: #f8fafc;
+      background: transparent;
+    }
+
+    .code-editor::selection {
+      background: rgba(37, 99, 235, 0.45);
+      color: transparent;
+    }
+
+    .btn-run {
+      background: #15803d;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      padding: 0.55rem 1rem;
+      font-weight: 700;
+      font-size: 0.875rem;
+      cursor: pointer;
+    }
+
+    .btn-run:hover {
+      background: #166534;
+    }
+
+    .coding-tabs {
+      display: flex;
+      gap: 0.4rem;
+      margin-top: 0.75rem;
+    }
+
+    .coding-tab {
+      background: white;
+      border: 1px solid #cbd5e1;
+      color: var(--primary);
+      border-radius: 6px;
+      padding: 0.28rem 0.75rem;
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      cursor: pointer;
+    }
+
+    .coding-tab[aria-selected="true"] {
+      background: var(--primary-light);
+      border-color: var(--primary-light);
+      color: white;
+    }
+
+    .coding-panel {
+      margin-top: 0.65rem;
+    }
+
+    .hint-body,
+    .test-empty {
+      margin: 0;
+      padding: 0.75rem 0.9rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+    }
+
+    .hint-body {
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      color: #1e3a8a;
+    }
+
+    .test-empty {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      color: #475569;
+    }
+
+    .test-results {
+      margin-top: 0.65rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .coding-panel .test-results {
+      margin-top: 0.5rem;
+    }
+
+    .coding-panel .test-results:empty {
+      display: none;
+    }
+
+    .test-case {
+      border-radius: 6px;
+      padding: 0.65rem 0.75rem;
+      border: 1px solid var(--border);
+      background: white;
+    }
+
+    .test-case.pass {
+      background: var(--correct-bg);
+      border-color: #bbf7d0;
+    }
+
+    .test-case.fail {
+      background: var(--wrong-bg);
+      border-color: #fecaca;
+    }
+
+    .test-case-title {
+      font-family: Consolas, "Courier New", Courier, monospace;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .test-case-detail {
+      font-size: 0.85rem;
+      margin-top: 0.15rem;
+    }
+
+    .test-stale {
+      font-size: 0.85rem;
+      color: var(--primary-light);
+      margin: 0;
     }
 
     .feedback {
@@ -622,6 +873,11 @@
       .header-brand {
         flex-direction: row;
       }
+      .code-highlight,
+      .code-editor,
+      .code-highlight code {
+        white-space: pre-wrap;
+      }
     }
   </style>
 </head>
@@ -632,14 +888,14 @@
       <div class="header-brand">
         <img src="images/logo.svg" alt="Zurich International School Logo" class="school-logo">
         <div>
-          <h1>VEX C++ Programming</h1>
-          <p>Study Handbook</p>
+          <h1>VEX C++ Programming Handbook</h1>
+          <p>Interactive Edition</p>
         </div>
       </div>
       <div class="progress-container">
         <div>
           <div style="font-size: 0.75rem; color: #94a3b8;">Quiz Progress</div>
-          <div id="progress-text" style="font-size: 0.9rem; font-weight: bold; color: white;">0 / 54 Completed</div>
+          <div id="progress-text" style="font-size: 0.9rem; font-weight: bold; color: white;">0 / 81 Completed</div>
         </div>
         <div class="progress-bar-bg">
           <div id="progress-bar" class="progress-bar-fill"></div>
@@ -655,11 +911,13 @@
       <ul>
         <li><a href="#section1">Sec 1: Why C++?</a></li>
         <li><a href="#section-setup">Sec 2: Project Setup</a></li>
-        <li><a href="#section2">Sec 3: C++ Variables</a></li>
-        <li><a href="#section3">Sec 4: Arithmetic Expressions</a></li>
-        <li><a href="#section4">Sec 5: if / else Statements</a></li>
-        <li><a href="#section5">Sec 6: Relational Operators</a></li>
-        <li><a href="#section6">Sec 7: Constant Variables</a></li>
+        <li><a href="#section2">Sec 3: C++ Variables <span class="new-badge">NEW</span></a></li>
+        <li><a href="#section3">Sec 4: Arithmetic Expressions <span class="new-badge">NEW</span></a></li>
+        <li><a class="practice-link" href="#practice-variables"><svg class="practice-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M11.3.7a1.4 1.4 0 0 1 2 0l2 2a1.4 1.4 0 0 1 0 2L6.6 13.4 2.4 14.5a.6.6 0 0 1-.7-.7l1.1-4.2L11.3.7zM4 10.2l-.5 2.3 2.3-.5 6.8-6.8-1.8-1.8L4 10.2z"/></svg>Exercises: Variables &amp; Arithmetic <span class="new-badge">NEW</span></a></li>
+        <li><a href="#section4">Sec 5: if / else Statements <span class="new-badge">NEW</span></a></li>
+        <li><a href="#section5">Sec 6: Relational Operators <span class="new-badge">NEW</span></a></li>
+        <li><a href="#section6">Sec 7: Constant Variables <span class="new-badge">NEW</span></a></li>
+        <li><a class="practice-link" href="#practice-decisions"><svg class="practice-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M11.3.7a1.4 1.4 0 0 1 2 0l2 2a1.4 1.4 0 0 1 0 2L6.6 13.4 2.4 14.5a.6.6 0 0 1-.7-.7l1.1-4.2L11.3.7zM4 10.2l-.5 2.3 2.3-.5 6.8-6.8-1.8-1.8L4 10.2z"/></svg>Exercises: Decisions &amp; Constants <span class="new-badge">NEW</span></a></li>
         <li><a href="#section7">Sec 8: Displaying Data</a></li>
         <li><a href="#section8">Sec 9: for Loops</a></li>
         <li><a href="#section9">Sec 10: Type Casting</a></li>
@@ -865,6 +1123,7 @@ int whenStarted1() {
       <section id="section2" class="card">
         <div class="section-header">
           <span class="section-tag">Section 3</span>
+          <span class="new-badge">NEW</span>
           <h2>Storing Data with C++ Variables</h2>
         </div>
         <p>A <strong>Variable</strong> is a named storage container in memory designed to hold a data value that can change while the program runs. In C++, you must explicitly specify a variable's <strong>Data Type</strong> before using it—a process known as variable <strong>Declaration</strong>. Assigning a starting value when creating a variable is called <strong>Initialization</strong>.</p>
@@ -980,6 +1239,30 @@ bool engineActive = true;  // State flag</code></pre>
             </ul>
             <div class="feedback"></div>
           </div>
+
+          <div class="question-block coding-block" data-qid="s2c1">
+            <div class="question-text"><span class="new-badge">NEW</span> 6. Declare an <code>int</code> named <code>wheelCount</code> set to <span class="key-term">4</span>, a <code>float</code> named <code>distanceCm</code> set to <span class="key-term">12.5</span>, and a <code>bool</code> named <code>isReady</code> set to <span class="key-term">true</span>.</div>
+            <div class="code-editor-wrap">
+              <pre class="code-highlight" aria-hidden="true"><code></code></pre>
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Declare wheelCount, distanceCm, and isReady">// Declare wheelCount, distanceCm, and isReady.
+</textarea>
+            </div>
+            <button type="button" class="btn-run">Run tests</button>
+            <div class="test-results" aria-live="polite"></div>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block coding-block" data-qid="s2c2">
+            <div class="question-text"><span class="new-badge">NEW</span> 7. The distance sensor reads <span class="key-term">24.75</span> cm. The robot has <span class="key-term">6</span> motors. Declare <code>rangeCm</code> and <code>motorCount</code> with the right types and those starting values.</div>
+            <div class="code-editor-wrap">
+              <pre class="code-highlight" aria-hidden="true"><code></code></pre>
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Declare rangeCm and motorCount">// Declare rangeCm and motorCount.
+</textarea>
+            </div>
+            <button type="button" class="btn-run">Run tests</button>
+            <div class="test-results" aria-live="polite"></div>
+            <div class="feedback"></div>
+          </div>
         </div>
       </section>
 
@@ -987,6 +1270,7 @@ bool engineActive = true;  // State flag</code></pre>
       <section id="section3" class="card">
         <div class="section-header">
           <span class="section-tag">Section 4</span>
+          <span class="new-badge">NEW</span>
           <h2>Arithmetic Expressions & Operators</h2>
         </div>
         <p>An <strong>Arithmetic Expression</strong> combines variables, numeric values (called <strong>Operands</strong>), and mathematical symbol <strong>Operators</strong> to calculate dynamic new values. C++ uses standard arithmetic operators: <strong>Addition (<code>+</code>)</strong>, <strong>Subtraction (<code>-</code>)</strong>, <strong>Multiplication (<code>*</code>)</strong>, and <strong>Division (<code>/</code>)</strong>.</p>
@@ -1084,6 +1368,190 @@ score = score + 5; // New score value is 15</code></pre>
             </ul>
             <div class="feedback"></div>
           </div>
+
+          <div class="question-block coding-block" data-qid="s3c1">
+            <div class="question-text"><span class="new-badge">NEW</span> 7. <code>startPos</code> and <code>endPos</code> already exist. Create a <code>float</code> named <code>distance</code> that stores how far <code>endPos</code> is from <code>startPos</code>.</div>
+            <div class="code-title">ALREADY WRITTEN</div>
+<pre><code>float startPos = ...;
+float endPos = ...;</code></pre>
+            <div class="code-editor-wrap">
+              <pre class="code-highlight" aria-hidden="true"><code></code></pre>
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Create distance from endPos and startPos">// Create float distance from endPos and startPos.
+</textarea>
+            </div>
+            <button type="button" class="btn-run">Run tests</button>
+            <div class="test-results" aria-live="polite"></div>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block coding-block" data-qid="s3c2">
+            <div class="question-text"><span class="new-badge">NEW</span> 8. <code>ticks</code> and <code>motors</code> already exist. Store how many whole encoder ticks each motor gets in <code>int wholeTurns</code>. Store the exact share in <code>float exactTurns</code>.</div>
+            <div class="code-title">ALREADY WRITTEN</div>
+<pre><code>int ticks = ...;
+int motors = ...;</code></pre>
+            <div class="code-editor-wrap">
+              <pre class="code-highlight" aria-hidden="true"><code></code></pre>
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Create wholeTurns and exactTurns">// Create wholeTurns and exactTurns.
+</textarea>
+            </div>
+            <button type="button" class="btn-run">Run tests</button>
+            <div class="test-results" aria-live="polite"></div>
+            <div class="feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRACTICE: SECTIONS 3 AND 4 -->
+      <section id="practice-variables" class="card">
+        <div class="section-header">
+          <span class="section-tag practice"><svg class="practice-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M11.3.7a1.4 1.4 0 0 1 2 0l2 2a1.4 1.4 0 0 1 0 2L6.6 13.4 2.4 14.5a.6.6 0 0 1-.7-.7l1.1-4.2L11.3.7zM4 10.2l-.5 2.3 2.3-.5 6.8-6.8-1.8-1.8L4 10.2z"/></svg>Exercises</span>
+          <span class="new-badge">NEW</span>
+          <h2>Variables and Arithmetic</h2>
+        </div>
+        <p>These exercises cover Sections 3 and 4.</p>
+
+        <div class="quiz-container">
+          <h3>PRACTICE QUESTIONS</h3>
+
+          <div class="question-block" data-qid="pvq1">
+            <div class="question-text">1. A counter stores how many times the bumper switch was pressed. That number is always a whole number. Which declaration is the right choice?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="pvq1" value="A"> <code>float presses = 3.0;</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="pvq1" value="B"> <code>bool presses = true;</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="pvq1" value="C"> <code>int presses = 3;</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="pvq1" value="D"> <code>presses = 3;</code></label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="pvq2" data-multi="true">
+            <div class="question-text">2. Which statements about C++ variables are true?</div>
+            <p class="question-hint">Select all that apply</p>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="checkbox" name="pvq2" value="A"> A variable's data type must be declared before the variable is used</label></li>
+              <li class="option-item"><label class="option-label"><input type="checkbox" name="pvq2" value="B"> Initialization means giving a variable its starting value</label></li>
+              <li class="option-item"><label class="option-label"><input type="checkbox" name="pvq2" value="C"> An uninitialized variable is guaranteed to start at 0</label></li>
+              <li class="option-item"><label class="option-label"><input type="checkbox" name="pvq2" value="D"> A decimal measurement such as 12.375 should be stored in a <code>float</code></label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="pvq3">
+            <div class="question-text">3. What is the value of <code>int result = 7 / 2;</code>?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="pvq3" value="A"> 3.5</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="pvq3" value="B"> 3</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="pvq3" value="C"> 4</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="pvq3" value="D"> 2</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="pvq4" data-multi="true">
+            <div class="question-text">4. Which expressions evaluate to 8?</div>
+            <p class="question-hint">Select all that apply</p>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="checkbox" name="pvq4" value="A"> <code>3 + 5</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="checkbox" name="pvq4" value="B"> <code>16 / 2</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="checkbox" name="pvq4" value="C"> <code>2 * 2 * 2</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="checkbox" name="pvq4" value="D"> <code>20 / 3</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="checkbox" name="pvq4" value="E"> <code>5 + 6 / 2</code></label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block coding-block" data-qid="pvx1">
+            <div class="question-text"><span class="new-badge">NEW</span> 5. <code>endPos</code>, <code>startPos</code>, and <code>laps</code> already exist. Create <code>float travel</code> for the distance from start to end, multiplied by the number of laps.</div>
+            <div class="code-title">ALREADY WRITTEN</div>
+<pre><code>float endPos = ...;
+float startPos = ...;
+int laps = ...;</code></pre>
+            <div class="code-editor-wrap">
+              <pre class="code-highlight" aria-hidden="true"><code></code></pre>
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Create travel">// Create float travel.
+</textarea>
+            </div>
+            <button type="button" class="btn-run">Run tests</button>
+            <div class="test-results" aria-live="polite"></div>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block coding-block" data-qid="pvx2">
+            <div class="question-text"><span class="new-badge">NEW</span> 6. <code>distanceCm</code> and <code>wheelTurns</code> already exist. Update <code>distanceCm</code> by adding <span class="key-term">5 cm for each wheel turn</span>.</div>
+            <div class="code-title">ALREADY WRITTEN</div>
+<pre><code>int distanceCm = ...;
+int wheelTurns = ...;</code></pre>
+            <div class="code-editor-wrap">
+              <pre class="code-highlight" aria-hidden="true"><code></code></pre>
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Update distance from wheel turns">// Update distanceCm.
+</textarea>
+            </div>
+            <button type="button" class="btn-run">Run tests</button>
+            <div class="test-results" aria-live="polite"></div>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block coding-block" data-qid="pvx3">
+            <div class="question-text"><span class="new-badge">NEW</span> 7. <code>leftRpm</code>, <code>rightRpm</code>, and <code>gear</code> already exist. Create <code>int power</code> that adds the two motor speeds, multiplies that sum by <code>gear</code>, then subtracts <code>rightRpm</code> divided by 2 using <span class="key-term">integer division</span>.</div>
+            <div class="code-title">ALREADY WRITTEN</div>
+<pre><code>int leftRpm = ...;
+int rightRpm = ...;
+int gear = ...;</code></pre>
+            <div class="code-editor-wrap">
+              <pre class="code-highlight" aria-hidden="true"><code></code></pre>
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Create power from the two motor speeds">// Create int power.
+</textarea>
+            </div>
+            <button type="button" class="btn-run">Run tests</button>
+            <div class="test-results" aria-live="polite"></div>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block coding-block" data-qid="pvx4">
+            <div class="question-text"><span class="new-badge">NEW</span> 8. <code>reading</code> and <code>gain</code> already exist. Create <code>float scaled</code> as the line-sensor <code>reading</code> times <code>gain</code>, plus <span class="key-term">1.5</span>.</div>
+            <div class="code-title">ALREADY WRITTEN</div>
+<pre><code>int reading = ...;
+float gain = ...;</code></pre>
+            <div class="code-editor-wrap">
+              <pre class="code-highlight" aria-hidden="true"><code></code></pre>
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Create scaled">// Create float scaled.
+</textarea>
+            </div>
+            <button type="button" class="btn-run">Run tests</button>
+            <div class="test-results" aria-live="polite"></div>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block coding-block" data-qid="pvx5">
+            <div class="question-text"><span class="new-badge">NEW</span> 9. <code>capacity</code>, <code>draw</code>, and <code>motors</code> already exist. Create <code>int remaining</code> as the battery capacity minus <code>draw</code> times <code>motors</code>.</div>
+            <div class="code-title">ALREADY WRITTEN</div>
+<pre><code>int capacity = ...;
+int draw = ...;
+int motors = ...;</code></pre>
+            <div class="code-editor-wrap">
+              <pre class="code-highlight" aria-hidden="true"><code></code></pre>
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Create remaining">// Create int remaining.
+</textarea>
+            </div>
+            <button type="button" class="btn-run">Run tests</button>
+            <div class="test-results" aria-live="polite"></div>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block coding-block" data-qid="pvx6">
+            <div class="question-text"><span class="new-badge">NEW</span> 10. Two distance sensors, <code>nearCm</code> and <code>farCm</code>, already exist. Create <code>float gap</code> as <code>farCm</code> minus <code>nearCm</code>, and <code>float midpoint</code> as the average of the two readings.</div>
+            <div class="code-title">ALREADY WRITTEN</div>
+<pre><code>float nearCm = ...;
+float farCm = ...;</code></pre>
+            <div class="code-editor-wrap">
+              <pre class="code-highlight" aria-hidden="true"><code></code></pre>
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Create gap and midpoint">// Create gap and midpoint.
+</textarea>
+            </div>
+            <button type="button" class="btn-run">Run tests</button>
+            <div class="test-results" aria-live="polite"></div>
+            <div class="feedback"></div>
+          </div>
         </div>
       </section>
 
@@ -1091,6 +1559,7 @@ score = score + 5; // New score value is 15</code></pre>
       <section id="section4" class="card">
         <div class="section-header">
           <span class="section-tag">Section 5</span>
+          <span class="new-badge">NEW</span>
           <h2>Control Flow: Basic <code>if</code> / <code>else</code> Statements</h2>
         </div>
         <p>By default, program <strong>Control Flow</strong> follows sequential line-by-line execution. Introducing <strong>Decision-Making</strong> through a <strong>Conditional Statement</strong> allows programs to branch. An <strong><code>if</code> Statement</strong> checks a condition, while an <strong><code>else</code> Statement</strong> provides an alternate fallback branch. Code inside each branch is enclosed within a curly-brace <strong>Code Block</strong> <code>{}</code>.</p>
@@ -1193,6 +1662,46 @@ if (systemReady) {
             </ul>
             <div class="feedback"></div>
           </div>
+
+          <div class="question-block coding-block" data-qid="s4c1">
+            <div class="question-text"><span class="new-badge">NEW</span> 7. <code>systemReady</code> already exists. Declare <code>int status</code> before the <code>if</code>. Set <code>status</code> to <span class="key-term">1</span> when <code>systemReady</code> is true, and to <span class="key-term">0</span> in the <code>else</code>.</div>
+            <div class="code-title">ALREADY WRITTEN</div>
+<pre><code>bool systemReady = ...;</code></pre>
+            <div class="code-editor-wrap">
+              <pre class="code-highlight" aria-hidden="true"><code></code></pre>
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Set status from systemReady">int status;
+
+if (systemReady) {
+
+} else {
+
+}
+</textarea>
+            </div>
+            <button type="button" class="btn-run">Run tests</button>
+            <div class="test-results" aria-live="polite"></div>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block coding-block" data-qid="s4c2">
+            <div class="question-text"><span class="new-badge">NEW</span> 8. The distance sensor reading, <code>distance</code>, already exists. Declare <code>int warning</code> before the <code>if</code>. Set it to <span class="key-term">1</span> when <code>distance</code> is less than 20 cm, and to <span class="key-term">0</span> otherwise.</div>
+            <div class="code-title">ALREADY WRITTEN</div>
+<pre><code>float distance = ...;</code></pre>
+            <div class="code-editor-wrap">
+              <pre class="code-highlight" aria-hidden="true"><code></code></pre>
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Set warning from distance">int warning;
+
+if (distance < 20) {
+
+} else {
+
+}
+</textarea>
+            </div>
+            <button type="button" class="btn-run">Run tests</button>
+            <div class="test-results" aria-live="polite"></div>
+            <div class="feedback"></div>
+          </div>
         </div>
       </section>
 
@@ -1200,6 +1709,7 @@ if (systemReady) {
       <section id="section5" class="card">
         <div class="section-header">
           <span class="section-tag">Section 6</span>
+          <span class="new-badge">NEW</span>
           <h2>Relational Operators & Boolean Expressions</h2>
         </div>
         <p>A <strong>Relational Operator</strong> compares two values to construct a <strong>Boolean Expression</strong> that evaluates strictly to <code>true</code> or <code>false</code>. Understanding the difference between the <strong>Equality Operator (<code>==</code>)</strong> and the <strong>Assignment Operator (<code>=</code>)</strong> is essential for correct logic.</p>
@@ -1357,6 +1867,35 @@ if (speed >= 50) {
             </ul>
             <div class="feedback"></div>
           </div>
+
+          <div class="question-block coding-block" data-qid="s5c1">
+            <div class="question-text"><span class="new-badge">NEW</span> 9. <code>speed</code> already exists. Create a <code>bool</code> named <code>isFast</code> that is <span class="key-term">true</span> when <code>speed</code> is greater than or equal to 50, and <span class="key-term">false</span> otherwise.</div>
+            <div class="code-title">ALREADY WRITTEN</div>
+<pre><code>int speed = ...;</code></pre>
+            <div class="code-editor-wrap">
+              <pre class="code-highlight" aria-hidden="true"><code></code></pre>
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Create isFast from speed">// Create bool isFast from speed.
+</textarea>
+            </div>
+            <button type="button" class="btn-run">Run tests</button>
+            <div class="test-results" aria-live="polite"></div>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block coding-block" data-qid="s5c2">
+            <div class="question-text"><span class="new-badge">NEW</span> 10. The encoder <code>reading</code> and the target position <code>target</code> already exist. Create <code>bool matched</code> for when they are equal, and <code>bool different</code> for when they are not equal.</div>
+            <div class="code-title">ALREADY WRITTEN</div>
+<pre><code>int reading = ...;
+int target = ...;</code></pre>
+            <div class="code-editor-wrap">
+              <pre class="code-highlight" aria-hidden="true"><code></code></pre>
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Create matched and different">// Create matched and different.
+</textarea>
+            </div>
+            <button type="button" class="btn-run">Run tests</button>
+            <div class="test-results" aria-live="polite"></div>
+            <div class="feedback"></div>
+          </div>
         </div>
       </section>
 
@@ -1364,6 +1903,7 @@ if (speed >= 50) {
       <section id="section6" class="card">
         <div class="section-header">
           <span class="section-tag">Section 7</span>
+          <span class="new-badge">NEW</span>
           <h2>Constant Variables (<code>const</code>)</h2>
         </div>
         <p>A <strong>Constant Variable</strong> is created using the <strong><code>const</code> Keyword</strong>. Declaring a constant marks the variable as <strong>Read-Only</strong>. Once assigned during initial declaration, its value can never be altered or reassigned elsewhere in your program.</p>
@@ -1433,6 +1973,151 @@ const int kMaxSpeed = 100;
               <li class="option-item"><label class="option-label"><input type="radio" name="s6q4" value="C"> They allow variables to change data types automatically</label></li>
               <li class="option-item"><label class="option-label"><input type="radio" name="s6q4" value="D"> They automatically delete unused code</label></li>
             </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block coding-block" data-qid="s6c1">
+            <div class="question-text"><span class="new-badge">NEW</span> 5. Declare <code>const int kMaxSpeed = 100</code>. Then create <code>int power</code> as <code>kMaxSpeed</code> minus <span class="key-term">15</span>, and <code>int quarter</code> as <code>kMaxSpeed</code> divided by <span class="key-term">4</span>.</div>
+            <div class="code-editor-wrap">
+              <pre class="code-highlight" aria-hidden="true"><code></code></pre>
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Create kMaxSpeed, power, and quarter">// Declare const int kMaxSpeed, then power and quarter.
+</textarea>
+            </div>
+            <button type="button" class="btn-run">Run tests</button>
+            <div class="test-results" aria-live="polite"></div>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block coding-block" data-qid="s6c2">
+            <div class="question-text"><span class="new-badge">NEW</span> 6. <code>requested</code> is the motor speed the driver asked for, and it already exists. Declare <code>const int kMaxSpeed = 100</code>, the fastest this motor may spin. Store the speed the motor is allowed to use in <code>int speed</code>: use <code>requested</code> when it is within that limit, and <code>kMaxSpeed</code> when <code>requested</code> is greater.</div>
+            <div class="code-title">ALREADY WRITTEN</div>
+<pre><code>int requested = ...;</code></pre>
+            <div class="code-editor-wrap">
+              <pre class="code-highlight" aria-hidden="true"><code></code></pre>
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Cap speed with kMaxSpeed">const int kMaxSpeed = 100;
+int speed;
+</textarea>
+            </div>
+            <button type="button" class="btn-run">Run tests</button>
+            <div class="test-results" aria-live="polite"></div>
+            <div class="feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- PRACTICE: SECTIONS 5, 6, AND 7 -->
+      <section id="practice-decisions" class="card">
+        <div class="section-header">
+          <span class="section-tag practice"><svg class="practice-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M11.3.7a1.4 1.4 0 0 1 2 0l2 2a1.4 1.4 0 0 1 0 2L6.6 13.4 2.4 14.5a.6.6 0 0 1-.7-.7l1.1-4.2L11.3.7zM4 10.2l-.5 2.3 2.3-.5 6.8-6.8-1.8-1.8L4 10.2z"/></svg>Exercises</span>
+          <span class="new-badge">NEW</span>
+          <h2>Decisions, Comparisons, and Constants</h2>
+        </div>
+        <p>These exercises cover Sections 5, 6, and 7.</p>
+
+        <div class="quiz-container">
+          <h3>PRACTICE QUESTIONS</h3>
+
+          <div class="question-block" data-qid="pdq1">
+            <div class="question-text">1. When does the <code>else</code> block in this program run?</div>
+            <div class="code-title">SPEED CHECK</div>
+<pre><code>if (speed >= 50) {
+    // fast
+} else {
+    // slow
+}</code></pre>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="pdq1" value="A"> When speed is greater than 50</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="pdq1" value="B"> When speed is strictly less than 50</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="pdq1" value="C"> After the <code>if</code> block, on every run</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="pdq1" value="D"> Only when speed is equal to 50</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="pdq2" data-multi="true">
+            <div class="question-text">2. <code>int speed = 50;</code> Which conditions evaluate to <code>true</code>?</div>
+            <p class="question-hint">Select all that apply</p>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="checkbox" name="pdq2" value="A"> <code>speed == 50</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="checkbox" name="pdq2" value="B"> <code>speed &gt;= 50</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="checkbox" name="pdq2" value="C"> <code>speed &gt; 50</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="checkbox" name="pdq2" value="D"> <code>speed != 40</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="checkbox" name="pdq2" value="E"> <code>speed &lt; 50</code></label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="pdq3">
+            <div class="question-text">3. A programmer meant to test whether <code>battery</code> equals 0, but wrote <code>if (battery = 0)</code>. What does that condition do?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="pdq3" value="A"> It compares <code>battery</code> with 0</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="pdq3" value="B"> It assigns 0 to <code>battery</code> instead of comparing</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="pdq3" value="C"> It declares <code>battery</code> as a constant</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="pdq3" value="D"> It divides <code>battery</code> by zero</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="pdq4" data-multi="true">
+            <div class="question-text">4. Which statements about <code>const</code> are true?</div>
+            <p class="question-hint">Select all that apply</p>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="checkbox" name="pdq4" value="A"> <code>const</code> marks a variable as read-only</label></li>
+              <li class="option-item"><label class="option-label"><input type="checkbox" name="pdq4" value="B"> A <code>const</code> variable must receive its value when it is declared</label></li>
+              <li class="option-item"><label class="option-label"><input type="checkbox" name="pdq4" value="C"> Assigning a new value to a <code>const</code> variable causes a compiler error</label></li>
+              <li class="option-item"><label class="option-label"><input type="checkbox" name="pdq4" value="D"> <code>const</code> is written after the name, as in <code>int speed const = 100;</code></label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block coding-block" data-qid="pdx1">
+            <div class="question-text"><span class="new-badge">NEW</span> 5. <code>pathClear</code> and <code>baseSpeed</code> already exist. Declare <code>int driveSpeed</code> before the <code>if</code>. When the path is clear, set <code>driveSpeed</code> to <code>baseSpeed + 10</code>. When the path is blocked, set <code>driveSpeed</code> to <span class="key-term">0</span>.</div>
+            <div class="code-title">ALREADY WRITTEN</div>
+<pre><code>bool pathClear = ...;
+int baseSpeed = ...;</code></pre>
+            <div class="code-editor-wrap">
+              <pre class="code-highlight" aria-hidden="true"><code></code></pre>
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Set driveSpeed from pathClear">int driveSpeed;
+
+if (pathClear) {
+
+} else {
+
+}
+</textarea>
+            </div>
+            <button type="button" class="btn-run">Run tests</button>
+            <div class="test-results" aria-live="polite"></div>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block coding-block" data-qid="pdx2">
+            <div class="question-text"><span class="new-badge">NEW</span> 6. The left and right distance readings, <code>left</code> and <code>right</code>, already exist. Create <code>bool leftBigger</code> for when <code>left</code> is greater than <code>right</code>, and <code>bool same</code> for when the two readings are equal.</div>
+            <div class="code-title">ALREADY WRITTEN</div>
+<pre><code>int left = ...;
+int right = ...;</code></pre>
+            <div class="code-editor-wrap">
+              <pre class="code-highlight" aria-hidden="true"><code></code></pre>
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Create leftBigger and same">// Create leftBigger and same.
+</textarea>
+            </div>
+            <button type="button" class="btn-run">Run tests</button>
+            <div class="test-results" aria-live="polite"></div>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block coding-block" data-qid="pdx3">
+            <div class="question-text"><span class="new-badge">NEW</span> 7. <code>askedSpeed</code> is the motor percent the driver asked for, and it already exists. Declare <code>const int kMaxPercent = 80</code>, the highest percent this motor may use. Store the percent actually sent to the motor in <code>int motorPercent</code>: use <code>askedSpeed</code> when it is below <code>kMaxPercent</code>, and use <code>kMaxPercent</code> when <code>askedSpeed</code> is greater than or equal to that limit.</div>
+            <div class="code-title">ALREADY WRITTEN</div>
+<pre><code>int askedSpeed = ...;</code></pre>
+            <div class="code-editor-wrap">
+              <pre class="code-highlight" aria-hidden="true"><code></code></pre>
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Cap motor percent with kMaxPercent">const int kMaxPercent = 80;
+int motorPercent;
+</textarea>
+            </div>
+            <button type="button" class="btn-run">Run tests</button>
+            <div class="test-results" aria-live="polite"></div>
             <div class="feedback"></div>
           </div>
         </div>
@@ -1830,13 +2515,14 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
   </div>
 
   <footer>
-    <p>VEX C++ Student Study Handbook • Interactive Edition</p>
+    <p>VEX C++ Programming Handbook • Interactive Edition</p>
   </footer>
 
   <script>
     const sectionIds = [
-      'section1', 'section-setup', 'section2', 'section3', 'section4', 'section5',
-      'section6', 'section7', 'section8', 'section9'
+      'section1', 'section-setup', 'section2', 'section3', 'practice-variables',
+      'section4', 'section5', 'section6', 'practice-decisions',
+      'section7', 'section8', 'section9'
     ];
 
     function showSection(targetId) {
@@ -1878,12 +2564,15 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
         const prevId = idx > 0 ? sections[idx - 1].id : null;
         const nextId = idx < sections.length - 1 ? sections[idx + 1].id : null;
 
+        const prevLabel = prevId && prevId.indexOf('practice') === 0 ? '← Exercises' : '← Previous Section';
+        const nextLabel = nextId && nextId.indexOf('practice') === 0 ? 'Exercises →' : 'Next Section →';
+
         let prevBtn = prevId
-          ? `<button class="btn-nav" onclick="showSection('${prevId}')">← Previous Section</button>`
+          ? `<button class="btn-nav" onclick="showSection('${prevId}')">${prevLabel}</button>`
           : `<div></div>`;
 
         let nextBtn = nextId
-          ? `<button class="btn-nav" onclick="showSection('${nextId}')">Next Section →</button>`
+          ? `<button class="btn-nav" onclick="showSection('${nextId}')">${nextLabel}</button>`
           : `<div></div>`;
 
         navDiv.innerHTML = `${prevBtn}${nextBtn}`;
@@ -1907,49 +2596,1182 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       showSection(initialHash || 'section1');
     }
 
+    function highlightCpp(source) {
+      let text = String(source);
+      text = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+      const tokens = [];
+
+      function storeToken(match, className) {
+        tokens.push('<span class="' + className + '">' + match + '</span>');
+        return '___TOKEN_' + (tokens.length - 1) + '___';
+      }
+
+      text = text.replace(/(\/\/.*)/g, m => storeToken(m, 'syn-comment'));
+      text = text.replace(/\.\.\./g, m => storeToken(m, 'syn-comment'));
+      text = text.replace(/("[^"]*")/g, m => storeToken(m, 'syn-string'));
+      text = text.replace(/\b(int|float|bool|char|const|return|if|else|for|static_cast)\b/g, m => storeToken(m, 'syn-keyword'));
+      text = text.replace(/\b(Brain|Screen|clearScreen|setCursor|print|newLine|moveCursor|setPosition|main)\b/g, m => storeToken(m, 'syn-builtin'));
+      text = text.replace(/\b(true|false)\b/g, m => storeToken(m, 'syn-literal'));
+      text = text.replace(/(%[dfsi])/g, m => storeToken(m, 'syn-literal'));
+      text = text.replace(/\b(\d+(\.\d+)?)\b/g, m => storeToken(m, 'syn-number'));
+
+      for (let i = tokens.length - 1; i >= 0; i--) {
+        text = text.replace('___TOKEN_' + i + '___', tokens[i]);
+      }
+      return text;
+    }
+
     function applySyntaxHighlighting() {
-      const codeBlocks = document.querySelectorAll('code');
-      codeBlocks.forEach(block => {
-        let text = block.textContent;
-
-        text = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-
-        const tokens = [];
-
-        function storeToken(match, className) {
-          tokens.push(`<span class="${className}">${match}</span>`);
-          return `___TOKEN_${tokens.length - 1}___`;
-        }
-
-        text = text.replace(/(\/\/.*)/g, m => storeToken(m, 'syn-comment'));
-        text = text.replace(/("[^"]*")/g, m => storeToken(m, 'syn-string'));
-        text = text.replace(/\b(int|float|bool|char|const|return|if|else|for|static_cast)\b/g, m => storeToken(m, 'syn-keyword'));
-        text = text.replace(/\b(Brain|Screen|clearScreen|setCursor|print|newLine|moveCursor|setPosition|main)\b/g, m => storeToken(m, 'syn-builtin'));
-        text = text.replace(/\b(true|false)\b/g, m => storeToken(m, 'syn-literal'));
-        text = text.replace(/(%[dfsi])/g, m => storeToken(m, 'syn-literal'));
-        text = text.replace(/\b(\d+(\.\d+)?)\b/g, m => storeToken(m, 'syn-number'));
-
-        for (let i = tokens.length - 1; i >= 0; i--) {
-          text = text.replace(`___TOKEN_${i}___`, tokens[i]);
-        }
-
-        block.innerHTML = text;
+      document.querySelectorAll('code').forEach(block => {
+        if (block.closest('.code-highlight')) return;
+        block.innerHTML = highlightCpp(block.textContent);
       });
+    }
+
+    function refreshEditorHighlight(textarea) {
+      const wrap = textarea.closest('.code-editor-wrap');
+      if (!wrap) return;
+      const code = wrap.querySelector('.code-highlight code');
+      if (!code) return;
+      code.innerHTML = highlightCpp(textarea.value.length ? textarea.value : '\n');
+    }
+
+    // Executes the C++ subset students have practiced (variables, arithmetic,
+    // if / else, comparisons, and const) and checks the variables they create.
+    let cppSteps = 0;
+
+    function cppError(line, message) {
+      if (line) return new Error("Line " + line + ": " + message);
+      return new Error(message);
+    }
+
+    function describeToken(token) {
+      if (!token || token.kind === "eof") return "the end of the code";
+      return "'" + token.value + "'";
+    }
+
+    const CPP_KEYWORDS = new Set([
+      "int", "float", "bool", "const", "if", "else", "return", "true", "false",
+      "for", "while", "double", "char", "void", "string"
+    ]);
+
+    function stripPreamble(source) {
+      const lines = source.split(/\r?\n/);
+      for (let n = 0; n < lines.length; n++) {
+        const trimmed = lines[n].trim();
+        if (/^#\s*include\b/.test(trimmed) || /^using\s+namespace\s+[A-Za-z_][A-Za-z0-9_]*\s*;$/.test(trimmed)) {
+          lines[n] = "";
+          continue;
+        }
+        if (trimmed.charAt(0) === "#") {
+          throw cppError(n + 1, "this practice does not use that preprocessor line. You can remove it.");
+        }
+      }
+      return lines.join("\n");
+    }
+
+    function codeWithoutComments(source) {
+      let out = "";
+      let i = 0;
+      while (i < source.length) {
+        if (source.charAt(i) === "/" && source.charAt(i + 1) === "/") {
+          while (i < source.length && source.charAt(i) !== "\n") i++;
+          continue;
+        }
+        if (source.charAt(i) === "/" && source.charAt(i + 1) === "*") {
+          i += 2;
+          while (i < source.length && !(source.charAt(i) === "*" && source.charAt(i + 1) === "/")) {
+            if (source.charAt(i) === "\n") out += "\n";
+            i++;
+          }
+          i = Math.min(source.length, i + 2);
+          continue;
+        }
+        out += source.charAt(i);
+        i++;
+      }
+      return out;
+    }
+
+    function tokenize(source) {
+      const tokens = [];
+      let i = 0;
+      let line = 1;
+      const twoChar = ["==", "!=", "<=", ">=", "&&", "||"];
+      const singles = "(){}[];,+-*/<>!=";
+
+      function pushBreak(ch) {
+        if (ch === "\r" && source.charAt(i + 1) === "\n") i++;
+        line++;
+        i++;
+      }
+
+      while (i < source.length) {
+        const ch = source.charAt(i);
+        if (ch === " " || ch === "\t") { i++; continue; }
+        if (ch === "\n" || ch === "\r") { pushBreak(ch); continue; }
+        if (ch === "/" && source.charAt(i + 1) === "/") {
+          while (i < source.length && source.charAt(i) !== "\n" && source.charAt(i) !== "\r") i++;
+          continue;
+        }
+        if (ch === "/" && source.charAt(i + 1) === "*") {
+          const startLine = line;
+          i += 2;
+          while (i < source.length && !(source.charAt(i) === "*" && source.charAt(i + 1) === "/")) {
+            if (source.charAt(i) === "\n" || source.charAt(i) === "\r") pushBreak(source.charAt(i));
+            else i++;
+          }
+          if (i >= source.length) throw cppError(startLine, "this comment was never closed.");
+          i += 2;
+          continue;
+        }
+        if (ch === '"' || ch === "'") {
+          throw cppError(line, "this practice uses numbers, true, and false, not quoted text.");
+        }
+        if (/[A-Za-z_]/.test(ch)) {
+          const start = i;
+          i++;
+          while (i < source.length && /[A-Za-z0-9_]/.test(source.charAt(i))) i++;
+          const word = source.slice(start, i);
+          if (CPP_KEYWORDS.has(word)) tokens.push({ kind: "keyword", value: word, line: line });
+          else tokens.push({ kind: "ident", value: word, line: line });
+          continue;
+        }
+        if (/[0-9]/.test(ch) || (ch === "." && /[0-9]/.test(source.charAt(i + 1)))) {
+          const startLine = line;
+          let raw = "";
+          let numType = "int";
+          if (ch === ".") {
+            numType = "float";
+            raw = ".";
+            i++;
+            while (/[0-9]/.test(source.charAt(i))) { raw += source.charAt(i); i++; }
+          } else {
+            while (/[0-9]/.test(source.charAt(i))) { raw += source.charAt(i); i++; }
+            if (source.charAt(i) === "." && !/[A-Za-z_]/.test(source.charAt(i + 1))) {
+              numType = "float";
+              raw += ".";
+              i++;
+              while (/[0-9]/.test(source.charAt(i))) { raw += source.charAt(i); i++; }
+            }
+          }
+          if (source.charAt(i) === "f" || source.charAt(i) === "F") {
+            numType = "float";
+            i++;
+          }
+          if (source.charAt(i) === "e" || source.charAt(i) === "E") {
+            throw cppError(startLine, "write this number in ordinary decimal form instead of scientific notation.");
+          }
+          const value = numType === "int" ? parseInt(raw, 10) : parseFloat(raw);
+          if (!Number.isFinite(value)) throw cppError(startLine, "this number could not be read.");
+          tokens.push({ kind: "number", numType: numType, value: value, line: startLine });
+          continue;
+        }
+        const pair = source.slice(i, i + 2);
+        if (twoChar.indexOf(pair) !== -1) {
+          tokens.push({ kind: "punct", value: pair, line: line });
+          i += 2;
+          continue;
+        }
+        if (ch === "%") throw cppError(line, "the % operator is not covered in this practice.");
+        if (ch === "&") throw cppError(line, "use && to mean and. A single & is not covered here.");
+        if (ch === "|") throw cppError(line, "use || to mean or. A single | is not covered here.");
+        if (singles.indexOf(ch) !== -1) {
+          tokens.push({ kind: "punct", value: ch, line: line });
+          i++;
+          continue;
+        }
+        throw cppError(line, "unexpected character '" + ch + "'.");
+      }
+      tokens.push({ kind: "eof", value: "", line: line });
+      return tokens;
+    }
+
+    function parseProgram(tokens, asSnippet) {
+      let pos = 0;
+      let depth = 0;
+
+      function peek() { return tokens[pos]; }
+      function next() { return tokens[pos++]; }
+      function isPunct(value) {
+        const token = peek();
+        return token.kind === "punct" && token.value === value;
+      }
+      function pushDepth(line) {
+        depth += 1;
+        if (depth > 40) throw cppError(line, "this code is nested too deeply.");
+      }
+      function expectPunct(value) {
+        const token = peek();
+        if (!isPunct(value)) {
+          if (value === ";") throw cppError(token.line, "every C++ statement must end with a semicolon.");
+          if (value === "}") throw cppError(token.line, "missing a closing curly brace }.");
+          if (value === "{") throw cppError(token.line, "expected an opening curly brace {.");
+          if (value === ")") throw cppError(token.line, "missing a closing parenthesis ).");
+          if (value === "(") throw cppError(token.line, "expected an opening parenthesis (.");
+          throw cppError(token.line, "expected '" + value + "' but found " + describeToken(token) + ".");
+        }
+        return next();
+      }
+      function expectIdent() {
+        const token = peek();
+        if (token.kind === "keyword" && token.value === "const") {
+          throw cppError(token.line, "write const before the type, like const int kMaxSpeed = 100.");
+        }
+        if (token.kind !== "ident") throw cppError(token.line, "expected a name but found " + describeToken(token) + ".");
+        return next();
+      }
+      function parseType() {
+        const token = peek();
+        if (token.kind === "keyword" && (token.value === "for" || token.value === "while")) {
+          throw cppError(token.line, "loops are not used in this practice. Use if / else and arithmetic.");
+        }
+        if (token.kind === "keyword" && token.value === "double") throw cppError(token.line, "use float for decimal numbers.");
+        if (token.kind === "keyword" && (token.value === "char" || token.value === "string")) {
+          throw cppError(token.line, "this practice uses int, float, and bool, not text types.");
+        }
+        if (token.kind === "keyword" && token.value === "void") throw cppError(token.line, "this function must return int, float, or bool.");
+        if (!(token.kind === "keyword" && (token.value === "int" || token.value === "float" || token.value === "bool"))) {
+          throw cppError(token.line, "expected a type (int, float, or bool) but found " + describeToken(token) + ".");
+        }
+        next();
+        return token.value;
+      }
+      function isTypeKeyword(token) {
+        return token.kind === "keyword" && (
+          token.value === "int" || token.value === "float" || token.value === "bool" ||
+          token.value === "double" || token.value === "char" || token.value === "void" || token.value === "string"
+        );
+      }
+      function parseExpr() { return parseAssign(); }
+      function parseAssign() {
+        const left = parseOr();
+        if (!isPunct("=")) return left;
+        if (left.kind !== "ident") {
+          throw cppError(peek().line, "only a variable can be assigned a new value. Use == to compare two values.");
+        }
+        const op = next();
+        const right = parseAssign();
+        return { kind: "assignExpr", name: left.name, expr: right, line: op.line };
+      }
+      function parseOr() {
+        let left = parseAnd();
+        while (isPunct("||")) {
+          const op = next();
+          const right = parseAnd();
+          left = { kind: "binary", op: op.value, left: left, right: right, line: op.line };
+        }
+        return left;
+      }
+      function parseAnd() {
+        let left = parseEquality();
+        while (isPunct("&&")) {
+          const op = next();
+          const right = parseEquality();
+          left = { kind: "binary", op: op.value, left: left, right: right, line: op.line };
+        }
+        return left;
+      }
+      function parseEquality() {
+        let left = parseRel();
+        while (isPunct("==") || isPunct("!=")) {
+          const op = next();
+          const right = parseRel();
+          left = { kind: "binary", op: op.value, left: left, right: right, line: op.line };
+        }
+        return left;
+      }
+      function parseRel() {
+        let left = parseAdd();
+        while (isPunct("<") || isPunct(">") || isPunct("<=") || isPunct(">=")) {
+          const op = next();
+          const right = parseAdd();
+          left = { kind: "binary", op: op.value, left: left, right: right, line: op.line };
+        }
+        return left;
+      }
+      function parseAdd() {
+        let left = parseMul();
+        while (isPunct("+") || isPunct("-")) {
+          const op = next();
+          const right = parseMul();
+          left = { kind: "binary", op: op.value, left: left, right: right, line: op.line };
+        }
+        return left;
+      }
+      function parseMul() {
+        let left = parseUnary();
+        while (isPunct("*") || isPunct("/")) {
+          const op = next();
+          const right = parseUnary();
+          left = { kind: "binary", op: op.value, left: left, right: right, line: op.line };
+        }
+        return left;
+      }
+      function parseUnary() {
+        if (isPunct("!") || isPunct("-") || isPunct("+")) {
+          const op = next();
+          const expr = parseUnary();
+          return { kind: "unary", op: op.value, expr: expr, line: op.line };
+        }
+        return parsePrimary();
+      }
+      function parsePrimary() {
+        const token = peek();
+        if (token.kind === "number") {
+          next();
+          return { kind: "literal", type: token.numType, value: token.value, line: token.line };
+        }
+        if (token.kind === "keyword" && (token.value === "true" || token.value === "false")) {
+          next();
+          return { kind: "literal", type: "bool", value: token.value === "true", line: token.line };
+        }
+        if (token.kind === "ident") {
+          next();
+          if (isPunct("(")) {
+            throw cppError(token.line, "do not call other functions here. Use variables, arithmetic, comparisons, and if / else.");
+          }
+          return { kind: "ident", name: token.value, line: token.line };
+        }
+        if (isPunct("(")) {
+          const open = next();
+          pushDepth(open.line);
+          try {
+            const expr = parseExpr();
+            expectPunct(")");
+            return expr;
+          } finally {
+            depth -= 1;
+          }
+        }
+        throw cppError(token.line, "expected a value, variable, or (expression) but found " + describeToken(token) + ".");
+      }
+      function parseBlock() {
+        const brace = expectPunct("{");
+        pushDepth(brace.line);
+        try {
+          const stmts = [];
+          while (!isPunct("}") && peek().kind !== "eof") stmts.push(parseStmt());
+          expectPunct("}");
+          return { kind: "block", stmts: stmts, line: brace.line };
+        } finally {
+          depth -= 1;
+        }
+      }
+      function parseReturn() {
+        const keyword = next();
+        if (isPunct(";")) throw cppError(keyword.line, "return a value from the function.");
+        const expr = parseExpr();
+        expectPunct(";");
+        return { kind: "return", expr: expr, line: keyword.line };
+      }
+      function parseIf() {
+        const keyword = next();
+        pushDepth(keyword.line);
+        try {
+          expectPunct("(");
+          const cond = parseExpr();
+          expectPunct(")");
+          const thenBranch = parseStmt();
+          let elseBranch = null;
+          if (peek().kind === "keyword" && peek().value === "else") {
+            next();
+            elseBranch = parseStmt();
+          }
+          return { kind: "if", cond: cond, then: thenBranch, else: elseBranch, line: keyword.line };
+        } finally {
+          depth -= 1;
+        }
+      }
+      function parseDecl() {
+        const start = peek();
+        let isConst = false;
+        if (start.kind === "keyword" && start.value === "const") {
+          isConst = true;
+          next();
+          const upcoming = peek();
+          if (!(upcoming.kind === "keyword" && (upcoming.value === "int" || upcoming.value === "float" || upcoming.value === "bool"))) {
+            throw cppError(upcoming.line, "write the type after const, like const int kMaxSpeed = 100.");
+          }
+        }
+        const type = parseType();
+        const nameTok = expectIdent();
+        if (isPunct("(")) {
+          throw cppError(nameTok.line, "write the statements directly. A function is not needed here.");
+        }
+        let init = null;
+        if (isPunct("=")) {
+          next();
+          init = parseExpr();
+        } else if (isPunct(",")) {
+          throw cppError(peek().line, "declare one variable per statement.");
+        }
+        if (isConst && !init) throw cppError(nameTok.line, "a const variable must be given a value when it is declared.");
+        expectPunct(";");
+        return { kind: "decl", isConst: isConst, type: type, name: nameTok.value, init: init, line: nameTok.line };
+      }
+      function parseAssignStmt() {
+        const nameTok = next();
+        if (!isPunct("=")) throw cppError(peek().line, "to change " + nameTok.value + ", write " + nameTok.value + " = value;");
+        const op = next();
+        const expr = parseExpr();
+        expectPunct(";");
+        return { kind: "assign", name: nameTok.value, expr: expr, line: op.line };
+      }
+      function parseStmt() {
+        const token = peek();
+        if (token.kind === "keyword" && (token.value === "for" || token.value === "while")) {
+          throw cppError(token.line, "loops are not used in this practice. Use if / else and arithmetic.");
+        }
+        if (token.kind === "keyword" && token.value === "else") {
+          throw cppError(token.line, "else must follow an if. Check the braces around the if block.");
+        }
+        if (isPunct("{")) return parseBlock();
+        if (isPunct(";")) { next(); return { kind: "empty", line: token.line }; }
+        if (token.kind === "keyword" && token.value === "if") return parseIf();
+        if (token.kind === "keyword" && token.value === "return") return parseReturn();
+        if (token.kind === "keyword" && (token.value === "const" || isTypeKeyword(token))) return parseDecl();
+        if (token.kind === "ident") return parseAssignStmt();
+        throw cppError(token.line, "expected a statement but found " + describeToken(token) + ".");
+      }
+      function parseParam() {
+        let isConst = false;
+        if (peek().kind === "keyword" && peek().value === "const") {
+          isConst = true;
+          next();
+        }
+        const type = parseType();
+        const nameTok = expectIdent();
+        return { type: type, name: nameTok.value, isConst: isConst, line: nameTok.line };
+      }
+      function parseFunction() {
+        const returnType = parseType();
+        const nameTok = expectIdent();
+        if (!isPunct("(")) throw cppError(nameTok.line, "start with the function header. Other statements belong inside the function.");
+        expectPunct("(");
+        const params = [];
+        if (!isPunct(")")) {
+          params.push(parseParam());
+          while (isPunct(",")) {
+            next();
+            params.push(parseParam());
+          }
+        }
+        expectPunct(")");
+        const seen = new Set();
+        params.forEach(param => {
+          if (seen.has(param.name)) throw cppError(param.line, "parameter " + param.name + " is declared twice.");
+          seen.add(param.name);
+        });
+        const body = parseBlock();
+        return { returnType: returnType, name: nameTok.value, params: params, body: body, line: nameTok.line };
+      }
+
+      if (asSnippet) {
+        const stmts = [];
+        while (peek().kind !== "eof") {
+          if (peek().kind === "keyword" && peek().value === "return") {
+            throw cppError(peek().line, "you do not need return here. Store the result in a variable.");
+          }
+          stmts.push(parseStmt());
+        }
+        return { functions: [], stmts: stmts };
+      }
+
+      const functions = [];
+      while (peek().kind !== "eof") {
+        if (isPunct(";")) { next(); continue; }
+        if (peek().kind === "keyword" && peek().value === "const") {
+          throw cppError(peek().line, "declare const variables inside your function, not above it.");
+        }
+        functions.push(parseFunction());
+      }
+      return { functions: functions };
+    }
+
+    function parseCpp(source, asSnippet) {
+      if (!source || !String(source).trim()) {
+        throw new Error(asSnippet ? "Write your C++ statements before running the tests." : "Write the function before running the tests.");
+      }
+      if (source.length > 8000) throw new Error("This solution is too long. Keep only the statements for this question.");
+      return parseProgram(tokenize(stripPreamble(source)), !!asSnippet);
+    }
+
+    function Environment() { this.stack = []; }
+    Environment.prototype.push = function () { this.stack.push(new Map()); };
+    Environment.prototype.pop = function () { this.stack.pop(); };
+    Environment.prototype.declare = function (name, type, value, isConst, initialized, line) {
+      const scope = this.stack[this.stack.length - 1];
+      if (scope.has(name)) throw cppError(line, name + " is already declared in this block.");
+      scope.set(name, { type: type, value: value, isConst: !!isConst, initialized: !!initialized });
+    };
+    Environment.prototype.lookup = function (name) {
+      for (let i = this.stack.length - 1; i >= 0; i--) {
+        if (this.stack[i].has(name)) return this.stack[i].get(name);
+      }
+      return null;
+    };
+
+    function tick(node) {
+      cppSteps += 1;
+      if (cppSteps > 10000) throw cppError(node && node.line, "this solution was stopped because it ran too long.");
+    }
+
+    function isTruthy(value) {
+      if (value.type === "bool") return value.value === true;
+      return value.value !== 0;
+    }
+
+    function numericValue(value) {
+      if (value.type === "bool") return value.value ? 1 : 0;
+      return value.value;
+    }
+
+    function arithTypes(left, right) {
+      const type = (left.type === "float" || right.type === "float") ? "float" : "int";
+      return { type: type, l: numericValue(left), r: numericValue(right) };
+    }
+
+    function coerce(targetType, value, node) {
+      if (targetType === "bool") return isTruthy(value);
+      const n = numericValue(value);
+      if (typeof n !== "number" || !Number.isFinite(n)) {
+        throw cppError(node && node.line, "this calculation did not produce a usable number.");
+      }
+      if (targetType === "int") return Math.trunc(n);
+      return n;
+    }
+
+    function readVariable(name, node, env) {
+      const rec = env.lookup(name);
+      if (!rec) throw cppError(node.line, name + " has not been declared. Declare it with int, float, or bool before using it.");
+      if (!rec.initialized) throw cppError(node.line, name + " has no starting value yet. Initialize it before using it.");
+      return { type: rec.type, value: rec.value };
+    }
+
+    function assignVariable(name, expr, env, node) {
+      const rec = env.lookup(name);
+      if (!rec) throw cppError(node.line, name + " has not been declared. Declare it with int, float, or bool before using it.");
+      if (rec.isConst) throw cppError(node.line, name + " is const, so its value cannot be changed.");
+      const evaluated = evalExpr(expr, env);
+      rec.value = coerce(rec.type, evaluated, node);
+      rec.initialized = true;
+      return { type: rec.type, value: rec.value };
+    }
+
+    function compareValues(op, left, right) {
+      const pair = arithTypes(left, right);
+      if (op === "==") return pair.l === pair.r;
+      if (op === "!=") return pair.l !== pair.r;
+      if (op === "<") return pair.l < pair.r;
+      if (op === ">") return pair.l > pair.r;
+      if (op === "<=") return pair.l <= pair.r;
+      if (op === ">=") return pair.l >= pair.r;
+      return false;
+    }
+
+    function evalUnary(node, env) {
+      const value = evalExpr(node.expr, env);
+      if (node.op === "!") return { type: "bool", value: !isTruthy(value) };
+      if (value.type === "float") {
+        const n = node.op === "-" ? -value.value : value.value;
+        if (!Number.isFinite(n)) throw cppError(node.line, "this calculation did not produce a usable number.");
+        return { type: "float", value: n };
+      }
+      const n = numericValue(value);
+      return { type: "int", value: node.op === "-" ? -n : n };
+    }
+
+    function evalBinary(node, env) {
+      if (node.op === "&&") {
+        const left = evalExpr(node.left, env);
+        if (!isTruthy(left)) return { type: "bool", value: false };
+        return { type: "bool", value: isTruthy(evalExpr(node.right, env)) };
+      }
+      if (node.op === "||") {
+        const left = evalExpr(node.left, env);
+        if (isTruthy(left)) return { type: "bool", value: true };
+        return { type: "bool", value: isTruthy(evalExpr(node.right, env)) };
+      }
+      const left = evalExpr(node.left, env);
+      const right = evalExpr(node.right, env);
+      if (node.op === "==" || node.op === "!=" || node.op === "<" || node.op === ">" || node.op === "<=" || node.op === ">=") {
+        return { type: "bool", value: compareValues(node.op, left, right) };
+      }
+      const pair = arithTypes(left, right);
+      let value;
+      if (node.op === "+") value = pair.l + pair.r;
+      else if (node.op === "-") value = pair.l - pair.r;
+      else if (node.op === "*") value = pair.l * pair.r;
+      else if (node.op === "/") {
+        if (pair.r === 0) throw cppError(node.line, "division by zero.");
+        value = pair.type === "int" ? Math.trunc(pair.l / pair.r) : pair.l / pair.r;
+      } else {
+        throw cppError(node.line, "the operator " + node.op + " is not covered in this practice.");
+      }
+      if (!Number.isFinite(value)) throw cppError(node.line, "this calculation did not produce a usable number.");
+      if (pair.type === "int") value = Math.trunc(value);
+      return { type: pair.type, value: value };
+    }
+
+    function evalExpr(expr, env) {
+      tick(expr);
+      if (!expr) throw new Error("This expression is missing a value.");
+      if (expr.kind === "literal") return { type: expr.type, value: expr.value };
+      if (expr.kind === "ident") return readVariable(expr.name, expr, env);
+      if (expr.kind === "unary") return evalUnary(expr, env);
+      if (expr.kind === "binary") return evalBinary(expr, env);
+      if (expr.kind === "assignExpr") return assignVariable(expr.name, expr.expr, env, expr);
+      throw cppError(expr.line, "this expression is not supported in this practice.");
+    }
+
+    function execStmts(stmts, env) {
+      for (let i = 0; i < stmts.length; i++) {
+        const outcome = execStmt(stmts[i], env);
+        if (outcome.returned) return outcome;
+      }
+      return { returned: false };
+    }
+
+    function execStmt(stmt, env) {
+      tick(stmt);
+      if (!stmt || stmt.kind === "empty") return { returned: false };
+      if (stmt.kind === "block") {
+        env.push();
+        try { return execStmts(stmt.stmts, env); }
+        finally { env.pop(); }
+      }
+      if (stmt.kind === "decl") {
+        let stored = null;
+        let ready = false;
+        if (stmt.init) {
+          stored = coerce(stmt.type, evalExpr(stmt.init, env), stmt);
+          ready = true;
+        }
+        env.declare(stmt.name, stmt.type, stored, stmt.isConst, ready, stmt.line);
+        return { returned: false };
+      }
+      if (stmt.kind === "assign") {
+        assignVariable(stmt.name, stmt.expr, env, stmt);
+        return { returned: false };
+      }
+      if (stmt.kind === "if") {
+        if (isTruthy(evalExpr(stmt.cond, env))) return execStmt(stmt.then, env);
+        if (stmt.else) return execStmt(stmt.else, env);
+        return { returned: false };
+      }
+      if (stmt.kind === "return") {
+        return { returned: true, value: evalExpr(stmt.expr, env), node: stmt };
+      }
+      throw cppError(stmt.line, "this statement is not supported in this practice.");
+    }
+
+    function bindArg(type, jsValue, line) {
+      if (type === "bool") return !!jsValue;
+      const n = Number(jsValue);
+      if (!Number.isFinite(n)) throw cppError(line, "could not use this test input.");
+      if (type === "int") return Math.trunc(n);
+      return n;
+    }
+
+    function callFunction(fn, args) {
+      if (args.length !== fn.params.length) throw new Error(fn.name + " expects " + fn.params.length + " arguments.");
+      cppSteps = 0;
+      const env = new Environment();
+      env.push();
+      fn.params.forEach((param, index) => {
+        env.declare(param.name, param.type, bindArg(param.type, args[index], param.line), !!param.isConst, true, param.line);
+      });
+      const outcome = execStmts(fn.body.stmts, env);
+      if (!outcome.returned) throw cppError(fn.line, "your function finished without returning a value. Add a return statement.");
+      return { type: fn.returnType, value: coerce(fn.returnType, outcome.value, outcome.node || fn) };
+    }
+
+    function runCppFunction(source, functionName, args) {
+      const program = parseCpp(source);
+      const fn = program.functions.find(item => item.name === functionName);
+      if (!fn) throw new Error("missing function " + functionName);
+      return callFunction(fn, args);
+    }
+
+    function formatValue(type, value) {
+      if (type === "bool" || typeof value === "boolean") return value ? "true" : "false";
+      if (typeof value !== "number" || !Number.isFinite(value)) return String(value);
+      if (Object.is(value, -0)) return "0";
+      const rounded = Math.round(value * 10000) / 10000;
+      return String(rounded);
+    }
+
+    function formatArg(value) {
+      if (typeof value === "boolean") return value ? "true" : "false";
+      return formatValue("float", value);
+    }
+
+    function exprUses(expr, name) {
+      if (!expr) return false;
+      if (expr.kind === "ident") return expr.name === name;
+      if (expr.kind === "binary") return exprUses(expr.left, name) || exprUses(expr.right, name);
+      if (expr.kind === "unary") return exprUses(expr.expr, name);
+      if (expr.kind === "assignExpr") return expr.name === name || exprUses(expr.expr, name);
+      return false;
+    }
+
+    function decisionUses(stmt, name) {
+      if (!stmt || stmt.kind === "empty") return false;
+      if (stmt.kind === "block") return stmt.stmts.some(item => decisionUses(item, name));
+      if (stmt.kind === "if") return exprUses(stmt.cond, name) || decisionUses(stmt.then, name) || decisionUses(stmt.else, name);
+      if (stmt.kind === "return") return exprUses(stmt.expr, name);
+      if (stmt.kind === "assign") return exprUses(stmt.expr, name);
+      if (stmt.kind === "decl") {
+        if (stmt.name === name) return false;
+        return exprUses(stmt.init, name);
+      }
+      return false;
+    }
+
+    function collectDecls(stmt, name, out) {
+      if (!stmt || stmt.kind === "empty") return;
+      if (stmt.kind === "block") {
+        stmt.stmts.forEach(item => collectDecls(item, name, out));
+        return;
+      }
+      if (stmt.kind === "if") {
+        collectDecls(stmt.then, name, out);
+        collectDecls(stmt.else, name, out);
+        return;
+      }
+      if (stmt.kind === "decl" && stmt.name === name) out.push(stmt);
+    }
+
+    function exprHasAssign(expr) {
+      if (!expr) return false;
+      if (expr.kind === "assignExpr") return true;
+      if (expr.kind === "binary") return exprHasAssign(expr.left) || exprHasAssign(expr.right);
+      if (expr.kind === "unary") return exprHasAssign(expr.expr);
+      return false;
+    }
+
+    function ifConditionAssigns(stmt) {
+      if (!stmt || stmt.kind === "empty") return false;
+      if (stmt.kind === "block") return stmt.stmts.some(ifConditionAssigns);
+      if (stmt.kind === "if") {
+        if (exprHasAssign(stmt.cond)) return true;
+        return ifConditionAssigns(stmt.then) || ifConditionAssigns(stmt.else);
+      }
+      return false;
+    }
+
+    function checkConstDecl(fn, spec) {
+      const decls = [];
+      collectDecls(fn.body, spec.name, decls);
+      const title = "Constant " + spec.name;
+      if (!decls.length) {
+        return { pass: false, title: title, detail: "Declare const int " + spec.name + " = " + spec.value + "; in your code, then use " + spec.name + " in your calculation." };
+      }
+      if (decls.some(decl => !decl.isConst)) {
+        return { pass: false, title: title, detail: spec.name + " must be declared with const so the limit cannot be changed later." };
+      }
+      if (decls.some(decl => decl.type !== spec.type)) {
+        return { pass: false, title: title, detail: spec.name + " must be a const " + spec.type + " set to " + spec.value + "." };
+      }
+      for (let i = 0; i < decls.length; i++) {
+        const decl = decls[i];
+        try {
+          cppSteps = 0;
+          const env = new Environment();
+          env.push();
+          const value = coerce(decl.type, evalExpr(decl.init, env), decl);
+          if (value !== spec.value) {
+            return { pass: false, title: title, detail: spec.name + " must start at " + spec.value + ". It was set to " + formatValue(spec.type, value) + "." };
+          }
+        } catch (err) {
+          return { pass: false, title: title, detail: "Set the constant when you declare it, for example: const int " + spec.name + " = " + spec.value + ";" };
+        }
+      }
+      if (!decisionUses(fn.body, spec.name)) {
+        return { pass: false, title: title, detail: "Use " + spec.name + " when you compute the result, rather than only writing the number " + spec.value + "." };
+      }
+      return { pass: true, title: title, detail: "const " + spec.type + " " + spec.name + " = " + spec.value + " is declared and used." };
+    }
+
+    function valuesEqual(type, actual, expected) {
+      if (type === "bool" || type === "int") return actual === expected;
+      return Math.abs(actual - expected) <= 0.0001;
+    }
+
+    function codingCase(title, given, expect) {
+      return { title: title, given: given, expect: expect };
+    }
+
+    function ev(name, type, value) {
+      return { name: name, type: type, value: value };
+    }
+
+    function typeWord(type) {
+      if (type === "int") return "an int";
+      if (type === "float") return "a float";
+      if (type === "bool") return "a bool";
+      return "a " + type;
+    }
+
+    function freshEnv() {
+      cppSteps = 0;
+      const env = new Environment();
+      env.push();
+      return env;
+    }
+
+    const codingTasks = {
+      s2c1: {
+        cases: [
+          codingCase("Your variables", "", [
+            ev("wheelCount", "int", 4),
+            ev("distanceCm", "float", 12.5),
+            ev("isReady", "bool", true)
+          ])
+        ]
+      },
+      s2c2: {
+        cases: [
+          codingCase("Your variables", "", [
+            ev("rangeCm", "float", 24.75),
+            ev("motorCount", "int", 6)
+          ])
+        ]
+      },
+      s3c1: {
+        cases: [
+          codingCase("startPos = 100, endPos = 450", "float startPos = 100;\nfloat endPos = 450;", [ev("distance", "float", 350)]),
+          codingCase("startPos = 0, endPos = 12.5", "float startPos = 0;\nfloat endPos = 12.5;", [ev("distance", "float", 12.5)]),
+          codingCase("startPos = 80.5, endPos = 20.5", "float startPos = 80.5;\nfloat endPos = 20.5;", [ev("distance", "float", -60)]),
+          codingCase("startPos = 10, endPos = 10.5", "float startPos = 10;\nfloat endPos = 10.5;", [ev("distance", "float", 0.5)]),
+          codingCase("startPos = 3.25, endPos = 3.25", "float startPos = 3.25;\nfloat endPos = 3.25;", [ev("distance", "float", 0)])
+        ]
+      },
+      s3c2: {
+        cases: [
+          codingCase("ticks = 10, motors = 4", "int ticks = 10;\nint motors = 4;", [ev("wholeTurns", "int", 2), ev("exactTurns", "float", 2.5)]),
+          codingCase("ticks = 7, motors = 2", "int ticks = 7;\nint motors = 2;", [ev("wholeTurns", "int", 3), ev("exactTurns", "float", 3.5)]),
+          codingCase("ticks = 9, motors = 3", "int ticks = 9;\nint motors = 3;", [ev("wholeTurns", "int", 3), ev("exactTurns", "float", 3)]),
+          codingCase("ticks = 1, motors = 2", "int ticks = 1;\nint motors = 2;", [ev("wholeTurns", "int", 0), ev("exactTurns", "float", 0.5)]),
+          codingCase("ticks = 8, motors = 5", "int ticks = 8;\nint motors = 5;", [ev("wholeTurns", "int", 1), ev("exactTurns", "float", 1.6)])
+        ]
+      },
+      s4c1: {
+        cases: [
+          codingCase("systemReady = true", "bool systemReady = true;", [ev("status", "int", 1)]),
+          codingCase("systemReady = false", "bool systemReady = false;", [ev("status", "int", 0)])
+        ]
+      },
+      s4c2: {
+        cases: [
+          codingCase("distance = 19", "float distance = 19;", [ev("warning", "int", 1)]),
+          codingCase("distance = 20", "float distance = 20;", [ev("warning", "int", 0)]),
+          codingCase("distance = 0", "float distance = 0;", [ev("warning", "int", 1)]),
+          codingCase("distance = 100", "float distance = 100;", [ev("warning", "int", 0)]),
+          codingCase("distance = 19.5", "float distance = 19.5;", [ev("warning", "int", 1)])
+        ]
+      },
+      s5c1: {
+        cases: [
+          codingCase("speed = 50", "int speed = 50;", [ev("isFast", "bool", true)]),
+          codingCase("speed = 49", "int speed = 49;", [ev("isFast", "bool", false)]),
+          codingCase("speed = 80", "int speed = 80;", [ev("isFast", "bool", true)]),
+          codingCase("speed = 0", "int speed = 0;", [ev("isFast", "bool", false)]),
+          codingCase("speed = 51", "int speed = 51;", [ev("isFast", "bool", true)])
+        ]
+      },
+      s5c2: {
+        cases: [
+          codingCase("reading = 5, target = 5", "int reading = 5;\nint target = 5;", [ev("matched", "bool", true), ev("different", "bool", false)]),
+          codingCase("reading = 5, target = 6", "int reading = 5;\nint target = 6;", [ev("matched", "bool", false), ev("different", "bool", true)]),
+          codingCase("reading = 0, target = 0", "int reading = 0;\nint target = 0;", [ev("matched", "bool", true), ev("different", "bool", false)]),
+          codingCase("reading = -3, target = -3", "int reading = -3;\nint target = -3;", [ev("matched", "bool", true), ev("different", "bool", false)]),
+          codingCase("reading = 20, target = 19", "int reading = 20;\nint target = 19;", [ev("matched", "bool", false), ev("different", "bool", true)])
+        ]
+      },
+      s6c1: {
+        constCheck: { name: "kMaxSpeed", type: "int", value: 100 },
+        cases: [
+          codingCase("Your variables", "", [ev("power", "int", 85), ev("quarter", "int", 25)])
+        ]
+      },
+      s6c2: {
+        constCheck: { name: "kMaxSpeed", type: "int", value: 100 },
+        cases: [
+          codingCase("requested = 40", "int requested = 40;", [ev("speed", "int", 40)]),
+          codingCase("requested = 100", "int requested = 100;", [ev("speed", "int", 100)]),
+          codingCase("requested = 101", "int requested = 101;", [ev("speed", "int", 100)]),
+          codingCase("requested = 0", "int requested = 0;", [ev("speed", "int", 0)]),
+          codingCase("requested = 250", "int requested = 250;", [ev("speed", "int", 100)]),
+          codingCase("requested = -5", "int requested = -5;", [ev("speed", "int", -5)])
+        ]
+      },
+      pvx1: {
+        cases: [
+          codingCase("endPos = 100, startPos = 40, laps = 3", "float endPos = 100;\nfloat startPos = 40;\nint laps = 3;", [ev("travel", "float", 180)]),
+          codingCase("endPos = 10, startPos = 10, laps = 5", "float endPos = 10;\nfloat startPos = 10;\nint laps = 5;", [ev("travel", "float", 0)]),
+          codingCase("endPos = 8.5, startPos = 2.5, laps = 4", "float endPos = 8.5;\nfloat startPos = 2.5;\nint laps = 4;", [ev("travel", "float", 24)]),
+          codingCase("endPos = 20, startPos = 50, laps = 2", "float endPos = 20;\nfloat startPos = 50;\nint laps = 2;", [ev("travel", "float", -60)]),
+          codingCase("endPos = 3, startPos = 1, laps = 1", "float endPos = 3;\nfloat startPos = 1;\nint laps = 1;", [ev("travel", "float", 2)])
+        ]
+      },
+      pvx2: {
+        cases: [
+          codingCase("distanceCm = 10, wheelTurns = 3", "int distanceCm = 10;\nint wheelTurns = 3;", [ev("distanceCm", "int", 25)]),
+          codingCase("distanceCm = 0, wheelTurns = 4", "int distanceCm = 0;\nint wheelTurns = 4;", [ev("distanceCm", "int", 20)]),
+          codingCase("distanceCm = 7, wheelTurns = 1", "int distanceCm = 7;\nint wheelTurns = 1;", [ev("distanceCm", "int", 12)]),
+          codingCase("distanceCm = 15, wheelTurns = 0", "int distanceCm = 15;\nint wheelTurns = 0;", [ev("distanceCm", "int", 15)]),
+          codingCase("distanceCm = 2, wheelTurns = 6", "int distanceCm = 2;\nint wheelTurns = 6;", [ev("distanceCm", "int", 32)])
+        ]
+      },
+      pvx3: {
+        cases: [
+          codingCase("leftRpm = 5, rightRpm = 3, gear = 2", "int leftRpm = 5;\nint rightRpm = 3;\nint gear = 2;", [ev("power", "int", 15)]),
+          codingCase("leftRpm = 1, rightRpm = 1, gear = 4", "int leftRpm = 1;\nint rightRpm = 1;\nint gear = 4;", [ev("power", "int", 8)]),
+          codingCase("leftRpm = 10, rightRpm = 4, gear = 1", "int leftRpm = 10;\nint rightRpm = 4;\nint gear = 1;", [ev("power", "int", 12)]),
+          codingCase("leftRpm = 2, rightRpm = 5, gear = 3", "int leftRpm = 2;\nint rightRpm = 5;\nint gear = 3;", [ev("power", "int", 19)]),
+          codingCase("leftRpm = 8, rightRpm = 2, gear = 3", "int leftRpm = 8;\nint rightRpm = 2;\nint gear = 3;", [ev("power", "int", 29)])
+        ]
+      },
+      pvx4: {
+        cases: [
+          codingCase("reading = 4, gain = 2.5", "int reading = 4;\nfloat gain = 2.5;", [ev("scaled", "float", 11.5)]),
+          codingCase("reading = 0, gain = 3.25", "int reading = 0;\nfloat gain = 3.25;", [ev("scaled", "float", 1.5)]),
+          codingCase("reading = 3, gain = 0.5", "int reading = 3;\nfloat gain = 0.5;", [ev("scaled", "float", 3)]),
+          codingCase("reading = 10, gain = 1.25", "int reading = 10;\nfloat gain = 1.25;", [ev("scaled", "float", 14)]),
+          codingCase("reading = 2, gain = 2", "int reading = 2;\nfloat gain = 2;", [ev("scaled", "float", 5.5)])
+        ]
+      },
+      pvx5: {
+        cases: [
+          codingCase("capacity = 100, draw = 10, motors = 3", "int capacity = 100;\nint draw = 10;\nint motors = 3;", [ev("remaining", "int", 70)]),
+          codingCase("capacity = 50, draw = 5, motors = 2", "int capacity = 50;\nint draw = 5;\nint motors = 2;", [ev("remaining", "int", 40)]),
+          codingCase("capacity = 20, draw = 4, motors = 5", "int capacity = 20;\nint draw = 4;\nint motors = 5;", [ev("remaining", "int", 0)]),
+          codingCase("capacity = 15, draw = 2, motors = 4", "int capacity = 15;\nint draw = 2;\nint motors = 4;", [ev("remaining", "int", 7)]),
+          codingCase("capacity = 30, draw = 3, motors = 3", "int capacity = 30;\nint draw = 3;\nint motors = 3;", [ev("remaining", "int", 21)])
+        ]
+      },
+      pvx6: {
+        cases: [
+          codingCase("nearCm = 0, farCm = 10", "float nearCm = 0;\nfloat farCm = 10;", [ev("gap", "float", 10), ev("midpoint", "float", 5)]),
+          codingCase("nearCm = 2.5, farCm = 7.5", "float nearCm = 2.5;\nfloat farCm = 7.5;", [ev("gap", "float", 5), ev("midpoint", "float", 5)]),
+          codingCase("nearCm = 8, farCm = 3", "float nearCm = 8;\nfloat farCm = 3;", [ev("gap", "float", -5), ev("midpoint", "float", 5.5)]),
+          codingCase("nearCm = 1.25, farCm = 1.25", "float nearCm = 1.25;\nfloat farCm = 1.25;", [ev("gap", "float", 0), ev("midpoint", "float", 1.25)]),
+          codingCase("nearCm = 4, farCm = 9", "float nearCm = 4;\nfloat farCm = 9;", [ev("gap", "float", 5), ev("midpoint", "float", 6.5)])
+        ]
+      },
+      pdx1: {
+        cases: [
+          codingCase("pathClear = true, baseSpeed = 20", "bool pathClear = true;\nint baseSpeed = 20;", [ev("driveSpeed", "int", 30)]),
+          codingCase("pathClear = false, baseSpeed = 20", "bool pathClear = false;\nint baseSpeed = 20;", [ev("driveSpeed", "int", 0)]),
+          codingCase("pathClear = true, baseSpeed = 0", "bool pathClear = true;\nint baseSpeed = 0;", [ev("driveSpeed", "int", 10)]),
+          codingCase("pathClear = false, baseSpeed = 5", "bool pathClear = false;\nint baseSpeed = 5;", [ev("driveSpeed", "int", 0)]),
+          codingCase("pathClear = true, baseSpeed = 15", "bool pathClear = true;\nint baseSpeed = 15;", [ev("driveSpeed", "int", 25)])
+        ]
+      },
+      pdx2: {
+        cases: [
+          codingCase("left = 5, right = 3", "int left = 5;\nint right = 3;", [ev("leftBigger", "bool", true), ev("same", "bool", false)]),
+          codingCase("left = 4, right = 4", "int left = 4;\nint right = 4;", [ev("leftBigger", "bool", false), ev("same", "bool", true)]),
+          codingCase("left = 1, right = 9", "int left = 1;\nint right = 9;", [ev("leftBigger", "bool", false), ev("same", "bool", false)]),
+          codingCase("left = 0, right = 0", "int left = 0;\nint right = 0;", [ev("leftBigger", "bool", false), ev("same", "bool", true)]),
+          codingCase("left = 8, right = 7", "int left = 8;\nint right = 7;", [ev("leftBigger", "bool", true), ev("same", "bool", false)])
+        ]
+      },
+      pdx3: {
+        constCheck: { name: "kMaxPercent", type: "int", value: 80 },
+        cases: [
+          codingCase("askedSpeed = 79", "int askedSpeed = 79;", [ev("motorPercent", "int", 79)]),
+          codingCase("askedSpeed = 80", "int askedSpeed = 80;", [ev("motorPercent", "int", 80)]),
+          codingCase("askedSpeed = 120", "int askedSpeed = 120;", [ev("motorPercent", "int", 80)]),
+          codingCase("askedSpeed = 0", "int askedSpeed = 0;", [ev("motorPercent", "int", 0)]),
+          codingCase("askedSpeed = 200", "int askedSpeed = 200;", [ev("motorPercent", "int", 80)]),
+          codingCase("askedSpeed = -5", "int askedSpeed = -5;", [ev("motorPercent", "int", -5)])
+        ]
+      }
+    };
+
+    const codingHints = {
+      s2c1: "Each declaration needs a type, a name, and a starting value. wheelCount is an int, distanceCm is a float, and isReady is a bool.",
+      s2c2: "The distance in centimeters is a float. The number of motors is an int.",
+      s3c1: "Subtract startPos from endPos and store the result in distance.",
+      s3c2: "Integer division drops the fraction. Multiply by 1.0 before dividing when you need the decimal share.",
+      s4c1: "Give status a value in the if branch and a value in the else branch.",
+      s4c2: "A reading of exactly 20 cm is not less than 20, so warning is 0.",
+      s5c1: "Use >= to compare speed with 50. Use = only to store isFast.",
+      s5c2: "Use == when the encoder matches the target, and != when it does not.",
+      s6c1: "Use the name kMaxSpeed in both calculations. Dividing two ints drops the fraction.",
+      s6c2: "requested is the speed the driver asked for. If it is above kMaxSpeed, store kMaxSpeed in speed. Use the name kMaxSpeed in that decision.",
+      pvx1: "Parentheses make the subtraction happen before you multiply by laps.",
+      pvx2: "Update the existing distanceCm. Multiply wheelTurns by 5, then add that to the current distance.",
+      pvx3: "Add the two speeds first, multiply by gear, then subtract rightRpm / 2. Parentheses control that order.",
+      pvx4: "Multiply the reading by gain first, then add 1.5.",
+      pvx5: "Multiply draw by motors first, then subtract that product from capacity.",
+      pvx6: "The gap is farCm minus nearCm. Put parentheses around the sum before you divide by 2.",
+      pdx1: "When the path is clear, driveSpeed is baseSpeed + 10. When the path is blocked, driveSpeed is 0.",
+      pdx2: "Use > for leftBigger and == for same.",
+      pdx3: "askedSpeed is the percent the driver asked for. If it is at or above kMaxPercent, store kMaxPercent in motorPercent. Use the name kMaxPercent, not only the number 80."
+    };
+
+    function collectNamesSet(stmt, names) {
+      if (!stmt || stmt.kind === "empty") return;
+      if (stmt.kind === "block") {
+        stmt.stmts.forEach(item => collectNamesSet(item, names));
+        return;
+      }
+      if (stmt.kind === "if") {
+        collectAssignTargets(stmt.cond, names);
+        collectNamesSet(stmt.then, names);
+        collectNamesSet(stmt.else, names);
+        return;
+      }
+      if (stmt.kind === "assign") {
+        names.add(stmt.name);
+        collectAssignTargets(stmt.expr, names);
+        return;
+      }
+      if (stmt.kind === "decl") {
+        if (stmt.init) names.add(stmt.name);
+        collectAssignTargets(stmt.init, names);
+      }
+    }
+
+    function collectAssignTargets(expr, names) {
+      if (!expr) return;
+      if (expr.kind === "assignExpr") {
+        names.add(expr.name);
+        collectAssignTargets(expr.expr, names);
+        return;
+      }
+      if (expr.kind === "binary") {
+        collectAssignTargets(expr.left, names);
+        collectAssignTargets(expr.right, names);
+        return;
+      }
+      if (expr.kind === "unary") collectAssignTargets(expr.expr, names);
+    }
+
+    function gradeCodingTask(source, taskOrId) {
+      const task = typeof taskOrId === "string" ? codingTasks[taskOrId] : taskOrId;
+      if (!task) return { ok: false, error: "This coding question is not configured.", cases: [], checks: [] };
+      const plain = codeWithoutComments(source);
+      if (/\b(cout|cin|printf|Brain)\b/.test(plain)) {
+        return { ok: false, error: "Do not print. The tester reads the variables you create.", cases: [], checks: [] };
+      }
+      if (/\breturn\b/.test(plain)) {
+        return { ok: false, error: "You do not need return. Store the result in a variable.", cases: [], checks: [] };
+      }
+      let studentProgram;
+      try {
+        studentProgram = parseCpp(source, true);
+      } catch (err) {
+        return { ok: false, error: err.message, cases: [], checks: [] };
+      }
+      const studentBody = { kind: "block", stmts: studentProgram.stmts || [] };
+      const namesSet = new Set();
+      collectNamesSet(studentBody, namesSet);
+      const checks = task.constCheck ? [checkConstDecl({ body: studentBody }, task.constCheck)] : [];
+      const cases = task.cases.map(test => {
+        try {
+          const env = freshEnv();
+          if (test.given && String(test.given).trim()) {
+            const givenProgram = parseCpp(test.given, true);
+            execStmts(givenProgram.stmts || [], env);
+          }
+          execStmts(studentProgram.stmts || [], env);
+          const problems = [];
+          test.expect.forEach(spec => {
+            const rec = env.lookup(spec.name);
+            if (!rec) problems.push(spec.name + " was not created.");
+            else if (!rec.initialized) problems.push(spec.name + " has no value yet.");
+            else if (spec.type && rec.type !== spec.type) problems.push(spec.name + " should be " + typeWord(spec.type) + ". It is " + typeWord(rec.type) + ".");
+            else if (!valuesEqual(rec.type, rec.value, spec.value)) {
+              problems.push("Expected " + spec.name + " to be " + formatValue(spec.type || rec.type, spec.value) + ". It is " + formatValue(rec.type, rec.value) + ".");
+            } else if (!namesSet.has(spec.name)) {
+              problems.push(spec.name + " still has its starting value. Set it in your code.");
+            }
+          });
+          const pass = problems.length === 0;
+          const okDetail = test.expect.map(spec => spec.name + " is " + formatValue(spec.type, spec.value) + ".").join(" ");
+          return { pass: pass, title: test.title, detail: pass ? okDetail : problems.join(" ") };
+        } catch (err) {
+          return { pass: false, title: test.title, detail: err.message };
+        }
+      });
+      const behaviorOk = cases.every(row => row.pass);
+      const checksOk = checks.every(row => row.pass);
+      let error = "";
+      if (!behaviorOk && ifConditionAssigns(studentBody)) {
+        error = "Not every test case passed. Hint: = stores a value. Use == inside if to compare two values.";
+      } else if (!behaviorOk) {
+        const messages = cases.filter(row => !row.pass).map(row => row.detail);
+        const unique = [...new Set(messages)];
+        if (unique.length === 1 && unique[0].indexOf("Line ") === 0) error = unique[0];
+      }
+      return { ok: behaviorOk && checksOk, error: error, cases: cases, checks: checks };
+    }
+
+    function renderCaseRow(row) {
+      const div = document.createElement("div");
+      div.className = "test-case " + (row.pass ? "pass" : "fail");
+      const title = document.createElement("div");
+      title.className = "test-case-title";
+      title.textContent = row.title;
+      const detail = document.createElement("div");
+      detail.className = "test-case-detail";
+      detail.textContent = row.detail;
+      div.appendChild(title);
+      div.appendChild(detail);
+      return div;
+    }
+
+    function renderCodingResult(block, result) {
+      const panel = block.querySelector(".test-results");
+      const feedback = block.querySelector(".feedback");
+      panel.replaceChildren();
+      (result.checks || []).forEach(row => panel.appendChild(renderCaseRow(row)));
+      (result.cases || []).forEach(row => panel.appendChild(renderCaseRow(row)));
+      syncTestPlaceholder(block);
+      feedback.style.display = "";
+      if (result.ok) {
+        feedback.textContent = "✓ All test cases passed.";
+        feedback.className = "feedback correct";
+        return;
+      }
+      feedback.className = "feedback wrong";
+      const failedCheck = (result.checks || []).find(row => !row.pass);
+      const failedCase = (result.cases || []).find(row => !row.pass);
+      if (result.error) feedback.textContent = "✗ " + result.error;
+      else if (failedCheck && !failedCase) feedback.textContent = "✗ " + failedCheck.detail;
+      else feedback.textContent = "✗ Not every test case passed. Compare the expected value with the variables you created.";
     }
 
     const answerKey = {
       s1q1: "B", s1q2: "A",
       s2q1: "C", s2q2: "A", s2q3: "C", s2q4: "A", s2q5: "B",
+      s2c1: "pass", s2c2: "pass",
       s3q1: "C", s3q2: "B", s3q3: "B", s3q4: "B", s3q5: "B", s3q6: "A",
+      s3c1: "pass", s3c2: "pass",
       s4q1: "B", s4q2: "B", s4q3: "C", s4q4: "B", s4q5: "B", s4q6: "B",
+      s4c1: "pass", s4c2: "pass",
       s5q1: "B", s5q2: "B", s5q3: "B", s5q4: "A", s5q5: "B", s5q6: "B", s5q7: "B", s5q8: "B",
+      s5c1: "pass", s5c2: "pass",
       s6q1: "B", s6q2: "C", s6q3: "B", s6q4: "B",
+      s6c1: "pass", s6c2: "pass",
       s7q1: "C", s7q2: "B", s7q3: "B", s7q4: "B", s7q5: "A", s7q6: "B", s7q7: "B", s7q8: "B",
       s8q1: "B", s8q2: "C", s8q3: "B", s8q4: "B", s8q5: "B", s8q6: "B", s8q7: "B",
-      s9q1: "C", s9q2: "A", s9q3: "B", s9q4: "B", s9q5: "B", s9q6: "B", s9q7: "B", s9q8: "A"
+      s9q1: "C", s9q2: "A", s9q3: "B", s9q4: "B", s9q5: "B", s9q6: "B", s9q7: "B", s9q8: "A",
+      pvq1: "C", pvq2: "A,B,D", pvq3: "B", pvq4: "A,B,C,E",
+      pvx1: "pass", pvx2: "pass", pvx3: "pass", pvx4: "pass", pvx5: "pass", pvx6: "pass",
+      pdq1: "B", pdq2: "A,B,D", pdq3: "B", pdq4: "A,B,C",
+      pdx1: "pass", pdx2: "pass", pdx3: "pass"
     };
 
     const STORAGE_KEY = 'vex_cpp_handbook_answers_v3';
+    const CODE_STORAGE_KEY = 'vex_cpp_handbook_code_v5';
+    const codingStarters = {};
 
     function loadSavedAnswers() {
       const saved = localStorage.getItem(STORAGE_KEY);
@@ -1963,15 +3785,38 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       updateProgress();
     }
 
+    function clearAnswer(qid) {
+      const answers = loadSavedAnswers();
+      if (!Object.prototype.hasOwnProperty.call(answers, qid)) return;
+      delete answers[qid];
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(answers));
+      updateProgress();
+    }
+
+    function loadSavedCode() {
+      const saved = localStorage.getItem(CODE_STORAGE_KEY);
+      return saved ? JSON.parse(saved) : {};
+    }
+
+    function saveCode(qid, value) {
+      const saved = loadSavedCode();
+      saved[qid] = value;
+      localStorage.setItem(CODE_STORAGE_KEY, JSON.stringify(saved));
+    }
+
     function checkAnswer(qid, userVal) {
       const qBlock = document.querySelector(`[data-qid="${qid}"]`);
       if (!qBlock) return;
       const feedback = qBlock.querySelector('.feedback');
       const correctVal = answerKey[qid];
+      feedback.style.display = '';
 
       if (userVal === correctVal) {
         feedback.textContent = `✓ Correct! Excellent job.`;
         feedback.className = 'feedback correct';
+      } else if (qBlock.getAttribute('data-multi') === 'true') {
+        feedback.textContent = `✗ Not quite. Select every correct answer, and leave the incorrect ones unchecked.`;
+        feedback.className = 'feedback wrong';
       } else {
         feedback.textContent = `✗ Incorrect. Give it another try!`;
         feedback.className = 'feedback wrong';
@@ -1998,11 +3843,40 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       const answers = loadSavedAnswers();
 
       document.querySelectorAll('.question-block').forEach(block => {
+        if (block.classList.contains('coding-block')) return;
         const qid = block.getAttribute('data-qid');
-        const inputs = block.querySelectorAll('input[type="radio"]');
+        const checks = block.querySelectorAll('input[type="checkbox"]');
 
+        if (checks.length) {
+          const selectedNow = () => [...checks].filter(input => input.checked).map(input => input.value).sort().join(',');
+          const apply = () => {
+            const selected = selectedNow();
+            if (!selected) {
+              clearAnswer(qid);
+              const feedback = block.querySelector('.feedback');
+              feedback.className = 'feedback';
+              feedback.style.display = '';
+              feedback.textContent = '';
+              return;
+            }
+            saveAnswer(qid, selected);
+            checkAnswer(qid, selected);
+          };
+          if (answers[qid]) {
+            answers[qid].split(',').forEach(val => {
+              const savedInput = block.querySelector('input[type="checkbox"][value="' + val + '"]');
+              if (savedInput) savedInput.checked = true;
+            });
+            const selected = selectedNow();
+            if (selected) checkAnswer(qid, selected);
+          }
+          checks.forEach(input => input.addEventListener('change', apply));
+          return;
+        }
+
+        const inputs = block.querySelectorAll('input[type="radio"]');
         if (answers[qid]) {
-          const savedInput = block.querySelector(`input[value="${answers[qid]}"]`);
+          const savedInput = block.querySelector('input[type="radio"][value="' + answers[qid] + '"]');
           if (savedInput) {
             savedInput.checked = true;
             checkAnswer(qid, answers[qid]);
@@ -2021,13 +3895,146 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       updateProgress();
     }
 
+    function markCodingEdited(block) {
+      const qid = block.getAttribute('data-qid');
+      const textarea = block.querySelector('.code-editor');
+      refreshEditorHighlight(textarea);
+      saveCode(qid, textarea.value);
+      clearAnswer(qid);
+      const feedback = block.querySelector('.feedback');
+      feedback.className = 'feedback';
+      feedback.style.display = '';
+      feedback.textContent = '';
+      const panel = block.querySelector('.test-results');
+      if (panel.childElementCount) {
+        const note = document.createElement('p');
+        note.className = 'test-stale';
+        note.textContent = 'Code changed. Run the tests again.';
+        panel.replaceChildren(note);
+      }
+      syncTestPlaceholder(block);
+    }
+
+    function runCodingBlock(block) {
+      const qid = block.getAttribute('data-qid');
+      const source = block.querySelector('.code-editor').value;
+      saveCode(qid, source);
+      const result = gradeCodingTask(source, qid);
+      renderCodingResult(block, result);
+      if (result.ok) saveAnswer(qid, 'pass');
+      else clearAnswer(qid);
+    }
+
+    function syncTestPlaceholder(block) {
+      const empty = block.querySelector('.test-empty');
+      const results = block.querySelector('.test-results');
+      if (empty && results) empty.hidden = results.childElementCount > 0;
+    }
+
+    function setupCodingTabs(block) {
+      if (block.querySelector('.coding-tabs')) return;
+      const results = block.querySelector('.test-results');
+      const feedback = block.querySelector('.feedback');
+      const qid = block.getAttribute('data-qid');
+      const tabs = document.createElement('div');
+      tabs.className = 'coding-tabs';
+      tabs.setAttribute('role', 'tablist');
+      ['tests', 'hint'].forEach(name => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'coding-tab';
+        button.dataset.panel = name;
+        button.setAttribute('aria-selected', 'false');
+        button.textContent = name === 'tests' ? 'Tests' : 'Hint';
+        tabs.appendChild(button);
+      });
+      const testsPanel = document.createElement('div');
+      testsPanel.className = 'coding-panel';
+      testsPanel.dataset.panel = 'tests';
+      testsPanel.hidden = true;
+      const empty = document.createElement('p');
+      empty.className = 'test-empty';
+      empty.textContent = 'Run the tests to see each case.';
+      testsPanel.appendChild(empty);
+      results.parentNode.insertBefore(tabs, results);
+      results.parentNode.insertBefore(testsPanel, results);
+      testsPanel.appendChild(results);
+      const hintPanel = document.createElement('div');
+      hintPanel.className = 'coding-panel';
+      hintPanel.dataset.panel = 'hint';
+      hintPanel.hidden = true;
+      const hint = document.createElement('p');
+      hint.className = 'hint-body';
+      hint.textContent = codingHints[qid] || '';
+      hintPanel.appendChild(hint);
+      feedback.parentNode.insertBefore(hintPanel, feedback);
+      tabs.querySelectorAll('.coding-tab').forEach(tab => {
+        tab.addEventListener('click', () => {
+          const panel = block.querySelector('.coding-panel[data-panel="' + tab.dataset.panel + '"]');
+          const wasOpen = tab.getAttribute('aria-selected') === 'true';
+          tabs.querySelectorAll('.coding-tab').forEach(item => item.setAttribute('aria-selected', 'false'));
+          block.querySelectorAll('.coding-panel').forEach(item => { item.hidden = true; });
+          if (!wasOpen) {
+            tab.setAttribute('aria-selected', 'true');
+            panel.hidden = false;
+          }
+        });
+      });
+    }
+
+    function initCoding() {
+      const answers = loadSavedAnswers();
+      const savedCode = loadSavedCode();
+      document.querySelectorAll('.coding-block').forEach(block => {
+        setupCodingTabs(block);
+        const qid = block.getAttribute('data-qid');
+        const textarea = block.querySelector('.code-editor');
+        const starter = textarea.value.replace(/^\n/, '').replace(/\s+$/, '');
+        codingStarters[qid] = starter;
+        textarea.value = Object.prototype.hasOwnProperty.call(savedCode, qid) ? savedCode[qid] : starter;
+        refreshEditorHighlight(textarea);
+        block.querySelector('.btn-run').addEventListener('click', () => runCodingBlock(block));
+        textarea.addEventListener('scroll', () => {
+          const pre = textarea.parentElement.querySelector('.code-highlight');
+          if (!pre) return;
+          pre.scrollTop = textarea.scrollTop;
+          pre.scrollLeft = textarea.scrollLeft;
+        });
+        textarea.addEventListener('keydown', (e) => {
+          if (e.key === 'Tab') {
+            e.preventDefault();
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const insert = '    ';
+            textarea.value = textarea.value.slice(0, start) + insert + textarea.value.slice(end);
+            textarea.selectionStart = textarea.selectionEnd = start + insert.length;
+            markCodingEdited(block);
+          } else if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+            e.preventDefault();
+            runCodingBlock(block);
+          }
+        });
+        textarea.addEventListener('input', () => markCodingEdited(block));
+        if (answers[qid] === 'pass' && Object.prototype.hasOwnProperty.call(savedCode, qid)) runCodingBlock(block);
+      });
+    }
+
     function resetAllQuizzes() {
       if (confirm("Are you sure you want to reset all your quiz answers?")) {
         localStorage.removeItem(STORAGE_KEY);
-        document.querySelectorAll('input[type="radio"]').forEach(input => input.checked = false);
+        localStorage.removeItem(CODE_STORAGE_KEY);
+        document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(input => input.checked = false);
         document.querySelectorAll('.feedback').forEach(fb => {
-          fb.style.display = 'none';
+          fb.style.display = '';
           fb.className = 'feedback';
+          fb.textContent = '';
+        });
+        document.querySelectorAll('.test-results').forEach(panel => panel.replaceChildren());
+        document.querySelectorAll('.code-editor').forEach(editor => {
+          const block = editor.closest('.coding-block');
+          const qid = block ? block.getAttribute('data-qid') : '';
+          if (qid && codingStarters[qid]) editor.value = codingStarters[qid];
+          refreshEditorHighlight(editor);
         });
         updateProgress();
       }
@@ -2036,6 +4043,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
     document.addEventListener('DOMContentLoaded', () => {
       applySyntaxHighlighting();
       initQuiz();
+      initCoding();
       initPageNavigationControls();
     });
   </script>
