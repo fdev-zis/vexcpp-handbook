@@ -588,6 +588,33 @@
       color: var(--primary-light);
     }
 
+    .wip-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+      margin-left: 0.4rem;
+      background: #d97706;
+      color: white;
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      line-height: 1.4;
+      padding: 0.05rem 0.35rem;
+      border-radius: 4px;
+      vertical-align: middle;
+    }
+
+    .wip-mark {
+      width: 0.85em;
+      height: 0.85em;
+      display: block;
+    }
+
+    nav.sidebar a.active .wip-badge {
+      background: white;
+      color: #d97706;
+    }
+
     .key-term {
       color: var(--primary-light);
       font-weight: 700;
@@ -1127,9 +1154,9 @@
         <li><a href="#section5">Sec 7: Relational Operators <span class="new-badge">NEW</span></a></li>
         <li><a href="#section6">Sec 8: Constant Variables <span class="new-badge">NEW</span></a></li>
         <li><a class="practice-link" href="#practice-decisions"><svg class="practice-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M11.3.7a1.4 1.4 0 0 1 2 0l2 2a1.4 1.4 0 0 1 0 2L6.6 13.4 2.4 14.5a.6.6 0 0 1-.7-.7l1.1-4.2L11.3.7zM4 10.2l-.5 2.3 2.3-.5 6.8-6.8-1.8-1.8L4 10.2z"/></svg>Exercises: Decisions &amp; Constants <span class="new-badge">NEW</span></a></li>
-        <li><a href="#section7">Sec 9: Displaying Data</a></li>
-        <li><a href="#section8">Sec 10: for Loops</a></li>
-        <li><a href="#section9">Sec 11: Type Casting</a></li>
+        <li><a href="#section7">Sec 9: Displaying Data <span class="wip-badge" title="Work in progress"><svg class="wip-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.1 1.2h1.8L13.4 12H2.6L7.1 1.2z"/><path fill="currentColor" d="M1.5 12.6h13v2h-13z"/></svg>WIP</span></a></li>
+        <li><a href="#section8">Sec 10: for Loops <span class="wip-badge" title="Work in progress"><svg class="wip-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.1 1.2h1.8L13.4 12H2.6L7.1 1.2z"/><path fill="currentColor" d="M1.5 12.6h13v2h-13z"/></svg>WIP</span></a></li>
+        <li><a href="#section9">Sec 11: Type Casting <span class="wip-badge" title="Work in progress"><svg class="wip-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.1 1.2h1.8L13.4 12H2.6L7.1 1.2z"/><path fill="currentColor" d="M1.5 12.6h13v2h-13z"/></svg>WIP</span></a></li>
       </ul>
     </nav>
 
@@ -1483,6 +1510,7 @@ bool engineActive = true;  // State flag</code></pre>
           <h2>Arithmetic Expressions & Operators</h2>
         </div>
         <p>An <strong>Arithmetic Expression</strong> combines variables, numeric values (called <strong>Operands</strong>), and mathematical symbol <strong>Operators</strong> to calculate dynamic new values. C++ uses standard arithmetic operators: <strong>Addition (<code>+</code>)</strong>, <strong>Subtraction (<code>-</code>)</strong>, <strong>Multiplication (<code>*</code>)</strong>, and <strong>Division (<code>/</code>)</strong>.</p>
+        <p><strong>Operator precedence</strong> decides which operation runs first. Multiplication and division happen before addition and subtraction. <code>15 - 3 * 2</code> is <code>15 - 6</code>, which is <code>9</code>. Parentheses run first, so <code>(15 - 3) * 2</code> is <code>24</code>.</p>
 
         <div class="code-title">EXPRESSIONS.CPP - MATH OPERATIONS</div>
 <pre><code>float startPos = 100.0;
@@ -1506,6 +1534,7 @@ score = score + 5; // New score value is 15</code></pre>
             <li><strong>Operator:</strong> Symbols like <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code> that instruct C++ to perform mathematical operations.</li>
             <li><strong>Operand:</strong> The values or variables acted upon by an operator in an expression.</li>
             <li><strong>Integer Division:</strong> Division performed between two whole numbers that automatically truncates any fractional decimal remainder.</li>
+            <li><strong>Operator Precedence:</strong> The order C++ uses when an expression has more than one operator. <code>*</code> and <code>/</code> run before <code>+</code> and <code>-</code>. Parentheses run first.</li>
           </ul>
         </div>
 
@@ -1579,7 +1608,7 @@ score = score + 5; // New score value is 15</code></pre>
           </div>
 
           <div class="question-block coding-block" data-qid="s3c1">
-            <div class="question-text"><span class="new-badge">NEW</span> 7. <code>startPos</code> and <code>endPos</code> already exist. Create a <code>float</code> named <code>distance</code> that stores how far <code>endPos</code> is from <code>startPos</code>.</div>
+            <div class="question-text"><span class="new-badge">NEW</span> 7. <code>startPos</code> and <code>endPos</code> already exist. Assume <code>endPos</code> is greater than <code>startPos</code>. Create a <code>float</code> named <code>distance</code> that stores how far <code>endPos</code> is from <code>startPos</code>.</div>
             <div class="code-title">ALREADY WRITTEN</div>
 <pre><code>float startPos = ...;
 float endPos = ...;</code></pre>
@@ -1594,13 +1623,13 @@ float endPos = ...;</code></pre>
           </div>
 
           <div class="question-block coding-block" data-qid="s3c2">
-            <div class="question-text"><span class="new-badge">NEW</span> 8. <code>ticks</code> and <code>motors</code> already exist. Store how many whole encoder ticks each motor gets in <code>int wholeTurns</code>. Store the leftover ticks in <code>int spare</code>: <code>ticks</code> minus <code>wholeTurns</code> times <code>motors</code>.</div>
+            <div class="question-text"><span class="new-badge">NEW</span> 8. <code>screws</code> and <code>robots</code> already exist. Each robot gets the same number of screws. Create <code>int each</code> for the whole screws each robot gets, and <code>int leftover</code> for the screws left in the bin: <code>screws</code> minus <code>each</code> times <code>robots</code>.</div>
             <div class="code-title">ALREADY WRITTEN</div>
-<pre><code>int ticks = ...;
-int motors = ...;</code></pre>
+<pre><code>int screws = ...;
+int robots = ...;</code></pre>
             <div class="code-editor-wrap">
               <pre class="code-highlight" aria-hidden="true"><code></code></pre>
-              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Create wholeTurns and spare">// Create wholeTurns and spare.
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Create each and leftover from screws and robots">// Create int each and int leftover.
 </textarea>
             </div>
             <button type="button" class="btn-run">Run tests</button>
@@ -1772,21 +1801,7 @@ float farCm = ...;</code></pre>
           <h2>Tracing Code on Paper</h2>
         </div>
         <p>Before a program runs on the robot, walk through it yourself. Read one statement, do exactly what that line does, and write the result down. Then go to the next line. This is called <span class="key-term">tracing</span>.</p>
-        <p>When a line creates a variable, add a row and write its name and starting value. When a later line stores a new value in that same variable, draw a line through the old value and write the new one beside it. Do not erase the old value, and do not invent a 0 for a variable the program has not stored yet.</p>
-        <div class="grid-3">
-          <div class="feature-box">
-            <h4>Variable table</h4>
-            <p>One row per variable. Cross out a value when it changes, and write the new one next to it.</p>
-          </div>
-          <div class="feature-box">
-            <h4>Console</h4>
-            <p>When a program prints, write those words on a separate part of the same paper. The programs here do not print.</p>
-          </div>
-          <div class="feature-box">
-            <h4>Robot</h4>
-            <p>When the code drives the robot, sketch that move beside the table. These programs only store values.</p>
-          </div>
-        </div>
+        <p>Record each result in a <span class="key-term">variable table</span>: one row per variable. When a line creates a variable, add a row and write its name and starting value. When a later line stores a new value in that same variable, draw a line through the old value and write the new one beside it. Do not erase the old value.</p>
         <h3 class="trace-heading">Worked example</h3>
         <p>This program shares a battery across motors. Use <strong>Next line</strong> to run one statement at a time. A blue value is the one that line just stored.</p>
         <div id="trace-demo"></div>
@@ -2426,6 +2441,7 @@ int motorPercent;
       <section id="section7" class="card">
         <div class="section-header">
           <span class="section-tag">Section 9</span>
+          <span class="wip-badge" title="Work in progress"><svg class="wip-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.1 1.2h1.8L13.4 12H2.6L7.1 1.2z"/><path fill="currentColor" d="M1.5 12.6h13v2h-13z"/></svg>WIP</span>
           <h2>Displaying Data on VEX Brain Screen</h2>
         </div>
         <p>VEX C++ provides specialized screen output functions that draw on the physical display <strong>Screen Buffer</strong>. Text layout is controlled by positioning the active text <strong>Cursor</strong>.</p>
@@ -2580,6 +2596,7 @@ Brain.Screen.print("Temp: %f", temp);   // Prints floating decimal</code></pre>
       <section id="section8" class="card">
         <div class="section-header">
           <span class="section-tag">Section 10</span>
+          <span class="wip-badge" title="Work in progress"><svg class="wip-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.1 1.2h1.8L13.4 12H2.6L7.1 1.2z"/><path fill="currentColor" d="M1.5 12.6h13v2h-13z"/></svg>WIP</span>
           <h2>Control Flow: Repetition with <code>for</code> Loops</h2>
         </div>
         <p>A <strong><code>for</code> Loop</strong> repeats a code block multiple times. Each pass through the loop is called an <strong>Iteration</strong>. A <strong>Loop Counter</strong> variable manages the loop state, updated at the end of each pass using the <strong>Increment Operator (<code>++</code>)</strong>.</p>
@@ -2692,6 +2709,7 @@ for (int i = 0; i &lt; 5; i++) {
       <section id="section9" class="card">
         <div class="section-header">
           <span class="section-tag">Section 11</span>
+          <span class="wip-badge" title="Work in progress"><svg class="wip-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.1 1.2h1.8L13.4 12H2.6L7.1 1.2z"/><path fill="currentColor" d="M1.5 12.6h13v2h-13z"/></svg>WIP</span>
           <h2>Type Casting with <code>static_cast&lt;int&gt;</code></h2>
         </div>
         <p><strong>Type Casting</strong> is an <strong>Explicit Conversion</strong> technique used to convert data from one type to another. Writing <code>static_cast&lt;int&gt;(value)</code> converts a decimal (<code>float</code>) into an integer (<code>int</code>) by performing <strong>Truncation</strong>—dropping the fractional decimal portion entirely.</p>
@@ -3744,18 +3762,18 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
         cases: [
           codingCase("startPos = 100, endPos = 450", "float startPos = 100;\nfloat endPos = 450;", [ev("distance", "float", 350)]),
           codingCase("startPos = 0, endPos = 12.5", "float startPos = 0;\nfloat endPos = 12.5;", [ev("distance", "float", 12.5)]),
-          codingCase("startPos = 80.5, endPos = 20.5", "float startPos = 80.5;\nfloat endPos = 20.5;", [ev("distance", "float", -60)]),
+          codingCase("startPos = 20.5, endPos = 80.5", "float startPos = 20.5;\nfloat endPos = 80.5;", [ev("distance", "float", 60)]),
           codingCase("startPos = 10, endPos = 10.5", "float startPos = 10;\nfloat endPos = 10.5;", [ev("distance", "float", 0.5)]),
-          codingCase("startPos = 3.25, endPos = 3.25", "float startPos = 3.25;\nfloat endPos = 3.25;", [ev("distance", "float", 0)])
+          codingCase("startPos = 3.25, endPos = 6.5", "float startPos = 3.25;\nfloat endPos = 6.5;", [ev("distance", "float", 3.25)])
         ]
       },
       s3c2: {
         cases: [
-          codingCase("ticks = 10, motors = 4", "int ticks = 10;\nint motors = 4;", [ev("wholeTurns", "int", 2), ev("spare", "int", 2)]),
-          codingCase("ticks = 7, motors = 2", "int ticks = 7;\nint motors = 2;", [ev("wholeTurns", "int", 3), ev("spare", "int", 1)]),
-          codingCase("ticks = 9, motors = 3", "int ticks = 9;\nint motors = 3;", [ev("wholeTurns", "int", 3), ev("spare", "int", 0)]),
-          codingCase("ticks = 1, motors = 2", "int ticks = 1;\nint motors = 2;", [ev("wholeTurns", "int", 0), ev("spare", "int", 1)]),
-          codingCase("ticks = 8, motors = 5", "int ticks = 8;\nint motors = 5;", [ev("wholeTurns", "int", 1), ev("spare", "int", 3)])
+          codingCase("screws = 10, robots = 4", "int screws = 10;\nint robots = 4;", [ev("each", "int", 2), ev("leftover", "int", 2)]),
+          codingCase("screws = 7, robots = 2", "int screws = 7;\nint robots = 2;", [ev("each", "int", 3), ev("leftover", "int", 1)]),
+          codingCase("screws = 9, robots = 3", "int screws = 9;\nint robots = 3;", [ev("each", "int", 3), ev("leftover", "int", 0)]),
+          codingCase("screws = 1, robots = 2", "int screws = 1;\nint robots = 2;", [ev("each", "int", 0), ev("leftover", "int", 1)]),
+          codingCase("screws = 8, robots = 5", "int screws = 8;\nint robots = 5;", [ev("each", "int", 1), ev("leftover", "int", 3)])
         ]
       },
       s4c1: {
@@ -3897,7 +3915,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       s2c1: "Each declaration needs a type, a name, and a starting value. wheelCount is an int, distanceCm is a float, and isReady is a bool.",
       s2c2: "The distance in centimeters is a float. The number of motors is an int.",
       s3c1: "Subtract startPos from endPos and store the result in distance.",
-      s3c2: "Integer division drops the fraction. Multiply wholeTurns by motors, then subtract that from ticks.",
+      s3c2: "each is screws / robots. leftover is screws minus each times robots.",
       s4c1: "Give status a value in the if branch and a value in the else branch.",
       s4c2: "A reading of exactly 20 cm is not less than 20, so warning is 0.",
       s5c1: "Use >= to compare speed with 50. Use = only to store isFast.",
@@ -4096,6 +4114,15 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
     function loadSavedCode() {
       const saved = localStorage.getItem(CODE_STORAGE_KEY);
       return saved ? JSON.parse(saved) : {};
+    }
+
+    function forgetOldSection4Question8() {
+      const code = loadSavedCode();
+      if (!Object.prototype.hasOwnProperty.call(code, "s3c2")) return;
+      if (!/\b(ticks|wholeTurns|spare|stickers|students|wheels)\b/.test(code.s3c2)) return;
+      delete code.s3c2;
+      localStorage.setItem(CODE_STORAGE_KEY, JSON.stringify(code));
+      clearAnswer("s3c2");
     }
 
     function saveCode(qid, value) {
@@ -4765,6 +4792,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+      forgetOldSection4Question8();
       applySyntaxHighlighting();
       initTracing();
       initQuiz();
