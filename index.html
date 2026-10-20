@@ -1124,6 +1124,10 @@
       margin-top: 0.9rem;
     }
 
+    .l3-calls.one {
+      grid-template-columns: 1fr;
+    }
+
     .l3-call {
       background: #f8fafc;
       border: 1px solid var(--border);
@@ -1193,6 +1197,66 @@
 
     .l3-size[aria-pressed="true"] .l3-icon-tall { display: none; }
     .l3-size[aria-pressed="true"] .l3-icon-short { display: block; }
+
+    .l12-title-tools {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .l12-console-toggle[aria-pressed="true"] {
+      background: #16324f;
+      color: #fff;
+      border-color: #16324f;
+    }
+
+    .l12-editrow {
+      display: flex;
+      align-items: stretch;
+      min-width: 0;
+    }
+
+    .l12-editrow > .l3-editor {
+      flex: 1 1 auto;
+      min-width: 0;
+      width: auto;
+    }
+
+    .l12-console {
+      box-sizing: border-box;
+      align-self: flex-start;
+      flex: 0 0 240px;
+      width: 240px;
+      height: 260px;
+      margin: 0;
+      overflow: auto;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 13px;
+      line-height: 1.45;
+      padding: 10px 12px;
+      background: #101820;
+      color: #d7efe4;
+      border: 1px solid #334155;
+      border-left: 0;
+      border-radius: 0 0 6px 0;
+    }
+
+    .l12-console[hidden] { display: none; }
+
+    .l12-editrow:has(> .l12-console:not([hidden])) > .l3-editor {
+      border-bottom-right-radius: 0;
+    }
+
+    .l12-editrow > .l3-editor.l3-tall + .l12-console {
+      height: 520px;
+    }
+
+    .l12-console:empty::before {
+      content: "printf prints here...";
+      color: rgba(215, 239, 228, 0.28);
+    }
 
     .l3-map {
       overflow-x: auto;
@@ -1444,6 +1508,20 @@
       .l3-calls {
         grid-template-columns: 1fr;
       }
+      .l12-editrow { flex-direction: column; }
+      .l12-console,
+      .l12-editrow > .l3-editor.l3-tall + .l12-console {
+        flex-basis: auto;
+        width: 100%;
+        height: 140px;
+        border-left: 1px solid #334155;
+        border-top: 0;
+        border-radius: 0 0 6px 6px;
+      }
+      .l12-editrow:has(> .l12-console:not([hidden])) > .l3-editor {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+      }
     }
   </style>
 </head>
@@ -1482,10 +1560,12 @@
         <li><a class="practice-link" href="#practice-variables"><svg class="practice-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M11.3.7a1.4 1.4 0 0 1 2 0l2 2a1.4 1.4 0 0 1 0 2L6.6 13.4 2.4 14.5a.6.6 0 0 1-.7-.7l1.1-4.2L11.3.7zM4 10.2l-.5 2.3 2.3-.5 6.8-6.8-1.8-1.8L4 10.2z"/></svg>Exercises: Variables &amp; Arithmetic <span class="new-badge">NEW</span></a></li>
         <li><a href="#section-tracing">Sec 5: Tracing Code <span class="new-badge">NEW</span></a></li>
         <li><a class="practice-link" href="#practice-tracing"><svg class="practice-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M11.3.7a1.4 1.4 0 0 1 2 0l2 2a1.4 1.4 0 0 1 0 2L6.6 13.4 2.4 14.5a.6.6 0 0 1-.7-.7l1.1-4.2L11.3.7zM4 10.2l-.5 2.3 2.3-.5 6.8-6.8-1.8-1.8L4 10.2z"/></svg>Exercises: Tracing <span class="new-badge">NEW</span></a></li>
+        <li><a class="playground-link" href="#level1-playground"><svg class="practice-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M2 8.2h7.1L7.2 6.3l1.1-1.1L12.3 9 8.3 13l-1.1-1.1 1.9-1.9H2v-1.8z"/></svg>Level 1 Playground <span class="new-badge">NEW</span></a></li>
         <li><a href="#section4">Sec 6: if / else Statements <span class="new-badge">NEW</span></a></li>
         <li><a href="#section5">Sec 7: Relational Operators <span class="new-badge">NEW</span></a></li>
         <li><a href="#section6">Sec 8: Constant Variables <span class="new-badge">NEW</span></a></li>
         <li><a class="practice-link" href="#practice-decisions"><svg class="practice-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M11.3.7a1.4 1.4 0 0 1 2 0l2 2a1.4 1.4 0 0 1 0 2L6.6 13.4 2.4 14.5a.6.6 0 0 1-.7-.7l1.1-4.2L11.3.7zM4 10.2l-.5 2.3 2.3-.5 6.8-6.8-1.8-1.8L4 10.2z"/></svg>Exercises: Decisions &amp; Constants <span class="new-badge">NEW</span></a></li>
+        <li><a class="playground-link" href="#level2-playground"><svg class="practice-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M2 8.2h7.1L7.2 6.3l1.1-1.1L12.3 9 8.3 13l-1.1-1.1 1.9-1.9H2v-1.8z"/></svg>Level 2 Playground <span class="new-badge">NEW</span></a></li>
         <li><a class="playground-link" href="#level3-playground"><svg class="practice-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M2 8.2h7.1L7.2 6.3l1.1-1.1L12.3 9 8.3 13l-1.1-1.1 1.9-1.9H2v-1.8z"/></svg>Level 3 Playground <span class="new-badge">NEW</span></a></li>
         <li><a href="#section7">Sec 9: Displaying Data <span class="wip-badge" title="Work in progress"><svg class="wip-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.1 1.2h1.8L13.4 12H2.6L7.1 1.2z"/><path fill="currentColor" d="M1.5 12.6h13v2h-13z"/></svg>WIP</span></a></li>
         <li><a href="#section8">Sec 10: for Loops <span class="wip-badge" title="Work in progress"><svg class="wip-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.1 1.2h1.8L13.4 12H2.6L7.1 1.2z"/><path fill="currentColor" d="M1.5 12.6h13v2h-13z"/></svg>WIP</span></a></li>
@@ -2184,6 +2264,69 @@ float farCm = ...;</code></pre>
         </div>
       </section>
 
+      <!-- LEVEL 1 PLAYGROUND -->
+      <section id="level1-playground" class="card">
+        <div class="section-header">
+          <span class="section-tag playground">Playground</span>
+          <span class="new-badge">NEW</span>
+          <h2>Level 1 Playground</h2>
+        </div>
+        <p>The track is a number line from <strong>0 mm</strong> to <strong>1000 mm</strong>. The robot starts at <strong>0</strong>, facing right. Visit <span class="l3-name l3-c1">A</span>, then <span class="l3-name l3-c2">B</span>, then <span class="l3-name l3-c3">C</span>.</p>
+        <div class="l3-calls one">
+          <div class="l3-call">
+            <h3>Drivetrain.driveFor</h3>
+            <p><code>Drivetrain.driveFor(forward, distance, mm)</code> drives to the right. <code>Drivetrain.driveFor(reverse, distance, mm)</code> drives to the left. A negative distance drives the other way. The robot moves when this call runs. It drives that distance from where it is now.</p>
+          </div>
+        </div>
+        <div class="l3-workspace">
+          <div class="l3-actions">
+            <button type="button" class="btn-paper" id="l1-rand">Randomize targets</button>
+            <button type="button" class="btn-paper" id="l1-handout">Handout map</button>
+          </div>
+          <div class="l3-board">
+          <div id="l1-map" class="l3-map"></div>
+          <div class="l3-codebox">
+            <div class="code-title l3-code-title">
+              <span>LEVEL1.CPP</span>
+              <span class="l12-title-tools">
+                <button type="button" class="btn-paper l3-size l12-console-toggle" id="l1-console-toggle" aria-pressed="false" aria-label="Show console" title="Show console">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M4 6.2 6.2 8 4 9.8M7.6 10.2H11.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <button type="button" class="btn-paper l3-size" id="l1-size" aria-pressed="false" aria-label="Taller code">
+                  <svg class="l3-icon-tall" viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M3 6.2 8 2.2 13 6.2M3 9.8 8 13.8 13 9.8"/></svg>
+                  <svg class="l3-icon-short" viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M3 2.2 8 6.2 13 2.2M3 13.8 8 9.8 13 13.8"/></svg>
+                </button>
+              </span>
+            </div>
+            <div class="l12-editrow">
+              <div class="code-editor-wrap l3-editor" id="l1-editor">
+                <pre class="code-highlight" aria-hidden="true"><div id="l1-current" class="l3-current" hidden></div><code></code></pre>
+                <textarea id="l1-code" class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Level 1 program"></textarea>
+              </div>
+              <pre id="l1-console" class="l12-console" hidden aria-live="polite" aria-label="Console"></pre>
+            </div>
+            <div class="l3-varbar">
+              <button type="button" class="btn-paper" id="l1-vars-toggle" aria-expanded="false" aria-controls="l1-vars">Show variables</button>
+              <div id="l1-vars" class="l3-vars" hidden aria-live="polite"></div>
+            </div>
+            <div class="l3-actions">
+              <button type="button" class="btn-run" id="l1-run">Run</button>
+              <button type="button" class="btn-paper" id="l1-compile">Compile</button>
+              <button type="button" class="btn-paper" id="l1-pause" disabled>Pause</button>
+              <button type="button" class="btn-paper" id="l1-step" disabled>Step</button>
+              <button type="button" class="btn-paper" id="l1-reset">Reset robot</button>
+              <button type="button" class="btn-paper" id="l1-copy">Copy map numbers into code</button>
+              <label class="l3-speed">Speed
+                <input id="l1-speed" type="range" min="0.5" max="3" step="0.5" value="1" aria-label="Simulation speed">
+                <span id="l1-speed-label">1×</span>
+              </label>
+            </div>
+            <div id="l1-msg" class="l3-msg" hidden role="status"></div>
+          </div>
+          </div>
+        </div>
+      </section>
+
       <!-- SECTION 6 -->
       <section id="section4" class="card">
         <div class="section-header">
@@ -2770,6 +2913,74 @@ int motorPercent;
         </div>
       </section>
 
+      <!-- LEVEL 2 PLAYGROUND -->
+      <section id="level2-playground" class="card">
+        <div class="section-header">
+          <span class="section-tag playground">Playground</span>
+          <span class="new-badge">NEW</span>
+          <h2>Level 2 Playground</h2>
+        </div>
+        <p>The track is a number line from <strong>0 mm</strong> to <strong>1000 mm</strong>. The fuel station is at <strong>0</strong>. The robot starts there, and it must visit <span class="l3-name l3-c1">A</span>, then <span class="l3-name l3-c2">B</span>, then <span class="l3-name l3-c3">C</span>. <code>kTankCapacity</code> is how much fuel a full tank holds. One millimetre driven costs one unit of fuel.</p>
+        <div class="l3-calls">
+          <div class="l3-call">
+            <h3>Drivetrain.driveFor</h3>
+            <p><code>Drivetrain.driveFor(forward, distance, mm)</code> drives to the right. <code>Drivetrain.driveFor(reverse, distance, mm)</code> drives to the left. A negative distance drives the other way. The robot moves when this call runs. Changing <code>position</code> does not move it.</p>
+          </div>
+          <div class="l3-call">
+            <h3>fuel and position</h3>
+            <p>The picture does not subtract fuel for you. After a drive, subtract how far the robot drove from <code>fuel</code>, and set <code>position</code> to where it is now. Driving backwards costs fuel too, so subtract the positive distance. When <code>fuel</code> is not enough for the next target, drive back to the station, set <code>position</code> to 0, and set <code>fuel</code> to <code>kTankCapacity</code>. The bar under the track shows the variable <code>fuel</code>.</p>
+          </div>
+        </div>
+        <div class="l3-workspace">
+          <div class="l3-actions">
+            <button type="button" class="btn-paper" id="l2-rand">Randomize targets</button>
+            <button type="button" class="btn-paper" id="l2-rand-fuel">Randomize fuel</button>
+            <button type="button" class="btn-paper" id="l2-handout">Handout map</button>
+          </div>
+          <div class="l3-board">
+          <div id="l2-map" class="l3-map"></div>
+          <div class="l3-codebox">
+            <div class="code-title l3-code-title">
+              <span>LEVEL2.CPP</span>
+              <span class="l12-title-tools">
+                <button type="button" class="btn-paper l3-size l12-console-toggle" id="l2-console-toggle" aria-pressed="false" aria-label="Show console" title="Show console">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M4 6.2 6.2 8 4 9.8M7.6 10.2H11.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <button type="button" class="btn-paper l3-size" id="l2-size" aria-pressed="false" aria-label="Taller code">
+                  <svg class="l3-icon-tall" viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M3 6.2 8 2.2 13 6.2M3 9.8 8 13.8 13 9.8"/></svg>
+                  <svg class="l3-icon-short" viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M3 2.2 8 6.2 13 2.2M3 13.8 8 9.8 13 13.8"/></svg>
+                </button>
+              </span>
+            </div>
+            <div class="l12-editrow">
+              <div class="code-editor-wrap l3-editor" id="l2-editor">
+                <pre class="code-highlight" aria-hidden="true"><div id="l2-current" class="l3-current" hidden></div><code></code></pre>
+                <textarea id="l2-code" class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Level 2 program"></textarea>
+              </div>
+              <pre id="l2-console" class="l12-console" hidden aria-live="polite" aria-label="Console"></pre>
+            </div>
+            <div class="l3-varbar">
+              <button type="button" class="btn-paper" id="l2-vars-toggle" aria-expanded="false" aria-controls="l2-vars">Show variables</button>
+              <div id="l2-vars" class="l3-vars" hidden aria-live="polite"></div>
+            </div>
+            <div class="l3-actions">
+              <button type="button" class="btn-run" id="l2-run">Run</button>
+              <button type="button" class="btn-paper" id="l2-compile">Compile</button>
+              <button type="button" class="btn-paper" id="l2-pause" disabled>Pause</button>
+              <button type="button" class="btn-paper" id="l2-step" disabled>Step</button>
+              <button type="button" class="btn-paper" id="l2-reset">Reset robot</button>
+              <button type="button" class="btn-paper" id="l2-copy">Copy map numbers into code</button>
+              <label class="l3-speed">Speed
+                <input id="l2-speed" type="range" min="0.5" max="3" step="0.5" value="1" aria-label="Simulation speed">
+                <span id="l2-speed-label">1×</span>
+              </label>
+            </div>
+            <div id="l2-msg" class="l3-msg" hidden role="status"></div>
+          </div>
+          </div>
+        </div>
+      </section>
+
       <!-- LEVEL 3 PLAYGROUND -->
       <section id="level3-playground" class="card">
         <div class="section-header">
@@ -2808,14 +3019,22 @@ ArmMotor.spinToPosition(armUp, degrees, true);</code></pre>
           <div class="l3-codebox">
             <div class="code-title l3-code-title">
               <span>LEVEL3.CPP</span>
-              <button type="button" class="btn-paper l3-size" id="l3-size" aria-pressed="false" aria-label="Taller code">
-                <svg class="l3-icon-tall" viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M3 6.2 8 2.2 13 6.2M3 9.8 8 13.8 13 9.8"/></svg>
-                <svg class="l3-icon-short" viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M3 2.2 8 6.2 13 2.2M3 13.8 8 9.8 13 13.8"/></svg>
-              </button>
+              <span class="l12-title-tools">
+                <button type="button" class="btn-paper l3-size l12-console-toggle" id="l3-console-toggle" aria-pressed="false" aria-label="Show console" title="Show console">
+                  <svg viewBox="0 0 16 16" aria-hidden="true"><rect x="1.5" y="2.5" width="13" height="11" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M4 6.2 6.2 8 4 9.8M7.6 10.2H11.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </button>
+                <button type="button" class="btn-paper l3-size" id="l3-size" aria-pressed="false" aria-label="Taller code">
+                  <svg class="l3-icon-tall" viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M3 6.2 8 2.2 13 6.2M3 9.8 8 13.8 13 9.8"/></svg>
+                  <svg class="l3-icon-short" viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M3 2.2 8 6.2 13 2.2M3 13.8 8 9.8 13 13.8"/></svg>
+                </button>
+              </span>
             </div>
-            <div class="code-editor-wrap l3-editor" id="l3-editor">
-              <pre class="code-highlight" aria-hidden="true"><div id="l3-current" class="l3-current" hidden></div><code></code></pre>
-              <textarea id="l3-code" class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Level 3 program"></textarea>
+            <div class="l12-editrow">
+              <div class="code-editor-wrap l3-editor" id="l3-editor">
+                <pre class="code-highlight" aria-hidden="true"><div id="l3-current" class="l3-current" hidden></div><code></code></pre>
+                <textarea id="l3-code" class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Level 3 program"></textarea>
+              </div>
+              <pre id="l3-console" class="l12-console" hidden aria-live="polite" aria-label="Console"></pre>
             </div>
             <div class="l3-varbar">
               <button type="button" class="btn-paper" id="l3-vars-toggle" aria-expanded="false" aria-controls="l3-vars">Show variables</button>
@@ -3241,14 +3460,16 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
     const sectionIds = [
       'section1', 'section-setup', 'section2', 'section3', 'practice-variables',
       'section-tracing', 'practice-tracing',
+      'level1-playground',
       'section4', 'section5', 'section6', 'practice-decisions',
+      'level2-playground',
       'level3-playground',
       'section7', 'section8', 'section9'
     ];
 
     function navLabel(id, direction) {
       if (id && id.indexOf('practice') === 0) return direction === 'prev' ? '← Exercises' : 'Exercises →';
-      if (id === 'level3-playground') return direction === 'prev' ? '← Playground' : 'Playground →';
+      if (id && id.indexOf('playground') !== -1) return direction === 'prev' ? '← Playground' : 'Playground →';
       return direction === 'prev' ? '← Previous Section' : 'Next Section →';
     }
 
@@ -3423,7 +3644,8 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       return out;
     }
 
-    function tokenize(source) {
+    function tokenize(source, options) {
+      options = options || {};
       const tokens = [];
       let i = 0;
       let line = 1;
@@ -3456,7 +3678,34 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
           continue;
         }
         if (ch === '"' || ch === "'") {
-          throw cppError(line, "this practice uses numbers, true, and false, not quoted text.");
+          if (!options.calls || ch === "'") {
+            throw cppError(line, "this practice uses numbers, true, and false, not quoted text.");
+          }
+          const startLine = line;
+          i++;
+          let value = "";
+          let closed = false;
+          while (i < source.length) {
+            const c = source.charAt(i);
+            if (c === "\n" || c === "\r") break;
+            if (c === "\\") {
+              const esc = source.charAt(i + 1);
+              if (esc === "n") value += "\n";
+              else if (esc === "t") value += "\t";
+              else if (esc === "r") value += "\r";
+              else if (esc === "\\") value += "\\";
+              else if (esc === "\"") value += "\"";
+              else throw cppError(startLine, "this escape is not used here. Use \\\\ or \\n.");
+              i += 2;
+              continue;
+            }
+            if (c === "\"") { closed = true; i++; break; }
+            value += c;
+            i++;
+          }
+          if (!closed) throw cppError(startLine, "this quote was never closed.");
+          tokens.push({ kind: "string", value: value, line: startLine });
+          continue;
         }
         if (/[A-Za-z_]/.test(ch)) {
           const start = i;
@@ -3661,6 +3910,10 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
         if (token.kind === "number") {
           next();
           return { kind: "literal", type: token.numType, value: token.value, line: token.line };
+        }
+        if (token.kind === "string") {
+          next();
+          return { kind: "literal", type: "string", value: token.value, line: token.line };
         }
         if (token.kind === "keyword" && (token.value === "true" || token.value === "false")) {
           next();
@@ -3887,7 +4140,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
           ? "This program is too long for the playground."
           : "This solution is too long. Keep only the statements for this question.");
       }
-      return parseProgram(tokenize(stripPreamble(source)), !!asSnippet, options);
+      return parseProgram(tokenize(stripPreamble(source), options), !!asSnippet, options);
     }
 
     function Environment() { this.stack = []; }
@@ -3917,12 +4170,18 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
 
     function numericValue(value) {
       if (value.type === "bool") return value.value ? 1 : 0;
+      if (value.type === "string") return NaN;
       return value.value;
     }
 
-    function arithTypes(left, right) {
+    function arithTypes(left, right, line) {
       const type = (left.type === "float" || right.type === "float") ? "float" : "int";
-      return { type: type, l: numericValue(left), r: numericValue(right) };
+      const l = numericValue(left);
+      const r = numericValue(right);
+      if (typeof l !== "number" || typeof r !== "number" || !Number.isFinite(l) || !Number.isFinite(r)) {
+        throw cppError(line, "this calculation did not produce a usable number.");
+      }
+      return { type: type, l: l, r: r };
     }
 
     function coerce(targetType, value, node) {
@@ -3952,8 +4211,8 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       return { type: rec.type, value: rec.value };
     }
 
-    function compareValues(op, left, right) {
-      const pair = arithTypes(left, right);
+    function compareValues(op, left, right, line) {
+      const pair = arithTypes(left, right, line);
       if (op === "==") return pair.l === pair.r;
       if (op === "!=") return pair.l !== pair.r;
       if (op === "<") return pair.l < pair.r;
@@ -3972,6 +4231,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
         return { type: "float", value: n };
       }
       const n = numericValue(value);
+      if (typeof n !== "number" || !Number.isFinite(n)) throw cppError(node.line, "this calculation did not produce a usable number.");
       return { type: "int", value: node.op === "-" ? -n : n };
     }
 
@@ -3989,9 +4249,9 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       const left = evalExpr(node.left, env);
       const right = evalExpr(node.right, env);
       if (node.op === "==" || node.op === "!=" || node.op === "<" || node.op === ">" || node.op === "<=" || node.op === ">=") {
-        return { type: "bool", value: compareValues(node.op, left, right) };
+        return { type: "bool", value: compareValues(node.op, left, right, node.line) };
       }
-      const pair = arithTypes(left, right);
+      const pair = arithTypes(left, right, node.line);
       let value;
       if (node.op === "+") value = pair.l + pair.r;
       else if (node.op === "-") value = pair.l - pair.r;
@@ -5288,6 +5548,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       initPageNavigationControls();
     });
   </script>
-  <script src="level3-playground.js?v=14"></script>
+  <script src="level3-playground.js?v=16"></script>
+  <script src="level12-playground.js?v=2"></script>
 </body>
 </html>

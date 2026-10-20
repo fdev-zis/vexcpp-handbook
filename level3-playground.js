@@ -35,7 +35,8 @@
     pauseWhenDone: false,
     resume: null,
     varText: null,
-    silent: false
+    silent: false,
+    console: ""
   };
 
   const L3_GRIP_STEPS = [
@@ -151,10 +152,10 @@
     lines.push(
       "",
       "// TODO: experimentally determine these values.",
-      line("float", "armDown", true),
-      line("float", "armUp", true),
-      line("float", "clawOpen", true),
-      line("float", "clawClosed", true),
+      line("float", "armDown", false),
+      line("float", "armUp", false),
+      line("float", "clawOpen", false),
+      line("float", "clawClosed", false),
       L3_END
     );
     return lines.join("\n");
@@ -213,7 +214,7 @@
 
   function l3HasStudentLogic(source) {
     const code = String(source).replace(/\/\*[\s\S]*?\*\//g, "").replace(/\/\/.*$/gm, "");
-    return /\b(if|else|Drivetrain|ArmMotor|ClawMotor|wait|for|while)\b/.test(code);
+    return /\b(if|else|Drivetrain|ArmMotor|ClawMotor|wait|for|while|printf)\b/.test(code);
   }
 
   function l3SetCode(value) {
@@ -330,6 +331,62 @@
     l3.intent = "";
     l3.phase = "";
     l3.grabTarget = 0;
+    l3.console = "";
+    l3PaintConsole();
+  }
+
+  function l3PaintConsole() {
+    const el = document.getElementById("l3-console");
+    if (!el) return;
+    el.textContent = l3.console;
+    el.scrollTop = el.scrollHeight;
+  }
+
+  function l3FormatSpec(spec, value, line) {
+    if (spec === "s") {
+      if (value.type === "string") return value.value;
+      if (value.type === "bool") return value.value ? "true" : "false";
+      if (typeof value.value === "number" && Number.isFinite(value.value)) return l3Literal(value.type, value.value);
+      throw vex.cppError(line, "%s needs text or a number.");
+    }
+    if (spec === "d" || spec === "i" || spec === "f") {
+      const n = value.type === "bool" ? (value.value ? 1 : 0) : value.value;
+      if (typeof n !== "number" || !Number.isFinite(n)) throw vex.cppError(line, "%" + spec + " needs a number.");
+      return spec === "f" ? l3Literal("float", n) : String(Math.trunc(n));
+    }
+    throw vex.cppError(line, "printf does not use %" + spec + " here. Use %d, %f, or %s.");
+  }
+
+  function l3FormatPrintf(fmt, values, line) {
+    let out = "";
+    let i = 0;
+    let ai = 0;
+    while (i < fmt.length) {
+      if (fmt.charAt(i) !== "%") { out += fmt.charAt(i); i++; continue; }
+      const spec = fmt.charAt(i + 1);
+      if (!spec) throw vex.cppError(line, "printf has a % with nothing after it.");
+      if (spec === "%") { out += "%"; i += 2; continue; }
+      if (ai >= values.length) throw vex.cppError(line, "printf is missing a value for %" + spec + ".");
+      out += l3FormatSpec(spec, values[ai], line);
+      ai++;
+      i += 2;
+    }
+    return out;
+  }
+
+  function l3PrintCall(stmt, env, live) {
+    const args = stmt.args || [];
+    if (!args.length) throw vex.cppError(stmt.line, "printf needs a message in quotes, such as printf(\"Hello\\n\");");
+    const fmt = l3ReadExpr(args[0], env);
+    if (!fmt || fmt.type !== "string") throw vex.cppError(stmt.line, "printf starts with text in quotes, such as printf(\"Hello\\n\");");
+    const values = [];
+    for (let n = 1; n < args.length; n++) values.push(l3ReadExpr(args[n], env));
+    const text = l3FormatPrintf(fmt.value, values, stmt.line);
+    if (live) {
+      l3.console += text;
+      l3PaintConsole();
+    }
+    return text;
   }
 
   function l3Push(x, y) {
@@ -998,6 +1055,10 @@
       const which = name.indexOf("Arm") === 0 ? "Arm" : "Claw";
       return { grip: grip, kind: "motor", action: which + " to " + vex.formatValue("float", angle) + "°" };
     }
+    if (name === "printf") {
+      l3PrintCall(stmt, env, live);
+      return { grip: grip, kind: "print", action: "" };
+    }
     if (name === "wait") {
       if (args.length !== 2) throw vex.cppError(stmt.line, "use wait(5.0, seconds);");
       const time = l3Number(args[0], env);
@@ -1022,6 +1083,7 @@
     }
     if (step.phase) l3.phase = step.phase;
     l3Action(step.action);
+    if (step.kind === "print") return;
     if (step.kind === "turn") {
       await l3Turn(step.dir === "left" ? step.angle : -step.angle, token);
       return;
@@ -1448,6 +1510,15 @@
       const button = document.getElementById("l3-size");
       button.setAttribute("aria-pressed", tall ? "true" : "false");
       button.setAttribute("aria-label", tall ? "Shorter code" : "Taller code");
+    });
+    document.getElementById("l3-console-toggle").addEventListener("click", () => {
+      const panel = document.getElementById("l3-console");
+      const button = document.getElementById("l3-console-toggle");
+      const open = panel.hidden;
+      panel.hidden = !open;
+      button.setAttribute("aria-pressed", open ? "true" : "false");
+      button.setAttribute("aria-label", open ? "Hide console" : "Show console");
+      button.title = open ? "Hide console" : "Show console";
     });
     document.getElementById("l3-rand-pos").addEventListener("click", () => {
       const before = l3PosKey();
