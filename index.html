@@ -1081,6 +1081,330 @@
       background: #dc2626;
     }
 
+    .section-tag.playground {
+      background-color: #0f766e;
+    }
+
+    nav.sidebar a.playground-link {
+      color: #115e59;
+      background: #ccfbf1;
+      font-weight: 700;
+      border-left: 3px solid #0f766e;
+    }
+
+    nav.sidebar a.playground-link:hover {
+      background: #99f6e4;
+      color: #115e59;
+    }
+
+    nav.sidebar a.playground-link.active {
+      background: #0f766e;
+      color: white;
+      border-left-color: white;
+    }
+
+    nav.sidebar a.playground-link.active .new-badge {
+      background: white;
+      color: #0f766e;
+    }
+
+    .l3-name {
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-weight: 700;
+    }
+
+    .l3-c1 { color: #d1495b; }
+    .l3-c2 { color: #1f7a8c; }
+    .l3-c3 { color: #d98c00; }
+
+    .l3-calls {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+      margin-top: 0.9rem;
+    }
+
+    .l3-call {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-left: 4px solid #1e3a8a;
+      border-radius: 8px;
+      padding: 0.8rem 0.95rem 0.9rem;
+    }
+
+    .l3-call h3 {
+      margin: 0;
+      font-family: Consolas, "Courier New", Courier, monospace;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+
+    .l3-call p {
+      margin: 0.4rem 0 0;
+      font-size: 0.92rem;
+    }
+
+    .l3-call-arm {
+      grid-column: 1 / -1;
+      border-left-color: #0f766e;
+    }
+
+    .l3-call pre {
+      margin: 0.55rem 0 0;
+      padding: 0.7rem 0.85rem;
+      border-radius: 6px;
+    }
+
+    .l3-workspace {
+      margin-top: 1.1rem;
+    }
+
+    .l3-board .l3-map {
+      width: min(100%, 920px);
+      margin: 0.35rem auto 1.35rem;
+      border-radius: 8px;
+    }
+
+    .l3-board .l3-codebox {
+      margin-top: 0;
+    }
+
+    .l3-varbar {
+      margin-top: 0.75rem;
+    }
+
+    .l3-size {
+      width: 1.75rem;
+      height: 1.75rem;
+      padding: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .l3-size svg {
+      width: 16px;
+      height: 16px;
+      display: block;
+    }
+
+    .l3-size .l3-icon-short { display: none; }
+
+    .l3-size[aria-pressed="true"] .l3-icon-tall { display: none; }
+    .l3-size[aria-pressed="true"] .l3-icon-short { display: block; }
+
+    .l3-map {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fff;
+      padding: 0.25rem 0.25rem 0;
+    }
+
+    .l3-map svg {
+      width: 100%;
+      min-width: 640px;
+      height: auto;
+      display: block;
+      user-select: none;
+    }
+
+    .l3-code-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .l3-code-title .l3-size {
+      width: 1.75rem;
+      height: 1.75rem;
+      padding: 0;
+      letter-spacing: 0;
+    }
+
+    .l3-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.45rem;
+      margin-top: 0.75rem;
+    }
+
+    .l3-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      margin-top: 0.55rem;
+      font-size: 0.9rem;
+      color: var(--text-dark);
+    }
+
+    .l3-key {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .l3-key i {
+      width: 0.7rem;
+      height: 0.7rem;
+      border-radius: 2px;
+      display: inline-block;
+      flex: none;
+    }
+
+    .l3-readout {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem 1.25rem;
+      align-items: baseline;
+      margin: 0.85rem 0 0.3rem;
+      color: var(--text-dark);
+    }
+
+    .l3-k {
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #64748b;
+      margin-right: 0.35rem;
+    }
+
+    #l3-action {
+      color: #1e3a8a;
+      font-weight: 700;
+      min-height: 1.2em;
+    }
+
+    #l3-pose.l3-off {
+      color: var(--wrong);
+      font-weight: 700;
+    }
+
+    .l3-vars {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.35rem;
+      margin: 0.55rem 0 0;
+    }
+
+    .l3-vars[hidden] {
+      display: none;
+    }
+
+    .l3-chip {
+      font-family: Consolas, "Courier New", Courier, monospace;
+      font-size: 0.78rem;
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 0.08rem 0.55rem;
+      color: var(--text-dark);
+    }
+
+    .l3-chip.changed {
+      background: #dbeafe;
+      border-color: #93c5fd;
+      color: #1e3a8a;
+      font-weight: 700;
+    }
+
+    .l3-codebox .code-editor-wrap {
+      margin-top: 0;
+      border-radius: 0 0 6px 6px;
+    }
+
+    .l3-editor.code-editor-wrap {
+      height: 260px;
+      min-height: 260px;
+      overflow: hidden;
+    }
+
+    .l3-editor.code-editor-wrap.l3-tall {
+      height: 520px;
+      min-height: 520px;
+    }
+
+    .l3-editor .code-highlight,
+    .l3-editor .code-editor {
+      font-size: 15px;
+      line-height: 22px;
+      padding: 12px 14px;
+      white-space: pre;
+      scrollbar-gutter: stable;
+    }
+
+    .l3-editor .code-highlight {
+      position: relative;
+      height: 100%;
+      min-height: 0;
+      overflow: auto;
+      margin: 0;
+    }
+
+    .l3-editor .code-highlight code {
+      font-size: 15px;
+      line-height: 22px;
+      white-space: pre;
+      position: relative;
+      z-index: 1;
+    }
+
+    .l3-editor .code-editor {
+      z-index: 2;
+    }
+
+    .l3-current {
+      position: absolute;
+      left: 0;
+      right: 0;
+      z-index: 0;
+      background: rgba(250, 204, 21, 0.16);
+      box-shadow: inset 3px 0 0 #fbbf24;
+      pointer-events: none;
+    }
+
+    .l3-speed {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-left: 0.25rem;
+    }
+
+    .l3-msg {
+      margin-top: 0.75rem;
+      padding: 0.65rem 0.85rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .l3-msg.info {
+      background: #eff6ff;
+      color: #1e3a8a;
+      border: 1px solid #bfdbfe;
+      font-weight: 600;
+    }
+
+    .l3-msg.ok {
+      background: var(--correct-bg);
+      color: #166534;
+      border: 1px solid #bbf7d0;
+    }
+
+    .l3-msg.error {
+      background: var(--wrong-bg);
+      color: var(--wrong);
+      border: 1px solid #fecaca;
+    }
+
     footer {
       background-color: var(--secondary);
       color: #94a3b8;
@@ -1111,6 +1435,14 @@
       .code-editor,
       .code-highlight code {
         white-space: pre-wrap;
+      }
+      .l3-editor .code-highlight,
+      .l3-editor .code-editor,
+      .l3-editor .code-highlight code {
+        white-space: pre;
+      }
+      .l3-calls {
+        grid-template-columns: 1fr;
       }
     }
   </style>
@@ -1154,6 +1486,7 @@
         <li><a href="#section5">Sec 7: Relational Operators <span class="new-badge">NEW</span></a></li>
         <li><a href="#section6">Sec 8: Constant Variables <span class="new-badge">NEW</span></a></li>
         <li><a class="practice-link" href="#practice-decisions"><svg class="practice-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M11.3.7a1.4 1.4 0 0 1 2 0l2 2a1.4 1.4 0 0 1 0 2L6.6 13.4 2.4 14.5a.6.6 0 0 1-.7-.7l1.1-4.2L11.3.7zM4 10.2l-.5 2.3 2.3-.5 6.8-6.8-1.8-1.8L4 10.2z"/></svg>Exercises: Decisions &amp; Constants <span class="new-badge">NEW</span></a></li>
+        <li><a class="playground-link" href="#level3-playground"><svg class="practice-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M2 8.2h7.1L7.2 6.3l1.1-1.1L12.3 9 8.3 13l-1.1-1.1 1.9-1.9H2v-1.8z"/></svg>Level 3 Playground <span class="new-badge">NEW</span></a></li>
         <li><a href="#section7">Sec 9: Displaying Data <span class="wip-badge" title="Work in progress"><svg class="wip-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.1 1.2h1.8L13.4 12H2.6L7.1 1.2z"/><path fill="currentColor" d="M1.5 12.6h13v2h-13z"/></svg>WIP</span></a></li>
         <li><a href="#section8">Sec 10: for Loops <span class="wip-badge" title="Work in progress"><svg class="wip-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.1 1.2h1.8L13.4 12H2.6L7.1 1.2z"/><path fill="currentColor" d="M1.5 12.6h13v2h-13z"/></svg>WIP</span></a></li>
         <li><a href="#section9">Sec 11: Type Casting <span class="wip-badge" title="Work in progress"><svg class="wip-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.1 1.2h1.8L13.4 12H2.6L7.1 1.2z"/><path fill="currentColor" d="M1.5 12.6h13v2h-13z"/></svg>WIP</span></a></li>
@@ -2437,6 +2770,75 @@ int motorPercent;
         </div>
       </section>
 
+      <!-- LEVEL 3 PLAYGROUND -->
+      <section id="level3-playground" class="card">
+        <div class="section-header">
+          <span class="section-tag playground">Playground</span>
+          <span class="new-badge">NEW</span>
+          <h2>Level 3 Playground</h2>
+        </div>
+        <p>The field is <strong>1800 mm east</strong> by <strong>1000 mm north</strong>. The robot starts at <strong>(0, 0)</strong>, facing east. <span class="l3-name l3-c1">Can 1</span> goes to <span class="l3-name l3-c1">House 1</span>, <span class="l3-name l3-c2">Can 2</span> to <span class="l3-name l3-c2">House 2</span>, and <span class="l3-name l3-c3">Can 3</span> to <span class="l3-name l3-c3">House 3</span>. A bigger priority is to be delivered first. Cans and houses sit on crossings, where a north-south street meets an east-west street.</p>
+        <div class="l3-calls">
+          <div class="l3-call">
+            <h3>Drivetrain.turnFor</h3>
+            <p><code>Drivetrain.turnFor(left, angle, degrees, true)</code> turns left by <code>angle</code> degrees and waits until the turn is finished. A negative angle turns the other way. <code>Drivetrain.turnFor(right, angle, degrees, true)</code> turns right by that angle. East is 0, north is 90, west is 180, and south is 270. The arrow turns when this call runs.</p>
+          </div>
+          <div class="l3-call">
+            <h3>Drivetrain.driveFor</h3>
+            <p><code>Drivetrain.driveFor(forward, distance, mm)</code> drives forward that many millimeters, along the direction the arrow is already facing. <code>Drivetrain.driveFor(reverse, distance, mm)</code> drives backward. A negative distance drives the other way. The arrow moves when this call runs.</p>
+          </div>
+          <div class="l3-call l3-call-arm">
+            <h3>ArmMotor.spinToPosition and ClawMotor.spinToPosition</h3>
+            <p><code>spinToPosition</code> sends that motor to an angle and waits. In the generated block, set <code>armDown</code>, <code>armUp</code>, <code>clawOpen</code>, and <code>clawClosed</code> to the angles you measure on the robot. Picking up and putting down use the same four lines, in this order:</p>
+            <pre><code>ArmMotor.spinToPosition(armDown, degrees, true);
+ClawMotor.spinToPosition(clawOpen, degrees, true);
+ClawMotor.spinToPosition(clawClosed, degrees, true);
+ArmMotor.spinToPosition(armUp, degrees, true);</code></pre>
+            <p>At a can, with nothing already held, the can is grabbed and rides with the arrow. With a can already held, the same four lines put it down where the robot is. The arrow shakes when those four lines finish. The robot cannot turn or drive again until all four have run. Lines out of order, or a turn or drive before they are finished, stop the program with an error on that line.</p>
+          </div>
+        </div>
+        <div class="l3-workspace">
+          <div class="l3-actions">
+            <button type="button" class="btn-paper" id="l3-rand-pos">Randomize positions</button>
+            <button type="button" class="btn-paper" id="l3-rand-pri">Randomize priorities</button>
+            <button type="button" class="btn-paper" id="l3-handout">Handout map</button>
+          </div>
+          <div class="l3-board">
+          <div id="l3-map" class="l3-map"></div>
+          <div class="l3-codebox">
+            <div class="code-title l3-code-title">
+              <span>LEVEL3.CPP</span>
+              <button type="button" class="btn-paper l3-size" id="l3-size" aria-pressed="false" aria-label="Taller code">
+                <svg class="l3-icon-tall" viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M3 6.2 8 2.2 13 6.2M3 9.8 8 13.8 13 9.8"/></svg>
+                <svg class="l3-icon-short" viewBox="0 0 16 16" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M3 2.2 8 6.2 13 2.2M3 13.8 8 9.8 13 13.8"/></svg>
+              </button>
+            </div>
+            <div class="code-editor-wrap l3-editor" id="l3-editor">
+              <pre class="code-highlight" aria-hidden="true"><div id="l3-current" class="l3-current" hidden></div><code></code></pre>
+              <textarea id="l3-code" class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Level 3 program"></textarea>
+            </div>
+            <div class="l3-varbar">
+              <button type="button" class="btn-paper" id="l3-vars-toggle" aria-expanded="false" aria-controls="l3-vars">Show variables</button>
+              <div id="l3-vars" class="l3-vars" hidden aria-live="polite"></div>
+            </div>
+            <div class="l3-actions">
+              <button type="button" class="btn-run" id="l3-run">Run</button>
+              <button type="button" class="btn-paper" id="l3-compile">Compile</button>
+              <button type="button" class="btn-paper" id="l3-pause" disabled>Pause</button>
+              <button type="button" class="btn-paper" id="l3-step" disabled>Step</button>
+              <button type="button" class="btn-paper" id="l3-reset">Reset robot</button>
+              <button type="button" class="btn-paper" id="l3-copy">Copy map numbers into code</button>
+              <label class="l3-speed">Speed
+                <input id="l3-speed" type="range" min="0.5" max="3" step="0.5" value="1" aria-label="Simulation speed">
+                <span id="l3-speed-label">1×</span>
+              </label>
+            </div>
+            <div id="l3-msg" class="l3-msg" hidden role="status"></div>
+          </div>
+          </div>
+        </div>
+      </section>
+
       <!-- SECTION 9 -->
       <section id="section7" class="card">
         <div class="section-header">
@@ -2840,8 +3242,15 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       'section1', 'section-setup', 'section2', 'section3', 'practice-variables',
       'section-tracing', 'practice-tracing',
       'section4', 'section5', 'section6', 'practice-decisions',
+      'level3-playground',
       'section7', 'section8', 'section9'
     ];
+
+    function navLabel(id, direction) {
+      if (id && id.indexOf('practice') === 0) return direction === 'prev' ? '← Exercises' : 'Exercises →';
+      if (id === 'level3-playground') return direction === 'prev' ? '← Playground' : 'Playground →';
+      return direction === 'prev' ? '← Previous Section' : 'Next Section →';
+    }
 
     function showSection(targetId) {
       if (!sectionIds.includes(targetId)) {
@@ -2882,8 +3291,8 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
         const prevId = idx > 0 ? sections[idx - 1].id : null;
         const nextId = idx < sections.length - 1 ? sections[idx + 1].id : null;
 
-        const prevLabel = prevId && prevId.indexOf('practice') === 0 ? '← Exercises' : '← Previous Section';
-        const nextLabel = nextId && nextId.indexOf('practice') === 0 ? 'Exercises →' : 'Next Section →';
+        const prevLabel = navLabel(prevId, 'prev');
+        const nextLabel = navLabel(nextId, 'next');
 
         let prevBtn = prevId
           ? `<button class="btn-nav" onclick="showSection('${prevId}')">${prevLabel}</button>`
@@ -2925,11 +3334,13 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
         return '___TOKEN_' + (tokens.length - 1) + '___';
       }
 
+      text = text.replace(/\/\*[\s\S]*?\*\//g, m => storeToken(m, 'syn-comment'));
       text = text.replace(/(\/\/.*)/g, m => storeToken(m, 'syn-comment'));
       text = text.replace(/\.\.\./g, m => storeToken(m, 'syn-comment'));
       text = text.replace(/("[^"]*")/g, m => storeToken(m, 'syn-string'));
       text = text.replace(/\b(int|float|bool|char|const|return|if|else|for|static_cast)\b/g, m => storeToken(m, 'syn-keyword'));
       text = text.replace(/\b(Brain|Screen|clearScreen|setCursor|print|newLine|moveCursor|setPosition|main)\b/g, m => storeToken(m, 'syn-builtin'));
+      text = text.replace(/\b(Drivetrain|ArmMotor|ClawMotor|driveFor|turnFor|spinToPosition|wait|forward|reverse|left|right|degrees|mm|seconds)\b/g, m => storeToken(m, 'syn-builtin'));
       text = text.replace(/\b(true|false)\b/g, m => storeToken(m, 'syn-literal'));
       text = text.replace(/(%[dfsi])/g, m => storeToken(m, 'syn-literal'));
       text = text.replace(/\b(\d+(\.\d+)?)\b/g, m => storeToken(m, 'syn-number'));
@@ -3017,7 +3428,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       let i = 0;
       let line = 1;
       const twoChar = ["==", "!=", "<=", ">=", "&&", "||"];
-      const singles = "(){}[];,+-*/<>!=";
+      const singles = "(){}[];,+-*/<>!=.";
 
       function pushBreak(ch) {
         if (ch === "\r" && source.charAt(i + 1) === "\n") i++;
@@ -3106,7 +3517,10 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       return tokens;
     }
 
-    function parseProgram(tokens, asSnippet) {
+    const ROBOT_WORDS = new Set(["forward", "reverse", "left", "right", "degrees", "mm", "seconds"]);
+
+    function parseProgram(tokens, asSnippet, options) {
+      options = options || {};
       let pos = 0;
       let depth = 0;
 
@@ -3115,6 +3529,15 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       function isPunct(value) {
         const token = peek();
         return token.kind === "punct" && token.value === value;
+      }
+      function punctAt(offset, value) {
+        const token = tokens[pos + offset];
+        return !!token && token.kind === "punct" && token.value === value;
+      }
+      function loopMessage(line) {
+        throw cppError(line, options.calls
+          ? "Level 3 writes the delivery three times. Loops are not used in this playground."
+          : "loops are not used in this practice. Use if / else and arithmetic.");
       }
       function pushDepth(line) {
         depth += 1;
@@ -3142,9 +3565,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       }
       function parseType() {
         const token = peek();
-        if (token.kind === "keyword" && (token.value === "for" || token.value === "while")) {
-          throw cppError(token.line, "loops are not used in this practice. Use if / else and arithmetic.");
-        }
+        if (token.kind === "keyword" && (token.value === "for" || token.value === "while")) loopMessage(token.line);
         if (token.kind === "keyword" && token.value === "double") throw cppError(token.line, "use float for decimal numbers.");
         if (token.kind === "keyword" && (token.value === "char" || token.value === "string")) {
           throw cppError(token.line, "this practice uses int, float, and bool, not text types.");
@@ -3246,9 +3667,20 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
           return { kind: "literal", type: "bool", value: token.value === "true", line: token.line };
         }
         if (token.kind === "ident") {
+          if (options.calls && ROBOT_WORDS.has(token.value) && !punctAt(1, "(") && !punctAt(1, ".")) {
+            next();
+            return { kind: "literal", type: "enum", value: token.value, line: token.line };
+          }
           next();
           if (isPunct("(")) {
-            throw cppError(token.line, "do not call other functions here. Use variables, arithmetic, comparisons, and if / else.");
+            throw cppError(token.line, options.calls
+              ? "call Drivetrain.turnFor, Drivetrain.driveFor, or wait as its own statement."
+              : "do not call other functions here. Use variables, arithmetic, comparisons, and if / else.");
+          }
+          if (isPunct(".")) {
+            throw cppError(token.line, options.calls
+              ? "use Drivetrain.turnFor or Drivetrain.driveFor as a statement."
+              : "this practice does not use a dot after " + token.value + ".");
           }
           return { kind: "ident", name: token.value, line: token.line };
         }
@@ -3329,8 +3761,43 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
         expectPunct(";");
         return { kind: "decl", isConst: isConst, type: type, name: nameTok.value, init: init, line: nameTok.line };
       }
+      function parseCallStmt() {
+        const first = expectIdent();
+        let name = first.value;
+        if (isPunct(".")) {
+          next();
+          const member = expectIdent();
+          name += "." + member.value;
+          if (isPunct(".")) {
+            throw cppError(member.line, "write Drivetrain.turnFor, Drivetrain.driveFor, ArmMotor.spinToPosition, ClawMotor.spinToPosition, or wait.");
+          }
+        }
+        expectPunct("(");
+        const args = [];
+        if (!isPunct(")")) {
+          args.push(parseExpr());
+          while (isPunct(",")) {
+            next();
+            if (isPunct(")")) throw cppError(peek().line, "remove the extra comma in this call.");
+            args.push(parseExpr());
+          }
+        }
+        expectPunct(")");
+        expectPunct(";");
+        return { kind: "call", name: name, args: args, line: first.line };
+      }
       function parseAssignStmt() {
         const nameTok = next();
+        if (isPunct(".")) {
+          throw cppError(nameTok.line, options.calls
+            ? "use Drivetrain.turnFor or Drivetrain.driveFor as a statement."
+            : "this practice does not use a dot after " + nameTok.value + ".");
+        }
+        if (isPunct("(")) {
+          throw cppError(nameTok.line, options.calls
+            ? "call wait, Drivetrain.turnFor, or Drivetrain.driveFor as a statement ending with a semicolon."
+            : "do not call other functions here. Use variables, arithmetic, comparisons, and if / else.");
+        }
         if (!isPunct("=")) throw cppError(peek().line, "to change " + nameTok.value + ", write " + nameTok.value + " = value;");
         const op = next();
         const expr = parseExpr();
@@ -3339,9 +3806,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       }
       function parseStmt() {
         const token = peek();
-        if (token.kind === "keyword" && (token.value === "for" || token.value === "while")) {
-          throw cppError(token.line, "loops are not used in this practice. Use if / else and arithmetic.");
-        }
+        if (token.kind === "keyword" && (token.value === "for" || token.value === "while")) loopMessage(token.line);
         if (token.kind === "keyword" && token.value === "else") {
           throw cppError(token.line, "else must follow an if. Check the braces around the if block.");
         }
@@ -3350,7 +3815,10 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
         if (token.kind === "keyword" && token.value === "if") return parseIf();
         if (token.kind === "keyword" && token.value === "return") return parseReturn();
         if (token.kind === "keyword" && (token.value === "const" || isTypeKeyword(token))) return parseDecl();
-        if (token.kind === "ident") return parseAssignStmt();
+        if (token.kind === "ident") {
+          if (options.calls && (punctAt(1, "(") || punctAt(1, "."))) return parseCallStmt();
+          return parseAssignStmt();
+        }
         throw cppError(token.line, "expected a statement but found " + describeToken(token) + ".");
       }
       function parseParam() {
@@ -3408,12 +3876,18 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       return { functions: functions };
     }
 
-    function parseCpp(source, asSnippet) {
+    function parseCpp(source, asSnippet, options) {
+      options = options || {};
       if (!source || !String(source).trim()) {
         throw new Error(asSnippet ? "Write your C++ statements before running the tests." : "Write the function before running the tests.");
       }
-      if (source.length > 8000) throw new Error("This solution is too long. Keep only the statements for this question.");
-      return parseProgram(tokenize(stripPreamble(source)), !!asSnippet);
+      const limit = options.limit || 8000;
+      if (source.length > limit) {
+        throw new Error(options.calls
+          ? "This program is too long for the playground."
+          : "This solution is too long. Keep only the statements for this question.");
+      }
+      return parseProgram(tokenize(stripPreamble(source)), !!asSnippet, options);
     }
 
     function Environment() { this.stack = []; }
@@ -4791,6 +5265,20 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       document.querySelectorAll('.trace-block').forEach(renderTracePractice);
     }
 
+    window.vexCppRun = {
+      parseCpp: parseCpp,
+      evalExpr: evalExpr,
+      Environment: Environment,
+      coerce: coerce,
+      isTruthy: isTruthy,
+      numericValue: numericValue,
+      assignVariable: assignVariable,
+      formatValue: formatValue,
+      cppError: cppError,
+      refreshEditorHighlight: refreshEditorHighlight,
+      resetSteps: function () { cppSteps = 0; }
+    };
+
     document.addEventListener('DOMContentLoaded', () => {
       forgetOldSection4Question8();
       applySyntaxHighlighting();
@@ -4800,5 +5288,6 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       initPageNavigationControls();
     });
   </script>
+  <script src="level3-playground.js?v=13"></script>
 </body>
 </html>
