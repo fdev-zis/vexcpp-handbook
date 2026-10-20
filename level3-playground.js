@@ -259,8 +259,11 @@
       source = block + "\n" + source;
       inserted = true;
     }
-    if (source !== before) l3SetCode(l3ShapeGenerated(source));
-    return { found: found, inserted: inserted, changed: source !== before };
+    const next = insertMissing ? l3ShapeGenerated(source) : source;
+    const changed = next !== before;
+    if (changed) l3SetCode(insertMissing ? next : l3ShapeGenerated(source));
+    if (insertMissing && before.indexOf("*** BEGIN ***") === -1) inserted = true;
+    return { found: found, inserted: inserted, changed: changed };
   }
 
   function l3Fmt(n) {
