@@ -102,7 +102,7 @@
     }
 
     .progress-bar-bg {
-      width: 120px;
+      width: 100px;
       height: 8px;
       background: #334155;
       border-radius: 4px;
@@ -1081,6 +1081,54 @@
       background: #dc2626;
     }
 
+    .header-tools {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-left: auto;
+    }
+
+    .progress-file-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-progress {
+      background: rgba(255, 255, 255, 0.08);
+      color: #f8fafc;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      padding: 0.4rem 0.65rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn-progress:hover {
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .btn-progress:focus-visible {
+      outline: 2px solid #38bdf8;
+      outline-offset: 2px;
+    }
+
+    .progress-file-status {
+      flex-basis: 100%;
+      margin: 0;
+      text-align: right;
+      font-size: 0.75rem;
+      color: #94a3b8;
+    }
+
+    .progress-file-status:empty {
+      display: none;
+    }
+
     .section-tag.playground {
       background-color: #0f766e;
     }
@@ -1495,6 +1543,9 @@
       .header-brand {
         flex-direction: row;
       }
+      .header-tools {
+        width: 100%;
+      }
       .code-highlight,
       .code-editor,
       .code-highlight code {
@@ -1536,15 +1587,23 @@
           <p>Interactive Edition</p>
         </div>
       </div>
-      <div class="progress-container">
-        <div>
-          <div style="font-size: 0.75rem; color: #94a3b8;">Quiz Progress</div>
-          <div id="progress-text" style="font-size: 0.9rem; font-weight: bold; color: white;">0 / 89 Completed</div>
+      <div class="header-tools">
+        <div class="progress-file-actions">
+          <button type="button" id="save-progress" class="btn-progress" title="Download your quiz, exercise, and playground progress">Save Progress</button>
+          <button type="button" id="open-progress" class="btn-progress" title="Load progress from a file you saved earlier">Open Progress</button>
+          <input id="progress-file-input" type="file" accept=".json,application/json" hidden aria-hidden="true" tabindex="-1">
         </div>
-        <div class="progress-bar-bg">
-          <div id="progress-bar" class="progress-bar-fill"></div>
+        <div class="progress-container">
+          <div>
+            <div style="font-size: 0.75rem; color: #94a3b8;">Quiz Progress</div>
+            <div id="progress-text" style="font-size: 0.9rem; font-weight: bold; color: white;">0 / 89 Completed</div>
+          </div>
+          <div class="progress-bar-bg">
+            <div id="progress-bar" class="progress-bar-fill"></div>
+          </div>
+          <button class="btn-reset" onclick="resetAllQuizzes()">Reset Progress</button>
         </div>
-        <button class="btn-reset" onclick="resetAllQuizzes()">Reset Progress</button>
+        <p id="progress-file-status" class="progress-file-status" role="status"></p>
       </div>
     </div>
   </header>
@@ -4821,13 +4880,42 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       pdx1: "pass", pdx2: "pass", pdx3: "pass"
     };
 
+    // Progress files store work by these exercise ids (s1q1, pvx1, tr1, ...).
+    // Keep an id once students may have saved it, and add a new id for a new
+    // exercise. Renaming or reusing an id detaches saved work from that exercise.
     const STORAGE_KEY = 'vex_cpp_handbook_answers_v3';
     const CODE_STORAGE_KEY = 'vex_cpp_handbook_code_v5';
+    const PROGRESS_FORMAT = 'vexcpp-handbook-progress';
+    const PROGRESS_VERSION = 1;
+    const PROGRESS_MAX_FILE_BYTES = 5 * 1024 * 1024;
+    const PROGRESS_MAX_KEYS = 2000;
+    const PROGRESS_MAX_ANSWER = 8000;
+    const PROGRESS_MAX_CODE = 500000;
+    const PROGRESS_ID = /^[A-Za-z][A-Za-z0-9_-]{0,63}$/;
+    // Playground ids are stable file keys. Add an id when a playground is added.
+    // Opening a file restores only the playgrounds named in that file, so a file
+    // saved before a new playground existed still restores the older ones.
+    const PLAYGROUND_FILES = {
+      level1: { codeKey: 'vexcpp-level1-code', mapKey: 'vexcpp-level1-map' },
+      level2: { codeKey: 'vexcpp-level2-code', mapKey: 'vexcpp-level2-map' },
+      level3: { codeKey: 'vexcpp-level3-code', mapKey: 'vexcpp-level3-map' }
+    };
     const codingStarters = {};
 
+    function readStorageJson(key) {
+      try {
+        const saved = localStorage.getItem(key);
+        if (!saved) return {};
+        const parsed = JSON.parse(saved);
+        if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) return {};
+        return parsed;
+      } catch (err) {
+        return {};
+      }
+    }
+
     function loadSavedAnswers() {
-      const saved = localStorage.getItem(STORAGE_KEY);
-      return saved ? JSON.parse(saved) : {};
+      return readStorageJson(STORAGE_KEY);
     }
 
     function saveAnswer(qid, val) {
@@ -4846,8 +4934,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
     }
 
     function loadSavedCode() {
-      const saved = localStorage.getItem(CODE_STORAGE_KEY);
-      return saved ? JSON.parse(saved) : {};
+      return readStorageJson(CODE_STORAGE_KEY);
     }
 
     function forgetOldSection4Question8() {
@@ -5080,6 +5167,305 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       });
     }
 
+    function setProgressStatus(message) {
+      const status = document.getElementById('progress-file-status');
+      if (status) status.textContent = message;
+    }
+
+    function sortedStringMap(map) {
+      const out = {};
+      Object.keys(map).sort().forEach(key => { out[key] = map[key]; });
+      return out;
+    }
+
+    function sanitizeStringMap(value, maxLen) {
+      if (value == null) return {};
+      if (typeof value !== 'object' || Array.isArray(value)) {
+        throw new Error('That progress file could not be opened. It may be damaged.');
+      }
+      const keys = Object.keys(value);
+      if (keys.length > PROGRESS_MAX_KEYS) {
+        throw new Error('That progress file could not be opened. It may be damaged.');
+      }
+      const out = {};
+      keys.forEach(key => {
+        if (!PROGRESS_ID.test(key)) return;
+        const item = value[key];
+        if (typeof item !== 'string') {
+          throw new Error('That progress file could not be opened. It may be damaged.');
+        }
+        if (item.length > maxLen) {
+          throw new Error('That progress file has an exercise that is too large to open.');
+        }
+        if (item.length === 0) return;
+        out[key] = item;
+      });
+      return out;
+    }
+
+    function sanitizePlaygrounds(value) {
+      if (value == null) return {};
+      if (typeof value !== 'object' || Array.isArray(value)) {
+        throw new Error('That progress file could not be opened. It may be damaged.');
+      }
+      const out = {};
+      Object.keys(value).forEach(id => {
+        if (!Object.prototype.hasOwnProperty.call(PLAYGROUND_FILES, id)) return;
+        const entry = value[id];
+        if (entry == null) {
+          out[id] = { clearCode: true, clearMap: true };
+          return;
+        }
+        if (typeof entry !== 'object' || Array.isArray(entry)) {
+          throw new Error('That progress file could not be opened. It may be damaged.');
+        }
+        const clean = {};
+        if (Object.prototype.hasOwnProperty.call(entry, 'code')) {
+          if (typeof entry.code !== 'string') {
+            throw new Error('That progress file could not be opened. It may be damaged.');
+          }
+          if (entry.code.length > PROGRESS_MAX_CODE) {
+            throw new Error('That progress file has an exercise that is too large to open.');
+          }
+          if (entry.code.length === 0) clean.clearCode = true;
+          else clean.code = entry.code;
+        }
+        if (Object.prototype.hasOwnProperty.call(entry, 'map')) {
+          if (entry.map == null) {
+            clean.clearMap = true;
+          } else if (typeof entry.map !== 'object') {
+            throw new Error('That progress file could not be opened. It may be damaged.');
+          } else {
+            let encoded = '';
+            try { encoded = JSON.stringify(entry.map); }
+            catch (err) { throw new Error('That progress file could not be opened. It may be damaged.'); }
+            if (encoded.length > PROGRESS_MAX_CODE) {
+              throw new Error('That progress file has an exercise that is too large to open.');
+            }
+            clean.map = JSON.parse(encoded);
+          }
+        }
+        out[id] = clean;
+      });
+      return out;
+    }
+
+    function exportStringMap(raw, maxLen) {
+      const out = {};
+      if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return out;
+      Object.keys(raw).forEach(key => {
+        if (!PROGRESS_ID.test(key)) return;
+        const item = raw[key];
+        if (typeof item !== 'string' || item.length === 0 || item.length > maxLen) return;
+        out[key] = item;
+      });
+      return sortedStringMap(out);
+    }
+
+    function readLocalString(key) {
+      try {
+        const value = localStorage.getItem(key);
+        return typeof value === 'string' ? value : '';
+      } catch (err) {
+        return '';
+      }
+    }
+
+    function exportPlaygrounds() {
+      const out = {};
+      Object.keys(PLAYGROUND_FILES).forEach(id => {
+        const slot = PLAYGROUND_FILES[id];
+        const entry = {};
+        const code = readLocalString(slot.codeKey);
+        if (code) entry.code = code;
+        const raw = readLocalString(slot.mapKey);
+        if (raw) {
+          try {
+            const map = JSON.parse(raw);
+            if (map && typeof map === 'object') entry.map = map;
+          } catch (err) { /* the handout map is used when this picture cannot be read */ }
+        }
+        out[id] = entry;
+      });
+      return out;
+    }
+
+    function buildProgressSnapshot() {
+      return {
+        format: PROGRESS_FORMAT,
+        version: PROGRESS_VERSION,
+        handbook: 'VEX C++ Programming Handbook',
+        savedAt: new Date().toISOString(),
+        answers: exportStringMap(loadSavedAnswers(), PROGRESS_MAX_ANSWER),
+        code: exportStringMap(loadSavedCode(), PROGRESS_MAX_CODE),
+        playgrounds: exportPlaygrounds()
+      };
+    }
+
+    function progressDownloadName() {
+      const now = new Date();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      return 'vexcpp-handbook-progress-' + now.getFullYear() + '-' + month + '-' + day + '.json';
+    }
+
+    function downloadTextFile(name, text) {
+      const blob = new Blob([text], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = name;
+      link.rel = 'noopener';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 2000);
+    }
+
+    async function saveProgressFile() {
+      const name = progressDownloadName();
+      let text = '';
+      try {
+        text = JSON.stringify(buildProgressSnapshot(), null, 2) + '\n';
+      } catch (err) {
+        setProgressStatus('Could not save your progress.');
+        alert('Could not save your progress file.');
+        return;
+      }
+      if (window.showSaveFilePicker) {
+        try {
+          const handle = await window.showSaveFilePicker({
+            suggestedName: name,
+            types: [{
+              description: 'Handbook progress file',
+              accept: { 'application/json': ['.json'] }
+            }]
+          });
+          const writable = await handle.createWritable();
+          await writable.write(text);
+          await writable.close();
+          setProgressStatus('Saved ' + handle.name + '.');
+          return;
+        } catch (err) {
+          if (err && err.name === 'AbortError') {
+            setProgressStatus('');
+            return;
+          }
+        }
+      }
+      try {
+        downloadTextFile(name, text);
+        setProgressStatus('Saved ' + name + '.');
+      } catch (err) {
+        setProgressStatus('Could not save your progress.');
+        alert('Could not save your progress file.');
+      }
+    }
+
+    function parseProgressSnapshot(text) {
+      let data;
+      try {
+        data = JSON.parse(String(text).replace(/^\uFEFF/, ''));
+      } catch (err) {
+        throw new Error('This file is not a VEX C++ Handbook progress file. Use a file saved with Save Progress.');
+      }
+      if (!data || typeof data !== 'object' || Array.isArray(data) || data.format !== PROGRESS_FORMAT) {
+        throw new Error('This file is not a VEX C++ Handbook progress file. Use a file saved with Save Progress.');
+      }
+      const snapshot = {};
+      if (Object.prototype.hasOwnProperty.call(data, 'answers')) {
+        snapshot.answers = sortedStringMap(sanitizeStringMap(data.answers, PROGRESS_MAX_ANSWER));
+      }
+      if (Object.prototype.hasOwnProperty.call(data, 'code')) {
+        snapshot.code = sortedStringMap(sanitizeStringMap(data.code, PROGRESS_MAX_CODE));
+      }
+      if (Object.prototype.hasOwnProperty.call(data, 'playgrounds')) {
+        snapshot.playgrounds = sanitizePlaygrounds(data.playgrounds);
+      }
+      if (!Object.prototype.hasOwnProperty.call(snapshot, 'answers') &&
+          !Object.prototype.hasOwnProperty.call(snapshot, 'code') &&
+          !Object.prototype.hasOwnProperty.call(snapshot, 'playgrounds')) {
+        throw new Error('This file is not a VEX C++ Handbook progress file. Use a file saved with Save Progress.');
+      }
+      return snapshot;
+    }
+
+    function storageWrite(key, value) {
+      try {
+        if (value == null) localStorage.removeItem(key);
+        else localStorage.setItem(key, value);
+      } catch (err) {
+        throw new Error('This browser blocked storing progress. Allow saved site data for this page, then try Open Progress again.');
+      }
+    }
+
+    function applyProgressSnapshot(snapshot) {
+      if (Object.prototype.hasOwnProperty.call(snapshot, 'answers')) {
+        storageWrite(STORAGE_KEY, JSON.stringify(snapshot.answers));
+      }
+      if (Object.prototype.hasOwnProperty.call(snapshot, 'code')) {
+        storageWrite(CODE_STORAGE_KEY, JSON.stringify(snapshot.code));
+      }
+      if (!snapshot.playgrounds) return;
+      Object.keys(snapshot.playgrounds).forEach(id => {
+        const slot = PLAYGROUND_FILES[id];
+        const entry = snapshot.playgrounds[id];
+        if (entry.clearCode) storageWrite(slot.codeKey, null);
+        else if (typeof entry.code === 'string') storageWrite(slot.codeKey, entry.code);
+        if (entry.clearMap) storageWrite(slot.mapKey, null);
+        else if (entry.map && typeof entry.map === 'object') storageWrite(slot.mapKey, JSON.stringify(entry.map));
+      });
+    }
+
+    function readProgressFile(file) {
+      return new Promise((resolve, reject) => {
+        if (!file) {
+          reject(new Error('Choose a progress file to open.'));
+          return;
+        }
+        if (file.size > PROGRESS_MAX_FILE_BYTES) {
+          reject(new Error('That file is too large to be a handbook progress file.'));
+          return;
+        }
+        const reader = new FileReader();
+        reader.onerror = () => reject(new Error('Could not read that file.'));
+        reader.onload = () => resolve(String(reader.result || ''));
+        reader.readAsText(file);
+      });
+    }
+
+    async function openProgressFile(file) {
+      try {
+        const text = await readProgressFile(file);
+        const snapshot = parseProgressSnapshot(text);
+        const replace = confirm('Replace the quiz, exercise, and playground progress in this browser with the progress in this file?');
+        if (!replace) {
+          setProgressStatus('');
+          return;
+        }
+        applyProgressSnapshot(snapshot);
+        location.reload();
+      } catch (err) {
+        const message = err && err.message ? err.message : 'Could not open that progress file.';
+        setProgressStatus('Could not open that file.');
+        alert(message);
+      }
+    }
+
+    function bindProgressFileControls() {
+      const saveButton = document.getElementById('save-progress');
+      const openButton = document.getElementById('open-progress');
+      const input = document.getElementById('progress-file-input');
+      if (!saveButton || !openButton || !input) return;
+      saveButton.addEventListener('click', saveProgressFile);
+      openButton.addEventListener('click', () => input.click());
+      input.addEventListener('change', () => {
+        const file = input.files && input.files[0];
+        input.value = '';
+        if (file) openProgressFile(file);
+      });
+    }
+
     function resetAllQuizzes() {
       if (confirm("Are you sure you want to reset all your quiz answers?")) {
         localStorage.removeItem(STORAGE_KEY);
@@ -5097,6 +5483,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
           if (qid && codingStarters[qid]) editor.value = codingStarters[qid];
           refreshEditorHighlight(editor);
         });
+        setProgressStatus('');
         updateProgress();
       }
     }
@@ -5546,6 +5933,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       initQuiz();
       initCoding();
       initPageNavigationControls();
+      bindProgressFileControls();
     });
   </script>
   <script src="level3-playground.js?v=16"></script>
