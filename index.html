@@ -127,6 +127,10 @@
       flex: 1;
     }
 
+    .container > * {
+      min-width: 0;
+    }
+
     nav.sidebar {
       position: sticky;
       top: 90px;
@@ -636,6 +640,7 @@
     }
 
     .code-editor-wrap {
+      --code-gutter: 0px;
       position: relative;
       margin: 0.75rem 0;
       background: var(--code-bg);
@@ -694,6 +699,40 @@
     .code-editor::selection {
       background: rgba(37, 99, 235, 0.45);
       color: transparent;
+    }
+
+    .code-highlight,
+    .code-editor {
+      padding-left: calc(1rem + var(--code-gutter));
+    }
+
+    .code-gutter {
+      position: absolute;
+      z-index: 4;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: var(--code-gutter);
+      overflow: hidden;
+      box-sizing: border-box;
+      pointer-events: none;
+      user-select: none;
+      background: var(--code-bg);
+      border-right: 1px solid #334155;
+      color: #94a3b8;
+      font-family: Consolas, "Courier New", Courier, monospace;
+      font-size: 16px;
+      line-height: 1.5;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .code-gutter-inner {
+      padding: 1rem 0.5rem 1rem 0.35rem;
+      text-align: right;
+    }
+
+    .code-gutter-line {
+      line-height: inherit;
     }
 
     .btn-run {
@@ -1092,6 +1131,14 @@
 
     .progress-file-actions {
       display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      justify-content: center;
+      gap: 0.28rem;
+    }
+
+    .progress-file-actions-row {
+      display: flex;
       align-items: center;
       gap: 0.5rem;
     }
@@ -1127,6 +1174,124 @@
 
     .progress-file-status:empty {
       display: none;
+    }
+
+    .cpp-playground {
+      position: fixed;
+      inset: 0;
+      z-index: 400;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 1.25rem 1rem;
+      background: rgba(15, 23, 42, 0.72);
+      overflow: auto;
+    }
+
+    .cpp-playground[hidden] {
+      display: none !important;
+    }
+
+    .cpp-playground-panel {
+      width: min(920px, 100%);
+      margin: auto;
+      background: #fff;
+      color: var(--text);
+      border-radius: 10px;
+      padding: 1rem 1.1rem 1.15rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    }
+
+    .cpp-playground-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .cpp-playground-head h2 {
+      font-size: 1.2rem;
+      color: var(--text-dark);
+    }
+
+    .cpp-playground-panel .code-editor-wrap {
+      margin-top: 0;
+    }
+
+    .cpp-playground-editor.code-editor-wrap {
+      height: 280px;
+      min-height: 280px;
+      overflow: hidden;
+    }
+
+    .cpp-playground-editor .code-highlight,
+    .cpp-playground-editor .code-editor {
+      font-size: 15px;
+      line-height: 22px;
+      padding: 12px 14px;
+      white-space: pre;
+    }
+
+    .cpp-playground-editor .code-highlight {
+      height: 100%;
+      min-height: 0;
+      overflow: auto;
+    }
+
+    .cpp-playground-console {
+      box-sizing: border-box;
+      height: 140px;
+      margin: 0.75rem 0 0;
+      overflow: auto;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 14px;
+      line-height: 1.45;
+      padding: 10px 12px;
+      background: #101820;
+      color: #d7efe4;
+      border-radius: 6px;
+    }
+
+    .cpp-playground-console:empty::before {
+      content: "printf and cout print here.";
+      color: rgba(215, 239, 228, 0.38);
+    }
+
+    .cpp-playground-console-input {
+      display: inline-block;
+      width: 12ch;
+      max-width: 100%;
+      margin: 0;
+      padding: 0 0 1px;
+      border: 0;
+      border-bottom: 1px solid rgba(215, 239, 228, 0.55);
+      border-radius: 0;
+      background: transparent;
+      color: #d7efe4;
+      font-family: inherit;
+      font-size: inherit;
+      line-height: inherit;
+      outline: none;
+      caret-color: #d7efe4;
+      vertical-align: baseline;
+    }
+
+    .cpp-playground-console-input::placeholder {
+      color: rgba(215, 239, 228, 0.38);
+    }
+
+    .cpp-playground-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.75rem;
+    }
+
+    .cpp-playground-panel .l3-msg {
+      margin-top: 0.75rem;
     }
 
     .section-tag.playground {
@@ -1258,10 +1423,19 @@
       border-color: #16324f;
     }
 
+    .l3-workspace,
+    .l3-board,
+    .l3-codebox,
+    .l3-map,
+    .l12-editrow {
+      min-width: 0;
+      max-width: 100%;
+    }
+
     .l12-editrow {
       display: flex;
       align-items: stretch;
-      min-width: 0;
+      width: 100%;
     }
 
     .l12-editrow > .l3-editor {
@@ -1273,9 +1447,12 @@
     .l12-console {
       box-sizing: border-box;
       align-self: flex-start;
-      flex: 0 0 240px;
+      flex: 0 1 240px;
       width: 240px;
+      min-width: 0;
       height: 260px;
+      min-height: 0;
+      max-height: 260px;
       margin: 0;
       overflow: auto;
       white-space: pre-wrap;
@@ -1299,6 +1476,7 @@
 
     .l12-editrow > .l3-editor.l3-tall + .l12-console {
       height: 520px;
+      max-height: 520px;
     }
 
     .l12-console:empty::before {
@@ -1470,9 +1648,27 @@
       z-index: 2;
     }
 
+    .l3-editor .code-highlight,
+    .l3-editor .code-editor,
+    .cpp-playground-editor .code-highlight,
+    .cpp-playground-editor .code-editor {
+      padding-left: calc(14px + var(--code-gutter));
+    }
+
+    .l3-editor > .code-gutter,
+    .cpp-playground-editor > .code-gutter {
+      font-size: 15px;
+      line-height: 22px;
+    }
+
+    .l3-editor > .code-gutter .code-gutter-inner,
+    .cpp-playground-editor > .code-gutter .code-gutter-inner {
+      padding: 12px 0.5rem 12px 0.35rem;
+    }
+
     .l3-current {
       position: absolute;
-      left: 0;
+      left: var(--code-gutter);
       right: 0;
       z-index: 0;
       background: rgba(250, 204, 21, 0.16);
@@ -1562,9 +1758,11 @@
       .l12-editrow { flex-direction: column; }
       .l12-console,
       .l12-editrow > .l3-editor.l3-tall + .l12-console {
+        flex: 0 0 auto;
         flex-basis: auto;
         width: 100%;
         height: 140px;
+        max-height: 140px;
         border-left: 1px solid #334155;
         border-top: 0;
         border-radius: 0 0 6px 6px;
@@ -1589,9 +1787,12 @@
       </div>
       <div class="header-tools">
         <div class="progress-file-actions">
-          <button type="button" id="save-progress" class="btn-progress" title="Download your quiz, exercise, and playground progress">Save Progress</button>
-          <button type="button" id="open-progress" class="btn-progress" title="Load progress from a file you saved earlier">Open Progress</button>
-          <input id="progress-file-input" type="file" accept=".json,application/json" hidden aria-hidden="true" tabindex="-1">
+          <div class="progress-file-actions-row">
+            <button type="button" id="save-progress" class="btn-progress" title="Download your quiz, exercise, and playground progress">Save Progress</button>
+            <button type="button" id="open-progress" class="btn-progress" title="Load progress from a file you saved earlier">Open Progress</button>
+            <input id="progress-file-input" type="file" accept=".json,application/json" hidden aria-hidden="true" tabindex="-1">
+          </div>
+          <button type="button" id="open-cpp-playground" class="btn-progress" title="Open a general C++ editor">C++ Playground</button>
         </div>
         <div class="progress-container">
           <div>
@@ -3618,8 +3819,8 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       text = text.replace(/(\/\/.*)/g, m => storeToken(m, 'syn-comment'));
       text = text.replace(/\.\.\./g, m => storeToken(m, 'syn-comment'));
       text = text.replace(/("[^"]*")/g, m => storeToken(m, 'syn-string'));
-      text = text.replace(/\b(int|float|bool|char|const|return|if|else|for|static_cast)\b/g, m => storeToken(m, 'syn-keyword'));
-      text = text.replace(/\b(Brain|Screen|clearScreen|setCursor|print|newLine|moveCursor|setPosition|main)\b/g, m => storeToken(m, 'syn-builtin'));
+      text = text.replace(/\b(int|float|bool|char|const|return|if|else|for|while|void|string|static_cast|include|break|continue)\b/g, m => storeToken(m, 'syn-keyword'));
+      text = text.replace(/\b(Brain|Screen|clearScreen|setCursor|print|newLine|moveCursor|setPosition|main|printf|puts|cout|cin|endl|sqrt|abs)\b/g, m => storeToken(m, 'syn-builtin'));
       text = text.replace(/\b(Drivetrain|ArmMotor|ClawMotor|driveFor|turnFor|spinToPosition|wait|forward|reverse|left|right|degrees|mm|seconds)\b/g, m => storeToken(m, 'syn-builtin'));
       text = text.replace(/\b(true|false)\b/g, m => storeToken(m, 'syn-literal'));
       text = text.replace(/(%[dfsi])/g, m => storeToken(m, 'syn-literal'));
@@ -3644,7 +3845,161 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       const code = wrap.querySelector('.code-highlight code');
       if (!code) return;
       code.innerHTML = highlightCpp(textarea.value.length ? textarea.value : '\n');
+      refreshEditorGutter(textarea);
     }
+
+    const editorGutterObserver = new ResizeObserver(entries => {
+      entries.forEach(entry => {
+        const area = entry.target.querySelector('.code-editor');
+        if (area) refreshEditorGutter(area);
+      });
+    });
+
+    function refreshEditorGutter(textarea) {
+      const wrap = textarea.closest('.code-editor-wrap');
+      if (!wrap) return;
+      let gutter = wrap.querySelector(':scope > .code-gutter');
+      if (!gutter) {
+        gutter = document.createElement('div');
+        gutter.className = 'code-gutter';
+        gutter.setAttribute('aria-hidden', 'true');
+        const inner = document.createElement('div');
+        inner.className = 'code-gutter-inner';
+        gutter.appendChild(inner);
+        wrap.insertBefore(gutter, wrap.firstChild);
+        if (!wrap.dataset.gutterObserved) {
+          wrap.dataset.gutterObserved = '1';
+          editorGutterObserver.observe(wrap);
+        }
+      }
+      const inner = gutter.querySelector('.code-gutter-inner');
+      const parts = (textarea.value.length ? textarea.value : '\n').split('\n');
+      const width = 'calc(' + Math.max(2, String(parts.length).length) + 'ch + 1.15rem)';
+      if (wrap.style.getPropertyValue('--code-gutter') !== width) wrap.style.setProperty('--code-gutter', width);
+      if (inner.childElementCount !== parts.length) {
+        const frag = document.createDocumentFragment();
+        for (let i = 0; i < parts.length; i++) {
+          const line = document.createElement('div');
+          line.className = 'code-gutter-line';
+          line.textContent = String(i + 1);
+          frag.appendChild(line);
+        }
+        inner.replaceChildren(frag);
+      }
+      const style = getComputedStyle(textarea);
+      const wraps = style.whiteSpace !== 'pre' && style.whiteSpace !== 'nowrap';
+      const rows = inner.children;
+      if (!wraps) {
+        for (let i = 0; i < rows.length; i++) rows[i].style.height = '';
+      } else {
+        const heights = measureWrappedEditorLines(textarea, parts, style);
+        for (let i = 0; i < rows.length; i++) rows[i].style.height = heights[i] + 'px';
+      }
+      inner.style.transform = 'translateY(' + (-textarea.scrollTop) + 'px)';
+    }
+
+    function measureWrappedEditorLines(textarea, parts, style) {
+      const width = textarea.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
+      const mirror = document.createElement('div');
+      mirror.style.position = 'absolute';
+      mirror.style.visibility = 'hidden';
+      mirror.style.pointerEvents = 'none';
+      mirror.style.left = '0';
+      mirror.style.top = '0';
+      mirror.style.width = Math.max(0, width) + 'px';
+      mirror.style.font = style.font;
+      mirror.style.lineHeight = style.lineHeight;
+      mirror.style.whiteSpace = style.whiteSpace;
+      mirror.style.overflowWrap = style.overflowWrap;
+      mirror.style.wordBreak = style.wordBreak;
+      mirror.style.tabSize = style.tabSize;
+      const lh = parseFloat(style.lineHeight) || 24;
+      parts.forEach(part => {
+        const row = document.createElement('div');
+        row.style.minHeight = lh + 'px';
+        row.style.whiteSpace = 'inherit';
+        row.textContent = part.length ? part : '\u200b';
+        mirror.appendChild(row);
+      });
+      textarea.parentElement.appendChild(mirror);
+      const heights = [];
+      for (let i = 0; i < mirror.children.length; i++) heights.push(mirror.children[i].getBoundingClientRect().height);
+      mirror.remove();
+      return heights;
+    }
+
+    document.addEventListener('scroll', event => {
+      const area = event.target;
+      if (!area || !area.classList || !area.classList.contains('code-editor')) return;
+      const inner = area.parentElement && area.parentElement.querySelector(':scope > .code-gutter .code-gutter-inner');
+      if (inner) inner.style.transform = 'translateY(' + (-area.scrollTop) + 'px)';
+    }, true);
+
+    function lineBraceDelta(text) {
+      let count = 0;
+      for (let i = 0; i < text.length; i++) {
+        const ch = text.charAt(i);
+        if (ch === "/" && text.charAt(i + 1) === "/") {
+          const nextLine = text.indexOf("\n", i);
+          if (nextLine < 0) break;
+          i = nextLine;
+          continue;
+        }
+        if (ch === "/" && text.charAt(i + 1) === "*") {
+          const close = text.indexOf("*/", i + 2);
+          if (close < 0) break;
+          i = close + 1;
+          continue;
+        }
+        if (ch === "\"" || ch === "'") {
+          const quote = ch;
+          i += 1;
+          while (i < text.length && text.charAt(i) !== quote) {
+            if (text.charAt(i) === "\\") i += 1;
+            i += 1;
+          }
+          continue;
+        }
+        if (ch === "{") count += 1;
+        else if (ch === "}") count -= 1;
+      }
+      return count;
+    }
+
+    function indentEditorNewline(area) {
+      const start = area.selectionStart;
+      const end = area.selectionEnd;
+      const before = area.value.slice(0, start);
+      const after = area.value.slice(end);
+      const lineStart = before.lastIndexOf("\n") + 1;
+      const linePrefix = before.slice(lineStart);
+      const depth = Math.max(0, lineBraceDelta(before));
+      const openedHere = Math.max(0, lineBraceDelta(linePrefix));
+      const indent = "    ".repeat(depth);
+      const base = "    ".repeat(Math.max(0, depth - openedHere));
+      const restOfLine = after.split("\n")[0];
+      const closing = openedHere === 1 ? /^[ \t]*\}/.exec(restOfLine) : null;
+      let insertion = "\n" + indent;
+      let replaceEnd = end;
+      let cursorAt = start + insertion.length;
+      if (closing) {
+        replaceEnd = end + closing[0].length;
+        insertion = "\n" + indent + "\n" + base + "}";
+        cursorAt = start + ("\n" + indent).length;
+      }
+      area.setRangeText(insertion, start, replaceEnd, "end");
+      area.selectionStart = area.selectionEnd = cursorAt;
+      area.dispatchEvent(new Event("input", { bubbles: true }));
+      area.dispatchEvent(new Event("scroll"));
+    }
+
+    document.addEventListener("keydown", event => {
+      if (event.key !== "Enter" || event.ctrlKey || event.metaKey || event.altKey || event.shiftKey || event.isComposing) return;
+      const area = event.target;
+      if (!area || !area.classList || !area.classList.contains("code-editor")) return;
+      event.preventDefault();
+      indentEditorNewline(area);
+    });
 
     // Executes the C++ subset students have practiced (variables, arithmetic,
     // if / else, comparisons, and const) and checks the variables they create.
@@ -3709,6 +4064,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       let i = 0;
       let line = 1;
       const twoChar = ["==", "!=", "<=", ">=", "&&", "||"];
+      const demoChar = ["++", "--", "<<", ">>", "+=", "-=", "*=", "/=", "::"];
       const singles = "(){}[];,+-*/<>!=.";
 
       function pushBreak(ch) {
@@ -3737,10 +4093,15 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
           continue;
         }
         if (ch === '"' || ch === "'") {
-          if (!options.calls || ch === "'") {
+          const quoted = ch;
+          if (quoted === "'" && !options.demo) {
+            throw cppError(line, "this practice uses numbers, true, and false, not quoted text.");
+          }
+          if (quoted === '"' && !options.calls && !options.demo) {
             throw cppError(line, "this practice uses numbers, true, and false, not quoted text.");
           }
           const startLine = line;
+          const endQuote = quoted;
           i++;
           let value = "";
           let closed = false;
@@ -3754,16 +4115,22 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
               else if (esc === "r") value += "\r";
               else if (esc === "\\") value += "\\";
               else if (esc === "\"") value += "\"";
+              else if (esc === "'" && options.demo) value += "'";
               else throw cppError(startLine, "this escape is not used here. Use \\\\ or \\n.");
               i += 2;
               continue;
             }
-            if (c === "\"") { closed = true; i++; break; }
+            if (c === endQuote) { closed = true; i++; break; }
             value += c;
             i++;
           }
           if (!closed) throw cppError(startLine, "this quote was never closed.");
-          tokens.push({ kind: "string", value: value, line: startLine });
+          if (quoted === "'") {
+            if (value.length !== 1) throw cppError(startLine, "a character literal holds one character, such as 'A'.");
+            tokens.push({ kind: "char", value: value, line: startLine });
+          } else {
+            tokens.push({ kind: "string", value: value, line: startLine });
+          }
           continue;
         }
         if (/[A-Za-z_]/.test(ch)) {
@@ -3771,8 +4138,9 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
           i++;
           while (i < source.length && /[A-Za-z0-9_]/.test(source.charAt(i))) i++;
           const word = source.slice(start, i);
-          if (CPP_KEYWORDS.has(word)) tokens.push({ kind: "keyword", value: word, line: line });
-          else tokens.push({ kind: "ident", value: word, line: line });
+          if (CPP_KEYWORDS.has(word) || (options.demo && (word === "break" || word === "continue"))) {
+            tokens.push({ kind: "keyword", value: word, line: line });
+          } else tokens.push({ kind: "ident", value: word, line: line });
           continue;
         }
         if (/[0-9]/.test(ch) || (ch === "." && /[0-9]/.test(source.charAt(i + 1)))) {
@@ -3806,12 +4174,19 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
           continue;
         }
         const pair = source.slice(i, i + 2);
-        if (twoChar.indexOf(pair) !== -1) {
+        if (twoChar.indexOf(pair) !== -1 || (options.demo && demoChar.indexOf(pair) !== -1)) {
           tokens.push({ kind: "punct", value: pair, line: line });
           i += 2;
           continue;
         }
-        if (ch === "%") throw cppError(line, "the % operator is not covered in this practice.");
+        if (ch === "%") {
+          if (options.demo) {
+            tokens.push({ kind: "punct", value: "%", line: line });
+            i++;
+            continue;
+          }
+          throw cppError(line, "the % operator is not covered in this practice.");
+        }
         if (ch === "&") throw cppError(line, "use && to mean and. A single & is not covered here.");
         if (ch === "|") throw cppError(line, "use || to mean or. A single | is not covered here.");
         if (singles.indexOf(ch) !== -1) {
@@ -3872,13 +4247,27 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
         return next();
       }
       function parseType() {
+        if (options.demo && peek().kind === "ident" && peek().value === "std" && punctAt(1, "::")) {
+          next();
+          next();
+        }
         const token = peek();
         if (token.kind === "keyword" && (token.value === "for" || token.value === "while")) loopMessage(token.line);
-        if (token.kind === "keyword" && token.value === "double") throw cppError(token.line, "use float for decimal numbers.");
-        if (token.kind === "keyword" && (token.value === "char" || token.value === "string")) {
-          throw cppError(token.line, "this practice uses int, float, and bool, not text types.");
+        if (token.kind === "keyword" && token.value === "double") {
+          if (!options.demo) throw cppError(token.line, "use float for decimal numbers.");
+          next();
+          return "float";
         }
-        if (token.kind === "keyword" && token.value === "void") throw cppError(token.line, "this function must return int, float, or bool.");
+        if (token.kind === "keyword" && token.value === "void") {
+          if (!options.demo) throw cppError(token.line, "this function must return int, float, or bool.");
+          next();
+          return "void";
+        }
+        if (token.kind === "keyword" && (token.value === "char" || token.value === "string")) {
+          if (!options.demo) throw cppError(token.line, "this practice uses int, float, and bool, not text types.");
+          next();
+          return token.value;
+        }
         if (!(token.kind === "keyword" && (token.value === "int" || token.value === "float" || token.value === "bool"))) {
           throw cppError(token.line, "expected a type (int, float, or bool) but found " + describeToken(token) + ".");
         }
@@ -3894,13 +4283,15 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       function parseExpr() { return parseAssign(); }
       function parseAssign() {
         const left = parseOr();
-        if (!isPunct("=")) return left;
+        const compound = options.demo && (isPunct("+=") || isPunct("-=") || isPunct("*=") || isPunct("/="));
+        if (!isPunct("=") && !compound) return left;
         if (left.kind !== "ident") {
           throw cppError(peek().line, "only a variable can be assigned a new value. Use == to compare two values.");
         }
         const op = next();
         const right = parseAssign();
-        return { kind: "assignExpr", name: left.name, expr: right, line: op.line };
+        if (op.value === "=") return { kind: "assignExpr", name: left.name, expr: right, line: op.line };
+        return { kind: "compound", name: left.name, op: op.value.charAt(0), expr: right, line: op.line };
       }
       function parseOr() {
         let left = parseAnd();
@@ -3949,7 +4340,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       }
       function parseMul() {
         let left = parseUnary();
-        while (isPunct("*") || isPunct("/")) {
+        while (isPunct("*") || isPunct("/") || (options.demo && isPunct("%"))) {
           const op = next();
           const right = parseUnary();
           left = { kind: "binary", op: op.value, left: left, right: right, line: op.line };
@@ -3957,12 +4348,41 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
         return left;
       }
       function parseUnary() {
+        if (options.demo && (isPunct("++") || isPunct("--"))) {
+          const op = next();
+          const expr = parseUnary();
+          if (expr.kind !== "ident") throw cppError(op.line, "++ and -- must be used on a variable.");
+          return { kind: "prefix", op: op.value, name: expr.name, line: op.line };
+        }
         if (isPunct("!") || isPunct("-") || isPunct("+")) {
           const op = next();
           const expr = parseUnary();
           return { kind: "unary", op: op.value, expr: expr, line: op.line };
         }
-        return parsePrimary();
+        return parsePostfix();
+      }
+      function parsePostfix() {
+        const expr = parsePrimary();
+        if (options.demo && (isPunct("++") || isPunct("--"))) {
+          const op = next();
+          if (expr.kind !== "ident") throw cppError(op.line, "++ and -- must be used on a variable.");
+          return { kind: "postfix", op: op.value, name: expr.name, line: op.line };
+        }
+        return expr;
+      }
+      function parseCallArgs(openLine) {
+        expectPunct("(");
+        const args = [];
+        if (!isPunct(")")) {
+          args.push(parseExpr());
+          while (isPunct(",")) {
+            next();
+            if (isPunct(")")) throw cppError(peek().line, "remove the extra comma in this call.");
+            args.push(parseExpr());
+          }
+        }
+        expectPunct(")");
+        return args;
       }
       function parsePrimary() {
         const token = peek();
@@ -3974,16 +4394,47 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
           next();
           return { kind: "literal", type: "string", value: token.value, line: token.line };
         }
+        if (token.kind === "char") {
+          next();
+          return { kind: "literal", type: "char", value: token.value, line: token.line };
+        }
         if (token.kind === "keyword" && (token.value === "true" || token.value === "false")) {
           next();
           return { kind: "literal", type: "bool", value: token.value === "true", line: token.line };
         }
-        if (token.kind === "ident") {
-          if (options.calls && ROBOT_WORDS.has(token.value) && !punctAt(1, "(") && !punctAt(1, ".")) {
+        if (token.kind === "ident" || (options.demo && token.kind === "keyword" && token.value === "string")) {
+          if (options.demo && token.kind === "ident" && token.value === "std" && punctAt(1, "::")) {
+            next();
+            next();
+            token = peek();
+          }
+          if (options.demo && token.kind === "ident" && token.value === "static_cast" && punctAt(1, "<")) {
+            const castLine = token.line;
+            next();
+            expectPunct("<");
+            const castType = parseType();
+            if (castType === "void") throw cppError(castLine, "static_cast cannot produce void.");
+            expectPunct(">");
+            expectPunct("(");
+            const castExpr = parseExpr();
+            expectPunct(")");
+            return { kind: "cast", type: castType, expr: castExpr, line: castLine };
+          }
+          if (options.calls && token.kind === "ident" && ROBOT_WORDS.has(token.value) && !punctAt(1, "(") && !punctAt(1, ".")) {
             next();
             return { kind: "literal", type: "enum", value: token.value, line: token.line };
           }
+          if (token.kind !== "ident") throw cppError(token.line, "expected a value, variable, or (expression) but found " + describeToken(token) + ".");
           next();
+          if (options.demo && isPunct("(")) {
+            return { kind: "callExpr", name: token.value, args: parseCallArgs(token.line), line: token.line };
+          }
+          if (options.demo && isPunct(".")) {
+            next();
+            const member = expectIdent();
+            if (!isPunct("(")) throw cppError(member.line, "this playground can use .length() on a string.");
+            return { kind: "memberCall", object: token.value, name: member.value, args: parseCallArgs(member.line), line: token.line };
+          }
           if (isPunct("(")) {
             throw cppError(token.line, options.calls
               ? "call Drivetrain.turnFor, Drivetrain.driveFor, or wait as its own statement."
@@ -4023,7 +4474,11 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       }
       function parseReturn() {
         const keyword = next();
-        if (isPunct(";")) throw cppError(keyword.line, "return a value from the function.");
+        if (isPunct(";")) {
+          if (!options.demo) throw cppError(keyword.line, "return a value from the function.");
+          next();
+          return { kind: "return", expr: null, line: keyword.line };
+        }
         const expr = parseExpr();
         expectPunct(";");
         return { kind: "return", expr: expr, line: keyword.line };
@@ -4059,6 +4514,8 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
         }
         const type = parseType();
         const nameTok = expectIdent();
+        if (options.demo && isPunct("*")) throw cppError(nameTok.line, "pointers are not available in this playground.");
+        if (options.demo && isPunct("[")) throw cppError(nameTok.line, "arrays are not available in this playground.");
         if (isPunct("(")) {
           throw cppError(nameTok.line, "write the statements directly. A function is not needed here.");
         }
@@ -4070,6 +4527,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
           throw cppError(peek().line, "declare one variable per statement.");
         }
         if (isConst && !init) throw cppError(nameTok.line, "a const variable must be given a value when it is declared.");
+        if (type === "void") throw cppError(nameTok.line, "void is for functions, not variables.");
         expectPunct(";");
         return { kind: "decl", isConst: isConst, type: type, name: nameTok.value, init: init, line: nameTok.line };
       }
@@ -4110,15 +4568,118 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
             ? "call wait, Drivetrain.turnFor, or Drivetrain.driveFor as a statement ending with a semicolon."
             : "do not call other functions here. Use variables, arithmetic, comparisons, and if / else.");
         }
+        if (options.demo && (isPunct("++") || isPunct("--"))) {
+          const op = next();
+          expectPunct(";");
+          return { kind: "postfix", op: op.value, name: nameTok.value, line: op.line };
+        }
+        if (options.demo && (isPunct("+=") || isPunct("-=") || isPunct("*=") || isPunct("/="))) {
+          const op = next();
+          const expr = parseExpr();
+          expectPunct(";");
+          return { kind: "compound", name: nameTok.value, op: op.value.charAt(0), expr: expr, line: op.line };
+        }
         if (!isPunct("=")) throw cppError(peek().line, "to change " + nameTok.value + ", write " + nameTok.value + " = value;");
         const op = next();
         const expr = parseExpr();
         expectPunct(";");
         return { kind: "assign", name: nameTok.value, expr: expr, line: op.line };
       }
+      function parseCoutStmt() {
+        const first = next();
+        const parts = [];
+        if (!isPunct("<<")) throw cppError(first.line, "write cout << value;");
+        while (isPunct("<<")) {
+          next();
+          if (peek().kind === "ident" && peek().value === "std" && punctAt(1, "::")) {
+            next();
+            next();
+          }
+          if (peek().kind === "ident" && (peek().value === "endl" || peek().value === "ends") && !punctAt(1, "(")) {
+            const manip = next();
+            parts.push({ kind: "manip", name: manip.value, line: manip.line });
+            continue;
+          }
+          parts.push(parseExpr());
+        }
+        expectPunct(";");
+        return { kind: "cout", parts: parts, line: first.line };
+      }
+      function parseCinStmt() {
+        const first = next();
+        const targets = [];
+        if (!isPunct(">>")) throw cppError(first.line, "write cin >> variable;");
+        while (isPunct(">>")) {
+          next();
+          if (peek().kind === "ident" && peek().value === "std" && punctAt(1, "::")) {
+            next();
+            next();
+          }
+          const nameTok = expectIdent();
+          targets.push({ name: nameTok.value, line: nameTok.line });
+        }
+        expectPunct(";");
+        return { kind: "cin", targets: targets, line: first.line };
+      }
+      function parseDemoIdentStmt() {
+        if (peek().kind === "ident" && peek().value === "std" && punctAt(1, "::")) {
+          next();
+          next();
+        }
+        const first = peek();
+        if (first.kind === "ident" && first.value === "cout") return parseCoutStmt();
+        if (first.kind === "ident" && first.value === "cin") return parseCinStmt();
+        if (first.kind === "ident" && (punctAt(1, "(") || punctAt(1, "."))) return parseCallStmt();
+        return parseAssignStmt();
+      }
+      function parseFor() {
+        const keyword = next();
+        expectPunct("(");
+        let init = null;
+        if (!isPunct(";")) {
+          const start = peek();
+          const declares = (start.kind === "keyword" && (start.value === "const" || isTypeKeyword(start))) ||
+            (start.kind === "ident" && start.value === "std" && punctAt(1, "::"));
+          if (declares) init = parseDecl();
+          else {
+            init = { kind: "exprStmt", expr: parseExpr(), line: keyword.line };
+            expectPunct(";");
+          }
+        } else {
+          next();
+        }
+        let cond = null;
+        if (!isPunct(";")) cond = parseExpr();
+        expectPunct(";");
+        let step = null;
+        if (!isPunct(")")) step = parseExpr();
+        expectPunct(")");
+        const body = parseStmt();
+        return { kind: "for", init: init, cond: cond, step: step, body: body, line: keyword.line };
+      }
+      function parseWhile() {
+        const keyword = next();
+        expectPunct("(");
+        const cond = parseExpr();
+        expectPunct(")");
+        const body = parseStmt();
+        return { kind: "while", cond: cond, body: body, line: keyword.line };
+      }
       function parseStmt() {
         const token = peek();
-        if (token.kind === "keyword" && (token.value === "for" || token.value === "while")) loopMessage(token.line);
+        if (token.kind === "keyword" && token.value === "for") {
+          if (!options.demo) loopMessage(token.line);
+          return parseFor();
+        }
+        if (token.kind === "keyword" && token.value === "while") {
+          if (!options.demo) loopMessage(token.line);
+          return parseWhile();
+        }
+        if (options.demo && token.kind === "keyword" && (token.value === "break" || token.value === "continue")) {
+          next();
+          expectPunct(";");
+          return { kind: token.value, line: token.line };
+        }
         if (token.kind === "keyword" && token.value === "else") {
           throw cppError(token.line, "else must follow an if. Check the braces around the if block.");
         }
@@ -4127,7 +4688,13 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
         if (token.kind === "keyword" && token.value === "if") return parseIf();
         if (token.kind === "keyword" && token.value === "return") return parseReturn();
         if (token.kind === "keyword" && (token.value === "const" || isTypeKeyword(token))) return parseDecl();
+        if (options.demo && token.kind === "ident" && token.value === "std" && punctAt(1, "::")) {
+          const after = tokens[pos + 2];
+          if (after && after.kind === "keyword") return parseDecl();
+          return parseDemoIdentStmt();
+        }
         if (token.kind === "ident") {
+          if (options.demo) return parseDemoIdentStmt();
           if (options.calls && (punctAt(1, "(") || punctAt(1, "."))) return parseCallStmt();
           return parseAssignStmt();
         }
@@ -4162,8 +4729,23 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
           if (seen.has(param.name)) throw cppError(param.line, "parameter " + param.name + " is declared twice.");
           seen.add(param.name);
         });
+        if (options.demo && isPunct(";")) {
+          next();
+          return { returnType: returnType, name: nameTok.value, params: params, body: null, prototype: true, line: nameTok.line };
+        }
         const body = parseBlock();
         return { returnType: returnType, name: nameTok.value, params: params, body: body, line: nameTok.line };
+      }
+
+      function looksLikeFunction() {
+        let i = pos;
+        const first = tokens[i];
+        if (options.demo && first && first.kind === "ident" && first.value === "std" && tokens[i + 1] && tokens[i + 1].value === "::") i += 2;
+        const typeTok = tokens[i];
+        if (!(typeTok && typeTok.kind === "keyword" && isTypeKeyword(typeTok))) return false;
+        const nameTok = tokens[i + 1];
+        const paren = tokens[i + 2];
+        return !!(nameTok && nameTok.kind === "ident" && paren && paren.kind === "punct" && paren.value === "(");
       }
 
       if (asSnippet) {
@@ -4175,6 +4757,32 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
           stmts.push(parseStmt());
         }
         return { functions: [], stmts: stmts };
+      }
+
+      if (options.demo && !asSnippet) {
+        const functions = [];
+        const globals = [];
+        while (peek().kind !== "eof") {
+          if (isPunct(";")) { next(); continue; }
+          if (looksLikeFunction()) {
+            const fn = parseFunction();
+            if (!fn.prototype && functions.some(item => item.name === fn.name && !item.prototype)) {
+              throw cppError(fn.line, fn.name + " is already defined.");
+            }
+            functions.push(fn);
+            continue;
+          }
+          if (peek().kind === "keyword" && (peek().value === "const" || isTypeKeyword(peek()))) {
+            globals.push(parseDecl());
+            continue;
+          }
+          if (peek().kind === "ident" && peek().value === "std") {
+            globals.push(parseDecl());
+            continue;
+          }
+          throw cppError(peek().line, "expected a function or a variable declaration but found " + describeToken(peek()) + ".");
+        }
+        return { functions: functions, globals: globals, stmts: [] };
       }
 
       const functions = [];
@@ -4229,6 +4837,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
 
     function numericValue(value) {
       if (value.type === "bool") return value.value ? 1 : 0;
+      if (value.type === "char") return value.value.charCodeAt(0);
       if (value.type === "string") return NaN;
       return value.value;
     }
@@ -4244,6 +4853,23 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
     }
 
     function coerce(targetType, value, node) {
+      if (targetType === "string") return textOf(value);
+      if (targetType === "char") {
+        if (value.type === "char") return value.value;
+        if (value.type === "string") {
+          if (value.value.length !== 1) throw cppError(node && node.line, "a char holds one character.");
+          return value.value;
+        }
+        const code = numericValue(value);
+        if (!Number.isInteger(code) || code < 0 || code > 255) {
+          throw cppError(node && node.line, "a char needs one character or a code from 0 to 255.");
+        }
+        return String.fromCharCode(code);
+      }
+      if ((targetType === "int" || targetType === "float") && value.type === "char") {
+        const code = value.value.charCodeAt(0);
+        return targetType === "int" ? code : code;
+      }
       if (targetType === "bool") return isTruthy(value);
       const n = numericValue(value);
       if (typeof n !== "number" || !Number.isFinite(n)) {
@@ -4265,12 +4891,37 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       if (!rec) throw cppError(node.line, name + " has not been declared. Declare it with int, float, or bool before using it.");
       if (rec.isConst) throw cppError(node.line, name + " is const, so its value cannot be changed.");
       const evaluated = evalExpr(expr, env);
+      if (evaluated && typeof evaluated.then === "function") {
+        return evaluated.then(value => {
+          rec.value = coerce(rec.type, value, node);
+          rec.initialized = true;
+          return { type: rec.type, value: rec.value };
+        });
+      }
       rec.value = coerce(rec.type, evaluated, node);
       rec.initialized = true;
       return { type: rec.type, value: rec.value };
     }
 
+    function textOf(value) {
+      if (!value) return "";
+      if (value.type === "string" || value.type === "char") return String(value.value);
+      if (value.type === "bool") return value.value ? "true" : "false";
+      return formatValue(value.type, value.value);
+    }
+
     function compareValues(op, left, right, line) {
+      if (left.type === "string" || left.type === "char" || right.type === "string" || right.type === "char") {
+        const ls = textOf(left);
+        const rs = textOf(right);
+        if (op === "==") return ls === rs;
+        if (op === "!=") return ls !== rs;
+        if (op === "<") return ls < rs;
+        if (op === ">") return ls > rs;
+        if (op === "<=") return ls <= rs;
+        if (op === ">=") return ls >= rs;
+        return false;
+      }
       const pair = arithTypes(left, right, line);
       if (op === "==") return pair.l === pair.r;
       if (op === "!=") return pair.l !== pair.r;
@@ -4283,6 +4934,11 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
 
     function evalUnary(node, env) {
       const value = evalExpr(node.expr, env);
+      if (value && typeof value.then === "function") return value.then(resolved => unaryValue(node, resolved));
+      return unaryValue(node, value);
+    }
+
+    function unaryValue(node, value) {
       if (node.op === "!") return { type: "bool", value: !isTruthy(value) };
       if (value.type === "float") {
         const n = node.op === "-" ? -value.value : value.value;
@@ -4294,19 +4950,10 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       return { type: "int", value: node.op === "-" ? -n : n };
     }
 
-    function evalBinary(node, env) {
-      if (node.op === "&&") {
-        const left = evalExpr(node.left, env);
-        if (!isTruthy(left)) return { type: "bool", value: false };
-        return { type: "bool", value: isTruthy(evalExpr(node.right, env)) };
+    function binaryValue(node, left, right) {
+      if (node.op === "+" && (left.type === "string" || right.type === "string")) {
+        return { type: "string", value: textOf(left) + textOf(right) };
       }
-      if (node.op === "||") {
-        const left = evalExpr(node.left, env);
-        if (isTruthy(left)) return { type: "bool", value: true };
-        return { type: "bool", value: isTruthy(evalExpr(node.right, env)) };
-      }
-      const left = evalExpr(node.left, env);
-      const right = evalExpr(node.right, env);
       if (node.op === "==" || node.op === "!=" || node.op === "<" || node.op === ">" || node.op === "<=" || node.op === ">=") {
         return { type: "bool", value: compareValues(node.op, left, right, node.line) };
       }
@@ -4318,6 +4965,9 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       else if (node.op === "/") {
         if (pair.r === 0) throw cppError(node.line, "division by zero.");
         value = pair.type === "int" ? Math.trunc(pair.l / pair.r) : pair.l / pair.r;
+      } else if (node.op === "%") {
+        if (pair.r === 0) throw cppError(node.line, "modulo by zero.");
+        value = pair.l % pair.r;
       } else {
         throw cppError(node.line, "the operator " + node.op + " is not covered in this practice.");
       }
@@ -4326,9 +4976,55 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       return { type: pair.type, value: value };
     }
 
+    function evalBinary(node, env) {
+      if (node.op === "&&") {
+        const left = evalExpr(node.left, env);
+        if (left && typeof left.then === "function") {
+          return left.then(resolved => {
+            if (!isTruthy(resolved)) return { type: "bool", value: false };
+            const right = evalExpr(node.right, env);
+            if (right && typeof right.then === "function") return right.then(r => ({ type: "bool", value: isTruthy(r) }));
+            return { type: "bool", value: isTruthy(right) };
+          });
+        }
+        if (!isTruthy(left)) return { type: "bool", value: false };
+        return { type: "bool", value: isTruthy(evalExpr(node.right, env)) };
+      }
+      if (node.op === "||") {
+        const left = evalExpr(node.left, env);
+        if (left && typeof left.then === "function") {
+          return left.then(resolved => {
+            if (isTruthy(resolved)) return { type: "bool", value: true };
+            const right = evalExpr(node.right, env);
+            if (right && typeof right.then === "function") return right.then(r => ({ type: "bool", value: isTruthy(r) }));
+            return { type: "bool", value: isTruthy(right) };
+          });
+        }
+        if (isTruthy(left)) return { type: "bool", value: true };
+        return { type: "bool", value: isTruthy(evalExpr(node.right, env)) };
+      }
+      const left = evalExpr(node.left, env);
+      if (left && typeof left.then === "function") {
+        return left.then(resolved => {
+          const right = evalExpr(node.right, env);
+          if (right && typeof right.then === "function") return right.then(r => binaryValue(node, resolved, r));
+          return binaryValue(node, resolved, right);
+        });
+      }
+      const right = evalExpr(node.right, env);
+      if (right && typeof right.then === "function") return right.then(r => binaryValue(node, left, r));
+      return binaryValue(node, left, right);
+    }
+
+    let demoEvalExtra = null;
+
     function evalExpr(expr, env) {
       tick(expr);
       if (!expr) throw new Error("This expression is missing a value.");
+      if (expr.kind === "callExpr" || expr.kind === "memberCall" || expr.kind === "prefix" || expr.kind === "postfix" || expr.kind === "cast" || expr.kind === "compound") {
+        if (!demoEvalExtra) throw cppError(expr.line, "this expression is not supported in this practice.");
+        return demoEvalExtra(expr, env);
+      }
       if (expr.kind === "literal") return { type: expr.type, value: expr.value };
       if (expr.kind === "ident") return readVariable(expr.name, expr, env);
       if (expr.kind === "unary") return evalUnary(expr, env);
@@ -4898,7 +5594,8 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
     const PLAYGROUND_FILES = {
       level1: { codeKey: 'vexcpp-level1-code', mapKey: 'vexcpp-level1-map' },
       level2: { codeKey: 'vexcpp-level2-code', mapKey: 'vexcpp-level2-map' },
-      level3: { codeKey: 'vexcpp-level3-code', mapKey: 'vexcpp-level3-map' }
+      level3: { codeKey: 'vexcpp-level3-code', mapKey: 'vexcpp-level3-map' },
+      general: { codeKey: 'vexcpp-general-code' }
     };
     const codingStarters = {};
 
@@ -5278,6 +5975,10 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
         const entry = {};
         const code = readLocalString(slot.codeKey);
         if (code) entry.code = code;
+        if (!slot.mapKey) {
+          out[id] = entry;
+          return;
+        }
         const raw = readLocalString(slot.mapKey);
         if (raw) {
           try {
@@ -5412,6 +6113,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
         const entry = snapshot.playgrounds[id];
         if (entry.clearCode) storageWrite(slot.codeKey, null);
         else if (typeof entry.code === 'string') storageWrite(slot.codeKey, entry.code);
+        if (!slot.mapKey) return;
         if (entry.clearMap) storageWrite(slot.mapKey, null);
         else if (entry.map && typeof entry.map === 'object') storageWrite(slot.mapKey, JSON.stringify(entry.map));
       });
@@ -5923,7 +6625,9 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       formatValue: formatValue,
       cppError: cppError,
       refreshEditorHighlight: refreshEditorHighlight,
-      resetSteps: function () { cppSteps = 0; }
+      setDemoEval: function (fn) { demoEvalExtra = fn; },
+      resetSteps: function () { cppSteps = 0; },
+      tick: function (node) { tick(node); }
     };
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -5936,7 +6640,30 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       bindProgressFileControls();
     });
   </script>
+
+  <div id="cpp-playground" class="cpp-playground" hidden>
+    <div class="cpp-playground-panel" role="dialog" aria-modal="true" aria-labelledby="cpp-playground-title">
+      <div class="cpp-playground-head">
+        <h2 id="cpp-playground-title">C++ Playground</h2>
+        <button type="button" class="btn-paper" id="cpp-playground-close">Close</button>
+      </div>
+      <div class="code-title">MAIN.CPP</div>
+      <div class="code-editor-wrap cpp-playground-editor" id="cpp-playground-editor">
+        <pre class="code-highlight" aria-hidden="true"><code></code></pre>
+        <textarea id="cpp-playground-code" class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="C++ program"></textarea>
+      </div>
+      <div id="cpp-playground-console" class="cpp-playground-console" aria-live="polite" aria-label="Console"></div>
+      <div class="cpp-playground-actions">
+        <button type="button" class="btn-run" id="cpp-playground-run">Run</button>
+        <button type="button" class="btn-paper" id="cpp-playground-compile">Compile</button>
+        <button type="button" class="btn-paper" id="cpp-playground-reset">Reset code</button>
+      </div>
+      <div id="cpp-playground-msg" class="l3-msg" hidden role="status"></div>
+    </div>
+  </div>
+
   <script src="level3-playground.js?v=16"></script>
   <script src="level12-playground.js?v=2"></script>
+  <script src="cpp-playground.js?v=5"></script>
 </body>
 </html>
