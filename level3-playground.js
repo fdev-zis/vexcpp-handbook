@@ -134,6 +134,11 @@
 
   const L3_END = [
     "/**********************************************************",
+    " * *** END OF AUTO-GENERATED SETUP - WRITE YOUR CODE BELOW ***",
+    " **********************************************************/"
+  ].join("\n");
+  const L3_OLD_END = [
+    "/**********************************************************",
     " * *** END ***",
     " **********************************************************/"
   ].join("\n");
@@ -175,6 +180,7 @@
     let text = String(source || "").replace(/\r\n/g, "\n");
     text = text.split(L3_BEGIN).join("");
     text = text.split(L3_END).join("");
+    text = text.split(L3_OLD_END).join("");
     text = text.replace(/\/\* Generated from the map\.[\s\S]*?\*\//g, "");
     text = text.replace(/\/\* End of the generated map\.[\s\S]*?\*\//g, "");
     const noise = [

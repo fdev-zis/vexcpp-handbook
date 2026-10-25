@@ -12,6 +12,11 @@
   ].join("\n");
   const END = [
     "/**********************************************************",
+    " * *** END OF AUTO-GENERATED SETUP - WRITE YOUR CODE BELOW ***",
+    " **********************************************************/",
+  ].join("\n");
+  const OLD_END = [
+    "/**********************************************************",
     " * *** END ***",
     " **********************************************************/",
   ].join("\n");
@@ -81,7 +86,7 @@
     }
 
     function shape(source) {
-      let text = String(source || "").replace(/\r\n/g, "\n").split(BEGIN).join("").split(END).join("");
+      let text = String(source || "").replace(/\r\n/g, "\n").split(BEGIN).join("").split(END).join("").split(OLD_END).join("");
       const noise = [
         /^\/\/ Map numbers for the picture above\.\s*$/,
         /^\/\/ TODO: experimentally determine these values\.\s*$/,

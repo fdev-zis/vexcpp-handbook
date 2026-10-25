@@ -684,6 +684,11 @@
       white-space: inherit;
     }
 
+    /* A trailing newline is a real line in the textarea. Without a character on that line, the highlight is one line shorter and the caret sits on the wrong row once the editor scrolls. */
+    .code-highlight code::after {
+      content: "\200b";
+    }
+
     .code-editor {
       position: absolute;
       top: 0;
@@ -3844,7 +3849,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       if (!wrap) return;
       const code = wrap.querySelector('.code-highlight code');
       if (!code) return;
-      code.innerHTML = highlightCpp(textarea.value.length ? textarea.value : '\n');
+      code.innerHTML = highlightCpp(textarea.value);
       refreshEditorGutter(textarea);
     }
 
@@ -3873,7 +3878,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
         }
       }
       const inner = gutter.querySelector('.code-gutter-inner');
-      const parts = (textarea.value.length ? textarea.value : '\n').split('\n');
+      const parts = textarea.value.split('\n');
       const width = 'calc(' + Math.max(2, String(parts.length).length) + 'ch + 1.15rem)';
       if (wrap.style.getPropertyValue('--code-gutter') !== width) wrap.style.setProperty('--code-gutter', width);
       if (inner.childElementCount !== parts.length) {
@@ -3935,7 +3940,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       if (inner) inner.style.transform = 'translateY(' + (-area.scrollTop) + 'px)';
     }, true);
 
-    function lineBraceDelta(text) {
+    function lineBraceDelta(text, clamp) {
       let count = 0;
       for (let i = 0; i < text.length; i++) {
         const ch = text.charAt(i);
@@ -3961,9 +3966,31 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
           continue;
         }
         if (ch === "{") count += 1;
-        else if (ch === "}") count -= 1;
+        else if (ch === "}") count = clamp ? Math.max(0, count - 1) : count - 1;
       }
       return count;
+    }
+
+    function editorLineHeight(area) {
+      const style = getComputedStyle(area);
+      const parsed = parseFloat(style.lineHeight);
+      if (style.lineHeight.endsWith("px") && parsed) return parsed;
+      const fontSize = parseFloat(style.fontSize) || 16;
+      return (parsed || 1.5) * fontSize;
+    }
+
+    function revealEditorCaret(area) {
+      const style = getComputedStyle(area);
+      const lineHeight = editorLineHeight(area);
+      const padTop = parseFloat(style.paddingTop) || 0;
+      const padBottom = parseFloat(style.paddingBottom) || 0;
+      const line = area.value.slice(0, area.selectionStart).split("\n").length - 1;
+      const lineTop = padTop + line * lineHeight;
+      const lineBottom = lineTop + lineHeight;
+      if (lineTop < area.scrollTop) area.scrollTop = Math.max(0, lineTop - padTop);
+      else if (lineBottom + padBottom > area.scrollTop + area.clientHeight) {
+        area.scrollTop = lineBottom + padBottom - area.clientHeight;
+      }
     }
 
     function indentEditorNewline(area) {
@@ -3973,23 +4000,34 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       const after = area.value.slice(end);
       const lineStart = before.lastIndexOf("\n") + 1;
       const linePrefix = before.slice(lineStart);
-      const depth = Math.max(0, lineBraceDelta(before));
-      const openedHere = Math.max(0, lineBraceDelta(linePrefix));
-      const indent = "    ".repeat(depth);
-      const base = "    ".repeat(Math.max(0, depth - openedHere));
       const restOfLine = after.split("\n")[0];
-      const closing = openedHere === 1 ? /^[ \t]*\}/.exec(restOfLine) : null;
-      let insertion = "\n" + indent;
+      const codeFollows = /[^\s]/.test(restOfLine);
+      let insertion = "\n";
       let replaceEnd = end;
-      let cursorAt = start + insertion.length;
-      if (closing) {
-        replaceEnd = end + closing[0].length;
-        insertion = "\n" + indent + "\n" + base + "}";
-        cursorAt = start + ("\n" + indent).length;
+      let cursorAt = start + 1;
+      if (/^[ \t]*$/.test(linePrefix) && codeFollows) {
+        insertion = "\n";
+      } else {
+        const currentIndent = (/^[ \t]*/.exec(linePrefix + restOfLine) || [""])[0];
+        const opens = /^[ \t]*$/.test(linePrefix) ? 0 : Math.max(0, lineBraceDelta(linePrefix, true));
+        const indent = currentIndent + "    ".repeat(opens);
+        const closing = opens === 1 ? /^[ \t]*\}/.exec(restOfLine) : null;
+        insertion = "\n" + indent;
+        cursorAt = start + insertion.length;
+        if (closing) {
+          replaceEnd = end + closing[0].length;
+          insertion = "\n" + indent + "\n" + currentIndent + "}";
+          cursorAt = start + ("\n" + indent).length;
+        } else if (!codeFollows && restOfLine.length) {
+          replaceEnd = end + restOfLine.length;
+          cursorAt = start + insertion.length;
+        }
       }
       area.setRangeText(insertion, start, replaceEnd, "end");
       area.selectionStart = area.selectionEnd = cursorAt;
       area.dispatchEvent(new Event("input", { bubbles: true }));
+      area.selectionStart = area.selectionEnd = cursorAt;
+      revealEditorCaret(area);
       area.dispatchEvent(new Event("scroll"));
     }
 
@@ -6662,8 +6700,8 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
     </div>
   </div>
 
-  <script src="level3-playground.js?v=16"></script>
-  <script src="level12-playground.js?v=2"></script>
+  <script src="level3-playground.js?v=17"></script>
+  <script src="level12-playground.js?v=3"></script>
   <script src="cpp-playground.js?v=5"></script>
 </body>
 </html>
