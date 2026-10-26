@@ -3681,7 +3681,7 @@ ArmMotor.spinToPosition(armUp, degrees, true);</code></pre>
           <div class="guide-panel" data-guide="field">
           <div class="guide-step">
             <h3 class="guide-step-title">What the robot already knows</h3>
-            <p>The playground writes a block of variables before your code. Those names are the field, as the robot sees it, before it drives a single millimetre.</p>
+            <p>The playground writes a block of variables before your code. They describe the field, as the robot sees it, before it drives a single millimetre.</p>
           </div>
 
           <div class="question-block short-block" data-qid="l3gs1">
@@ -3774,22 +3774,22 @@ int priority3 = ...;</code></pre>
           <div class="guide-panel" data-guide="b" hidden>
           <div class="guide-step">
             <h3 class="guide-step-title">Where that can lives, and where it goes</h3>
-            <p><span class="l3-name l3-c1">Can 1</span> belongs to <span class="l3-name l3-c1">House 1</span>, <span class="l3-name l3-c2">Can 2</span> to <span class="l3-name l3-c2">House 2</span>, and <span class="l3-name l3-c3">Can 3</span> to <span class="l3-name l3-c3">House 3</span>. Once the robot has chosen <code>bestCan</code>, it needs one pair of names for that can and one pair for the matching house.</p>
+            <p><span class="l3-name l3-c1">Can 1</span> belongs to <span class="l3-name l3-c1">House 1</span>, <span class="l3-name l3-c2">Can 2</span> to <span class="l3-name l3-c2">House 2</span>, and <span class="l3-name l3-c3">Can 3</span> to <span class="l3-name l3-c3">House 3</span>. <code>bestCan</code> is the delivery you are about to make. Store that can's position in the variables <code>nextCanX</code> and <code>nextCanY</code>, and the matching house in <code>nextHouseX</code> and <code>nextHouseY</code>.</p>
           </div>
 
           <div class="question-block" data-qid="l3gq5">
-            <div class="question-text">8. The robot's choice is <span class="l3-name l3-c3">Can 3</span>. It has to drive to that can, then to the matching house. What should <code>canX</code> and <code>houseY</code> be set to?</div>
+            <div class="question-text">8. The robot has chosen <span class="l3-name l3-c3">Can 3</span>. <code>nextCanX</code> is how far east that can is, and <code>nextHouseY</code> is how far north its house is. Which assignments store those positions?</div>
             <ul class="options-list">
-              <li class="option-item"><label class="option-label"><input type="radio" name="l3gq5" value="A"> <code>canX = can1X</code> and <code>houseY = house1Y</code></label></li>
-              <li class="option-item"><label class="option-label"><input type="radio" name="l3gq5" value="B"> <code>canX = can2X</code> and <code>houseY = house2Y</code></label></li>
-              <li class="option-item"><label class="option-label"><input type="radio" name="l3gq5" value="C"> <code>canX = can3X</code> and <code>houseY = house3Y</code></label></li>
-              <li class="option-item"><label class="option-label"><input type="radio" name="l3gq5" value="D"> <code>canX = house3X</code> and <code>houseY = can3Y</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="l3gq5" value="A"> <code>nextCanX = can1X</code> and <code>nextHouseY = house1Y</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="l3gq5" value="B"> <code>nextCanX = can2X</code> and <code>nextHouseY = house2Y</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="l3gq5" value="C"> <code>nextCanX = can3X</code> and <code>nextHouseY = house3Y</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="l3gq5" value="D"> <code>nextCanX = house3X</code> and <code>nextHouseY = can3Y</code></label></li>
             </ul>
             <div class="feedback"></div>
           </div>
 
           <div class="question-block coding-block" data-qid="l3gc2">
-            <div class="question-text">9. <span class="piece-tag">Piece B</span> Give the chosen can and its house names the rest of the drive can use. Declare <code>canX</code>, <code>canY</code>, <code>houseX</code>, and <code>houseY</code>. Then, from <code>bestCan</code>, copy that can's crossing and the matching house.</div>
+            <div class="question-text">9. <span class="piece-tag">Piece B</span> Declare the variables <code>nextCanX</code>, <code>nextCanY</code>, <code>nextHouseX</code>, and <code>nextHouseY</code>. When <code>bestCan</code> is 1, copy <code>can1X</code>, <code>can1Y</code>, <code>house1X</code>, and <code>house1Y</code> into them. Do the same when <code>bestCan</code> is 2 or 3.</div>
             <div class="code-title">ALREADY WRITTEN</div>
 <pre><code>int bestCan = ...;
 
@@ -3812,7 +3812,7 @@ float house3X = ...;
 float house3Y = ...;</code></pre>
             <div class="code-editor-wrap">
               <pre class="code-highlight" aria-hidden="true"><code></code></pre>
-              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Piece B, copy the chosen can and its house">// Piece B. Declare canX, canY, houseX, and houseY, then assign them.
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Piece B, copy the chosen can and its house">// Piece B. Declare nextCanX, nextCanY, nextHouseX, and nextHouseY, then assign them.
 </textarea>
             </div>
             <button type="button" class="btn-run">Run tests</button>
@@ -3826,7 +3826,7 @@ float house3Y = ...;</code></pre>
             <h3 class="guide-step-title">Face the can, east and west first</h3>
             <div class="guide-scene">
               <p>The robot drives only forward. <code>heading</code> is the direction it faces, and a drive follows that direction. East is 0°, north is 90°, west is 180°, and south is 270°.</p>
-              <p>The can is at (<code>canX</code>, <code>canY</code>). Reaching it takes two straight drives, always in the same order. First the robot faces east or west and drives until <code>x</code> equals <code>canX</code>. Then it faces north or south and drives until <code>y</code> equals <code>canY</code>.</p>
+              <p><code>nextCanX</code> and <code>nextCanY</code> are the variables that hold the chosen can's position. Reaching it takes two straight drives, always in the same order. First the robot faces east or west and drives until <code>x</code> equals <code>nextCanX</code>. Then it faces north or south and drives until <code>y</code> equals <code>nextCanY</code>.</p>
               <p>The heading for the drive you are about to make is called <code>desired</code>. For the first drive, east means <code>desired</code> is 0 and west means <code>desired</code> is 180. The robot turns from the <code>heading</code> it has now toward <code>desired</code>, and then it drives forward.</p>
             </div>
           </div>
@@ -3837,7 +3837,7 @@ float house3Y = ...;</code></pre>
             <button type="button" class="btn-paper btn-model" aria-expanded="false">Model answer</button>
             <div class="model-answer" hidden>
               <p class="model-kicker">Model answer</p>
-              <p>The drive that changes <code>x</code> comes first. The robot turns to face east (0) or west (180) and drives until <code>x</code> matches <code>canX</code>. Only then does it turn north or south to change <code>y</code>.</p>
+              <p>The drive that changes <code>x</code> comes first. The robot turns to face east (0) or west (180) and drives until <code>x</code> matches <code>nextCanX</code>. Only then does it turn north or south to change <code>y</code>.</p>
             </div>
           </div>
 
@@ -3906,7 +3906,7 @@ float house3Y = ...;</code></pre>
           </div>
 
           <div class="question-block short-block" data-qid="l3gs9">
-            <div class="question-text">17. The robot is at <code>x</code> = 350 and the can is at <code>canX</code> = 100. The can is to the west. The robot first turns to face west, so the can is in front of it. It can then drive forward, and a forward drive uses a positive distance. How many millimetres should that forward drive be?</div>
+            <div class="question-text">17. The robot is at <code>x</code> = 350 and the can is at <code>nextCanX</code> = 100. The can is to the west. The robot first turns to face west, so the can is in front of it. It can then drive forward, and a forward drive uses a positive distance. How many millimetres should that forward drive be?</div>
             <textarea class="short-answer" aria-label="How far the robot drives forward"></textarea>
             <button type="button" class="btn-paper btn-model" aria-expanded="false">Model answer</button>
             <div class="model-answer" hidden>
@@ -3916,12 +3916,12 @@ float house3Y = ...;</code></pre>
           </div>
 
           <div class="question-block coding-block" data-qid="l3gc3">
-            <div class="question-text">18. <span class="piece-tag">Piece C</span> Write the logic to drive the robot along the X-axis toward the can. Use <code>desired</code>, <code>turn</code>, and <code>distance</code>. First, calculate your desired heading based on whether <code>canX</code> is greater or less than your current <code>x</code>. Then, calculate the shortest turn angle and drive forward the positive distance. Update your current <code>x</code> position when finished.</div>
+            <div class="question-text">18. <span class="piece-tag">Piece C</span> Write the logic to drive the robot along the X-axis toward the can. Use <code>desired</code>, <code>turn</code>, and <code>distance</code>. First, calculate your desired heading based on whether <code>nextCanX</code> is greater or less than your current <code>x</code>. Then, calculate the shortest turn angle and drive forward the positive distance. Update your current <code>x</code> position when finished.</div>
             <div class="code-title">ALREADY WRITTEN</div>
 <pre><code>float x = ...;
 float heading = ...;
 
-float canX = ...;</code></pre>
+float nextCanX = ...;</code></pre>
             <div class="code-editor-wrap guide-tall">
               <pre class="code-highlight" aria-hidden="true"><code></code></pre>
               <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Piece C, drive east or west to the can">// Piece C. Turn and drive along X to the can.
@@ -3936,11 +3936,11 @@ float canX = ...;</code></pre>
           <div class="guide-panel" data-guide="d" hidden>
           <div class="guide-step">
             <h3 class="guide-step-title">Then north or south</h3>
-            <p>The drive that changes <code>x</code> is finished: <code>x</code> now matches <code>canX</code>. The can may still be north or south of the robot. North is 90 and south is 270. <code>desired</code>, <code>turn</code>, and <code>distance</code> already exist from Piece C, so give them new values instead of declaring them again.</p>
+            <p>The drive that changes <code>x</code> is finished: <code>x</code> now matches <code>nextCanX</code>. The can may still be north or south of the robot. North is 90 and south is 270. <code>desired</code>, <code>turn</code>, and <code>distance</code> already exist from Piece C, so give them new values instead of declaring them again.</p>
           </div>
 
           <div class="question-block" data-qid="l3gq8">
-            <div class="question-text">19. The robot's <code>x</code> now matches <code>canX</code>. How should it choose <code>desired</code> for the drive that changes <code>y</code>?</div>
+            <div class="question-text">19. The robot's <code>x</code> now matches <code>nextCanX</code>. How should it choose <code>desired</code> for the drive that changes <code>y</code>?</div>
             <ul class="options-list">
               <li class="option-item"><label class="option-label"><input type="radio" name="l3gq8" value="A"> If the can is north, face east (0). If it is south, face west (180)</label></li>
               <li class="option-item"><label class="option-label"><input type="radio" name="l3gq8" value="B"> If the can is north, face north (90). If it is south, face south (270)</label></li>
@@ -3951,7 +3951,7 @@ float canX = ...;</code></pre>
           </div>
 
           <div class="question-block coding-block" data-qid="l3gc4">
-            <div class="question-text">20. <span class="piece-tag">Piece D</span> Write the same kind of drive along the Y-axis, toward the can. North is 90 and south is 270. When the robot arrives, <code>y</code> should match <code>canY</code>.</div>
+            <div class="question-text">20. <span class="piece-tag">Piece D</span> Write the same kind of drive along the Y-axis, toward the can. North is 90 and south is 270. When the robot arrives, <code>y</code> should match <code>nextCanY</code>.</div>
             <div class="code-title">ALREADY WRITTEN</div>
 <pre><code>float desired = ...;
 float turn = ...;
@@ -3960,7 +3960,7 @@ float distance = ...;
 float y = ...;
 float heading = ...;
 
-float canY = ...;</code></pre>
+float nextCanY = ...;</code></pre>
             <div class="code-editor-wrap guide-tall">
               <pre class="code-highlight" aria-hidden="true"><code></code></pre>
               <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Piece D, drive north or south to the can">// Piece D. Turn and drive along Y to the can.
@@ -4005,7 +4005,7 @@ float canY = ...;</code></pre>
           <div class="guide-panel" data-guide="f" hidden>
           <div class="guide-step">
             <h3 class="guide-step-title">Carry it to the matching house</h3>
-            <div class="guide-scene">The can is in the claw. The house is another crossing, at (<code>houseX</code>, <code>houseY</code>). The plan is the same two drives: first face east or west and drive until <code>x</code> matches the target, then face north or south and drive until <code>y</code> matches. The short turn and the positive distance stay the same. What changes is the place you are aiming at.</div>
+            <div class="guide-scene">The can is in the claw. The house for this delivery is stored in the variables <code>nextHouseX</code> and <code>nextHouseY</code>. The plan is the same two drives: first face east or west and drive until <code>x</code> matches <code>nextHouseX</code>, then face north or south and drive until <code>y</code> matches <code>nextHouseY</code>. The short turn and the positive distance stay the same.</div>
           </div>
 
           <div class="question-block short-block" data-qid="l3gs10">
@@ -4014,12 +4014,12 @@ float canY = ...;</code></pre>
             <button type="button" class="btn-paper btn-model" aria-expanded="false">Model answer</button>
             <div class="model-answer" hidden>
               <p class="model-kicker">Model answer</p>
-              <p>Aim at <code>houseX</code> and <code>houseY</code> instead of the can. You still drive east or west until <code>x</code> matches, then north or south until <code>y</code> matches. The short turn and the positive distance stay the same.</p>
+              <p>Aim at <code>nextHouseX</code> and <code>nextHouseY</code> instead of the can. You still drive east or west until <code>x</code> matches, then north or south until <code>y</code> matches. The short turn and the positive distance stay the same.</p>
             </div>
           </div>
 
           <div class="question-block coding-block" data-qid="l3gc6">
-            <div class="question-text">24. <span class="piece-tag">Piece F</span> Drive the robot along the X-axis toward the house. This is the same plan as Piece C, aimed at <code>houseX</code>. When you arrive, <code>x</code> should be the house. <code>desired</code>, <code>turn</code>, and <code>distance</code> already exist.</div>
+            <div class="question-text">24. <span class="piece-tag">Piece F</span> Drive the robot along the X-axis toward the house. This is the same plan as Piece C, aimed at <code>nextHouseX</code>. When you arrive, <code>x</code> should be the house. <code>desired</code>, <code>turn</code>, and <code>distance</code> already exist.</div>
             <div class="code-title">ALREADY WRITTEN</div>
 <pre><code>float desired = ...;
 float turn = ...;
@@ -4028,7 +4028,7 @@ float distance = ...;
 float x = ...;
 float heading = ...;
 
-float houseX = ...;</code></pre>
+float nextHouseX = ...;</code></pre>
             <div class="code-editor-wrap guide-tall">
               <pre class="code-highlight" aria-hidden="true"><code></code></pre>
               <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Piece F, drive east or west to the house">// Piece F. Turn and drive along X to the house.
@@ -4042,7 +4042,7 @@ float houseX = ...;</code></pre>
           </div>
           <div class="guide-panel" data-guide="g" hidden>
           <div class="question-block coding-block" data-qid="l3gc7">
-            <div class="question-text">25. <span class="piece-tag">Piece G</span> Finish the trip along the Y-axis, toward <code>houseY</code>. When the robot arrives, <code>y</code> should be the house.</div>
+            <div class="question-text">25. <span class="piece-tag">Piece G</span> Finish the trip along the Y-axis, toward <code>nextHouseY</code>. When the robot arrives, <code>y</code> should be the house.</div>
             <div class="code-title">ALREADY WRITTEN</div>
 <pre><code>float desired = ...;
 float turn = ...;
@@ -4051,7 +4051,7 @@ float distance = ...;
 float y = ...;
 float heading = ...;
 
-float houseY = ...;</code></pre>
+float nextHouseY = ...;</code></pre>
             <div class="code-editor-wrap guide-tall">
               <pre class="code-highlight" aria-hidden="true"><code></code></pre>
               <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Piece G, drive north or south to the house">// Piece G. Turn and drive along Y to the house.
@@ -4153,10 +4153,10 @@ int priority3 = ...;</code></pre>
               <li>Piece H — put the can down</li>
               <li>Piece I — set that can's priority to -1</li>
             </ol>
-            <p>The first delivery keeps the <code>int</code> and <code>float</code> declarations from Pieces A, B, and C. On the second and third deliveries, those names already exist, so you edit three pieces:</p>
+            <p>The first delivery keeps the <code>int</code> and <code>float</code> declarations from Pieces A, B, and C. On the second and third deliveries, those variables already exist, so you edit three pieces:</p>
             <ul>
               <li>Piece A: remove the word <code>int</code>, and keep <code>bestCan = 1;</code> and <code>bestPriority = priority1;</code>.</li>
-              <li>Piece B: delete the four lines that only declare <code>canX</code>, <code>canY</code>, <code>houseX</code>, and <code>houseY</code>. Keep the <code>if</code> statements.</li>
+              <li>Piece B: delete the four lines that only declare <code>nextCanX</code>, <code>nextCanY</code>, <code>nextHouseX</code>, and <code>nextHouseY</code>. Keep the <code>if</code> statements.</li>
               <li>Piece C: remove the word <code>float</code> from <code>desired</code>, <code>turn</code>, and <code>distance</code>. Keep the assignments.</li>
             </ul>
             <p>Pieces D, E, F, G, H, and I stay as you wrote them. Paste those unchanged every time.</p>
@@ -6339,29 +6339,29 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       },
       l3gc2: {
         cases: [
-          codingCase("bestCan = 1", "int bestCan = 1;\n" + l3Map, [ev("canX", "float", 10), ev("canY", "float", 11), ev("houseX", "float", 40), ev("houseY", "float", 41)]),
-          codingCase("bestCan = 2", "int bestCan = 2;\n" + l3Map, [ev("canX", "float", 20), ev("canY", "float", 21), ev("houseX", "float", 50), ev("houseY", "float", 51)]),
-          codingCase("bestCan = 3", "int bestCan = 3;\n" + l3Map, [ev("canX", "float", 30), ev("canY", "float", 31), ev("houseX", "float", 60), ev("houseY", "float", 61)])
+          codingCase("bestCan = 1", "int bestCan = 1;\n" + l3Map, [ev("nextCanX", "float", 10), ev("nextCanY", "float", 11), ev("nextHouseX", "float", 40), ev("nextHouseY", "float", 41)]),
+          codingCase("bestCan = 2", "int bestCan = 2;\n" + l3Map, [ev("nextCanX", "float", 20), ev("nextCanY", "float", 21), ev("nextHouseX", "float", 50), ev("nextHouseY", "float", 51)]),
+          codingCase("bestCan = 3", "int bestCan = 3;\n" + l3Map, [ev("nextCanX", "float", 30), ev("nextCanY", "float", 31), ev("nextHouseX", "float", 60), ev("nextHouseY", "float", 61)])
         ]
       },
       l3gc3: {
         calls: true,
         callUses: l3DriveCalls,
         cases: [
-          l3Move("can is east, already facing east", "float x = 0;\nfloat heading = 0;\nfloat canX = 400;", { desired: 0, turn: 0, heading: 0, distance: 400, where: "x", at: 400 }),
-          l3Move("can is west", "float x = 500;\nfloat heading = 0;\nfloat canX = 100;", { desired: 180, turn: 180, heading: 180, distance: 400, where: "x", at: 100 }),
-          l3Move("x already matches canX", "float x = 250;\nfloat heading = 90;\nfloat canX = 250;", { desired: 90, turn: 0, heading: 90, distance: 0, where: "x", at: 250 }),
-          l3Move("facing south, can is east", "float x = 0;\nfloat heading = 270;\nfloat canX = 80;", { desired: 0, turn: 90, heading: 0, distance: 80, where: "x", at: 80 })
+          l3Move("can is east, already facing east", "float x = 0;\nfloat heading = 0;\nfloat nextCanX = 400;", { desired: 0, turn: 0, heading: 0, distance: 400, where: "x", at: 400 }),
+          l3Move("can is west", "float x = 500;\nfloat heading = 0;\nfloat nextCanX = 100;", { desired: 180, turn: 180, heading: 180, distance: 400, where: "x", at: 100 }),
+          l3Move("x already matches nextCanX", "float x = 250;\nfloat heading = 90;\nfloat nextCanX = 250;", { desired: 90, turn: 0, heading: 90, distance: 0, where: "x", at: 250 }),
+          l3Move("facing south, can is east", "float x = 0;\nfloat heading = 270;\nfloat nextCanX = 80;", { desired: 0, turn: 90, heading: 0, distance: 80, where: "x", at: 80 })
         ]
       },
       l3gc4: {
         calls: true,
         callUses: l3DriveCalls,
         cases: [
-          l3Move("can is north", l3Ready(["float y = 0;", "float heading = 0;", "float canY = 300;"]), { desired: 90, turn: 90, heading: 90, distance: 300, where: "y", at: 300 }),
-          l3Move("can is south", l3Ready(["float y = 400;", "float heading = 90;", "float canY = 50;"]), { desired: 270, turn: 180, heading: 270, distance: 350, where: "y", at: 50 }),
-          l3Move("facing east, can is south", l3Ready(["float y = 100;", "float heading = 0;", "float canY = 0;"]), { desired: 270, turn: -90, heading: 270, distance: 100, where: "y", at: 0 }),
-          l3Move("y already matches canY", l3Ready(["float y = 40;", "float heading = 180;", "float canY = 40;"]), { desired: 180, turn: 0, heading: 180, distance: 0, where: "y", at: 40 })
+          l3Move("can is north", l3Ready(["float y = 0;", "float heading = 0;", "float nextCanY = 300;"]), { desired: 90, turn: 90, heading: 90, distance: 300, where: "y", at: 300 }),
+          l3Move("can is south", l3Ready(["float y = 400;", "float heading = 90;", "float nextCanY = 50;"]), { desired: 270, turn: 180, heading: 270, distance: 350, where: "y", at: 50 }),
+          l3Move("facing east, can is south", l3Ready(["float y = 100;", "float heading = 0;", "float nextCanY = 0;"]), { desired: 270, turn: -90, heading: 270, distance: 100, where: "y", at: 0 }),
+          l3Move("y already matches nextCanY", l3Ready(["float y = 40;", "float heading = 180;", "float nextCanY = 40;"]), { desired: 180, turn: 0, heading: 180, distance: 0, where: "y", at: 40 })
         ]
       },
       l3gc5: {
@@ -6373,18 +6373,18 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
         calls: true,
         callUses: l3DriveCalls,
         cases: [
-          l3Move("x already matches houseX", l3Ready(["float x = 80;", "float heading = 90;", "float houseX = 80;"]), { desired: 90, turn: 0, heading: 90, distance: 0, where: "x", at: 80 }),
-          l3Move("house is west", l3Ready(["float x = 200;", "float heading = 90;", "float houseX = 50;"]), { desired: 180, turn: 90, heading: 180, distance: 150, where: "x", at: 50 }),
-          l3Move("facing south, house is east", l3Ready(["float x = 0;", "float heading = 270;", "float houseX = 25;"]), { desired: 0, turn: 90, heading: 0, distance: 25, where: "x", at: 25 })
+          l3Move("x already matches nextHouseX", l3Ready(["float x = 80;", "float heading = 90;", "float nextHouseX = 80;"]), { desired: 90, turn: 0, heading: 90, distance: 0, where: "x", at: 80 }),
+          l3Move("house is west", l3Ready(["float x = 200;", "float heading = 90;", "float nextHouseX = 50;"]), { desired: 180, turn: 90, heading: 180, distance: 150, where: "x", at: 50 }),
+          l3Move("facing south, house is east", l3Ready(["float x = 0;", "float heading = 270;", "float nextHouseX = 25;"]), { desired: 0, turn: 90, heading: 0, distance: 25, where: "x", at: 25 })
         ]
       },
       l3gc7: {
         calls: true,
         callUses: l3DriveCalls,
         cases: [
-          l3Move("house is north", l3Ready(["float y = 10;", "float heading = 180;", "float houseY = 90;"]), { desired: 90, turn: -90, heading: 90, distance: 80, where: "y", at: 90 }),
-          l3Move("house is south", l3Ready(["float y = 70;", "float heading = 0;", "float houseY = 20;"]), { desired: 270, turn: -90, heading: 270, distance: 50, where: "y", at: 20 }),
-          l3Move("y already matches houseY", l3Ready(["float y = 15;", "float heading = 270;", "float houseY = 15;"]), { desired: 270, turn: 0, heading: 270, distance: 0, where: "y", at: 15 })
+          l3Move("house is north", l3Ready(["float y = 10;", "float heading = 180;", "float nextHouseY = 90;"]), { desired: 90, turn: -90, heading: 90, distance: 80, where: "y", at: 90 }),
+          l3Move("house is south", l3Ready(["float y = 70;", "float heading = 0;", "float nextHouseY = 20;"]), { desired: 270, turn: -90, heading: 270, distance: 50, where: "y", at: 20 }),
+          l3Move("y already matches nextHouseY", l3Ready(["float y = 15;", "float heading = 270;", "float nextHouseY = 15;"]), { desired: 270, turn: 0, heading: 270, distance: 0, where: "y", at: 15 })
         ]
       },
       l3gc8: {
@@ -6422,12 +6422,12 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       pdx2: "Use > for leftBigger and == for same.",
       pdx3: "askedSpeed is the percent the driver asked for. If it is at or above kMaxPercent, store kMaxPercent in motorPercent. Use the name kMaxPercent, not only the number 80.",
       l3gc1: "Start with Can 1: bestCan is 1 and bestPriority is priority1. If Can 2 has a greater priority, remember Can 2. Then do the same check for Can 3.",
-      l3gc2: "Declare canX, canY, houseX, and houseY once. When bestCan is 1, copy can 1 and house 1. Do the same for 2 and 3.",
-      l3gc3: "desired starts at heading. canX greater than x faces east (0). canX less than x faces west (180). turn is desired minus heading. Subtract 360 when turn is greater than 180, and add 360 when turn is less than -180. Exactly 180 stays 180. Turn left by turn, set heading to desired, drive the positive distance, and set x to canX.",
-      l3gc4: "Assign the variables Piece C already created. canY greater than y faces north (90). canY less than y faces south (270). Use the same turn fix and a positive distance, then set y to canY.",
+      l3gc2: "Declare nextCanX, nextCanY, nextHouseX, and nextHouseY once. When bestCan is 1, copy can 1 and house 1. Do the same for 2 and 3.",
+      l3gc3: "desired starts at heading. nextCanX greater than x faces east (0). nextCanX less than x faces west (180). turn is desired minus heading. Subtract 360 when turn is greater than 180, and add 360 when turn is less than -180. Exactly 180 stays 180. Turn left by turn, set heading to desired, drive the positive distance, and set x to nextCanX.",
+      l3gc4: "Assign the variables Piece C already created. nextCanY greater than y faces north (90). nextCanY less than y faces south (270). Use the same turn fix and a positive distance, then set y to nextCanY.",
       l3gc5: "The order is armDown, clawOpen, clawClosed, armUp. Arm lines use ArmMotor.spinToPosition. Claw lines use ClawMotor.spinToPosition. Pass degrees, then true.",
-      l3gc6: "This is the X drive with houseX. Set x to houseX at the end. Assign desired, turn, and distance. Do not declare them again.",
-      l3gc7: "This is the Y drive with houseY. Set y to houseY at the end.",
+      l3gc6: "This is the X drive with nextHouseX. Set x to nextHouseX at the end. Assign desired, turn, and distance. Do not declare them again.",
+      l3gc7: "This is the Y drive with nextHouseY. Set y to nextHouseY at the end.",
       l3gc8: "Putting the can down uses the same four lines as picking it up: armDown, clawOpen, clawClosed, armUp.",
       l3gc9: "If bestCan is 1, set priority1 to -1. Use else if for Can 2 and Can 3, so only the delivered can changes."
     };
