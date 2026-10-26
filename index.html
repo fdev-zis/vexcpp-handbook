@@ -1348,6 +1348,51 @@
       border-left-color: white;
     }
 
+    nav.sidebar a.guide-link.active .new-badge {
+      background: white;
+      color: #1d4ed8;
+    }
+
+    .reset-menu {
+      position: relative;
+    }
+
+    .reset-menu-panel {
+      position: absolute;
+      top: calc(100% + 0.35rem);
+      right: 0;
+      z-index: 30;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      min-width: 9.5rem;
+      padding: 0.45rem;
+      background: #0f172a;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    .reset-menu-panel[hidden] {
+      display: none;
+    }
+
+    .reset-menu-panel button {
+      background: rgba(255, 255, 255, 0.08);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 6px;
+      padding: 0.45rem 0.65rem;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .reset-menu-panel button:hover {
+      background: rgba(255, 255, 255, 0.16);
+    }
+
     .guide-step-title {
       margin: 1.5rem 0 0.35rem;
       font-size: 1.05rem;
@@ -2075,7 +2120,13 @@
           <div class="progress-bar-bg">
             <div id="progress-bar" class="progress-bar-fill"></div>
           </div>
-          <button class="btn-reset" onclick="resetAllQuizzes()">Reset Progress</button>
+          <div class="reset-menu">
+            <button class="btn-reset" type="button" id="reset-menu-button" aria-expanded="false" aria-controls="reset-menu-panel">Reset Progress</button>
+            <div id="reset-menu-panel" class="reset-menu-panel" hidden>
+              <button type="button" id="reset-section">This section</button>
+              <button type="button" id="reset-all">All sections</button>
+            </div>
+          </div>
         </div>
         <p id="progress-file-status" class="progress-file-status" role="status"></p>
       </div>
@@ -2100,7 +2151,7 @@
         <li><a class="practice-link" href="#practice-decisions"><svg class="practice-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M11.3.7a1.4 1.4 0 0 1 2 0l2 2a1.4 1.4 0 0 1 0 2L6.6 13.4 2.4 14.5a.6.6 0 0 1-.7-.7l1.1-4.2L11.3.7zM4 10.2l-.5 2.3 2.3-.5 6.8-6.8-1.8-1.8L4 10.2z"/></svg>Exercises: Decisions &amp; Constants</a></li>
         <li><a class="playground-link" href="#level2-playground"><svg class="practice-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M2 8.2h7.1L7.2 6.3l1.1-1.1L12.3 9 8.3 13l-1.1-1.1 1.9-1.9H2v-1.8z"/></svg>Level 2 Playground</a></li>
         <li><a class="playground-link" href="#level3-playground"><svg class="practice-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M2 8.2h7.1L7.2 6.3l1.1-1.1L12.3 9 8.3 13l-1.1-1.1 1.9-1.9H2v-1.8z"/></svg>Level 3 Playground</a></li>
-        <li><a class="guide-link" href="#level3-guided"><svg class="practice-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M2.2 2.2h2.2v2.2H2.2V2.2zm3.4 0h8.2v2.2H5.6V2.2zM2.2 6.9h2.2v2.2H2.2V6.9zm3.4 0h8.2v2.2H5.6V6.9zM2.2 11.6h2.2V13.8H2.2V11.6zm3.4 0h8.2V13.8H5.6V11.6z"/></svg>Level 3 Guided Build</a></li>
+        <li><a class="guide-link" href="#level3-guided"><svg class="practice-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M2.2 2.2h2.2v2.2H2.2V2.2zm3.4 0h8.2v2.2H5.6V2.2zM2.2 6.9h2.2v2.2H2.2V6.9zm3.4 0h8.2v2.2H5.6V6.9zM2.2 11.6h2.2V13.8H2.2V11.6zm3.4 0h8.2V13.8H5.6V11.6z"/></svg>Level 3 Guided Build <span class="new-badge">NEW</span></a></li>
         <li><a href="#section7">Sec 9: Displaying Data <span class="wip-badge" title="Work in progress"><svg class="wip-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.1 1.2h1.8L13.4 12H2.6L7.1 1.2z"/><path fill="currentColor" d="M1.5 12.6h13v2h-13z"/></svg>WIP</span></a></li>
         <li><a href="#section8">Sec 10: for Loops <span class="wip-badge" title="Work in progress"><svg class="wip-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.1 1.2h1.8L13.4 12H2.6L7.1 1.2z"/><path fill="currentColor" d="M1.5 12.6h13v2h-13z"/></svg>WIP</span></a></li>
         <li><a href="#section9">Sec 11: Type Casting <span class="wip-badge" title="Work in progress"><svg class="wip-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.1 1.2h1.8L13.4 12H2.6L7.1 1.2z"/><path fill="currentColor" d="M1.5 12.6h13v2h-13z"/></svg>WIP</span></a></li>
@@ -3620,6 +3671,7 @@ ArmMotor.spinToPosition(armUp, degrees, true);</code></pre>
       <section id="level3-guided" class="card">
         <div class="section-header">
           <span class="section-tag guide">Guided build</span>
+          <span class="new-badge">NEW</span>
           <h2>Level 3 Guided Build</h2>
         </div>
         <p>You will write the whole Level 3 program yourself, one small question at a time. Some questions ask you to think, some to choose, and some to write a few lines of code. Keep every piece of code you write. At the end you will paste the pieces into the Level 3 Playground, and the robot will complete the mission.</p>
@@ -7216,26 +7268,94 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       });
     }
 
+    function clearQuizSurface(root) {
+      root.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(input => { input.checked = false; });
+      root.querySelectorAll(".feedback").forEach(fb => {
+        fb.style.display = "";
+        fb.className = "feedback";
+        fb.textContent = "";
+      });
+      root.querySelectorAll(".coding-block").forEach(block => {
+        const panel = block.querySelector(".test-results");
+        if (panel) panel.replaceChildren();
+        syncTestPlaceholder(block);
+        const editor = block.querySelector(".code-editor");
+        const qid = block.getAttribute("data-qid");
+        if (editor && qid && codingStarters[qid]) editor.value = codingStarters[qid];
+        if (editor) refreshEditorHighlight(editor);
+      });
+      root.querySelectorAll(".short-answer").forEach(area => { area.value = ""; });
+      root.querySelectorAll(".trace-block input").forEach(input => { input.value = ""; });
+      root.querySelectorAll(".model-answer").forEach(model => model.setAttribute("hidden", ""));
+      root.querySelectorAll(".btn-model").forEach(button => {
+        button.setAttribute("aria-expanded", "false");
+        button.textContent = "Model answer";
+      });
+    }
+
+    function closeResetMenu() {
+      const panel = document.getElementById("reset-menu-panel");
+      const button = document.getElementById("reset-menu-button");
+      if (panel) panel.setAttribute("hidden", "");
+      if (button) button.setAttribute("aria-expanded", "false");
+    }
+
+    function resetSectionProgress() {
+      const section = document.querySelector("section.card.active");
+      if (!section) return;
+      const title = section.querySelector("h2") ? section.querySelector("h2").textContent : "this section";
+      const ids = [...section.querySelectorAll("[data-qid]")].map(el => el.getAttribute("data-qid")).filter(Boolean);
+      if (!ids.length) {
+        alert("This section has no quiz questions to reset.");
+        closeResetMenu();
+        return;
+      }
+      if (!confirm("Reset your answers in \"" + title + "\"? Your other sections stay as they are.")) return;
+      const answers = loadSavedAnswers();
+      const code = loadSavedCode();
+      ids.forEach(id => {
+        delete answers[id];
+        delete code[id];
+      });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(answers));
+      localStorage.setItem(CODE_STORAGE_KEY, JSON.stringify(code));
+      clearQuizSurface(section);
+      updateProgress();
+      closeResetMenu();
+    }
+
     function resetAllQuizzes() {
       if (confirm("Are you sure you want to reset all your quiz answers?")) {
         localStorage.removeItem(STORAGE_KEY);
         localStorage.removeItem(CODE_STORAGE_KEY);
-        document.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(input => input.checked = false);
-        document.querySelectorAll('.feedback').forEach(fb => {
-          fb.style.display = '';
-          fb.className = 'feedback';
-          fb.textContent = '';
-        });
-        document.querySelectorAll('.test-results').forEach(panel => panel.replaceChildren());
-        document.querySelectorAll('.code-editor').forEach(editor => {
-          const block = editor.closest('.coding-block');
-          const qid = block ? block.getAttribute('data-qid') : '';
-          if (qid && codingStarters[qid]) editor.value = codingStarters[qid];
-          refreshEditorHighlight(editor);
-        });
-        setProgressStatus('');
+        clearQuizSurface(document);
+        setProgressStatus("");
         updateProgress();
+        closeResetMenu();
       }
+    }
+
+    function bindResetControls() {
+      const menuButton = document.getElementById("reset-menu-button");
+      const panel = document.getElementById("reset-menu-panel");
+      const sectionButton = document.getElementById("reset-section");
+      const allButton = document.getElementById("reset-all");
+      if (!menuButton || !panel || !sectionButton || !allButton) return;
+      menuButton.addEventListener("click", (event) => {
+        event.stopPropagation();
+        const open = panel.hasAttribute("hidden");
+        if (open) panel.removeAttribute("hidden");
+        else panel.setAttribute("hidden", "");
+        menuButton.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+      sectionButton.addEventListener("click", resetSectionProgress);
+      allButton.addEventListener("click", resetAllQuizzes);
+      document.addEventListener("click", (event) => {
+        if (!event.target.closest(".reset-menu")) closeResetMenu();
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") closeResetMenu();
+      });
     }
 
     const traceDemo = {
@@ -7795,6 +7915,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       initGuidePanels();
       initPageNavigationControls();
       bindProgressFileControls();
+      bindResetControls();
     });
   </script>
 
