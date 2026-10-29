@@ -385,6 +385,11 @@
       border-radius: 0;
     }
 
+    #section-boolean table code {
+      background-color: #f1f5f9;
+      color: #0f172a;
+    }
+
     .code-title {
       background: #1e293b;
       color: #94a3b8;
@@ -456,17 +461,50 @@
     }
 
     .vocab-box ul {
-      list-style: none;
-      padding-left: 0;
+      list-style: disc;
+      padding-left: 1.35rem;
+      margin: 0.15rem 0 0;
     }
 
     .vocab-box li {
-      margin-bottom: 0.4rem;
+      margin-bottom: 0.55rem;
       font-size: 0.875rem;
+      padding-left: 0.2rem;
+    }
+
+    .vocab-box li::marker {
+      color: #16a34a;
     }
 
     .vocab-box li:last-child {
       margin-bottom: 0;
+    }
+
+    .example-box {
+      background-color: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-left: 4px solid var(--primary-light);
+      padding: 0.75rem 1rem;
+      border-radius: 0 6px 6px 0;
+      margin: 0.35rem 0 1.25rem;
+    }
+
+    .example-box p {
+      margin-bottom: 0.45rem;
+    }
+
+    .example-box p:last-child {
+      margin-bottom: 0;
+    }
+
+    .example-kicker {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--primary-light);
+      margin-bottom: 0.2rem;
     }
 
     .quiz-container {
@@ -2151,10 +2189,11 @@
         <li><a class="practice-link" href="#practice-decisions"><svg class="practice-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M11.3.7a1.4 1.4 0 0 1 2 0l2 2a1.4 1.4 0 0 1 0 2L6.6 13.4 2.4 14.5a.6.6 0 0 1-.7-.7l1.1-4.2L11.3.7zM4 10.2l-.5 2.3 2.3-.5 6.8-6.8-1.8-1.8L4 10.2z"/></svg>Exercises: Decisions &amp; Constants</a></li>
         <li><a class="playground-link" href="#level2-playground"><svg class="practice-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M2 8.2h7.1L7.2 6.3l1.1-1.1L12.3 9 8.3 13l-1.1-1.1 1.9-1.9H2v-1.8z"/></svg>Level 2 Playground</a></li>
         <li><a class="playground-link" href="#level3-playground"><svg class="practice-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M2 8.2h7.1L7.2 6.3l1.1-1.1L12.3 9 8.3 13l-1.1-1.1 1.9-1.9H2v-1.8z"/></svg>Level 3 Playground</a></li>
-        <li><a class="guide-link" href="#level3-guided"><svg class="practice-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M2.2 2.2h2.2v2.2H2.2V2.2zm3.4 0h8.2v2.2H5.6V2.2zM2.2 6.9h2.2v2.2H2.2V6.9zm3.4 0h8.2v2.2H5.6V6.9zM2.2 11.6h2.2V13.8H2.2V11.6zm3.4 0h8.2V13.8H5.6V11.6z"/></svg>Level 3 Guided Build <span class="new-badge">NEW</span></a></li>
-        <li><a href="#section7">Sec 9: Displaying Data <span class="wip-badge" title="Work in progress"><svg class="wip-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.1 1.2h1.8L13.4 12H2.6L7.1 1.2z"/><path fill="currentColor" d="M1.5 12.6h13v2h-13z"/></svg>WIP</span></a></li>
-        <li><a href="#section8">Sec 10: for Loops <span class="wip-badge" title="Work in progress"><svg class="wip-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.1 1.2h1.8L13.4 12H2.6L7.1 1.2z"/><path fill="currentColor" d="M1.5 12.6h13v2h-13z"/></svg>WIP</span></a></li>
-        <li><a href="#section9">Sec 11: Type Casting <span class="wip-badge" title="Work in progress"><svg class="wip-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.1 1.2h1.8L13.4 12H2.6L7.1 1.2z"/><path fill="currentColor" d="M1.5 12.6h13v2h-13z"/></svg>WIP</span></a></li>
+        <li><a class="guide-link" href="#level3-guided"><svg class="practice-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M2.2 2.2h2.2v2.2H2.2V2.2zm3.4 0h8.2v2.2H5.6V2.2zM2.2 6.9h2.2v2.2H2.2V6.9zm3.4 0h8.2v2.2H5.6V6.9zM2.2 11.6h2.2V13.8H2.2V11.6zm3.4 0h8.2V13.8H5.6V11.6z"/></svg>Level 3 Guided Build</a></li>
+        <li><a href="#section-boolean">Sec 9: Boolean Expressions <span class="new-badge">NEW</span></a></li>
+        <li><a href="#section7">Sec 10: Displaying Data <span class="wip-badge" title="Work in progress"><svg class="wip-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.1 1.2h1.8L13.4 12H2.6L7.1 1.2z"/><path fill="currentColor" d="M1.5 12.6h13v2h-13z"/></svg>WIP</span></a></li>
+        <li><a href="#section8">Sec 11: for Loops <span class="wip-badge" title="Work in progress"><svg class="wip-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.1 1.2h1.8L13.4 12H2.6L7.1 1.2z"/><path fill="currentColor" d="M1.5 12.6h13v2h-13z"/></svg>WIP</span></a></li>
+        <li><a href="#section9">Sec 12: Type Casting <span class="wip-badge" title="Work in progress"><svg class="wip-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.1 1.2h1.8L13.4 12H2.6L7.1 1.2z"/><path fill="currentColor" d="M1.5 12.6h13v2h-13z"/></svg>WIP</span></a></li>
       </ul>
     </nav>
 
@@ -2927,7 +2966,7 @@ float farCm = ...;</code></pre>
         <div class="code-title">BRANCHING.CPP - SINGLE BRANCH EXECUTION</div>
 <pre><code>bool systemReady = true;
 
-if (systemReady) {
+if (systemReady == true) {
     // Runs ONLY when systemReady is true
     int status = 1;
 } else {
@@ -2935,7 +2974,7 @@ if (systemReady) {
     int status = 0;
 }</code></pre>
 
-        <p><strong>DECISION RULE:</strong> If the condition inside <code>if (...)</code> evaluates to <code>true</code>, the top block executes and the <code>else</code> block is completely skipped. If it is <code>false</code>, the <code>if</code> block is skipped and the <code>else</code> block executes.</p>
+        <p><strong>DECISION RULE:</strong> When the condition is a <code>bool</code>, compare it with <code>true</code>, as in <code>if (systemReady == true)</code>. If that condition evaluates to <code>true</code>, the top block executes and the <code>else</code> block is completely skipped. If it is <code>false</code>, the <code>if</code> block is skipped and the <code>else</code> block executes.</p>
 
         <div class="pitfall-box">
           <h4>COMMON PITFALL: MISSING CURLY BRACES <code>{}</code></h4>
@@ -3029,13 +3068,7 @@ if (systemReady) {
 <pre><code>bool systemReady = ...;</code></pre>
             <div class="code-editor-wrap">
               <pre class="code-highlight" aria-hidden="true"><code></code></pre>
-              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Set status from systemReady">int status;
-
-if (systemReady) {
-
-} else {
-
-}
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Set status from systemReady">// Set status from systemReady.
 </textarea>
             </div>
             <button type="button" class="btn-run">Run tests</button>
@@ -3049,13 +3082,7 @@ if (systemReady) {
 <pre><code>float distance = ...;</code></pre>
             <div class="code-editor-wrap">
               <pre class="code-highlight" aria-hidden="true"><code></code></pre>
-              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Set warning from distance">int warning;
-
-if (distance < 20) {
-
-} else {
-
-}
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Set warning from distance">// Set warning from distance.
 </textarea>
             </div>
             <button type="button" class="btn-run">Run tests</button>
@@ -3352,8 +3379,7 @@ const int kMaxSpeed = 100;
 <pre><code>int requested = ...;</code></pre>
             <div class="code-editor-wrap">
               <pre class="code-highlight" aria-hidden="true"><code></code></pre>
-              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Cap speed with kMaxSpeed">const int kMaxSpeed = 100;
-int speed;
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Cap speed with kMaxSpeed">// Cap speed with kMaxSpeed.
 </textarea>
             </div>
             <button type="button" class="btn-run">Run tests</button>
@@ -3434,13 +3460,7 @@ int speed;
 int baseSpeed = ...;</code></pre>
             <div class="code-editor-wrap">
               <pre class="code-highlight" aria-hidden="true"><code></code></pre>
-              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Set driveSpeed from pathClear">int driveSpeed;
-
-if (pathClear) {
-
-} else {
-
-}
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Set driveSpeed from pathClear">// Set driveSpeed from pathClear.
 </textarea>
             </div>
             <button type="button" class="btn-run">Run tests</button>
@@ -3469,8 +3489,7 @@ int right = ...;</code></pre>
 <pre><code>int askedSpeed = ...;</code></pre>
             <div class="code-editor-wrap">
               <pre class="code-highlight" aria-hidden="true"><code></code></pre>
-              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Cap motor percent with kMaxPercent">const int kMaxPercent = 80;
-int motorPercent;
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Cap motor percent with kMaxPercent">// Cap motorPercent with kMaxPercent.
 </textarea>
             </div>
             <button type="button" class="btn-run">Run tests</button>
@@ -3671,7 +3690,6 @@ ArmMotor.spinToPosition(armUp, degrees, true);</code></pre>
       <section id="level3-guided" class="card">
         <div class="section-header">
           <span class="section-tag guide">Guided build</span>
-          <span class="new-badge">NEW</span>
           <h2>Level 3 Guided Build</h2>
         </div>
         <p>You will write the whole Level 3 program yourself, one small question at a time. Some questions ask you to think, some to choose, and some to write a few lines of code. Keep every piece of code you write. At the end you will paste the pieces into the Level 3 Playground, and the robot will complete the mission.</p>
@@ -4176,9 +4194,419 @@ int priority3 = ...;</code></pre>
       </section>
 
       <!-- SECTION 9 -->
-      <section id="section7" class="card">
+      <section id="section-boolean" class="card">
         <div class="section-header">
           <span class="section-tag">Section 9</span>
+          <span class="new-badge">NEW</span>
+          <h2>Boolean Expressions</h2>
+        </div>
+        <p>A warehouse bot is rolling toward a shelf when a person steps into the aisle. At the same moment, a Mars rover crests a rock and has to choose: keep driving, or freeze before a drop. Neither machine guesses. Each one combines yes-or-no facts with <strong>Boolean logic</strong>, then the motors move.</p>
+
+        <p><strong>Logical AND</strong> (<code>&amp;&amp;</code>) is the mission-critical dual-check. Read <code>&amp;&amp;</code> as the word <strong>and</strong>. The result is true only when both sides are true. One false side makes the whole expression false.</p>
+        <div class="example-box">
+          <span class="example-kicker">Example</span>
+          <p><code>objectDetected &amp;&amp; gripperReady</code> means object detected <strong>and</strong> gripper ready. The arm picks up only when both are true.</p>
+        </div>
+
+        <p><strong>Logical OR</strong> (<code>||</code>) is the emergency safety-trigger. Read <code>||</code> as the word <strong>or</strong>. The result is true when at least one side is true. It is false only when both sides are false.</p>
+        <div class="example-box">
+          <span class="example-kicker">Example</span>
+          <p><code>bumperPressed || cliffDetected</code> means bumper pressed <strong>or</strong> cliff detected. The rover halts when either one is true.</p>
+        </div>
+
+        <p><strong>Logical NOT</strong> (<code>!</code>) is the sensor inverter. It flips the next value: true becomes false, and false becomes true.</p>
+        <div class="example-box">
+          <span class="example-kicker">Example</span>
+          <p><code>!(pathClear)</code></p>
+        </div>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Operator</th>
+              <th>Name</th>
+              <th>True when</th>
+              <th>Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>&amp;&amp;</code></td>
+              <td>Logical AND</td>
+              <td>Both sides are true</td>
+              <td><code>objectDetected &amp;&amp; gripperReady</code></td>
+            </tr>
+            <tr>
+              <td><code>||</code></td>
+              <td>Logical OR</td>
+              <td>At least one side is true</td>
+              <td><code>bumperPressed || cliffDetected</code></td>
+            </tr>
+            <tr>
+              <td><code>!</code></td>
+              <td>Logical NOT</td>
+              <td>The next value is false</td>
+              <td><code>!(pathClear)</code></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>A <code>bool</code> variable already holds <code>true</code> or <code>false</code>. Using its name is the check. <code>pathClear</code> means "is the path clear?" Writing <code>pathClear == true</code> asks that same question in a longer way. Both are correct, and both give the same result.</p>
+        <div class="example-box">
+          <span class="example-kicker">Example</span>
+          <p><code>pathClear &amp;&amp; batteryOk</code> means the same thing as <code>pathClear == true &amp;&amp; batteryOk == true</code>. Both are true only when the path is clear <strong>and</strong> the battery is ready.</p>
+        </div>
+
+        <p><code>!</code> flips only the next value. Put parentheses around a larger check when the whole check should flip. <code>&amp;&amp;</code> (<strong>and</strong>) is grouped before <code>||</code> (<strong>or</strong>), the way <code>*</code> is grouped before <code>+</code>.</p>
+        <div class="example-box">
+          <span class="example-kicker">Example</span>
+          <p><code>!(pathClear &amp;&amp; batteryOk)</code> flips the whole <strong>and</strong>. <code>bumperPressed || pathClear &amp;&amp; batteryOk</code> means <code>bumperPressed || (pathClear &amp;&amp; batteryOk)</code>: the bumper, <strong>or</strong> the path <strong>and</strong> the battery together.</p>
+        </div>
+
+        <p>Relational operators such as <code>&lt;</code>, <code>&gt;</code>, and <code>==</code> already produce <code>true</code> or <code>false</code>. Join those results with <code>&amp;&amp;</code> and <code>||</code> the same way you join bools.</p>
+        <div class="example-box">
+          <span class="example-kicker">Examples</span>
+          <p><code>distance &lt; 20 &amp;&amp; batteryOk</code> is true when the distance is under 20 <strong>and</strong> the battery is ready.</p>
+          <p><code>speed &gt;= 50 || bumperPressed</code> is true when the speed is at least 50 <strong>or</strong> the bumper is pressed.</p>
+          <p><code>left &gt; right &amp;&amp; !pathClear</code> is true when the left reading is greater <strong>and</strong> the path is not clear.</p>
+        </div>
+
+        <p>In each table below, <code>pathClear</code> and <code>batteryOk</code> are the inputs. The third column is the result. The last column says what the rover does.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th><code>pathClear</code></th>
+              <th><code>batteryOk</code></th>
+              <th><code>&amp;&amp;</code></th>
+              <th>What the rover does</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>true</code></td>
+              <td><code>true</code></td>
+              <td><code>true</code></td>
+              <td>Drives. The path is open and the battery is ready.</td>
+            </tr>
+            <tr>
+              <td><code>true</code></td>
+              <td><code>false</code></td>
+              <td><code>false</code></td>
+              <td>Waits. The path is open, but the battery is not ready.</td>
+            </tr>
+            <tr>
+              <td><code>false</code></td>
+              <td><code>true</code></td>
+              <td><code>false</code></td>
+              <td>Waits. The battery is ready, but the path is blocked.</td>
+            </tr>
+            <tr>
+              <td><code>false</code></td>
+              <td><code>false</code></td>
+              <td><code>false</code></td>
+              <td>Waits. The path is blocked and the battery is not ready.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table>
+          <thead>
+            <tr>
+              <th><code>pathClear</code></th>
+              <th><code>batteryOk</code></th>
+              <th><code>||</code></th>
+              <th>What the rover does</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>true</code></td>
+              <td><code>true</code></td>
+              <td><code>true</code></td>
+              <td>Acts. At least one sensor says yes, and both do.</td>
+            </tr>
+            <tr>
+              <td><code>true</code></td>
+              <td><code>false</code></td>
+              <td><code>true</code></td>
+              <td>Acts. The open path alone is enough.</td>
+            </tr>
+            <tr>
+              <td><code>false</code></td>
+              <td><code>true</code></td>
+              <td><code>true</code></td>
+              <td>Acts. A ready battery alone is enough.</td>
+            </tr>
+            <tr>
+              <td><code>false</code></td>
+              <td><code>false</code></td>
+              <td><code>false</code></td>
+              <td>Waits. Neither sensor says yes.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="code-title">LOGIC.CPP - COMBINING BOOL CONDITIONS</div>
+<pre><code>bool pathClear = true;
+bool batteryOk = false;
+bool bumperPressed = true;
+
+// Both sensors must be true.
+// Battery is false, so this is false.
+bool canDrive = pathClear == true &amp;&amp; batteryOk == true;
+
+// One true sensor is enough.
+// The bumper is pressed, so this is true.
+bool stopNow = bumperPressed == true || batteryOk == true;
+
+// Flip pathClear.
+// The path is open, so this is false.
+bool blocked = !(pathClear == true);
+
+if (canDrive == true) {
+    // Power the motors
+    int driveSpeed = 50;
+} else {
+    // Hold the motors
+    int driveSpeed = 0;
+}</code></pre>
+
+        <div class="pitfall-box">
+          <h4>COMMON PITFALL: A NOT THAT FLIPS ONLY THE NEXT VALUE</h4>
+          <p><code>!</code> flips only the next value. <code>!pathClear &amp;&amp; batteryOk</code> means the path is not clear, and the battery is ready. To flip a whole <code>&amp;&amp;</code> check, wrap that check in parentheses.</p>
+          <div class="example-box">
+            <span class="example-kicker">Example</span>
+            <p><code>!(pathClear &amp;&amp; batteryOk)</code></p>
+          </div>
+        </div>
+
+        <div class="vocab-box">
+          <h4>SECTION 9 VOCABULARY REVIEW</h4>
+          <ul>
+            <li><strong>Boolean Expression:</strong> An expression that evaluates to <code>true</code> or <code>false</code>. Example: <code>pathClear</code> and <code>distance &lt; 20 &amp;&amp; batteryOk</code>.</li>
+            <li><strong>Logical Operator:</strong> An operator that joins Boolean expressions or flips one. This section uses <code>&amp;&amp;</code>, <code>||</code>, and <code>!</code>.</li>
+            <li><strong>Logical AND (<code>&amp;&amp;</code>):</strong> True only when both sides are true. One false side makes the result false. Read it as <strong>and</strong>. Example: the arm moves only when <code>objectDetected</code> <strong>and</strong> <code>gripperReady</code> are both true.</li>
+            <li><strong>Logical OR (<code>||</code>):</strong> True when at least one side is true. False only when both sides are false. Read it as <strong>or</strong>. Example: the rover halts when <code>bumperPressed</code> <strong>or</strong> <code>cliffDetected</code> is true.</li>
+            <li><strong>Logical NOT (<code>!</code>):</strong> Flips the next Boolean value. True becomes false, and false becomes true. Example: <code>!(pathClear)</code>.</li>
+          </ul>
+        </div>
+
+        <p>Practice Boolean logic in this online game, then answer the questions below: <a href="https://engagedcs.com/boolean-game" target="_blank" rel="noopener noreferrer" style="color: var(--primary-light); font-weight: 600;">Boolean Game</a>.</p>
+
+        <div class="quiz-container">
+          <h3>SECTION 9 REVIEW QUESTIONS</h3>
+
+          <div class="question-block" data-qid="beq1">
+            <div class="question-text">1. Which operator means both sides must be true?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq1" value="A"> <code>||</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq1" value="B"> <code>&amp;&amp;</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq1" value="C"> <code>!</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq1" value="D"> <code>==</code></label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="beq2">
+            <div class="question-text">2. <code>pathClear</code> is <code>true</code> and <code>batteryOk</code> is <code>false</code>. What is <code>pathClear == true &amp;&amp; batteryOk == true</code>?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq2" value="A"> <code>true</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq2" value="B"> <code>false</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq2" value="C"> <code>pathClear</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq2" value="D"> A syntax error</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="beq3">
+            <div class="question-text">3. Which operator is true when at least one side is true?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq3" value="A"> <code>&amp;&amp;</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq3" value="B"> <code>||</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq3" value="C"> <code>!</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq3" value="D"> <code>=</code></label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="beq4">
+            <div class="question-text">4. <code>bumperPressed</code> is <code>false</code> and <code>limitHit</code> is <code>true</code>. What is <code>bumperPressed == true || limitHit == true</code>?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq4" value="A"> <code>false</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq4" value="B"> <code>true</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq4" value="C"> <code>1</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq4" value="D"> <code>limitHit</code></label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="beq5">
+            <div class="question-text">5. What does <code>!</code> do to a bool?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq5" value="A"> It stores a new value into the bool</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq5" value="B"> It flips true to false, and false to true</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq5" value="C"> It checks whether two values are equal</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq5" value="D"> It runs both branches of an <code>if</code></label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="beq6">
+            <div class="question-text">6. <code>pathClear</code> is <code>true</code>. What is <code>!(pathClear == true)</code>?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq6" value="A"> <code>true</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq6" value="B"> <code>false</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq6" value="C"> <code>pathClear</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq6" value="D"> The number <code>0</code></label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="beq7">
+            <div class="question-text">7. <code>pathClear</code> is <code>false</code>. What is <code>!(pathClear == true)</code>?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq7" value="A"> <code>true</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq7" value="B"> <code>false</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq7" value="C"> <code>pathClear</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq7" value="D"> A compiler error</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="beq8">
+            <div class="question-text">8. <code>pathClear</code> is <code>true</code>, <code>seesGoal</code> is <code>false</code>, and <code>batteryOk</code> is <code>false</code>. <code>&amp;&amp;</code> is grouped before <code>||</code>. What is <code>pathClear == true || seesGoal == true &amp;&amp; batteryOk == true</code>?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq8" value="A"> <code>true</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq8" value="B"> <code>false</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq8" value="C"> <code>pathClear</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq8" value="D"> A syntax error</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="beq9" data-multi="true">
+            <div class="question-text">9. <code>pathClear</code> is <code>true</code>, <code>batteryOk</code> is <code>true</code>, and <code>holdingCan</code> is <code>false</code>. Which expressions are <code>true</code>?</div>
+            <p class="question-hint">Select all that apply</p>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="checkbox" name="beq9" value="A"> <code>pathClear == true &amp;&amp; batteryOk == true</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="checkbox" name="beq9" value="B"> <code>pathClear == true &amp;&amp; holdingCan == true</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="checkbox" name="beq9" value="C"> <code>pathClear == true || holdingCan == true</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="checkbox" name="beq9" value="D"> <code>!(batteryOk == true)</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="checkbox" name="beq9" value="E"> <code>!(holdingCan == true)</code></label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="beq10b">
+            <div class="question-text">10. Which expression means the same thing as <code>pathClear &amp;&amp; batteryOk</code>?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq10b" value="A"> <code>pathClear || batteryOk</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq10b" value="B"> <code>pathClear == true &amp;&amp; batteryOk == true</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq10b" value="C"> <code>!(pathClear &amp;&amp; batteryOk)</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq10b" value="D"> <code>pathClear == false &amp;&amp; batteryOk == false</code></label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="beq11">
+            <div class="question-text">11. When does the <code>if</code> block in this program run?</div>
+            <div class="code-title">DRIVE CHECK</div>
+<pre><code>if (pathClear == true &amp;&amp; batteryOk == true) {
+    int driveSpeed = 50;
+} else {
+    int driveSpeed = 0;
+}</code></pre>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq11" value="A"> When <code>pathClear</code> is true, even if <code>batteryOk</code> is false</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq11" value="B"> When both <code>pathClear</code> and <code>batteryOk</code> are true</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq11" value="C"> When either one is true</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="beq11" value="D"> When both are false</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block coding-block" data-qid="bex1">
+            <div class="question-text">12. <code>pathClear</code> and <code>batteryOk</code> already exist. Create <code>bool canDrive</code> that is <span class="key-term">true</span> only when both are true. Use <code>&amp;&amp;</code>.</div>
+            <div class="code-title">ALREADY WRITTEN</div>
+<pre><code>bool pathClear = ...;
+bool batteryOk = ...;</code></pre>
+            <div class="code-editor-wrap">
+              <pre class="code-highlight" aria-hidden="true"><code></code></pre>
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Create canDrive from pathClear and batteryOk">// Create bool canDrive.
+</textarea>
+            </div>
+            <button type="button" class="btn-run">Run tests</button>
+            <div class="test-results" aria-live="polite"></div>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block coding-block" data-qid="bex2">
+            <div class="question-text">13. <code>bumperPressed</code> and <code>limitHit</code> already exist. Create <code>bool stopNow</code> that is <span class="key-term">true</span> when either one is true. Use <code>||</code>.</div>
+            <div class="code-title">ALREADY WRITTEN</div>
+<pre><code>bool bumperPressed = ...;
+bool limitHit = ...;</code></pre>
+            <div class="code-editor-wrap">
+              <pre class="code-highlight" aria-hidden="true"><code></code></pre>
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Create stopNow from bumperPressed and limitHit">// Create bool stopNow.
+</textarea>
+            </div>
+            <button type="button" class="btn-run">Run tests</button>
+            <div class="test-results" aria-live="polite"></div>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block coding-block" data-qid="bex3">
+            <div class="question-text">14. <code>pathClear</code> already exists. Create <code>bool blocked</code> that is <span class="key-term">true</span> when the path is not clear. Use <code>!</code>.</div>
+            <div class="code-title">ALREADY WRITTEN</div>
+<pre><code>bool pathClear = ...;</code></pre>
+            <div class="code-editor-wrap">
+              <pre class="code-highlight" aria-hidden="true"><code></code></pre>
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Create blocked from pathClear">// Create bool blocked.
+</textarea>
+            </div>
+            <button type="button" class="btn-run">Run tests</button>
+            <div class="test-results" aria-live="polite"></div>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block coding-block" data-qid="bex4">
+            <div class="question-text">15. <code>pathClear</code>, <code>batteryOk</code>, and <code>holdingCan</code> already exist. Create <code>bool readyToScore</code> that is <span class="key-term">true</span> when the path is clear, the battery is ok, and the robot is not holding a can. Use <code>&amp;&amp;</code> and <code>!</code>.</div>
+            <div class="code-title">ALREADY WRITTEN</div>
+<pre><code>bool pathClear = ...;
+bool batteryOk = ...;
+bool holdingCan = ...;</code></pre>
+            <div class="code-editor-wrap">
+              <pre class="code-highlight" aria-hidden="true"><code></code></pre>
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Create readyToScore">// Create bool readyToScore.
+</textarea>
+            </div>
+            <button type="button" class="btn-run">Run tests</button>
+            <div class="test-results" aria-live="polite"></div>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block coding-block" data-qid="bex5">
+            <div class="question-text">16. <code>pathClear</code> and <code>batteryOk</code> already exist. Declare <code>int driveSpeed</code> before the <code>if</code>. Set it to <span class="key-term">50</span> when both are true, and to <span class="key-term">0</span> otherwise. Use <code>&amp;&amp;</code>.</div>
+            <div class="code-title">ALREADY WRITTEN</div>
+<pre><code>bool pathClear = ...;
+bool batteryOk = ...;</code></pre>
+            <div class="code-editor-wrap">
+              <pre class="code-highlight" aria-hidden="true"><code></code></pre>
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Set driveSpeed when the path is clear and the battery is ok">// Set driveSpeed from both sensors.
+</textarea>
+            </div>
+            <button type="button" class="btn-run">Run tests</button>
+            <div class="test-results" aria-live="polite"></div>
+            <div class="feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 10 -->
+      <section id="section7" class="card">
+        <div class="section-header">
+          <span class="section-tag">Section 10</span>
           <span class="wip-badge" title="Work in progress"><svg class="wip-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.1 1.2h1.8L13.4 12H2.6L7.1 1.2z"/><path fill="currentColor" d="M1.5 12.6h13v2h-13z"/></svg>WIP</span>
           <h2>Displaying Data on VEX Brain Screen</h2>
         </div>
@@ -4229,7 +4657,7 @@ Brain.Screen.print("Temp: %f", temp);   // Prints floating decimal</code></pre>
         </div>
 
         <div class="vocab-box">
-          <h4>SECTION 8 VOCABULARY REVIEW</h4>
+          <h4>SECTION 10 VOCABULARY REVIEW</h4>
           <ul>
             <li><strong>Format Specifier:</strong> Special placeholder tokens (like <code>%d</code> and <code>%f</code>) substituted with variable values during printing.</li>
             <li><strong>Screen Buffer:</strong> The video memory holding pixel and character data displayed on the VEX Brain LCD.</li>
@@ -4238,7 +4666,7 @@ Brain.Screen.print("Temp: %f", temp);   // Prints floating decimal</code></pre>
         </div>
 
         <div class="quiz-container">
-          <h3>SECTION 8 REVIEW QUESTIONS</h3>
+          <h3>SECTION 10 REVIEW QUESTIONS</h3>
           
           <div class="question-block" data-qid="s7q1">
             <div class="question-text">1. Which format specifier is used to display an <code>int</code> variable on screen?</div>
@@ -4330,10 +4758,10 @@ Brain.Screen.print("Temp: %f", temp);   // Prints floating decimal</code></pre>
         </div>
       </section>
 
-      <!-- SECTION 10 -->
+      <!-- SECTION 11 -->
       <section id="section8" class="card">
         <div class="section-header">
-          <span class="section-tag">Section 10</span>
+          <span class="section-tag">Section 11</span>
           <span class="wip-badge" title="Work in progress"><svg class="wip-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.1 1.2h1.8L13.4 12H2.6L7.1 1.2z"/><path fill="currentColor" d="M1.5 12.6h13v2h-13z"/></svg>WIP</span>
           <h2>Control Flow: Repetition with <code>for</code> Loops</h2>
         </div>
@@ -4352,7 +4780,7 @@ for (int i = 0; i &lt; 5; i++) {
         </div>
 
         <div class="vocab-box">
-          <h4>SECTION 9 VOCABULARY REVIEW</h4>
+          <h4>SECTION 11 VOCABULARY REVIEW</h4>
           <ul>
             <li><strong><code>for</code> Loop:</strong> A loop control structure that iterates code a specific number of times based on a counter condition.</li>
             <li><strong>Iteration:</strong> A single complete execution pass through a loop's code block.</li>
@@ -4362,7 +4790,7 @@ for (int i = 0; i &lt; 5; i++) {
         </div>
 
         <div class="quiz-container">
-          <h3>SECTION 9 REVIEW QUESTIONS</h3>
+          <h3>SECTION 11 REVIEW QUESTIONS</h3>
           
           <div class="question-block" data-qid="s8q1">
             <div class="question-text">1. How many times will the loop body run for <code>for (int i = 0; i &lt; 4; i++)</code>?</div>
@@ -4443,10 +4871,10 @@ for (int i = 0; i &lt; 5; i++) {
         </div>
       </section>
 
-      <!-- SECTION 11 -->
+      <!-- SECTION 12 -->
       <section id="section9" class="card">
         <div class="section-header">
-          <span class="section-tag">Section 11</span>
+          <span class="section-tag">Section 12</span>
           <span class="wip-badge" title="Work in progress"><svg class="wip-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.1 1.2h1.8L13.4 12H2.6L7.1 1.2z"/><path fill="currentColor" d="M1.5 12.6h13v2h-13z"/></svg>WIP</span>
           <h2>Type Casting with <code>static_cast&lt;int&gt;</code></h2>
         </div>
@@ -4465,7 +4893,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
         </div>
 
         <div class="vocab-box">
-          <h4>SECTION 10 VOCABULARY REVIEW</h4>
+          <h4>SECTION 12 VOCABULARY REVIEW</h4>
           <ul>
             <li><strong>Type Casting:</strong> Converting a variable value explicitly from one data type to another.</li>
             <li><strong>Explicit Conversion:</strong> Manually commanding C++ to convert a type using operators like <code>static_cast</code>.</li>
@@ -4475,7 +4903,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
         </div>
 
         <div class="quiz-container">
-          <h3>SECTION 10 REVIEW QUESTIONS</h3>
+          <h3>SECTION 12 REVIEW QUESTIONS</h3>
           
           <div class="question-block" data-qid="s9q1">
             <div class="question-text">1. What is the numerical result of <code>static_cast&lt;int&gt;(12.89)</code>?</div>
@@ -4582,12 +5010,14 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       'level2-playground',
       'level3-playground',
       'level3-guided',
+      'section-boolean',
       'section7', 'section8', 'section9'
     ];
 
     function navLabel(id, direction) {
       if (id && id.indexOf('practice') === 0) return direction === 'prev' ? '← Exercises' : 'Exercises →';
       if (id === 'level3-guided') return direction === 'prev' ? '← Guided build' : 'Guided build →';
+      if (id === 'section-boolean') return direction === 'prev' ? '← Section 9' : 'Section 9 →';
       if (id && id.indexOf('playground') !== -1) return direction === 'prev' ? '← Playground' : 'Playground →';
       return direction === 'prev' ? '← Previous Section' : 'Next Section →';
     }
@@ -6398,6 +6828,50 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
           codingCase("bestCan = 2", "int bestCan = 2;\nint priority1 = 5;\nint priority2 = 8;\nint priority3 = 3;", [ev("priority1", "int", 5), ev("priority2", "int", -1), ev("priority3", "int", 3)]),
           codingCase("bestCan = 3", "int bestCan = 3;\nint priority1 = -1;\nint priority2 = -1;\nint priority3 = 6;", [ev("priority1", "int", -1), ev("priority2", "int", -1), ev("priority3", "int", -1)])
         ]
+      },
+      bex1: {
+        ops: ["&&"],
+        cases: [
+          codingCase("pathClear = true, batteryOk = true", "bool pathClear = true;\nbool batteryOk = true;", [ev("canDrive", "bool", true)]),
+          codingCase("pathClear = true, batteryOk = false", "bool pathClear = true;\nbool batteryOk = false;", [ev("canDrive", "bool", false)]),
+          codingCase("pathClear = false, batteryOk = true", "bool pathClear = false;\nbool batteryOk = true;", [ev("canDrive", "bool", false)]),
+          codingCase("pathClear = false, batteryOk = false", "bool pathClear = false;\nbool batteryOk = false;", [ev("canDrive", "bool", false)])
+        ]
+      },
+      bex2: {
+        ops: ["||"],
+        cases: [
+          codingCase("bumperPressed = true, limitHit = false", "bool bumperPressed = true;\nbool limitHit = false;", [ev("stopNow", "bool", true)]),
+          codingCase("bumperPressed = false, limitHit = true", "bool bumperPressed = false;\nbool limitHit = true;", [ev("stopNow", "bool", true)]),
+          codingCase("bumperPressed = true, limitHit = true", "bool bumperPressed = true;\nbool limitHit = true;", [ev("stopNow", "bool", true)]),
+          codingCase("bumperPressed = false, limitHit = false", "bool bumperPressed = false;\nbool limitHit = false;", [ev("stopNow", "bool", false)])
+        ]
+      },
+      bex3: {
+        ops: ["!"],
+        cases: [
+          codingCase("pathClear = true", "bool pathClear = true;", [ev("blocked", "bool", false)]),
+          codingCase("pathClear = false", "bool pathClear = false;", [ev("blocked", "bool", true)])
+        ]
+      },
+      bex4: {
+        ops: ["&&", "!"],
+        cases: [
+          codingCase("path clear, battery ok, not holding", "bool pathClear = true;\nbool batteryOk = true;\nbool holdingCan = false;", [ev("readyToScore", "bool", true)]),
+          codingCase("path clear, battery ok, holding a can", "bool pathClear = true;\nbool batteryOk = true;\nbool holdingCan = true;", [ev("readyToScore", "bool", false)]),
+          codingCase("path blocked, battery ok, not holding", "bool pathClear = false;\nbool batteryOk = true;\nbool holdingCan = false;", [ev("readyToScore", "bool", false)]),
+          codingCase("path clear, battery low, not holding", "bool pathClear = true;\nbool batteryOk = false;\nbool holdingCan = false;", [ev("readyToScore", "bool", false)]),
+          codingCase("all three fail", "bool pathClear = false;\nbool batteryOk = false;\nbool holdingCan = true;", [ev("readyToScore", "bool", false)])
+        ]
+      },
+      bex5: {
+        ops: ["&&"],
+        cases: [
+          codingCase("pathClear = true, batteryOk = true", "bool pathClear = true;\nbool batteryOk = true;", [ev("driveSpeed", "int", 50)]),
+          codingCase("pathClear = true, batteryOk = false", "bool pathClear = true;\nbool batteryOk = false;", [ev("driveSpeed", "int", 0)]),
+          codingCase("pathClear = false, batteryOk = true", "bool pathClear = false;\nbool batteryOk = true;", [ev("driveSpeed", "int", 0)]),
+          codingCase("pathClear = false, batteryOk = false", "bool pathClear = false;\nbool batteryOk = false;", [ev("driveSpeed", "int", 0)])
+        ]
       }
     };
 
@@ -6429,7 +6903,12 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       l3gc6: "This is the X drive with nextHouseX. Set x to nextHouseX at the end. Assign desired, turn, and distance. Do not declare them again.",
       l3gc7: "This is the Y drive with nextHouseY. Set y to nextHouseY at the end.",
       l3gc8: "Putting the can down uses the same four lines as picking it up: armDown, clawOpen, clawClosed, armUp.",
-      l3gc9: "If bestCan is 1, set priority1 to -1. Use else if for Can 2 and Can 3, so only the delivered can changes."
+      l3gc9: "If bestCan is 1, set priority1 to -1. Use else if for Can 2 and Can 3, so only the delivered can changes.",
+      bex1: "canDrive is true only when both comparisons are true. Write pathClear == true && batteryOk == true.",
+      bex2: "stopNow is true when either comparison is true. Join them with ||.",
+      bex3: "blocked is the opposite of pathClear == true. Put ! in front of that comparison, and wrap the comparison in parentheses.",
+      bex4: "Join pathClear == true and batteryOk == true with &&. Flip holdingCan == true with !, and wrap that comparison in parentheses.",
+      bex5: "The if runs only when both are true. Put && between pathClear == true and batteryOk == true. Set driveSpeed to 50 in the if, and to 0 in the else."
     };
 
     function collectCalls(stmt, out) {
@@ -6554,6 +7033,32 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       if (expr.kind === "unary") collectAssignTargets(expr.expr, names);
     }
 
+    function exprHasOp(expr, op) {
+      if (!expr) return false;
+      if (expr.kind === "unary") return (op === "!" && expr.op === "!") || exprHasOp(expr.expr, op);
+      if (expr.kind === "binary") return expr.op === op || exprHasOp(expr.left, op) || exprHasOp(expr.right, op);
+      if (expr.kind === "assignExpr") return exprHasOp(expr.expr, op);
+      return false;
+    }
+
+    function stmtHasOp(stmt, op) {
+      if (!stmt || stmt.kind === "empty") return false;
+      if (stmt.kind === "block") return stmt.stmts.some(item => stmtHasOp(item, op));
+      if (stmt.kind === "if") return exprHasOp(stmt.cond, op) || stmtHasOp(stmt.then, op) || stmtHasOp(stmt.else, op);
+      if (stmt.kind === "decl") return exprHasOp(stmt.init, op);
+      if (stmt.kind === "assign") return exprHasOp(stmt.expr, op);
+      if (stmt.kind === "return") return exprHasOp(stmt.expr, op);
+      return false;
+    }
+
+    function checkRequiredOps(stmt, ops) {
+      const missing = ops.filter(op => !stmtHasOp(stmt, op));
+      if (!missing.length) {
+        return { pass: true, title: "Operators", detail: "The expression uses " + ops.join(" and ") + "." };
+      }
+      return { pass: false, title: "Operators", detail: "Use " + missing.join(" and ") + " in this answer." };
+    }
+
     function gradeCodingTask(source, taskOrId) {
       const task = typeof taskOrId === "string" ? codingTasks[taskOrId] : taskOrId;
       if (!task) return { ok: false, error: "This coding question is not configured.", cases: [], checks: [] };
@@ -6576,6 +7081,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       const checks = task.constCheck ? [checkConstDecl({ body: studentBody }, task.constCheck)] : [];
       const robotCheck = checkRobotCalls(studentBody.stmts, task);
       if (robotCheck) checks.push(robotCheck);
+      if (task.ops && task.ops.length) checks.push(checkRequiredOps(studentBody, task.ops));
       const cases = (task.cases || []).map(test => {
         try {
           const env = freshEnv();
@@ -6673,7 +7179,10 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       l3gq1: "B", l3gq2: "B", l3gq3: "B", l3gq5: "C", l3gq6: "B", l3gq7: "A",
       l3gq8: "B", l3gq9: "A", l3gq10: "B", l3gq11: "B", l3gq12: "C",
       l3gc1: "pass", l3gc2: "pass", l3gc3: "pass", l3gc4: "pass", l3gc5: "pass",
-      l3gc6: "pass", l3gc7: "pass", l3gc8: "pass", l3gc9: "pass"
+      l3gc6: "pass", l3gc7: "pass", l3gc8: "pass", l3gc9: "pass",
+      beq1: "B", beq2: "B", beq3: "B", beq4: "B", beq5: "B", beq6: "B", beq7: "A", beq8: "A",
+      beq9: "A,C,E", beq10b: "B", beq11: "B",
+      bex1: "pass", bex2: "pass", bex3: "pass", bex4: "pass", bex5: "pass"
     };
 
     // Progress files store work by these exercise ids (s1q1, pvx1, tr1, ...).
@@ -6741,6 +7250,28 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       delete code.s3c2;
       localStorage.setItem(CODE_STORAGE_KEY, JSON.stringify(code));
       clearAnswer("s3c2");
+    }
+
+    function forgetScaffoldStarters() {
+      const scaffolds = {
+        s4c1: "int status;\n\nif (systemReady == true) {\n\n} else {\n\n}",
+        s4c2: "int warning;\n\nif (distance < 20) {\n\n} else {\n\n}",
+        s6c2: "const int kMaxSpeed = 100;\nint speed;",
+        pdx1: "int driveSpeed;\n\nif (pathClear == true) {\n\n} else {\n\n}",
+        pdx3: "const int kMaxPercent = 80;\nint motorPercent;",
+        bex5: "int driveSpeed;\n\nif (pathClear == true && batteryOk == true) {\n\n} else {\n\n}"
+      };
+      const code = loadSavedCode();
+      let changed = false;
+      Object.keys(scaffolds).forEach(qid => {
+        if (!Object.prototype.hasOwnProperty.call(code, qid)) return;
+        const saved = String(code[qid]).replace(/\r\n/g, "\n").replace(/\s+$/, "");
+        if (saved !== scaffolds[qid]) return;
+        delete code[qid];
+        clearAnswer(qid);
+        changed = true;
+      });
+      if (changed) localStorage.setItem(CODE_STORAGE_KEY, JSON.stringify(code));
     }
 
     function saveCode(qid, value) {
@@ -7906,6 +8437,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
 
     document.addEventListener('DOMContentLoaded', () => {
       forgetOldSection4Question8();
+      forgetScaffoldStarters();
       applySyntaxHighlighting();
       initTracing();
       initQuiz();
