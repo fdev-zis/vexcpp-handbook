@@ -390,6 +390,11 @@
       color: #0f172a;
     }
 
+    .code-title + #while-trace .trace-code {
+      margin-top: 0;
+      border-radius: 0 0 6px 6px;
+    }
+
     .code-title {
       background: #1e293b;
       color: #94a3b8;
@@ -2226,9 +2231,10 @@
         <li><a class="guide-link" href="#level3-guided"><svg class="practice-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M2.2 2.2h2.2v2.2H2.2V2.2zm3.4 0h8.2v2.2H5.6V2.2zM2.2 6.9h2.2v2.2H2.2V6.9zm3.4 0h8.2v2.2H5.6V6.9zM2.2 11.6h2.2V13.8H2.2V11.6zm3.4 0h8.2V13.8H5.6V11.6z"/></svg>Level 3 Guided Build</a></li>
         <li><a href="#section-boolean">Sec 9: Boolean Expressions <span class="new-badge">NEW</span></a></li>
         <li><a href="#section-multiway">Sec 10: Multiway Selection <span class="new-badge">NEW</span></a></li>
-        <li><a href="#section7">Sec 11: Displaying Data <span class="wip-badge" title="Work in progress"><svg class="wip-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.1 1.2h1.8L13.4 12H2.6L7.1 1.2z"/><path fill="currentColor" d="M1.5 12.6h13v2h-13z"/></svg>WIP</span></a></li>
-        <li><a href="#section8">Sec 12: for Loops <span class="wip-badge" title="Work in progress"><svg class="wip-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.1 1.2h1.8L13.4 12H2.6L7.1 1.2z"/><path fill="currentColor" d="M1.5 12.6h13v2h-13z"/></svg>WIP</span></a></li>
-        <li><a href="#section9">Sec 13: Type Casting <span class="wip-badge" title="Work in progress"><svg class="wip-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.1 1.2h1.8L13.4 12H2.6L7.1 1.2z"/><path fill="currentColor" d="M1.5 12.6h13v2h-13z"/></svg>WIP</span></a></li>
+        <li><a href="#section-while">Sec 11: while Loops <span class="new-badge">NEW</span></a></li>
+        <li><a href="#section7">Sec 12: Displaying Data <span class="wip-badge" title="Work in progress"><svg class="wip-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.1 1.2h1.8L13.4 12H2.6L7.1 1.2z"/><path fill="currentColor" d="M1.5 12.6h13v2h-13z"/></svg>WIP</span></a></li>
+        <li><a href="#section8">Sec 13: for Loops <span class="wip-badge" title="Work in progress"><svg class="wip-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.1 1.2h1.8L13.4 12H2.6L7.1 1.2z"/><path fill="currentColor" d="M1.5 12.6h13v2h-13z"/></svg>WIP</span></a></li>
+        <li><a href="#section9">Sec 14: Type Casting <span class="wip-badge" title="Work in progress"><svg class="wip-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.1 1.2h1.8L13.4 12H2.6L7.1 1.2z"/><path fill="currentColor" d="M1.5 12.6h13v2h-13z"/></svg>WIP</span></a></li>
       </ul>
     </nav>
 
@@ -4840,9 +4846,196 @@ bool batteryOk = ...;</code></pre>
       </section>
 
       <!-- SECTION 11 -->
-      <section id="section7" class="card">
+      <section id="section-while" class="card">
         <div class="section-header">
           <span class="section-tag">Section 11</span>
+          <span class="new-badge">NEW</span>
+          <h2><code>while</code> Loops</h2>
+        </div>
+        <p>A rover is driving toward a wall. It does not have the moves written out in advance, because it cannot know how many it will need. A distance sensor on the front measures how many centimeters remain. After each short move, the rover reads that sensor again. It keeps moving while the sensor still measures more than 20 cm, and it stops when the sensor measures 20 cm or less. A <strong><code>while</code> loop</strong> is that kind of repeat. The body runs again only while a condition is still true.</p>
+
+<pre class="syntax-diagram"><code><span class="syn-if">while</span> (<span class="syn-cond">&lt;condition&gt;</span>) <span class="syn-if">{</span>
+    <span class="syn-if">&lt;statement&gt;;</span>
+    <span class="syn-if">&lt;statement&gt;;</span>
+    <span class="syn-if">...</span>
+<span class="syn-if">}</span></code></pre>
+
+        <p>Each time the program reaches a <code>while</code>, it checks the condition before doing any of the statements inside the braces. When the condition is true, those statements run from top to bottom. That pass is one repetition. C++ then returns to the condition and checks it again. A true result starts another pass. A false result ends the loop, and the program continues with the line after the closing brace.</p>
+        <p>The condition has to become false at some point, or the rover never leaves the loop. A value that the condition uses has to change between checks. That change is usually made by a statement in the body. In the distance example, each pass stores a smaller number in <code>distance</code>, so <code>distance &gt; 20</code> is eventually false. If the body never changes a value the condition depends on, the check stays true and the loop never ends.</p>
+        <div class="example-box">
+          <span class="example-kicker">Example</span>
+          <p><code>while (distance &gt; 20)</code> repeats while the wall is still more than 20 cm away. Each pass drives a little and makes <code>distance</code> smaller. When <code>distance</code> is no longer greater than 20, the loop stops.</p>
+        </div>
+        <div class="example-box">
+          <span class="example-kicker">Example</span>
+          <p><code>while (pathClear)</code> repeats while the path is clear. <code>while (pathClear &amp;&amp; steps &lt; 4)</code> also stops after 4 steps, even if the path is still clear.</p>
+        </div>
+
+        <p>Use <strong>Next line</strong> to run one line at a time. When the loop repeats, those lines run again. A blue value is the one that line just stored.</p>
+        <div class="code-title">WHILE.CPP - REPEAT UNTIL THE COUNT IS DONE</div>
+        <div id="while-trace"></div>
+
+        <div class="pitfall-box">
+          <h4>COMMON PITFALL: A CONDITION THAT NEVER BECOMES FALSE</h4>
+          <p>If the body never changes a value used in the condition, the check stays true and the loop never ends. The program is stuck.</p>
+          <div class="example-box">
+            <span class="example-kicker">Example</span>
+            <p><code>while (laps &lt; 3) { battery = battery - 10; }</code> never changes <code>laps</code>, so <code>laps &lt; 3</code> stays true.</p>
+          </div>
+        </div>
+
+        <div class="vocab-box">
+          <h4>SECTION 11 VOCABULARY REVIEW</h4>
+          <ul>
+            <li><strong><code>while</code> Loop:</strong> A loop that repeats its block while a condition is true. The condition is checked before each pass.</li>
+            <li><strong>Loop Condition:</strong> The true-or-false check that decides whether the body runs again.</li>
+            <li><strong>Iteration:</strong> One complete pass through the loop body.</li>
+            <li><strong>Infinite Loop:</strong> A loop whose condition never becomes false, so the body never stops repeating.</li>
+          </ul>
+        </div>
+
+        <div class="quiz-container">
+          <h3>SECTION 11 REVIEW QUESTIONS</h3>
+
+          <div class="question-block" data-qid="whq1">
+            <div class="question-text">1. When does a <code>while</code> body run zero times?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="whq1" value="A"> When the condition is true on the first check</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="whq1" value="B"> When the condition is false on the first check</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="whq1" value="C"> When the body uses braces</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="whq1" value="D"> After the body has run once</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="whq2">
+            <div class="question-text">2. How many times does the body of this loop run?</div>
+            <div class="code-title">LAPS</div>
+<pre><code>int laps = 0;
+while (laps &lt; 3) {
+    laps = laps + 1;
+}</code></pre>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="whq2" value="A"> 2</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="whq2" value="B"> 3</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="whq2" value="C"> 4</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="whq2" value="D"> 0</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="whq3">
+            <div class="question-text">3. After the loop in question 2 finishes, what is <code>laps</code>?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="whq3" value="A"> 0</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="whq3" value="B"> 2</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="whq3" value="C"> 3</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="whq3" value="D"> 4</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="whq4">
+            <div class="question-text">4. Which loop never finishes?</div>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="whq4" value="A"> <code>int n = 0; while (n &lt; 4) { n = n + 1; }</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="whq4" value="B"> <code>int n = 0; while (n &lt; 4) { battery = battery - 1; }</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="whq4" value="C"> <code>int n = 5; while (n &lt; 4) { n = n + 1; }</code></label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="whq4" value="D"> <code>int n = 0; while (n &lt; 1) { n = n + 1; }</code></label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block" data-qid="whq5">
+            <div class="question-text">5. <code>pathClear</code> stays true. What is <code>steps</code> after this loop?</div>
+            <div class="code-title">STEPS</div>
+<pre><code>int steps = 0;
+while (pathClear &amp;&amp; steps &lt; 2) {
+    steps = steps + 1;
+}</code></pre>
+            <ul class="options-list">
+              <li class="option-item"><label class="option-label"><input type="radio" name="whq5" value="A"> 0</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="whq5" value="B"> 1</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="whq5" value="C"> 2</label></li>
+              <li class="option-item"><label class="option-label"><input type="radio" name="whq5" value="D"> true</label></li>
+            </ul>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block trace-block" data-qid="wht1">
+            <div class="question-text">6. <code>laps</code> starts at 0 and <code>battery</code> starts at 50. While <code>laps</code> is less than 2, add 1 to <code>laps</code> and subtract 10 from <code>battery</code>. Trace every line on paper and enter each final value.</div>
+            <div class="trace-host"></div>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block trace-block" data-qid="wht2">
+            <div class="question-text">7. <code>laps</code> starts at 4 and <code>battery</code> starts at 80. <code>laps &lt; 3</code> is false on the first check, so the body never runs. Trace every line on paper and enter each final value.</div>
+            <div class="trace-host"></div>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block coding-block" data-qid="wlx1">
+            <div class="question-text">8. The rover should travel <code>goal</code> centimeters, and <code>goal</code> has already been declared. Create an <code>int</code> named <code>moved</code> that starts at <span class="key-term">0</span>. Write a <code>while</code> loop that repeats as long as <code>moved</code> is still less than <code>goal</code>. Each pass through the loop adds <span class="key-term">5</span> centimeters to <code>moved</code>.</div>
+            <div class="code-title">ALREADY WRITTEN</div>
+<pre><code>int goal = ...;</code></pre>
+            <div class="code-editor-wrap">
+              <pre class="code-highlight" aria-hidden="true"><code></code></pre>
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Add 5 to moved until it reaches goal">// Move by 5 until moved reaches goal.
+</textarea>
+            </div>
+            <button type="button" class="btn-run">Run tests</button>
+            <div class="test-results" aria-live="polite"></div>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block coding-block" data-qid="wlx2">
+            <div class="question-text">9. A wheel has turned <code>ticks</code> encoder ticks, and <code>ticks</code> has already been declared. One full turn of the wheel is 4 ticks. Create an <code>int</code> named <code>left</code> that starts equal to <code>ticks</code>, and an <code>int</code> named <code>turns</code> that starts at <span class="key-term">0</span>. Write a <code>while</code> loop that repeats while <code>left</code> is still at least 4. Each pass, subtract 4 from <code>left</code> and add 1 to <code>turns</code>.</div>
+            <div class="code-title">ALREADY WRITTEN</div>
+<pre><code>int ticks = ...;</code></pre>
+            <div class="code-editor-wrap">
+              <pre class="code-highlight" aria-hidden="true"><code></code></pre>
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Count whole turns of 4 ticks">// Count whole turns of 4 ticks.
+</textarea>
+            </div>
+            <button type="button" class="btn-run">Run tests</button>
+            <div class="test-results" aria-live="polite"></div>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block coding-block" data-qid="wlx3">
+            <div class="question-text">10. The battery reading <code>start</code> has already been declared. Create an <code>int</code> named <code>level</code> that starts equal to <code>start</code>. Write a <code>while</code> loop that repeats while <code>level</code> is greater than <span class="key-term">20</span>. Each pass, subtract <span class="key-term">7</span> from <code>level</code>.</div>
+            <div class="code-title">ALREADY WRITTEN</div>
+<pre><code>int start = ...;</code></pre>
+            <div class="code-editor-wrap">
+              <pre class="code-highlight" aria-hidden="true"><code></code></pre>
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Lower level by 7 until it is 20 or less">// Lower level by 7 while it is above 20.
+</textarea>
+            </div>
+            <button type="button" class="btn-run">Run tests</button>
+            <div class="test-results" aria-live="polite"></div>
+            <div class="feedback"></div>
+          </div>
+
+          <div class="question-block coding-block" data-qid="wlx4">
+            <div class="question-text">11. <code>n</code> has already been declared. It is how many crates are in the stack, counted from 1 up to <code>n</code>. Create an <code>int</code> named <code>total</code> that starts at <span class="key-term">0</span>, and an <code>int</code> named <code>i</code> that starts at <span class="key-term">1</span>. Write a <code>while</code> loop that repeats while <code>i</code> is less than or equal to <code>n</code>. Each pass, add <code>i</code> to <code>total</code>, then add 1 to <code>i</code>.</div>
+            <div class="code-title">ALREADY WRITTEN</div>
+<pre><code>int n = ...;</code></pre>
+            <div class="code-editor-wrap">
+              <pre class="code-highlight" aria-hidden="true"><code></code></pre>
+              <textarea class="code-editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Add the numbers from 1 through n">// Add the numbers from 1 through n.
+</textarea>
+            </div>
+            <button type="button" class="btn-run">Run tests</button>
+            <div class="test-results" aria-live="polite"></div>
+            <div class="feedback"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 12 -->
+      <section id="section7" class="card">
+        <div class="section-header">
+          <span class="section-tag">Section 12</span>
           <span class="wip-badge" title="Work in progress"><svg class="wip-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.1 1.2h1.8L13.4 12H2.6L7.1 1.2z"/><path fill="currentColor" d="M1.5 12.6h13v2h-13z"/></svg>WIP</span>
           <h2>Displaying Data on VEX Brain Screen</h2>
         </div>
@@ -4893,7 +5086,7 @@ Brain.Screen.print("Temp: %f", temp);   // Prints floating decimal</code></pre>
         </div>
 
         <div class="vocab-box">
-          <h4>SECTION 11 VOCABULARY REVIEW</h4>
+          <h4>SECTION 12 VOCABULARY REVIEW</h4>
           <ul>
             <li><strong>Format Specifier:</strong> Special placeholder tokens (like <code>%d</code> and <code>%f</code>) substituted with variable values during printing.</li>
             <li><strong>Screen Buffer:</strong> The video memory holding pixel and character data displayed on the VEX Brain LCD.</li>
@@ -4902,7 +5095,7 @@ Brain.Screen.print("Temp: %f", temp);   // Prints floating decimal</code></pre>
         </div>
 
         <div class="quiz-container">
-          <h3>SECTION 11 REVIEW QUESTIONS</h3>
+          <h3>SECTION 12 REVIEW QUESTIONS</h3>
           
           <div class="question-block" data-qid="s7q1">
             <div class="question-text">1. Which format specifier is used to display an <code>int</code> variable on screen?</div>
@@ -4994,10 +5187,10 @@ Brain.Screen.print("Temp: %f", temp);   // Prints floating decimal</code></pre>
         </div>
       </section>
 
-      <!-- SECTION 12 -->
+      <!-- SECTION 13 -->
       <section id="section8" class="card">
         <div class="section-header">
-          <span class="section-tag">Section 12</span>
+          <span class="section-tag">Section 13</span>
           <span class="wip-badge" title="Work in progress"><svg class="wip-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.1 1.2h1.8L13.4 12H2.6L7.1 1.2z"/><path fill="currentColor" d="M1.5 12.6h13v2h-13z"/></svg>WIP</span>
           <h2>Control Flow: Repetition with <code>for</code> Loops</h2>
         </div>
@@ -5016,7 +5209,7 @@ for (int i = 0; i &lt; 5; i++) {
         </div>
 
         <div class="vocab-box">
-          <h4>SECTION 12 VOCABULARY REVIEW</h4>
+          <h4>SECTION 13 VOCABULARY REVIEW</h4>
           <ul>
             <li><strong><code>for</code> Loop:</strong> A loop control structure that iterates code a specific number of times based on a counter condition.</li>
             <li><strong>Iteration:</strong> A single complete execution pass through a loop's code block.</li>
@@ -5026,7 +5219,7 @@ for (int i = 0; i &lt; 5; i++) {
         </div>
 
         <div class="quiz-container">
-          <h3>SECTION 12 REVIEW QUESTIONS</h3>
+          <h3>SECTION 13 REVIEW QUESTIONS</h3>
           
           <div class="question-block" data-qid="s8q1">
             <div class="question-text">1. How many times will the loop body run for <code>for (int i = 0; i &lt; 4; i++)</code>?</div>
@@ -5107,10 +5300,10 @@ for (int i = 0; i &lt; 5; i++) {
         </div>
       </section>
 
-      <!-- SECTION 13 -->
+      <!-- SECTION 14 -->
       <section id="section9" class="card">
         <div class="section-header">
-          <span class="section-tag">Section 13</span>
+          <span class="section-tag">Section 14</span>
           <span class="wip-badge" title="Work in progress"><svg class="wip-mark" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M7.1 1.2h1.8L13.4 12H2.6L7.1 1.2z"/><path fill="currentColor" d="M1.5 12.6h13v2h-13z"/></svg>WIP</span>
           <h2>Type Casting with <code>static_cast&lt;int&gt;</code></h2>
         </div>
@@ -5129,7 +5322,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
         </div>
 
         <div class="vocab-box">
-          <h4>SECTION 13 VOCABULARY REVIEW</h4>
+          <h4>SECTION 14 VOCABULARY REVIEW</h4>
           <ul>
             <li><strong>Type Casting:</strong> Converting a variable value explicitly from one data type to another.</li>
             <li><strong>Explicit Conversion:</strong> Manually commanding C++ to convert a type using operators like <code>static_cast</code>.</li>
@@ -5139,7 +5332,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
         </div>
 
         <div class="quiz-container">
-          <h3>SECTION 13 REVIEW QUESTIONS</h3>
+          <h3>SECTION 14 REVIEW QUESTIONS</h3>
           
           <div class="question-block" data-qid="s9q1">
             <div class="question-text">1. What is the numerical result of <code>static_cast&lt;int&gt;(12.89)</code>?</div>
@@ -5248,6 +5441,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       'level3-guided',
       'section-boolean',
       'section-multiway',
+      'section-while',
       'section7', 'section8', 'section9'
     ];
 
@@ -5256,6 +5450,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       if (id === 'level3-guided') return direction === 'prev' ? '← Guided build' : 'Guided build →';
       if (id === 'section-boolean') return direction === 'prev' ? '← Section 9' : 'Section 9 →';
       if (id === 'section-multiway') return direction === 'prev' ? '← Section 10' : 'Section 10 →';
+      if (id === 'section-while') return direction === 'prev' ? '← Section 11' : 'Section 11 →';
       if (id && id.indexOf('playground') !== -1) return direction === 'prev' ? '← Playground' : 'Playground →';
       return direction === 'prev' ? '← Previous Section' : 'Next Section →';
     }
@@ -5348,7 +5543,8 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       text = text.replace(/("[^"]*")/g, m => storeToken(m, 'syn-string'));
       text = text.replace(/\b(int|float|bool|char|const|return|if|else|for|while|void|string|static_cast|include|break|continue)\b/g, m => storeToken(m, 'syn-keyword'));
       text = text.replace(/\b(Brain|Screen|clearScreen|setCursor|print|newLine|moveCursor|setPosition|main|printf|puts|cout|cin|endl|sqrt|abs)\b/g, m => storeToken(m, 'syn-builtin'));
-      text = text.replace(/\b(Drivetrain|ArmMotor|ClawMotor|driveFor|turnFor|spinToPosition|wait|forward|reverse|left|right|degrees|mm|seconds)\b/g, m => storeToken(m, 'syn-builtin'));
+      text = text.replace(/\b(Drivetrain|ArmMotor|ClawMotor|driveFor|turnFor|spinToPosition|wait)\b/g, m => storeToken(m, 'syn-builtin'));
+      text = text.replace(/([,(])(\s*)(forward|reverse|left|right|degrees|mm|seconds)\b/g, (whole, lead, space, word) => lead + space + storeToken(word, 'syn-builtin'));
       text = text.replace(/\b(true|false)\b/g, m => storeToken(m, 'syn-literal'));
       text = text.replace(/(%[dfsi])/g, m => storeToken(m, 'syn-literal'));
       text = text.replace(/\b(\d+(\.\d+)?)\b/g, m => storeToken(m, 'syn-number'));
@@ -6228,11 +6424,15 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       function parseStmt() {
         const token = peek();
         if (token.kind === "keyword" && token.value === "for") {
-          if (!options.demo) loopMessage(token.line);
+          if (!options.demo) {
+            throw cppError(token.line, options.loops
+              ? "this practice uses while, not for."
+              : "loops are not used in this practice. Use if / else and arithmetic.");
+          }
           return parseFor();
         }
         if (token.kind === "keyword" && token.value === "while") {
-          if (!options.demo) loopMessage(token.line);
+          if (!options.demo && !options.loops) loopMessage(token.line);
           return parseWhile();
         }
         if (options.demo && token.kind === "keyword" && (token.value === "break" || token.value === "continue")) {
@@ -6626,6 +6826,13 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       if (stmt.kind === "if") {
         if (isTruthy(evalExpr(stmt.cond, env))) return execStmt(stmt.then, env);
         if (stmt.else) return execStmt(stmt.else, env);
+        return { returned: false };
+      }
+      if (stmt.kind === "while") {
+        while (isTruthy(evalExpr(stmt.cond, env))) {
+          const outcome = execStmt(stmt.body, env);
+          if (outcome.returned) return outcome;
+        }
         return { returned: false };
       }
       if (stmt.kind === "return") {
@@ -7129,6 +7336,50 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
           codingCase("path blocked, battery ready", "bool pathClear = false;\nbool batteryOk = true;", [ev("driveSpeed", "int", 0)]),
           codingCase("path blocked, battery not ready", "bool pathClear = false;\nbool batteryOk = false;", [ev("driveSpeed", "int", 0)])
         ]
+      },
+      wlx1: {
+        loops: true,
+        shape: "while",
+        cases: [
+          codingCase("goal = 0", "int goal = 0;", [ev("moved", "int", 0)]),
+          codingCase("goal = 5", "int goal = 5;", [ev("moved", "int", 5)]),
+          codingCase("goal = 12", "int goal = 12;", [ev("moved", "int", 15)]),
+          codingCase("goal = 15", "int goal = 15;", [ev("moved", "int", 15)]),
+          codingCase("goal = 1", "int goal = 1;", [ev("moved", "int", 5)])
+        ]
+      },
+      wlx2: {
+        loops: true,
+        shape: "while",
+        cases: [
+          codingCase("ticks = 0", "int ticks = 0;", [ev("left", "int", 0), ev("turns", "int", 0)]),
+          codingCase("ticks = 3", "int ticks = 3;", [ev("left", "int", 3), ev("turns", "int", 0)]),
+          codingCase("ticks = 4", "int ticks = 4;", [ev("left", "int", 0), ev("turns", "int", 1)]),
+          codingCase("ticks = 10", "int ticks = 10;", [ev("left", "int", 2), ev("turns", "int", 2)]),
+          codingCase("ticks = 8", "int ticks = 8;", [ev("left", "int", 0), ev("turns", "int", 2)])
+        ]
+      },
+      wlx3: {
+        loops: true,
+        shape: "while",
+        cases: [
+          codingCase("start = 20", "int start = 20;", [ev("level", "int", 20)]),
+          codingCase("start = 10", "int start = 10;", [ev("level", "int", 10)]),
+          codingCase("start = 21", "int start = 21;", [ev("level", "int", 14)]),
+          codingCase("start = 34", "int start = 34;", [ev("level", "int", 20)]),
+          codingCase("start = 41", "int start = 41;", [ev("level", "int", 20)])
+        ]
+      },
+      wlx4: {
+        loops: true,
+        shape: "while",
+        cases: [
+          codingCase("n = 0", "int n = 0;", [ev("total", "int", 0), ev("i", "int", 1)]),
+          codingCase("n = 1", "int n = 1;", [ev("total", "int", 1), ev("i", "int", 2)]),
+          codingCase("n = 3", "int n = 3;", [ev("total", "int", 6), ev("i", "int", 4)]),
+          codingCase("n = 4", "int n = 4;", [ev("total", "int", 10), ev("i", "int", 5)]),
+          codingCase("n = 5", "int n = 5;", [ev("total", "int", 15), ev("i", "int", 6)])
+        ]
       }
     };
 
@@ -7167,7 +7418,11 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       bex4: "Join pathClear and batteryOk with &&. Flip holdingCan with !, and wrap that check in parentheses.",
       bex5: "Write if (pathClear && batteryOk). Set driveSpeed to 50 in the if, and to 0 in the else.",
       mwx1: "Use else if. distance < 10 sets pace to 0. distance < 30 sets pace to 20. Otherwise pace is 50.",
-      mwx2: "Write if (pathClear), and put if (batteryOk) inside that branch. 50 when both are true, 10 when only the path is clear, and 0 when the path is blocked."
+      mwx2: "Write if (pathClear), and put if (batteryOk) inside that branch. 50 when both are true, 10 when only the path is clear, and 0 when the path is blocked.",
+      wlx1: "Start moved at 0. while (moved < goal) add 5 to moved.",
+      wlx2: "left starts at ticks and turns starts at 0. while (left >= 4), subtract 4 from left and add 1 to turns.",
+      wlx3: "level starts equal to start. while (level > 20) subtract 7 from level.",
+      wlx4: "total starts at 0 and i starts at 1. while (i <= n), add i to total, then add 1 to i."
     };
 
     function collectCalls(stmt, out) {
@@ -7266,6 +7521,11 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
         collectNamesSet(stmt.else, names);
         return;
       }
+      if (stmt.kind === "while") {
+        collectAssignTargets(stmt.cond, names);
+        collectNamesSet(stmt.body, names);
+        return;
+      }
       if (stmt.kind === "assign") {
         names.add(stmt.name);
         collectAssignTargets(stmt.expr, names);
@@ -7320,6 +7580,14 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       return false;
     }
 
+    function hasWhile(stmt) {
+      if (!stmt || stmt.kind === "empty") return false;
+      if (stmt.kind === "while") return true;
+      if (stmt.kind === "block") return stmt.stmts.some(hasWhile);
+      if (stmt.kind === "if") return hasWhile(stmt.then) || hasWhile(stmt.else);
+      return false;
+    }
+
     function containsIf(stmt) {
       if (!stmt) return false;
       if (stmt.kind === "if") return true;
@@ -7347,6 +7615,10 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
         if (hasNestedIf(stmt)) return { pass: true, title: "Nested if", detail: "One if sits inside another if." };
         return { pass: false, title: "Nested if", detail: "Put the battery check inside the path check." };
       }
+      if (shape === "while") {
+        if (hasWhile(stmt)) return { pass: true, title: "while", detail: "The solution uses a while loop." };
+        return { pass: false, title: "while", detail: "Use a while loop." };
+      }
       return { pass: true, title: "Shape", detail: "" };
     }
 
@@ -7370,7 +7642,9 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       }
       let studentProgram;
       try {
-        studentProgram = parseCpp(source, true, task.calls ? { demo: true, calls: true, limit: 12000 } : undefined);
+        studentProgram = parseCpp(source, true, task.calls
+          ? { demo: true, calls: true, limit: 12000 }
+          : task.loops ? { loops: true } : undefined);
       } catch (err) {
         return { ok: false, error: err.message, cases: [], checks: [] };
       }
@@ -7484,7 +7758,9 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       beq9: "A,C,E", beq10b: "B", beq11: "B",
       bex1: "pass", bex2: "pass", bex3: "pass", bex4: "pass", bex5: "pass",
       mwq1: "B", mwq2: "B", mwq3: "B", mwq4: "B",
-      mwx1: "pass", mwx2: "pass"
+      mwx1: "pass", mwx2: "pass",
+      whq1: "B", whq2: "B", whq3: "C", whq4: "B", whq5: "C",
+      wlx1: "pass", wlx2: "pass", wlx3: "pass", wlx4: "pass"
     };
 
     // Progress files store work by these exercise ids (s1q1, pvx1, tr1, ...).
@@ -8288,33 +8564,98 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
           '}'
         ],
         columns: ['kMaxSpeed', 'requested', 'speed']
+      },
+      wht1: {
+        lines: [
+          'int laps = 0;',
+          'int battery = 50;',
+          'while (laps < 2) {',
+          '    laps = laps + 1;',
+          '    battery = battery - 10;',
+          '}'
+        ],
+        columns: ['laps', 'battery'],
+        notes: [
+          'laps is created. Write 0.',
+          'battery is created. Write 50.',
+          '0 < 2 is true, so the body runs.',
+          'laps + 1 is 1. Cross out 0 and write 1 beside it.',
+          'battery - 10 is 40. Cross out 50 and write 40 beside it.',
+          '1 < 2 is true, so the body runs again.',
+          'laps + 1 is 2. Cross out 1 and write 2 beside it.',
+          'battery - 10 is 30. Cross out 40 and write 30 beside it.',
+          '2 < 2 is false, so the loop stops. laps is 2 and battery is 30.'
+        ]
+      },
+      wht2: {
+        lines: [
+          'int laps = 4;',
+          'int battery = 80;',
+          'while (laps < 3) {',
+          '    laps = laps + 1;',
+          '    battery = battery - 10;',
+          '}'
+        ],
+        columns: ['laps', 'battery'],
+        notes: [
+          'laps is created. Write 4.',
+          'battery is created. Write 80.',
+          '4 < 3 is false, so the body never runs. laps stays 4 and battery stays 80.'
+        ]
       }
     };
 
     function traceProgram(lines, columns) {
-      const program = parseCpp(lines.join('\n'), true);
+      const program = parseCpp(lines.join('\n'), true, { loops: true });
       const stmts = program.stmts || [];
       const env = freshEnv();
       const events = [];
+      const visits = [];
       const previous = {};
       columns.forEach(name => { previous[name] = ''; });
-      stmts.forEach((stmt, index) => {
-        execStmt(stmt, env);
+      function record(line) {
+        const step = visits.length + 1;
+        visits.push({ line: line, step: step });
         columns.forEach(name => {
           const rec = env.lookup(name);
           const value = rec && rec.initialized ? formatValue(rec.type, rec.value) : '';
           if (value !== '' && value !== previous[name]) {
-            events.push({ step: index + 1, name: name, value: value });
+            events.push({ step: step, name: name, value: value });
             previous[name] = value;
           }
         });
-      });
-      return { events: events, steps: stmts.length };
+      }
+      function execTrace(stmt) {
+        if (!stmt || stmt.kind === "empty") return;
+        if (stmt.kind === "block") {
+          stmt.stmts.forEach(execTrace);
+          return;
+        }
+        if (stmt.kind === "while") {
+          while (isTruthy(evalExpr(stmt.cond, env))) {
+            record(stmt.line);
+            execTrace(stmt.body);
+          }
+          record(stmt.line);
+          return;
+        }
+        if (stmt.kind === "if") {
+          record(stmt.line);
+          if (isTruthy(evalExpr(stmt.cond, env))) execTrace(stmt.then);
+          else if (stmt.else) execTrace(stmt.else);
+          return;
+        }
+        execStmt(stmt, env);
+        record(stmt.line || 1);
+      }
+      stmts.forEach(execTrace);
+      return { events: events, visits: visits, steps: visits.length };
     }
 
     function buildTrace(task) {
       const traced = traceProgram(task.lines, task.columns);
       task.events = traced.events;
+      task.visits = traced.visits;
       task.steps = traced.steps;
       return task;
     }
@@ -8461,10 +8802,9 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       return paper;
     }
 
-    function renderTraceDemo() {
-      const mount = document.getElementById('trace-demo');
-      if (!mount) return;
-      const task = buildTrace(traceDemo);
+    function renderTraceStepper(mount, spec) {
+      if (!mount) return null;
+      const task = spec.events ? spec : buildTrace(spec);
       let step = 0;
       const codeHost = document.createElement('div');
       const paperHost = document.createElement('div');
@@ -8483,22 +8823,63 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
       const progress = document.createElement('span');
       progress.className = 'trace-progress';
       actions.append(prev, next, progress);
+      const total = task.visits.length;
 
       function paint() {
-        codeHost.replaceChildren(renderTraceCode(task.lines, step === 0 ? -1 : step - 1));
+        const visit = step === 0 ? null : task.visits[step - 1];
+        const lineIndex = visit ? visit.line - 1 : -1;
+        codeHost.replaceChildren(renderTraceCode(task.lines, lineIndex));
         paperHost.replaceChildren(renderPaper(task, step, step));
         note.textContent = step === 0
           ? 'A variable gets a row when a line creates it. Run line 1.'
-          : task.notes[step - 1];
-        progress.textContent = step === 0 ? 'Paper is blank' : 'After line ' + step + ' of ' + task.lines.length;
+          : (task.notes && task.notes[step - 1]) || 'This line ran.';
+        const straight = total === task.lines.length && task.visits.every((item, index) => item.line === index + 1);
+        progress.textContent = step === 0
+          ? 'Paper is blank'
+          : straight
+            ? 'After line ' + step + ' of ' + total
+            : 'After line ' + visit.line + ' (' + step + ' of ' + total + ')';
         prev.disabled = step === 0;
-        next.disabled = step === task.lines.length;
+        next.disabled = step === total;
       }
 
       prev.addEventListener('click', () => { step -= 1; paint(); });
       next.addEventListener('click', () => { step += 1; paint(); });
       mount.replaceChildren(codeHost, actions, paperHost, note);
       paint();
+      return task;
+    }
+
+    function renderTraceDemo() {
+      renderTraceStepper(document.getElementById('trace-demo'), traceDemo);
+    }
+
+    function renderWhileTrace() {
+      renderTraceStepper(document.getElementById('while-trace'), {
+        lines: [
+          'int laps = 0;',
+          'int battery = 100;',
+          'while (laps < 3) {',
+          '    battery = battery - 10;',
+          '    laps = laps + 1;',
+          '}'
+        ],
+        columns: ['laps', 'battery'],
+        notes: [
+          'laps is created, so it gets a row. Write 0.',
+          'battery is created. Write 100 on its new row.',
+          '0 < 3 is true, so the body runs.',
+          'battery - 10 is 90. Cross out 100 and write 90 beside it.',
+          'laps + 1 is 1. Cross out 0 and write 1 beside it.',
+          '1 < 3 is true, so the body runs again.',
+          'battery - 10 is 80. Cross out 90 and write 80 beside it.',
+          'laps + 1 is 2. Cross out 1 and write 2 beside it.',
+          '2 < 3 is true, so the body runs again.',
+          'battery - 10 is 70. Cross out 80 and write 70 beside it.',
+          'laps + 1 is 3. Cross out 2 and write 3 beside it.',
+          '3 < 3 is false, so the loop stops. laps is 3 and battery is 70.'
+        ]
+      });
     }
 
     function renderTracePractice(block) {
@@ -8597,7 +8978,15 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
         });
       });
 
-      host.replaceChildren(renderTraceCode(task.lines, -1), sheet, actions, paperHost);
+      host.replaceChildren();
+      if (task.lineByLine) {
+        const stepper = document.createElement('div');
+        host.appendChild(stepper);
+        renderTraceStepper(stepper, task);
+      } else {
+        host.appendChild(renderTraceCode(task.lines, -1));
+      }
+      host.append(sheet, actions, paperHost);
 
       const saved = loadSavedAnswers()[qid];
       if (saved && saved === answerKey[qid]) {
@@ -8612,6 +9001,7 @@ Brain.Screen.print("Speed: %d", static_cast&lt;int&gt;(speedVal));
 
     function initTracing() {
       renderTraceDemo();
+      renderWhileTrace();
       document.querySelectorAll('.trace-block').forEach(renderTracePractice);
     }
 
